@@ -15,7 +15,9 @@ public class MGNotificationCenter {
 	private static MGNotificationCenter instance;
 	private Hashtable nameHastable;//name sels hastable
 	private ArrayList objcNamesSel;// objc contains names,name contains sel.
-
+	/// <summary>
+	/// Initializes a new instance of the <see cref="MGNotificationCenter"/> class.
+	/// </summary>
 	private MGNotificationCenter(){
 		this.nameHastable = new Hashtable ();
 		this.objcNamesSel = new ArrayList ();
