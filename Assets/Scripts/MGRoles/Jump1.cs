@@ -28,9 +28,10 @@ public class Jump1 : MonoBehaviour {
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
-        print("123123"+role1);
         drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
-        if(notification==null)
+
+		if(notification.objc==null)
+
         P2PBinding.sendMessageToPeer("1useSkillsDart");
     }
     public void firstJump(MGNotification notification)
@@ -44,6 +45,7 @@ public class Jump1 : MonoBehaviour {
             rigidbody2D.velocity = velocity;
             print("1:" + rigidbody2D.velocity.y);
             jumpCount = 1;
+		if(notification.objc==null)
             P2PBinding.sendMessageToPeer("1firstJump");
 
     }
@@ -74,6 +76,7 @@ public class Jump1 : MonoBehaviour {
             transform.localScale = new Vector3(1, -1, 1);
 
         }
+		if(notification.objc==null)
         P2PBinding.sendMessageToPeer("1downToLine");
     }
 	// Update is called once per frame
