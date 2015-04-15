@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class MGGlobalDataCenter  {
     public int isHost;
@@ -46,4 +47,9 @@ public class MGGlobalDataCenter  {
 		}
 		return instance;
 	}
+    public static string timestamp()
+    {
+        TimeSpan ts = DateTime.Now - DateTime.Parse("1970-1-1");
+        return ts.TotalMilliseconds.ToString();
+    }
 }

@@ -30,6 +30,7 @@ public class Jump1 : MonoBehaviour {
         GameObject role1 = this.gameObject;
         print("123123"+role1);
         drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
+        if(notification==null)
         P2PBinding.sendMessageToPeer("1useSkillsDart");
     }
     public void firstJump(MGNotification notification)
