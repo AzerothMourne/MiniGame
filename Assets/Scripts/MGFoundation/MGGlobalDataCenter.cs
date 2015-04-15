@@ -9,7 +9,24 @@ public class MGGlobalDataCenter  {
     /// 屏幕上下左右边框的坐标值
     /// </summary>
     public float screenLiftX, screenRightX,screenTopY,screenBottomY;
-
+    /*
+    switch (msg) {
+		    case "1"://前面的角色放飞镖
+			    break;
+		    case "2"://前面的角色一段跳
+			    break;
+		    case "3"://前面的角色二段跳
+			    break;
+            case "4"://前面的角色下翻
+                break;
+            case "5"://后面的角色一段跳
+                break;
+            case "6"://后面的角色二段跳
+                break;
+            case "7"://后面的角色下翻
+                break;
+		}
+     * */
     private MGGlobalDataCenter()
     {
         this.rRoleBlood = 1;

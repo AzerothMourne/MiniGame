@@ -23,6 +23,6 @@ public class MGNetWorking : MonoBehaviour {
 	public void receiverMessageFromPeer ( string msg)
 	{
 		print ("receiverMessageFromPeer:"+msg);
-
+        MGNotificationCenter.defaultCenter().postNotification(msg,null);
 	}
 }
