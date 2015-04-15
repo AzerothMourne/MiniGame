@@ -3,6 +3,11 @@ using System.Collections;
 
 public class MGNetWorking : MonoBehaviour {
 
+    void Start()
+    {
+        print("Init GlobalData");
+        MGGlobalDataCenter.defaultCenter();
+    }
 	public void findHost ()
 	{
 		print ("findHost");

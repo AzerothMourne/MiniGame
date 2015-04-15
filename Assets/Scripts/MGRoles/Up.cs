@@ -15,6 +15,9 @@ public class Up : MonoBehaviour {
 
 	public void OnMouseDown () {
 		print ("Up OnMouseDown ");
-        MGNotificationCenter.defaultCenter().postNotification("firstJump", null);
+        if (MGGlobalDataCenter.defaultCenter().isHost == 1)
+            MGNotificationCenter.defaultCenter().postNotification("firstJump", null);
+        else
+            MGNotificationCenter.defaultCenter().postNotification("1firstJump", null);
 	}
 }

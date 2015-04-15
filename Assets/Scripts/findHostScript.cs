@@ -10,6 +10,7 @@ public class findHostScript : MonoBehaviour {
     public void OnMouseDown()
     {
         print("finsHost");
+        MGGlobalDataCenter.defaultCenter().isHost = 0;
         P2PBinding.findHost();
     }
 	// Update is called once per frame

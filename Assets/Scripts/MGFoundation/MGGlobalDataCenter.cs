@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class MGGlobalDataCenter  {
+    public int isHost;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
     /// <summary>
@@ -29,6 +30,7 @@ public class MGGlobalDataCenter  {
      * */
     private MGGlobalDataCenter()
     {
+        this.isHost = 0;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -10.0f;

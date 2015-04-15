@@ -60,7 +60,7 @@ public class MGNotificationCenter  {
 		}
         if (selList.Contains(sel)) return;
 		selList.Add(sel);
-        Debug.Log("after add sel:"+selList.Count);
+        //Debug.Log("after add sel:"+selList.Count);
         MGFoundtion.AddOrPeplace<string, List<MGNotificationSelector>>(this.nameHastable, name, selList);
         Dictionary<string, List<MGNotificationSelector>> nameListDic = MGFoundtion.GetValue<object, Dictionary<string, List<MGNotificationSelector>>>(this.objcNamesSel, observer, null);
         if (nameListDic == null)
@@ -74,7 +74,7 @@ public class MGNotificationCenter  {
 		obj_name_selList.Add (sel);
         MGFoundtion.AddOrPeplace<string, List<MGNotificationSelector>>(nameListDic, name, obj_name_selList);
         MGFoundtion.AddOrPeplace<object, Dictionary<string, List<MGNotificationSelector>>>(this.objcNamesSel, observer, nameListDic);
-        Debug.Log("objcNamesSel count:" + this.objcNamesSel.Count);
+        //Debug.Log("objcNamesSel count:" + this.objcNamesSel.Count);
 	}
 	/// <summary>
 	/// Removes the observer.
@@ -96,7 +96,7 @@ public class MGNotificationCenter  {
 	public void removeObserver(object observer,string name){
         Dictionary<string, List<MGNotificationSelector>> nameListDic = MGFoundtion.GetValue<object, Dictionary<string, List<MGNotificationSelector>>>(this.objcNamesSel, observer, null);
         if (nameListDic == null) return;
-        Debug.Log("123123");
+       // Debug.Log("123123");
         this.removeObserver(nameListDic[name], name);
         nameListDic.Remove(name);
 	}
@@ -108,7 +108,7 @@ public class MGNotificationCenter  {
         notiSelList = MGFoundtion.GetValue<string, List<MGNotificationSelector>>(this.nameHastable, name, null);
 
         if (notiSelList == null) return;
-        Debug.Log("before remove:"+selList.Count);
+        //Debug.Log("before remove:"+selList.Count);
 
         foreach (MGNotificationSelector eachSel in notiSelList)
         {
@@ -122,7 +122,7 @@ public class MGNotificationCenter  {
         {
             notiSelList.Remove(needDelSel);
         }
-        Debug.Log("after remove:"+selList.Count);
+       // Debug.Log("after remove:"+selList.Count);
         needDelList.Clear();
     }
 	/// <summary>
