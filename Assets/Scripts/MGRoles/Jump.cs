@@ -4,24 +4,25 @@ using System.Collections;
 public class Jump : MonoBehaviour {
 
 	public float forceMove ;
-	private bool isGround = false;
+	private bool isGround ;
 	public float jumpVelocity ;
 	public float jumpSecond ;
 	public float jumpCount ;
-	private float timer=0;
 	public int isJump,isDown;
     public MGskillDrat drat;
+    private int groundLayerMask;
 	// Use this for initialization
 	void Start () {
-		timer = 0;
+        groundLayerMask = LayerMask.GetMask("Ground");
 		isJump = 0;
         isDown = 0;
+        isGround = false;
 		//forceMove = 50;
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
         MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, "useSkillsDart");
         MGNotificationCenter.defaultCenter().addObserver(this, firstJump, "firstJump");
-        MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
+        //MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
         MGNotificationCenter.defaultCenter().addObserver(this, downToLine, "downToLine");
 	}
     public void useSkillsDart(MGNotification notification)
@@ -32,8 +33,8 @@ public class Jump : MonoBehaviour {
     }
     public void firstJump(MGNotification notification)
     {
-        
-            isJump = 0;
+ 
+            isJump = 1;
             Vector2 velocity = rigidbody2D.velocity;
             velocity.y = 0;
             print("1:" + velocity.y);
@@ -42,8 +43,10 @@ public class Jump : MonoBehaviour {
             print("1:" + rigidbody2D.velocity.y);
             jumpCount = 1;
             P2PBinding.sendMessageToPeer("firstJump");
+        
 
     }
+    /*
     public void secondJump(MGNotification notification)
     {
         if (!isGround && (Input.GetKeyDown(KeyCode.Space) || isJump == 1) && jumpCount == 1)
@@ -56,6 +59,7 @@ public class Jump : MonoBehaviour {
             jumpCount = 2;
         }
     }
+     */
     public void downToLine(MGNotification notification)
     {
         //角色会根据上下键反转
@@ -99,7 +103,7 @@ public class Jump : MonoBehaviour {
 			transform.localScale = new Vector3(-1,rigidbody2D.gravityScale==0?-1:1,1);
 		}
 
-
+        
 	}
 
 	//判断角色是否在地面上
