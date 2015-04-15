@@ -104,6 +104,7 @@ static NSString * const kMessageKey = @"message";
 -(void)sendMessageToPeer:(const char *)msg{
     NSString *message = [NSString stringWithUTF8String:msg];
     NSError *error;
+    
     [self.session sendData:[message dataUsingEncoding:NSUTF8StringEncoding]
                    toPeers:[_session connectedPeers]
                   withMode:MCSessionSendDataReliable
@@ -155,7 +156,7 @@ static NSString * const kMessageKey = @"message";
     if ([data length]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             //接受到消息
-            UnitySendMessage("receiveIOS", "testIOSTOUnity", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].UTF8String);
+            UnitySendMessage("Main Camera", "receiverMessageFromPeer", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].UTF8String);
 
         });
     }
