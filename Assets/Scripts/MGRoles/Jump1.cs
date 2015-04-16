@@ -33,6 +33,7 @@ public class Jump1 : MonoBehaviour {
 		if(notification.objc==null)
 
         P2PBinding.sendMessageToPeer("1useSkillsDart");
+        print(1);
     }
     public void firstJump(MGNotification notification)
     {
