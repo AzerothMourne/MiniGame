@@ -1,8 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LitJson;
 
 public class MGNetWorking : MonoBehaviour {
 
+    void Start()
+    {
+        print("Init GlobalData");
+        MGGlobalDataCenter.defaultCenter();
+    }
 	public void findHost ()
 	{
 		print ("findHost");
@@ -22,7 +28,8 @@ public class MGNetWorking : MonoBehaviour {
 	}
 	public void receiverMessageFromPeer ( string msg)
 	{
-		print ("receiverMessageFromPeer:"+msg);
-
+		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
+		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
+		MGNotificationCenter.defaultCenter().postNotification(msgModel.eventId,msgModel);
 	}
 }
