@@ -6,9 +6,9 @@ public class server : MonoBehaviour {
 	public UILabel logLabel;
 	void Awake()
 	{
-		serverPort = 10000;
+		serverPort = 25000;
 	}
-	
+    
 	public void OnMouseDown(){
 		//Network.peerType是端类型的状态:  
 		//即disconnected, connecting, server 或 client四种  

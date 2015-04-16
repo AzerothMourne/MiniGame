@@ -3,14 +3,14 @@ using System.Collections;
 
 public class client : MonoBehaviour {
 	
-	private string IP = "10.67.87.148";
+	private string IP = "127.0.0.1";
 	private string clientIp;
 	private string clientIpSplite;
 	private Vector3 acceleration;
 	public GameObject cube;
 	private bool cubeInitialed = false;
 	//Connet port 
-	private int Port = 10000;
+	private int Port = 25000;
 	public UILabel logLabel;
 	
 	void Awake()
@@ -19,7 +19,7 @@ public class client : MonoBehaviour {
 		string[] tmpArray = clientIp.Split('.');
 		clientIpSplite = tmpArray[0] + "." + tmpArray[1] + "." + tmpArray[2] + ".";
 	}
-	
+    
 	public void OnMouseDown(){
 
 		switch (Network.peerType)
