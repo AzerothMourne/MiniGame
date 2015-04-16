@@ -6,10 +6,11 @@ public class MyNetworkTest : MonoBehaviour {
     public int connecttions = 10;
     public int listenPort = 8899;
     public UILabel clientLog, serverLog;
-    public string ip = "127.0.0.1";
     private Vector3 acceleration;
     public GameObject cube;
     private bool cubeInitialed = false;
+	private string ip = "192.168.23.10";
+
 	void OnGUI()
     {
         if (NetworkPeerType.Disconnected == Network.peerType)
@@ -17,12 +18,12 @@ public class MyNetworkTest : MonoBehaviour {
             if (GUILayout.Button("创建服务器"))
             {
                 NetworkConnectionError error = Network.InitializeServer(connecttions, listenPort, false);
-                serverLog.text += "\r\n" + "Network.InitializeServer:" + error;
+				serverLog.text += "\r\n" + "Network.InitializeServer:ip="+ip +";"+ error;
             }
             if (GUILayout.Button("连接服务器"))
             {
                 NetworkConnectionError error = Network.Connect(ip, 8899);
-                clientLog.text += "\r\n" + "Network.Connect:" + error;
+				clientLog.text += "\r\n" + "Network.Connect:hostIp=" +ip+";"+error;
             }
         }
         else if(Network.peerType == NetworkPeerType.Server)

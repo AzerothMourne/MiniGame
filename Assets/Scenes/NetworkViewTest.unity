@@ -764,7 +764,7 @@ MonoBehaviour:
   clientLog: {fileID: 960795956}
   serverLog: {fileID: 1330203135}
   ip: 127.0.0.1
-  cube: {fileID: 156540, guid: 14eddcedf693045ddb92c4dd4956aaeb, type: 2}
+  cube: {fileID: 0}
 --- !u!4 &1675268496
 Transform:
   m_ObjectHideFlags: 0

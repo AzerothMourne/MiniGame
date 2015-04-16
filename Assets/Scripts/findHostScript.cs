@@ -11,7 +11,7 @@ public class findHostScript : MonoBehaviour {
     {
         print("finsHost");
         MGGlobalDataCenter.defaultCenter().isHost = 0;
-        P2PBinding.findHost();
+		MGNetWorking.findHost();
     }
 	// Update is called once per frame
 	void Update () {

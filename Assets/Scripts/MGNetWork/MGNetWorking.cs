@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using LitJson;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public class MGNetWorking : MonoBehaviour {
 
@@ -9,22 +11,30 @@ public class MGNetWorking : MonoBehaviour {
         print("Init GlobalData");
         MGGlobalDataCenter.defaultCenter();
     }
-	public void findHost ()
+	[DllImport("__Internal")]
+	private static extern void _findHost();
+	[DllImport("__Internal")]
+	private static extern void _createHost();
+	[DllImport( "__Internal" )]
+	private static extern void _testUnityToiOS ( string msg);
+	[DllImport( "__Internal" )]
+	private static extern void _sendMessageToPeer ( string msg);
+	
+	public static void findHost()
 	{
-		print ("findHost");
-		P2PBinding.findHost();
-		
+		if(Application.platform==RuntimePlatform.IPhonePlayer)
+			_findHost();
 	}
-	public void createHost ()
+	public static void createHost()
 	{
-		print ("createHost");
-		P2PBinding.createHost();
-		
+		if(Application.platform==RuntimePlatform.IPhonePlayer)
+			_createHost();
 	}
-	public void sendMsgToPeer ( string idStr)
-	{
-		print ("In Unity sendMsgToPeer:"+idStr);
-		P2PBinding.sendMessageToPeer (idStr);
+	
+	public static void sendMessageToPeer (string msg){
+		print ("sendMessageToPeer:"+msg);
+		if(Application.platform==RuntimePlatform.IPhonePlayer)
+			_sendMessageToPeer(msg);
 	}
 	public void receiverMessageFromPeer ( string msg)
 	{
