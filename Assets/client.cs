@@ -3,7 +3,7 @@ using System.Collections;
 
 public class client : MonoBehaviour {
 	
-	private string IP = "127.0.0.1";
+	private string IP = "10.67.82.166";
 	private string clientIp;
 	private string clientIpSplite;
 	private Vector3 acceleration;
