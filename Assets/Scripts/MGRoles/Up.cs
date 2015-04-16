@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using LitJson;
 public class Up : MonoBehaviour {
 
+	public UIInput log;
 	// Use this for initialization
 	void Start () {
-	
+		log.label.text = "";
 	}
 	
 	// Update is called once per frame
@@ -14,7 +15,7 @@ public class Up : MonoBehaviour {
 	}
 
 	public void OnMouseDown () {
-		print ("Up OnMouseDown ");
+		//log.label.text += "up down:" + MGGlobalDataCenter.timestamp ()+"\r\n";
         if (MGGlobalDataCenter.defaultCenter().isHost == 1)
             MGNotificationCenter.defaultCenter().postNotification("firstJump", null);
         else
