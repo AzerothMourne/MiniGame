@@ -153,13 +153,13 @@ static NSString * const kMessageKey = @"message";
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
     if ([data length]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             //接受到消息
-            unsigned long long nowTimestamp=(unsigned long long)([[NSDate date] timeIntervalSince1970]*1000);
-            NSLog(@"%lld",nowTimestamp);
+//            unsigned long long nowTimestamp=(unsigned long long)([[NSDate date] timeIntervalSince1970]*1000);
+//            NSLog(@"%lld",nowTimestamp);
             UnitySendMessage("Main Camera", "receiverMessageFromPeer", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].UTF8String);
 
-        });
+//        });
     }
 }
 
