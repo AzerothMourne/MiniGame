@@ -3,17 +3,13 @@ using System.Collections;
 
 public class server : MonoBehaviour {
 	private int serverPort; 
-	public GUIText status;
-	
+	public UILabel logLabel;
 	void Awake()
 	{
 		serverPort = 10000;
 	}
 	
-	
-	//OnGUI方法，所有GUI的绘制都需要在这个方法中实现  
-	void OnGUI()
-	{
+	public void OnMouseDown(){
 		//Network.peerType是端类型的状态:  
 		//即disconnected, connecting, server 或 client四种  
 		switch (Network.peerType)
@@ -33,30 +29,27 @@ public class server : MonoBehaviour {
 		case NetworkPeerType.Connecting:
 			break;
 		}
-		GUILayout.Label(Network.player.ipAddress);
 	}
 	
 	void StartServer()
 	{
-		//当用户点击按钮的时候为true  
-		if (GUILayout.Button("创建服务器"))
-		{
 			//初始化本机服务器端口，第一个参数就是本机接收多少连接  
 			NetworkConnectionError error = Network.InitializeServer(12, serverPort, false);
-			Debug.Log("错误日志" + error);
-		}
+			Debug.Log("StartServer:" + error);
+		logLabel.text+="\r\n"+"StartServer:" + error;
 	}
 	
 	void OnServer()
 	{
-		GUILayout.Label("服务端已经运行,等待客户端连接");  
+
+		logLabel.text+="\r\n"+"server run,waiting connect";  
 		int length = Network.connections.Length;
 		
 		for(int i = 0; i < length; i++)
 		{
-			GUILayout.Label("客户端" + i);
-			GUILayout.Label("客户端ip" + Network.connections[i].ipAddress);
-			GUILayout.Label("客户端端口" + Network.connections[i].port);  
+			logLabel.text+="\r\n"+"client:" + i.ToString();
+			logLabel.text+="\r\n"+"clientIp:" + Network.connections[i].ipAddress;
+			logLabel.text+="\r\n"+"clientPort:" + Network.connections[i].port.ToString();  
 		}
 	}
 	

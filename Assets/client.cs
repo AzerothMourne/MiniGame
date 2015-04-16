@@ -3,7 +3,7 @@ using System.Collections;
 
 public class client : MonoBehaviour {
 	
-	private string IP = "10.66.208.191";
+	private string IP = "10.67.87.148";
 	private string clientIp;
 	private string clientIpSplite;
 	private Vector3 acceleration;
@@ -11,6 +11,7 @@ public class client : MonoBehaviour {
 	private bool cubeInitialed = false;
 	//Connet port 
 	private int Port = 10000;
+	public UILabel logLabel;
 	
 	void Awake()
 	{
@@ -19,39 +20,38 @@ public class client : MonoBehaviour {
 		clientIpSplite = tmpArray[0] + "." + tmpArray[1] + "." + tmpArray[2] + ".";
 	}
 	
-	
-	void OnGUI()
-	{
+	public void OnMouseDown(){
+
 		switch (Network.peerType)
 		{
 		case NetworkPeerType.Disconnected:
 			StartConnect();
 			break;
 		case NetworkPeerType.Server:
+			logLabel.text += "\r\n" + "NetworkPeerType.Server:" ;
 			break;
 		case NetworkPeerType.Client:
 			OnConnect();
 			break;
 		case NetworkPeerType.Connecting:
+			logLabel.text += "\r\n" + "NetworkPeerType.Connecting:" ;
 			break;
 		}
 	}
 	
-	
 	void StartConnect()
 	{
-
-		if (GUILayout.Button("Connect Server"))
-		{
-			NetworkConnectionError error = Network.Connect(IP, Port);
-			Debug.Log("connect status:" + error);	   
-		}
+		NetworkConnectionError error = Network.Connect(IP, Port);
+		Debug.Log("connect status:" + error);
+		logLabel.text += "\r\n" + "StartConnect:" + error;
 	}
 	
 	void OnConnect()
 	{
+		logLabel.text += "\r\n" + "OnConnect" ;
 		if(!cubeInitialed)
 		{
+			logLabel.text += "\r\n" + "Network.Instantiate" ;
 			Network.Instantiate(cube, transform.position, transform.rotation, 0);
 			cubeInitialed = true;
 		}

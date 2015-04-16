@@ -2,11 +2,10 @@
 using System.Collections;
 
 public class CubeController : MonoBehaviour {
-	private GUIText accelText;
+	public UILabel accelText;
 	
 	void Start()
 	{
-		accelText = GameObject.FindGameObjectWithTag("AccelTip").GetComponent<GUIText>() as GUIText;
 		accelText.text = "";
 	}
 	
@@ -25,8 +24,8 @@ public class CubeController : MonoBehaviour {
 		{
 			moveDir = new Vector3(Input.mousePosition.x - cubescreenPos.x, Input.mousePosition.y - cubescreenPos.y, 0f).normalized;
 		}
-		Debug.Log("moveDir: " + moveDir);
-		float speed = 5;
+
+		float speed = 15;
 		transform.Translate(speed * moveDir * Time.deltaTime);
 	}
 	
