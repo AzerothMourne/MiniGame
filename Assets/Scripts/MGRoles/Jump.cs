@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using LitJson;
+using System.Collections.Generic;
+using System;
 public class Jump : MonoBehaviour {
 
 	public float forceMove ;
@@ -11,12 +13,15 @@ public class Jump : MonoBehaviour {
 	public int isJump,isDown;
     public MGskillDrat drat;
     private int groundLayerMask;
+	public UIInput log;
+	public int isReceiveFlag;
 	// Use this for initialization
 	void Start () {
         groundLayerMask = LayerMask.GetMask("Ground");
 		isJump = 0;
         isDown = 0;
         isGround = false;
+		isReceiveFlag = 0;
 		//forceMove = 50;
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
@@ -43,8 +48,20 @@ public class Jump : MonoBehaviour {
             rigidbody2D.velocity = velocity;
             print("1:" + rigidbody2D.velocity.y);
             jumpCount = 1;
-		if(notification.objc==null)
-            P2PBinding.sendMessageToPeer("firstJump");
+		if (notification.objc == null) {
+			//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
+			MGMsgModel msgModel=new MGMsgModel();
+			msgModel.eventId="firstJump";
+			msgModel.timestamp=MGGlobalDataCenter.timestamp();
+			P2PBinding.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+		} else {
+			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\r\n";
+			//isReceiveFlag=1;
+			long time1=MGGlobalDataCenter.timestamp();
+			long time2=((MGMsgModel)notification.objc).timestamp;
+			print(time1+";"+time2);
+			log.label.text+=(Mathf.Abs(time1-time2)).ToString()+"\r\n";
+		}
         
 
     }
@@ -82,7 +99,10 @@ public class Jump : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
-
+		if (isReceiveFlag == 1) {
+			log.label.text+="Role Update :"+MGGlobalDataCenter.timestamp()+"\r\n";
+			isReceiveFlag=0;
+		}
 
 		//判断键盘输入左右键， 用来说明位移
 		float h = Input.GetAxis ("Horizontal");

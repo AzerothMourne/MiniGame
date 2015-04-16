@@ -3,14 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 
-public class Personnel
-{
 
-    public int Id { get; set; }
-
-    public string Name { get; set; }
-
+public class MGMsgModel{
+	public string eventId { get; set;}
+	public long timestamp{ get; set;}
+	/*
+	public MGMsgModel(string _eventId,string _timestamp){
+		this.eventId = _eventId;
+		this.timestamp = _timestamp;
+	}*/
 }
+
+
 public class MGGlobalDataCenter  {
     public int isHost;
     private static MGGlobalDataCenter instance;
@@ -55,10 +59,10 @@ public class MGGlobalDataCenter  {
 		}
 		return instance;
 	}
-    public static string timestamp()
+    public static long timestamp()
     {
         TimeSpan ts = DateTime.Now - DateTime.Parse("1970-1-1");
-        return ts.TotalMilliseconds.ToString();
+        return (long)Math.Floor(ts.TotalMilliseconds);
     }
     
 

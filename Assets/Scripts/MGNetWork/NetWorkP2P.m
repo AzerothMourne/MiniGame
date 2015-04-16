@@ -41,7 +41,6 @@ static NSString * const kMessageKey = @"message";
     if (self) {
         // Initialization code here.
     }
-    [[NSNotificationCenter defaultCenter] addObserver:nil selector:nil name:nil object:nil];
     return self;
 }
 //获取当前屏幕显示的viewcontroller
@@ -156,6 +155,8 @@ static NSString * const kMessageKey = @"message";
     if ([data length]) {
         dispatch_async(dispatch_get_main_queue(), ^{
             //接受到消息
+            unsigned long long nowTimestamp=(unsigned long long)([[NSDate date] timeIntervalSince1970]*1000);
+            NSLog(@"%lld",nowTimestamp);
             UnitySendMessage("Main Camera", "receiverMessageFromPeer", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].UTF8String);
 
         });
