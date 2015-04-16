@@ -2,12 +2,11 @@
 using System.Collections;
 
 public class client : MonoBehaviour {
-	
+    public GameObject cube;
 	private string IP = "127.0.0.1";
 	private string clientIp;
 	private string clientIpSplite;
 	private Vector3 acceleration;
-	public GameObject cube;
 	private bool cubeInitialed = false;
 	//Connet port 
 	private int Port = 25000;
