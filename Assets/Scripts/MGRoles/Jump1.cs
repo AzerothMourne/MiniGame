@@ -34,10 +34,12 @@ public class Jump1 : MonoBehaviour {
         GameObject role1 = this.gameObject;
         drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
 
-		if(notification.objc==null)
-
-        P2PBinding.sendMessageToPeer("1useSkillsDart");
-        print(1);
+		if (notification.objc == null) {
+			MGMsgModel msgModel=new MGMsgModel();
+			msgModel.eventId="1useSkillsDart";
+			msgModel.timestamp=MGGlobalDataCenter.timestamp();
+			P2PBinding.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+		}
     }
     public void firstJump(MGNotification notification)
     {
@@ -54,7 +56,7 @@ public class Jump1 : MonoBehaviour {
 			//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\n";
 
 			MGMsgModel msgModel=new MGMsgModel();
-			msgModel.eventId="firstJump";
+			msgModel.eventId="1firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
 			P2PBinding.sendMessageToPeer (JsonMapper.ToJson(msgModel));
 			//P2PBinding.sendMessageToPeer ("1firstJump ");
@@ -95,8 +97,12 @@ public class Jump1 : MonoBehaviour {
             transform.localScale = new Vector3(1, -1, 1);
 
         }
-		if(notification.objc==null)
-        P2PBinding.sendMessageToPeer("1downToLine");
+		if (notification.objc == null) {
+			MGMsgModel msgModel=new MGMsgModel();
+			msgModel.eventId="1downToLine";
+			msgModel.timestamp=MGGlobalDataCenter.timestamp();
+			P2PBinding.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+		}
     }
 	// Update is called once per frame
 	void Update () {

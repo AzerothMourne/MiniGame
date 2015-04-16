@@ -3,6 +3,9 @@ using System.Collections;
 using LitJson;
 using System.Collections.Generic;
 using System;
+public static class JumpEventEnum{
+	public static string jumpEventId="firstJump";
+}
 public class Jump : MonoBehaviour {
 
 	public float forceMove ;
@@ -26,16 +29,20 @@ public class Jump : MonoBehaviour {
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
         MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, "useSkillsDart");
-        MGNotificationCenter.defaultCenter().addObserver(this, firstJump, "firstJump");
-        //MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
+		MGNotificationCenter.defaultCenter().addObserver(this, firstJump, JumpEventEnum.jumpEventId);
+		//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
         MGNotificationCenter.defaultCenter().addObserver(this, downToLine, "downToLine");
 	}
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
         drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
-		if(notification.objc==null)
-        P2PBinding.sendMessageToPeer("useSkillsDart");
+		if (notification.objc == null) {
+			MGMsgModel msgModel = new MGMsgModel ();
+			msgModel.eventId = "useSkillsDart";
+			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
+			P2PBinding.sendMessageToPeer (JsonMapper.ToJson (msgModel));
+		}
     }
     public void firstJump(MGNotification notification)
     {
@@ -94,8 +101,12 @@ public class Jump : MonoBehaviour {
             transform.localScale = new Vector3(1, -1, 1);
 
         }
-		if(notification.objc==null)
-        P2PBinding.sendMessageToPeer("downToLine");
+		if(notification.objc==null){
+			MGMsgModel msgModel = new MGMsgModel ();
+			msgModel.eventId = "downToLine";
+			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
+			P2PBinding.sendMessageToPeer (JsonMapper.ToJson (msgModel));
+		}
     }
 	// Update is called once per frame
 	void Update () {

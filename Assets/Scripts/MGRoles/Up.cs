@@ -7,14 +7,16 @@ public class Up : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		log.label.text = "";
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	public void OnMouseDown () {
+
 		//log.label.text += "up down:" + MGGlobalDataCenter.timestamp ()+"\r\n";
         if (MGGlobalDataCenter.defaultCenter().isHost == 1)
             MGNotificationCenter.defaultCenter().postNotification("firstJump", null);
