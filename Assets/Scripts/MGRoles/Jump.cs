@@ -41,7 +41,7 @@ public class Jump : MonoBehaviour {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "useSkillsDart";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
-			P2PBinding.sendMessageToPeer (JsonMapper.ToJson (msgModel));
+			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
 		}
     }
     public void firstJump(MGNotification notification)
@@ -60,7 +60,7 @@ public class Jump : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-			P2PBinding.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
 		} else {
 			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\r\n";
 			//isReceiveFlag=1;
@@ -105,7 +105,7 @@ public class Jump : MonoBehaviour {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "downToLine";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
-			P2PBinding.sendMessageToPeer (JsonMapper.ToJson (msgModel));
+			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
 		}
     }
 	// Update is called once per frame

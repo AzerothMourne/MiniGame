@@ -11,7 +11,7 @@ public class creATEHostScript : MonoBehaviour {
     {
         print("createHost");
         MGGlobalDataCenter.defaultCenter().isHost = 1;
-        P2PBinding.createHost();
+		MGNetWorking.createHost();
     }
 	// Update is called once per frame
 	void Update () {
