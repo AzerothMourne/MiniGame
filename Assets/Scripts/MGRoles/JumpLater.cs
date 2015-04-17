@@ -58,7 +58,11 @@ public class JumpLater : MonoBehaviour
             msgModel.timestamp = MGGlobalDataCenter.timestamp();
             Vector3 pos = new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown == 0 ? 1 : -1) * role1.renderer.bounds.size.y / 2, role1.transform.position.z);
             if (Network.peerType != NetworkPeerType.Disconnected)
-                mgNetWorking.Instantiate(drat, pos, new Quaternion(), 0);
+            {
+                GameObject.Instantiate(drat, pos, Quaternion.Euler(0, 0, -1));
+                //drat.createSkillSprite(pos);
+                //mgNetWorking.Instantiate(drat, pos, new Quaternion(), 0);
+            }
             else
                 drat.createSkillSprite(pos);
         }

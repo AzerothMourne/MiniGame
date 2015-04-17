@@ -3,7 +3,7 @@ using System.Collections;
 
 public class MGskillDrat : MGSkillsBase{
 
-    public int speed = 3;
+    public int speed;
 	// Use this for initialization
 	void Start () {
         skillId = 1;
