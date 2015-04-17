@@ -1,28 +1,121 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LitJson;
+using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public class MGNetWorking : MonoBehaviour {
+    void Start()
+    {
+        print("Init GlobalData");
+        MGGlobalDataCenter.defaultCenter();
+    }
+	[DllImport("__Internal")]
+	private static extern void _findHost();
+	[DllImport("__Internal")]
+	private static extern void _createHost();
+	[DllImport( "__Internal" )]
+	private static extern void _sendMessageToPeer ( string msg);
+	public static void findHost()
+	{
+        MGGlobalDataCenter.defaultCenter().isHost = false;
+        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        {
+            Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
+        }
+		else if(Application.platform==RuntimePlatform.IPhonePlayer)
+			_findHost();
+	}
 
-	public void findHost ()
+	public static void createHost()
 	{
-		print ("findHost");
-		P2PBinding.findHost();
-		
+        MGGlobalDataCenter.defaultCenter().isHost = true;
+        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        {
+            Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
+        }
+        else if (Application.platform == RuntimePlatform.IPhonePlayer)
+			_createHost();
 	}
-	public void createHost ()
-	{
-		print ("createHost");
-		P2PBinding.createHost();
-		
+    /// <summary>
+    /// 重载sendMessageToPeer支持unity提供的NetworkView，方便在局域网条件下跨平台
+    /// </summary>
+    /// <param name="msg"></param>
+    /// <param name="networkView"></param>
+	public void sendMessageToPeer (string msg){
+        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        {
+            if (NetworkPeerType.Disconnected != Network.peerType)
+            {
+                print("sendMessageToPeer:" + msg);
+                networkView.RPC("RPCReceiverMessageFromPeer", RPCMode.Others, msg);
+            }
+                
+        }
+        else
+        {
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+                MGNetWorking._sendMessageToPeer(msg);
+        }	
 	}
-	public void sendMsgToPeer ( string idStr)
-	{
-		print ("In Unity sendMsgToPeer:"+idStr);
-		P2PBinding.sendMessageToPeer (idStr);
-	}
+    public void sendMessageToPeer(string name,string msg)
+    {
+        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        {
+            if (NetworkPeerType.Disconnected != Network.peerType)
+            {
+                print("sendMessageToPeer:" + msg);
+                networkView.RPC(name, RPCMode.Others, msg);
+            }
+
+        }
+        else
+        {
+            if (Application.platform == RuntimePlatform.IPhonePlayer)
+                MGNetWorking._sendMessageToPeer(msg);
+        }
+    }
+    [RPC]
+    public void RPCReceiverMessageFromPeer(string msg, NetworkMessageInfo info)
+    {
+        //刚从网络接收的数据的相关信息,会被保存到NetworkMessageInfo这个结构中  
+        string sender = info.sender.ToString();
+        //看脚本运行在什么状态下  
+        NetworkPeerType status = Network.peerType;
+        if (status != NetworkPeerType.Disconnected && sender!="-1")
+        {
+            receiverMessageFromPeer(msg);
+        }
+    }
 	public void receiverMessageFromPeer ( string msg)
 	{
-		print ("receiverMessageFromPeer:"+msg);
-
+		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
+		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
+		MGNotificationCenter.defaultCenter().postNotification(msgModel.eventId,msgModel);
 	}
+    public void Instantiate(UnityEngine.Object prefab,Vector3 position,Quaternion rotation,int group)
+    {
+        Network.Instantiate(prefab, position, rotation, group);
+    }
+    //同步gameobject的方法
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+
+        if (stream.isWriting)
+        {
+            Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;
+            Vector3 roleLaterVelocity = MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity;
+            stream.Serialize(ref roleVelocity);
+            stream.Serialize(ref roleLaterVelocity);
+        }
+        else
+        {
+            Vector3 roleVelocity = Vector3.zero;
+            Vector3 roleLaterVelocity = Vector3.zero;
+            stream.Serialize(ref roleVelocity);
+            stream.Serialize(ref roleLaterVelocity);
+            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = roleVelocity;
+            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = roleLaterVelocity;
+        }
+    }
 }

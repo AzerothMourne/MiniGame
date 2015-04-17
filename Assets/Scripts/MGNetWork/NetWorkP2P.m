@@ -41,7 +41,6 @@ static NSString * const kMessageKey = @"message";
     if (self) {
         // Initialization code here.
     }
-    [[NSNotificationCenter defaultCenter] addObserver:nil selector:nil name:nil object:nil];
     return self;
 }
 //获取当前屏幕显示的viewcontroller
@@ -104,6 +103,7 @@ static NSString * const kMessageKey = @"message";
 -(void)sendMessageToPeer:(const char *)msg{
     NSString *message = [NSString stringWithUTF8String:msg];
     NSError *error;
+    
     [self.session sendData:[message dataUsingEncoding:NSUTF8StringEncoding]
                    toPeers:[_session connectedPeers]
                   withMode:MCSessionSendDataReliable
@@ -153,11 +153,13 @@ static NSString * const kMessageKey = @"message";
 
 - (void)session:(MCSession *)session didReceiveData:(NSData *)data fromPeer:(MCPeerID *)peerID {
     if ([data length]) {
-        dispatch_async(dispatch_get_main_queue(), ^{
+//        dispatch_async(dispatch_get_main_queue(), ^{
             //接受到消息
-            UnitySendMessage("receiveIOS", "testIOSTOUnity", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].UTF8String);
+//            unsigned long long nowTimestamp=(unsigned long long)([[NSDate date] timeIntervalSince1970]*1000);
+//            NSLog(@"%lld",nowTimestamp);
+            UnitySendMessage("Main Camera", "receiverMessageFromPeer", [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding].UTF8String);
 
-        });
+//        });
     }
 }
 
