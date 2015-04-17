@@ -19,15 +19,8 @@ public class Down : MonoBehaviour {
             MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
         else
             MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
-		/*print (".........is Down : " + GameObject.Find ("role").GetComponent<Jump> ().isDown);
-		if (GameObject.Find ("role").GetComponent<Jump> ().isDown == 0) {
-			GameObject.Find ("上").SetActive (false);
-			GameObject.Find ("按钮跳跃").SetActive (true);
-		} else {
-			GameObject.Find ("上").SetActive (true);
-			GameObject.Find ("按钮跳跃").SetActive (false);
-		}
-		*/
+
+		//按向下后调出向上按钮
 		GameObject.Find ("上").GetComponent<SpriteRenderer>().sprite=upWardSprite;
 	}
 }

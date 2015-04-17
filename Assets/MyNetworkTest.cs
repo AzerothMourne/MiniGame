@@ -55,7 +55,7 @@ public class MyNetworkTest : MonoBehaviour {
         if (stream.isWriting)
         {
             MGMsgModel msgModel = new MGMsgModel();
-            msgModel.eventId = "firstJump";
+            msgModel.eventId = "jump";
             msgModel.timestamp = MGGlobalDataCenter.timestamp();
             Vector3 pos = transform.localPosition;
             Quaternion rot = transform.localRotation;
