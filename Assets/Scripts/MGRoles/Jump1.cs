@@ -40,7 +40,9 @@ public class Jump1 : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="1useSkillsDart";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+			Vector3 pos=new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z);
+			Network.Instantiate(drat, pos, new Quaternion(), 0);
+//            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
 		}
     }
     public void firstJump(MGNotification notification)
@@ -60,7 +62,7 @@ public class Jump1 : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="1firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+			MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
 			//P2PBinding.sendMessageToPeer ("1firstJump ");
 		} else {
 			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\n";
@@ -103,7 +105,7 @@ public class Jump1 : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="1downToLine";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+			MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
 		}
     }
 	// Update is called once per frame
@@ -151,5 +153,27 @@ public class Jump1 : MonoBehaviour {
     {
         mgNetWorking.RPCReceiverMessageFromPeer(msg, info);
     }
+	//同步gameobject的方法
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+		if (stream.isWriting)
+		{
+			//            Vector3 receivedPosition = Vector3.zero;
+			Vector3 receivedVelocity = Vector3.zero;
+			//            stream.Serialize(ref receivedPosition);
+			stream.Serialize(ref receivedVelocity);
+			//            transform.position = receivedPosition;
+			//            rigidbody2D.gravityScale = 0;
+			rigidbody2D.velocity = receivedVelocity;
+		}
+		else
+		{
+			//            Vector3 pos = transfor m.position;
+			Vector3 velocity = rigidbody2D.velocity;
+			//            stream.Serialize(ref pos);
+			stream.Serialize(ref velocity);
+
+		}
+	}
 
 }

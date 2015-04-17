@@ -27,7 +27,7 @@ public class MyNetworkTest : MonoBehaviour {
             if (GUILayout.Button("连接服务器"))
             {
                 MGGlobalDataCenter.defaultCenter().serverIp = ipInput.label.text;
-                print(MGGlobalDataCenter.defaultCenter().serverIp);
+                Debug.Log(MGGlobalDataCenter.defaultCenter().serverIp);
                 MGNetWorking.findHost();
                 //NetworkConnectionError error = Network.Connect(ip, 8899);
 				//clientLog.text += "\r\n" + "Network.Connect:hostIp=" +ip+";"+error;
@@ -42,7 +42,7 @@ public class MyNetworkTest : MonoBehaviour {
         else if (Network.peerType == NetworkPeerType.Client)
         {
             GUILayout.Label("服务器连接成功");
-            Network.sendRate = 30;
+            Network.sendRate = 60;
             //clientLog.renderer.enabled = false;
             //serverLog.renderer.enabled = false;
             OnConnect();

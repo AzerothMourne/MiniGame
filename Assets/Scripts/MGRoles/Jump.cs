@@ -50,12 +50,14 @@ public class Jump : MonoBehaviour {
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
-        drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
+//        drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
 		if (notification.objc == null) {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "useSkillsDart";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
-            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+			Vector3 pos=new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z);
+			Network.Instantiate(drat, pos, new Quaternion(), 0);
+//            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
 		}
     }
     public void firstJump(MGNotification notification)
@@ -63,7 +65,6 @@ public class Jump : MonoBehaviour {
  
             isJump = 1;
             Vector2 velocity = rigidbody2D.velocity;
-            velocity.y = 0;
             print("1:" + velocity.y);
             velocity.y = jumpVelocity;
             rigidbody2D.velocity = velocity;
@@ -167,28 +168,28 @@ public class Jump : MonoBehaviour {
 	public void OnCollisionExit2D() {
 		isGround = false;
 	}
-    /*
+    
     //同步gameobject的方法
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
-        log.label.text += "\r\nOnSerializeNetworkView";
+        
         if (stream.isWriting)
         {
-            Vector3 pos = transform.position;
-            Vector3 velocity = rigidbody.velocity;
-            stream.Serialize(ref pos);
-            //stream.Serialize(ref velocity);
+//            Vector3 pos = transfor m.position;
+            Vector3 velocity = rigidbody2D.velocity;
+//            stream.Serialize(ref pos);
+            stream.Serialize(ref velocity);
         }
         else
         {
-            Vector3 receivedPosition = Vector3.zero;
+//            Vector3 receivedPosition = Vector3.zero;
             Vector3 receivedVelocity = Vector3.zero;
-            stream.Serialize(ref receivedPosition);
+//            stream.Serialize(ref receivedPosition);
             stream.Serialize(ref receivedVelocity);
-            transform.position = receivedPosition;
-            rigidbody2D.gravityScale = 0;
-            //rigidbody.velocity = receivedVelocity;
+//            transform.position = receivedPosition;
+//            rigidbody2D.gravityScale = 0;
+            rigidbody2D.velocity = receivedVelocity;
         }
-    }*/
+    }
 
 }

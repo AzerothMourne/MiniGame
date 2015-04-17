@@ -317,7 +317,7 @@ Transform:
   m_GameObject: {fileID: 386217151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
+  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
   m_Children:
   - {fileID: 686714068}
   - {fileID: 1915728065}
@@ -881,7 +881,7 @@ NetworkView:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1852946983}
   m_Enabled: 1
-  m_StateSynchronization: 1
+  m_StateSynchronization: 2
   m_Observed: {fileID: 1852946989}
   m_ViewID:
     m_ID: 2
@@ -1205,7 +1205,7 @@ NetworkView:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1985725676}
   m_Enabled: 1
-  m_StateSynchronization: 1
+  m_StateSynchronization: 2
   m_Observed: {fileID: 1985725681}
   m_ViewID:
     m_ID: 1
