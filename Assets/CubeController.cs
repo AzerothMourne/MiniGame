@@ -26,7 +26,7 @@ public class CubeController : MonoBehaviour {
 		float speed = 15;
 		transform.Translate(speed * moveDir * Time.deltaTime);
 	}
-	
+	//同步gameobject的方法
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
 		if (stream.isWriting)
