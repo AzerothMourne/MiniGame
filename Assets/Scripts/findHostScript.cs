@@ -12,6 +12,7 @@ public class findHostScript : MonoBehaviour {
         print("finsHost");
         MGGlobalDataCenter.defaultCenter().isHost = 0;
 		MGNetWorking.findHost();
+		print("finsHost is : "+ MGGlobalDataCenter.defaultCenter().isHost);
     }
 	// Update is called once per frame
 	void Update () {

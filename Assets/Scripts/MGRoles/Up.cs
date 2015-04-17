@@ -10,10 +10,7 @@ public class Up : MonoBehaviour {
 
 	}
 	
-	// Update is called once per frame
-	void Update () {
 
-	}
 
 	public void OnMouseDown () {
 
@@ -22,5 +19,6 @@ public class Up : MonoBehaviour {
             MGNotificationCenter.defaultCenter().postNotification("firstJump", null);
         else
             MGNotificationCenter.defaultCenter().postNotification("1firstJump", null);
+
 	}
 }

@@ -12,6 +12,7 @@ public class creATEHostScript : MonoBehaviour {
         print("createHost");
         MGGlobalDataCenter.defaultCenter().isHost = 1;
 		MGNetWorking.createHost();
+		print("createHost is : "+ MGGlobalDataCenter.defaultCenter().isHost);
     }
 	// Update is called once per frame
 	void Update () {
