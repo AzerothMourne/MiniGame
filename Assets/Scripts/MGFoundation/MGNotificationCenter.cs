@@ -49,10 +49,6 @@ public class MGNotificationCenter  {
 	public void addObserver(object observer,MGNotificationSelector sel,string name){
 		if (observer==null || sel==null || name==null)
 			return;
-        if (!this.nameHastable.ContainsKey(name))
-        {
-
-        }
         List<MGNotificationSelector> selList = MGFoundtion.GetValue<string, List<MGNotificationSelector>>(this.nameHastable, name, null);
 		if (selList == null) 
         {
