@@ -12,7 +12,6 @@ GameObject:
   - 114: {fileID: 11431674}
   - 114: {fileID: 11431672}
   - 65: {fileID: 6531672}
-  - 148: {fileID: 14819894}
   m_Layer: 0
   m_Name: drat
   m_TagString: Untagged
@@ -71,18 +70,6 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!148 &14819894
-NetworkView:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 131672}
-  m_Enabled: 1
-  m_StateSynchronization: 1
-  m_Observed: {fileID: 431672}
-  m_ViewID:
-    m_ID: 0
-    m_Type: 0
 --- !u!212 &21231672
 SpriteRenderer:
   m_ObjectHideFlags: 1

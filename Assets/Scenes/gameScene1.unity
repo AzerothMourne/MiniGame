@@ -317,7 +317,7 @@ Transform:
   m_GameObject: {fileID: 386217151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
+  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
   m_Children:
   - {fileID: 686714068}
   - {fileID: 1915728065}
@@ -675,6 +675,7 @@ GameObject:
   - 124: {fileID: 1844146918}
   - 81: {fileID: 1844146917}
   - 114: {fileID: 1844146922}
+  - 148: {fileID: 1844146923}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -758,6 +759,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474fc3a29f76249d4af9c3ddd65aa29f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!148 &1844146923
+NetworkView:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844146916}
+  m_Enabled: 1
+  m_StateSynchronization: 1
+  m_Observed: {fileID: 1844146921}
+  m_ViewID:
+    m_ID: 3
+    m_Type: 1
 --- !u!1 &1852946983
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,7 +784,6 @@ GameObject:
   - 61: {fileID: 1852946986}
   - 50: {fileID: 1852946985}
   - 114: {fileID: 1852946984}
-  - 148: {fileID: 1852946990}
   m_Layer: 0
   m_Name: role1
   m_TagString: Untagged
@@ -787,7 +799,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1852946983}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f04ea0244f816842afa12380a77cd1a, type: 3}
+  m_Script: {fileID: 11500000, guid: ea2c3e5f3a9320f478eeedf8699c9525, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   forceMove: 5
@@ -798,7 +810,6 @@ MonoBehaviour:
   isDown: 0
   drat: {fileID: 11431672, guid: 1b79cac65f39045489494c1a7d25cb8c, type: 2}
   log: {fileID: 1915728067}
-  isReceiveFlag: 0
 --- !u!50 &1852946985
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -874,18 +885,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!148 &1852946990
-NetworkView:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1852946983}
-  m_Enabled: 1
-  m_StateSynchronization: 2
-  m_Observed: {fileID: 1852946989}
-  m_ViewID:
-    m_ID: 2
-    m_Type: 1
 --- !u!1 &1875529167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,7 +1095,6 @@ GameObject:
   - 61: {fileID: 1985725678}
   - 50: {fileID: 1985725677}
   - 114: {fileID: 1985725682}
-  - 148: {fileID: 1985725683}
   m_Layer: 0
   m_Name: role
   m_TagString: Untagged
@@ -1198,18 +1196,6 @@ MonoBehaviour:
   isDown: 0
   drat: {fileID: 11431672, guid: 1b79cac65f39045489494c1a7d25cb8c, type: 2}
   log: {fileID: 1915728067}
---- !u!148 &1985725683
-NetworkView:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1985725676}
-  m_Enabled: 1
-  m_StateSynchronization: 2
-  m_Observed: {fileID: 1985725681}
-  m_ViewID:
-    m_ID: 1
-    m_Type: 1
 --- !u!1 &2044774835
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,13 +15,13 @@ public class Jump : MonoBehaviour {
 	public float jumpCount ;
 	public int isJump,isDown;
     public MGskillDrat drat;
-    private int groundLayerMask;
 	public UIInput log;
 	private int isReceiveFlag;
     private MGNetWorking mgNetWorking;
 	// Use this for initialization
 	void Start () {
-        groundLayerMask = LayerMask.GetMask("Ground");
+        MGGlobalDataCenter.defaultCenter().role = this.gameObject;
+
 		isJump = 0;
         isDown = 0;
         isGround = false;
@@ -50,14 +50,15 @@ public class Jump : MonoBehaviour {
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
-//        drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
 		if (notification.objc == null) {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "useSkillsDart";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
 			Vector3 pos=new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z);
-			Network.Instantiate(drat, pos, new Quaternion(), 0);
-//            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+            if (Network.peerType != NetworkPeerType.Disconnected)
+                mgNetWorking.Instantiate(drat, pos, new Quaternion(), 0);
+            else
+                drat.createSkillSprite(pos);
 		}
     }
     public void firstJump(MGNotification notification)
@@ -65,17 +66,15 @@ public class Jump : MonoBehaviour {
  
             isJump = 1;
             Vector2 velocity = rigidbody2D.velocity;
-            print("1:" + velocity.y);
             velocity.y = jumpVelocity;
             rigidbody2D.velocity = velocity;
-            print("1:" + rigidbody2D.velocity.y);
             jumpCount = 1;
 		if (notification.objc == null) {
 			//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
 		} else {
 			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\r\n";
 			//isReceiveFlag=1;
@@ -87,11 +86,7 @@ public class Jump : MonoBehaviour {
         
 
     }
-    [RPC]
-    void RPCReceiverMessageFromPeer(string msg, NetworkMessageInfo info)
-    {
-        mgNetWorking.RPCReceiverMessageFromPeer(msg, info);
-    }
+
     /*
     public void secondJump(MGNotification notification)
     {
@@ -125,7 +120,7 @@ public class Jump : MonoBehaviour {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "downToLine";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
-            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
 		}
     }
 	// Update is called once per frame
@@ -168,29 +163,5 @@ public class Jump : MonoBehaviour {
 	public void OnCollisionExit2D() {
 		isGround = false;
 	}
-    
-    //同步gameobject的方法
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-    {
-        
-        if (stream.isWriting)
-        {
-			log.label.text+="\r\n"+"role1 OnSerializeNetworkView";
-//            Vector3 pos = transfor m.position;
-            Vector3 velocity = rigidbody2D.velocity;
-//            stream.Serialize(ref pos);
-            stream.Serialize(ref velocity);
-        }
-        else
-        {
-//            Vector3 receivedPosition = Vector3.zero;
-            Vector3 receivedVelocity = Vector3.zero;
-//            stream.Serialize(ref receivedPosition);
-            stream.Serialize(ref receivedVelocity);
-//            transform.position = receivedPosition;
-//            rigidbody2D.gravityScale = 0;
-            rigidbody2D.velocity = receivedVelocity;
-        }
-    }
 
 }

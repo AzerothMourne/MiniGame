@@ -37,20 +37,4 @@ public class MGskillDrat : MGSkillsBase{
     {
         DestroyImmediate(this.gameObject);
     }
-	/*
-	//同步gameobject的方法
-	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-	{
-		if (stream.isWriting)
-		{
-			Vector3 pos = transform.position;
-			stream.Serialize(ref pos);
-		}
-		else
-		{
-			Vector3 receivedPosition = Vector3.zero;
-			stream.Serialize(ref receivedPosition);
-			transform.position = receivedPosition;
-		}
-	}*/
 }

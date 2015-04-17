@@ -42,7 +42,7 @@ public class MyNetworkTest : MonoBehaviour {
         else if (Network.peerType == NetworkPeerType.Client)
         {
             GUILayout.Label("服务器连接成功");
-            Network.sendRate = 60;
+
             //clientLog.renderer.enabled = false;
             //serverLog.renderer.enabled = false;
             OnConnect();

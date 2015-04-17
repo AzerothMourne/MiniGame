@@ -17,6 +17,7 @@ public class MGGlobalDataCenter  {
     public int listenPort;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
+    public GameObject role, roleLater;
     private string _serverIp;
     public string serverIp
     {
@@ -37,6 +38,8 @@ public class MGGlobalDataCenter  {
 
     private MGGlobalDataCenter()
     {
+        this.role = null;
+        this.roleLater = null;
         this.connecttions = 1;
         this.listenPort = 8899;
         this.isNetworkViewEnable = false;
