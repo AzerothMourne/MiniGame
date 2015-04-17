@@ -15,16 +15,18 @@ public class Jump : MonoBehaviour {
 	public float jumpCount ;
 	public int isJump,isDown;
     public MGskillDrat drat;
-    private int groundLayerMask;
 	public UIInput log;
-	public int isReceiveFlag;
+	private int isReceiveFlag;
+    private MGNetWorking mgNetWorking;
 	// Use this for initialization
 	void Start () {
-        groundLayerMask = LayerMask.GetMask("Ground");
+        MGGlobalDataCenter.defaultCenter().role = this.gameObject;
+
 		isJump = 0;
         isDown = 0;
         isGround = false;
 		isReceiveFlag = 0;
+        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
 		//forceMove = 50;
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
@@ -32,16 +34,31 @@ public class Jump : MonoBehaviour {
 		MGNotificationCenter.defaultCenter().addObserver(this, firstJump, JumpEventEnum.jumpEventId);
 		//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
         MGNotificationCenter.defaultCenter().addObserver(this, downToLine, "downToLine");
+        switch (Network.peerType)
+        {
+            case NetworkPeerType.Disconnected:
+                log.label.text = "NetworkPeerType.Disconnectd";
+                break;
+            case NetworkPeerType.Client:
+                log.label.text = "NetworkPeerType.Client";
+                break;
+            case NetworkPeerType.Server:
+                log.label.text = "NetworkPeerType.Server";
+                break;
+        }
 	}
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
-        drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
 		if (notification.objc == null) {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "useSkillsDart";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
-			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
+			Vector3 pos=new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z);
+            if (Network.peerType != NetworkPeerType.Disconnected)
+                mgNetWorking.Instantiate(drat, pos, new Quaternion(), 0);
+            else
+                drat.createSkillSprite(pos);
 		}
     }
     public void firstJump(MGNotification notification)
@@ -49,18 +66,15 @@ public class Jump : MonoBehaviour {
  
             isJump = 1;
             Vector2 velocity = rigidbody2D.velocity;
-            velocity.y = 0;
-            print("1:" + velocity.y);
             velocity.y = jumpVelocity;
             rigidbody2D.velocity = velocity;
-            print("1:" + rigidbody2D.velocity.y);
             jumpCount = 1;
 		if (notification.objc == null) {
 			//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
 		} else {
 			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\r\n";
 			//isReceiveFlag=1;
@@ -72,6 +86,7 @@ public class Jump : MonoBehaviour {
         
 
     }
+
     /*
     public void secondJump(MGNotification notification)
     {
@@ -105,7 +120,7 @@ public class Jump : MonoBehaviour {
 			MGMsgModel msgModel = new MGMsgModel ();
 			msgModel.eventId = "downToLine";
 			msgModel.timestamp = MGGlobalDataCenter.timestamp ();
-			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
 		}
     }
 	// Update is called once per frame
@@ -148,6 +163,5 @@ public class Jump : MonoBehaviour {
 	public void OnCollisionExit2D() {
 		isGround = false;
 	}
-
 
 }
