@@ -50,11 +50,8 @@ public class Jump1 : MonoBehaviour {
         
             isJump = 0;
             Vector2 velocity = rigidbody2D.velocity;
-            velocity.y = 0;
-            print("1:" + velocity.y);
             velocity.y = jumpVelocity;
             rigidbody2D.velocity = velocity;
-            print("1:" + rigidbody2D.velocity.y);
             jumpCount = 1;
 		if (notification.objc == null) {
 			//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\n";
@@ -156,23 +153,25 @@ public class Jump1 : MonoBehaviour {
 	//同步gameobject的方法
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
+		log.label.text+="\r\n"+"role1 OnSerializeNetworkView";
 		if (stream.isWriting)
 		{
-			//            Vector3 receivedPosition = Vector3.zero;
-			Vector3 receivedVelocity = Vector3.zero;
-			//            stream.Serialize(ref receivedPosition);
-			stream.Serialize(ref receivedVelocity);
-			//            transform.position = receivedPosition;
-			//            rigidbody2D.gravityScale = 0;
-			rigidbody2D.velocity = receivedVelocity;
-		}
-		else
-		{
+//			log.label.text+="\r\n"+"role1 OnSerializeNetworkView";
 			//            Vector3 pos = transfor m.position;
 			Vector3 velocity = rigidbody2D.velocity;
 			//            stream.Serialize(ref pos);
 			stream.Serialize(ref velocity);
 
+		}
+		else
+		{
+			//            Vector3 receivedPosition = Vector3.zero;
+			Vector3 receivedVelocity = rigidbody2D.velocity;
+			//            stream.Serialize(ref receivedPosition);
+			stream.Serialize(ref receivedVelocity);
+			//            transform.position = receivedPosition;
+			//            rigidbody2D.gravityScale = 0;
+			rigidbody2D.velocity = receivedVelocity;
 		}
 	}
 

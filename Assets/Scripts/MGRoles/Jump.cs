@@ -175,6 +175,7 @@ public class Jump : MonoBehaviour {
         
         if (stream.isWriting)
         {
+			log.label.text+="\r\n"+"role1 OnSerializeNetworkView";
 //            Vector3 pos = transfor m.position;
             Vector3 velocity = rigidbody2D.velocity;
 //            stream.Serialize(ref pos);
