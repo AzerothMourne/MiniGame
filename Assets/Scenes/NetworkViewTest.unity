@@ -550,7 +550,7 @@ Transform:
   m_GameObject: {fileID: 1162471340}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
+  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
   m_Children:
   - {fileID: 795462723}
   - {fileID: 960795955}
@@ -786,7 +786,7 @@ NetworkView:
   m_StateSynchronization: 1
   m_Observed: {fileID: 1675268496}
   m_ViewID:
-    m_ID: 1
+    m_ID: 3
     m_Type: 1
 --- !u!1 &1889103879
 GameObject:

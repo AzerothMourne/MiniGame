@@ -15,7 +15,7 @@ public class Dart : MonoBehaviour {
 
 	public void OnMouseDown () {
 		print ("Dart OnMouseDown ");
-        if (MGGlobalDataCenter.defaultCenter().isHost == 1)
+        if (MGGlobalDataCenter.defaultCenter().isHost == true)
             MGNotificationCenter.defaultCenter().postNotification("useSkillsDart", null);
         else
             MGNotificationCenter.defaultCenter().postNotification("1useSkillsDart", null);

@@ -2,38 +2,47 @@
 using System.Collections;
 
 public class MyNetworkTest : MonoBehaviour {
-
+    public UIInput ipInput;
     public int connecttions = 10;
     public int listenPort = 8899;
     public UILabel clientLog, serverLog;
     private Vector3 acceleration;
     public GameObject cube;
     private bool cubeInitialed = false;
-	private string ip = "192.168.23.10";
-
+	private string ip = "127.0.0.1";
+    void Start()
+    {
+        MGGlobalDataCenter.defaultCenter().serverIp = ip;
+    }
 	void OnGUI()
     {
         if (NetworkPeerType.Disconnected == Network.peerType)
         {
             if (GUILayout.Button("创建服务器"))
             {
-                NetworkConnectionError error = Network.InitializeServer(connecttions, listenPort, false);
-				serverLog.text += "\r\n" + "Network.InitializeServer:ip="+ip +";"+ error;
+                MGNetWorking.createHost();
+                //NetworkConnectionError error = Network.InitializeServer(connecttions, listenPort, false);
+				//serverLog.text += "\r\n" + "Network.InitializeServer:ip="+ip +";"+ error;
             }
             if (GUILayout.Button("连接服务器"))
             {
-                NetworkConnectionError error = Network.Connect(ip, 8899);
-				clientLog.text += "\r\n" + "Network.Connect:hostIp=" +ip+";"+error;
+                MGGlobalDataCenter.defaultCenter().serverIp = ipInput.label.text;
+                print(MGGlobalDataCenter.defaultCenter().serverIp);
+                MGNetWorking.findHost();
+                //NetworkConnectionError error = Network.Connect(ip, 8899);
+				//clientLog.text += "\r\n" + "Network.Connect:hostIp=" +ip+";"+error;
             }
         }
         else if(Network.peerType == NetworkPeerType.Server)
         {
             GUILayout.Label("服务器创建完成.");
+            if(Network.connections.Length==1)
+                OnConnect();
         }
         else if (Network.peerType == NetworkPeerType.Client)
         {
             GUILayout.Label("服务器连接成功");
-            Network.sendRate = 60;
+            Network.sendRate = 30;
             //clientLog.renderer.enabled = false;
             //serverLog.renderer.enabled = false;
             OnConnect();
@@ -41,12 +50,14 @@ public class MyNetworkTest : MonoBehaviour {
     }
     void OnConnect()
     {
-        
+        /*
         if (!cubeInitialed)
         {
             Network.Instantiate(cube, transform.position, transform.rotation, 0);
             cubeInitialed = true;
-        }
+        }*/
+        //连接成功 需要切换场景
+        Application.LoadLevel("gameScene1");
     }
     /*
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)

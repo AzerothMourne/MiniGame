@@ -15,7 +15,7 @@ public class Down : MonoBehaviour {
 
 	public void OnMouseDown () {
 
-        if(MGGlobalDataCenter.defaultCenter().isHost==1)
+        if(MGGlobalDataCenter.defaultCenter().isHost==true)
             MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
         else
             MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);

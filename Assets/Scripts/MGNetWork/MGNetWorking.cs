@@ -22,9 +22,10 @@ public class MGNetWorking : MonoBehaviour {
 	
 	public static void findHost()
 	{
+        MGGlobalDataCenter.defaultCenter().isHost = false;
         if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
         {
-            Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
+            Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
         }
 		else if(Application.platform==RuntimePlatform.IPhonePlayer)
 			_findHost();
@@ -32,9 +33,10 @@ public class MGNetWorking : MonoBehaviour {
 
 	public static void createHost()
 	{
+        MGGlobalDataCenter.defaultCenter().isHost = true;
         if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
         {
-            Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
+            Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
         }
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
 			_createHost();
@@ -72,18 +74,34 @@ public class MGNetWorking : MonoBehaviour {
             sendMessageToPeer(msg);
         }	
 	}
+    public static void sendMessageToPeer(string name,string msg, NetworkView networkView)
+    {
+        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        {
+            if (NetworkPeerType.Disconnected != Network.peerType)
+            {
+                print("sendMessageToPeer:" + msg);
+                networkView.RPC(name, RPCMode.Others, msg);
+            }
+
+        }
+        else
+        {
+            sendMessageToPeer(msg);
+        }
+    }
     [RPC]
-    void RPCReceiverMessageFromPeer(string msg, NetworkMessageInfo info)
+    public void RPCReceiverMessageFromPeer(string msg, NetworkMessageInfo info)
     {
         //刚从网络接收的数据的相关信息,会被保存到NetworkMessageInfo这个结构中  
         string sender = info.sender.ToString();
         //看脚本运行在什么状态下  
         NetworkPeerType status = Network.peerType;
-        if (status != NetworkPeerType.Disconnected)
+        if (status != NetworkPeerType.Disconnected && sender!="-1")
         {
             receiverMessageFromPeer(msg);
         }
-    }  
+    }
 	public void receiverMessageFromPeer ( string msg)
 	{
 		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());

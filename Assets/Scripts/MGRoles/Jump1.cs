@@ -14,6 +14,7 @@ public class Jump1 : MonoBehaviour {
     public MGskillDrat drat;
 	public UIInput log;
 	public int isReceiveFlag;
+    private MGNetWorking mgNetWorking;
 	// Use this for initialization
 	void Start () {
 		timer = 0;
@@ -21,6 +22,7 @@ public class Jump1 : MonoBehaviour {
         isDown = 0;
 		isReceiveFlag = 0;
 		log.label.text = "";
+        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
 		//forceMove = 50;
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
@@ -38,7 +40,7 @@ public class Jump1 : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="1useSkillsDart";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
 		}
     }
     public void firstJump(MGNotification notification)
@@ -58,7 +60,7 @@ public class Jump1 : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="1firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
 			//P2PBinding.sendMessageToPeer ("1firstJump ");
 		} else {
 			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\n";
@@ -101,7 +103,7 @@ public class Jump1 : MonoBehaviour {
 			MGMsgModel msgModel=new MGMsgModel();
 			msgModel.eventId="1downToLine";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
-			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
+            MGNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel), networkView);
 		}
     }
 	// Update is called once per frame
@@ -144,6 +146,10 @@ public class Jump1 : MonoBehaviour {
 	public void OnCollisionExit2D() {
 		isGround = false;
 	}
-
+    [RPC]
+    void RPCReceiverMessageFromPeer(string msg, NetworkMessageInfo info)
+    {
+        mgNetWorking.RPCReceiverMessageFromPeer(msg, info);
+    }
 
 }

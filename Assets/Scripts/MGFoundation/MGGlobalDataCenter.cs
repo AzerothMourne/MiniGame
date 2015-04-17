@@ -12,20 +12,21 @@ public class MGMsgModel{
 
 public class MGGlobalDataCenter  {
     public bool isNetworkViewEnable;
-    public int isHost;
+    public bool isHost;
     public int connecttions;
     public int listenPort;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
+    private string _serverIp;
     public string serverIp
     {
         get
         {
-            return serverIp;
+            return _serverIp;
         }
         set
         {
-            serverIp = value;
+            _serverIp = value;
             isNetworkViewEnable = true;
         }
     }
@@ -39,7 +40,7 @@ public class MGGlobalDataCenter  {
         this.connecttions = 1;
         this.listenPort = 8899;
         this.isNetworkViewEnable = false;
-        this.isHost = 0;
+        this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -10.0f;
