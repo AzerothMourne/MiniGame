@@ -2,21 +2,18 @@
 using System.Collections;
 
 public class CubeController : MonoBehaviour {
-	private GUIText accelText;
-	
+	private UILabel cubeLabel;
 	void Start()
 	{
-		accelText = GameObject.FindGameObjectWithTag("AccelTip").GetComponent<GUIText>() as GUIText;
-		accelText.text = "";
+        cubeLabel = GameObject.Find("cubeLabel").GetComponent<UILabel>();
 	}
-	
+
 	void Update()
 	{
 		if(Network.isClient)
 		{
 			Vector3 acceleration = Input.acceleration;
-			accelText.text = "" + acceleration;
-			networkView.RPC("UpdateAcceleration", RPCMode.Others, acceleration);
+            //networkView.RPC("ProcessMove", RPCMode.Others, "msg");
 		}
 		
 		Vector3 moveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -25,8 +22,8 @@ public class CubeController : MonoBehaviour {
 		{
 			moveDir = new Vector3(Input.mousePosition.x - cubescreenPos.x, Input.mousePosition.y - cubescreenPos.y, 0f).normalized;
 		}
-		Debug.Log("moveDir: " + moveDir);
-		float speed = 5;
+
+		float speed = 15;
 		transform.Translate(speed * moveDir * Time.deltaTime);
 	}
 	
@@ -45,10 +42,10 @@ public class CubeController : MonoBehaviour {
 		}
 	}
 	
-	[RPC]
-	void UpdateAcceleration(Vector3 acceleration)
-	{
-		accelText.text = "" + acceleration;
-	}
-	
+    //接收请求的方法. 注意要在上面添加[RPC]  
+    [RPC]
+    void ProcessMove1(string msg, NetworkMessageInfo info)
+    {
+        cubeLabel.text += "\r\n"+msg;
+    }  
 }

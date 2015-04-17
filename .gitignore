@@ -1,4 +1,5 @@
 Temp/
+iOSBuild/
 Library/
 ExportedObj/
 obj/
@@ -12,7 +13,6 @@ obj/
 *.unityproj
 *.booproj
 .DS_Store
-._*
 .Spotlight-V100
 .Trashes
 ehthumbs.db
