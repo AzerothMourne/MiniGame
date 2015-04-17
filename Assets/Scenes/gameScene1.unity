@@ -211,7 +211,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309d0fcd0baf36e4092ff07f91e564ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  log: {fileID: 0}
 --- !u!1 &349749207
 GameObject:
   m_ObjectHideFlags: 0
@@ -392,7 +391,7 @@ Transform:
   m_GameObject: {fileID: 386217151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
+  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
   m_Children:
   - {fileID: 686714068}
   - {fileID: 1915728065}
@@ -722,6 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34e72bee8d849614d86fe5ba6b52d1fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpSprite: {fileID: 21300000, guid: 2b314ded718c53e419557e446af3b99a, type: 3}
 --- !u!1001 &1612839898
 Prefab:
   m_ObjectHideFlags: 0
@@ -1169,6 +1169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8304ce6ceeb364ea0477437a100500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  upWardSprite: {fileID: 21300000, guid: 63936018e327561429a62933314d9beb, type: 3}
 --- !u!1 &1915728064
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class Down : MonoBehaviour {
-
+	public Sprite upWardSprite;
 	// Use this for initialization
 	void Start () {
 	
@@ -28,6 +28,6 @@ public class Down : MonoBehaviour {
 			GameObject.Find ("按钮跳跃").SetActive (false);
 		}
 		*/
-
+		GameObject.Find ("上").GetComponent<SpriteRenderer>().sprite=upWardSprite;
 	}
 }

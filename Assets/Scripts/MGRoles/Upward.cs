@@ -2,31 +2,48 @@
 using System.Collections;
 
 public class Upward : MonoBehaviour {
-
+	public Sprite jumpSprite;
+	private float timer;
+	private bool isClick;
 	// Use this for initialization
 	void Start () {
-	
+		timer = 0.0f;
+		isClick = false;
 	}
 
-
+	void Update(){
+		if (isClick) {
+			if(timer<=0.25f){
+				transform.localScale=new Vector3((transform.localScale.x-0.01f),(transform.localScale.y-0.01f),(transform.localScale.z-0.01f));
+				timer+=Time.deltaTime;
+			}
+			else if(timer<=0.5f) {
+				transform.localScale=new Vector3((transform.localScale.x+0.01f),(transform.localScale.y+0.01f),(transform.localScale.z+0.01f));
+				timer+=Time.deltaTime;
+			}
+			else if(timer>0.5f){
+				isClick=false;timer=0.0f;
+				transform.localScale=new Vector3(1,1,1);
+			}
+		}
+	}
 	
 	// Update is called once per frame
 	public void OnMouseDown () {
-		
-		if(MGGlobalDataCenter.defaultCenter().isHost==1)
-			MGNotificationCenter.defaultCenter().postNotification("upwardToLine", null);
-		else
-			MGNotificationCenter.defaultCenter().postNotification("1upwardToLine", null);
-		/*print (".........is Down : " + GameObject.Find ("role").GetComponent<Jump> ().isDown);
+		isClick = true;
+		print (".........is Down : " + GameObject.Find ("role").GetComponent<Jump> ().isDown);
+		this.GetComponent<SpriteRenderer>().sprite=jumpSprite;
 		if (GameObject.Find ("role").GetComponent<Jump> ().isDown == 0) {
-			GameObject.Find ("上").SetActive (false);
-			print ("---------------");
-			GameObject.Find ("按钮跳跃").SetActive (true);
-		} else {
-			GameObject.Find ("上").SetActive (true);
-			GameObject.Find ("按钮跳跃").SetActive (false);
+			if (MGGlobalDataCenter.defaultCenter ().isHost == 1)
+				MGNotificationCenter.defaultCenter ().postNotification ("firstJump", null);
+			else
+				MGNotificationCenter.defaultCenter ().postNotification ("1firstJump", null);
 		} 
-		*/
-
+		else {
+			if(MGGlobalDataCenter.defaultCenter().isHost==1)
+				MGNotificationCenter.defaultCenter().postNotification("upwardToLine", null);
+			else
+				MGNotificationCenter.defaultCenter().postNotification("1upwardToLine", null);
+		}
 	}
 }

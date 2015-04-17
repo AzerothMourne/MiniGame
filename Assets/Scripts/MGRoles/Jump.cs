@@ -38,23 +38,31 @@ public class Jump : MonoBehaviour {
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
 		//前面角色的动作
-        MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dartFormerEventId);
-		MGNotificationCenter.defaultCenter().addObserver(this, firstJump, EventEnum.jumpFormerEventId);
-		//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
-		MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.downToLineFormerEventId);
-		MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineFormerEventId);
+		if (MGGlobalDataCenter.defaultCenter ().isHost == 1) {
+			MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsDart, EventEnum.dartFormerEventId);
+			MGNotificationCenter.defaultCenter ().addObserver (this, firstJump, EventEnum.jumpFormerEventId);
+			//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
+			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
+			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
+		} 
+		else {
+			//后面的角色动作
+			MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dartLatterEventId);
+			MGNotificationCenter.defaultCenter().addObserver(this, firstJump, EventEnum.jumpLatterEventId);
+			//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "1secondJump");
+			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
+			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
+		}
 
-		//后面的角色动作
-		MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dartLatterEventId);
-		MGNotificationCenter.defaultCenter().addObserver(this, firstJump, EventEnum.jumpLatterEventId);
-		//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "1secondJump");
-		MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
-		MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
+
+
 	}
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
+		print("1");
         drat.createSkillSprite(new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown==0?1:-1)*role1.renderer.bounds.size.y / 2, role1.transform.position.z));
+		print("2");
 		if (notification.objc == null) {
 			MGMsgModel msgModel = new MGMsgModel ();
 			if(MGGlobalDataCenter.defaultCenter().isHost == 1) 
