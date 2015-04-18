@@ -4,7 +4,7 @@ using LitJson;
 using System.Collections.Generic;
 using System;
 
-public class JumpLater : MonoBehaviour
+public class JumpFront : MonoBehaviour
 {
 
     public float forceMove;
@@ -18,6 +18,7 @@ public class JumpLater : MonoBehaviour
     public UIInput log;
     private int isReceiveFlag;
     private MGNetWorking mgNetWorking;
+    private bool isPressDown;
     // Use this for initialization
     void Start()
     {
@@ -25,16 +26,17 @@ public class JumpLater : MonoBehaviour
         groundLayerMask = LayerMask.GetMask("Ground");
         isJump = 0;
         isDown = 0;
-        isGround = false;
+        isGround = true;
+        isPressDown = false;
         isReceiveFlag = 0;
         mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
         //forceMove = 50;
         //jumpVelocity = 25;
         //jumpSecond = 15;
-        MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, "1useSkillsDart");
-        MGNotificationCenter.defaultCenter().addObserver(this, firstJump,"1jump");
-        //MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
-        MGNotificationCenter.defaultCenter().addObserver(this, downToLine, "1downToLine");
+        MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, "useSkillsDart");
+        MGNotificationCenter.defaultCenter().addObserver(this, firstJump, "jump");
+        MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineFormerEventId);
+        MGNotificationCenter.defaultCenter().addObserver(this, downToLine, "downToLine");
         switch (Network.peerType)
         {
             case NetworkPeerType.Disconnected:
@@ -54,7 +56,7 @@ public class JumpLater : MonoBehaviour
         if (notification.objc == null)
         {
             MGMsgModel msgModel = new MGMsgModel();
-            msgModel.eventId = "1useSkillsDart";
+            msgModel.eventId = "useSkillsDart";
             msgModel.timestamp = MGGlobalDataCenter.timestamp();
             Vector3 pos = new Vector3(role1.transform.position.x, role1.transform.position.y + (isDown == 0 ? 1 : -1) * role1.renderer.bounds.size.y / 2, role1.transform.position.z);
             if (Network.peerType != NetworkPeerType.Disconnected)
@@ -69,7 +71,51 @@ public class JumpLater : MonoBehaviour
     }
     public void firstJump(MGNotification notification)
     {
-
+        print("is ground " + isGround);
+        //如果在地面上，则一段跳
+        //print ("time : " + System.DateTime.Now);
+        //print (" the role is : " + this.gameObject.name);
+        if (isDown == 1)
+        {
+            upwardToLine(notification);
+            return;
+        }
+        if (isGround)
+        {
+            Vector2 velocity = rigidbody2D.velocity;
+            velocity.y = jumpVelocity;
+            rigidbody2D.velocity = velocity;
+            jumpCount = 1;
+            //如果没有发送给对方，则发送消息
+            if (notification.objc == null)
+            {
+                //log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
+                MGMsgModel msgModel = new MGMsgModel();
+                msgModel.eventId = "jump";
+                //print("eventId : "+msgModel.eventId);
+                msgModel.timestamp = MGGlobalDataCenter.timestamp();
+                mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
+            }
+            else
+            {
+                //log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\r\n";
+                //isReceiveFlag=1;
+                long time1 = MGGlobalDataCenter.timestamp();
+                long time2 = ((MGMsgModel)notification.objc).timestamp;
+                //print (time1 + ";" + time2);
+                log.label.text += (Mathf.Abs(time1 - time2)).ToString() + "\r\n";
+            }
+        }
+        //如果不在地面上，且一段跳了，则二段跳
+        else if (!isGround && jumpCount == 1)
+        {
+            Vector2 velocity = rigidbody2D.velocity;
+            if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
+            else velocity.y = jumpSecond;
+            rigidbody2D.velocity = velocity;
+            jumpCount = 2;
+        }
+        /*
         isJump = 1;
         Vector2 velocity = rigidbody2D.velocity;
         velocity.y = jumpVelocity;
@@ -79,7 +125,7 @@ public class JumpLater : MonoBehaviour
         {
             //log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
             MGMsgModel msgModel = new MGMsgModel();
-            msgModel.eventId = "1jump";
+            msgModel.eventId = "jump";
             msgModel.timestamp = MGGlobalDataCenter.timestamp();
             mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
         }
@@ -92,26 +138,42 @@ public class JumpLater : MonoBehaviour
             print(time1 + ";" + time2);
             log.label.text += (Mathf.Abs(time1 - time2)).ToString() + "\r\n";
         }
-
+        */
 
     }
 
-    /*
-    public void secondJump(MGNotification notification)
-    {
-        if (!isGround && (Input.GetKeyDown(KeyCode.Space) || isJump == 1) && jumpCount == 1)
-        {
-            isJump = 0;
-            Vector2 velocity = rigidbody2D.velocity;
-            if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
-            else velocity.y = jumpSecond;
-            rigidbody2D.velocity = velocity;
-            jumpCount = 2;
-        }
-    }
-     */
     public void downToLine(MGNotification notification)
     {
+        //角色会根据下按钮，翻转到线下
+        //print ("gravityScale : " + rigidbody2D.gravityScale);
+        print("is ground " + isGround);
+        if (isDown == 0)
+        {
+            //print("downToLine isDown : "+isDown);
+            if (isGround)
+            {
+                rigidbody2D.gravityScale = 0;
+                transform.localScale = new Vector3(1, -1, 1);
+                isDown = 1;
+            }
+            else if (!isGround)
+            {
+                print ("not on the ground");
+                rigidbody2D.gravityScale = 10;
+                isPressDown = true;
+            }
+            
+        }
+
+        if (notification.objc == null)
+        {
+            MGMsgModel msgModel = new MGMsgModel();
+            msgModel.eventId = "downToLine";
+            msgModel.timestamp = MGGlobalDataCenter.timestamp();
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
+        }
+        //print("downToLine receive time : " + MGGlobalDataCenter.timestamp());
+        /*
         //角色会根据上下键反转
         isDown = (isDown + 1) & 1;
         if (isDown == 0)
@@ -128,7 +190,27 @@ public class JumpLater : MonoBehaviour
         if (notification.objc == null)
         {
             MGMsgModel msgModel = new MGMsgModel();
-            msgModel.eventId = "1downToLine";
+            msgModel.eventId = "downToLine";
+            msgModel.timestamp = MGGlobalDataCenter.timestamp();
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
+        }*/
+    }
+    public void upwardToLine(MGNotification notification)
+    {
+        //角色会根据上按钮从线下到线上
+        //print ("up  gravityScale : " + rigidbody2D.gravityScale);
+        if (isDown == 1)
+        {
+            //print("upwardToLine isDown : "+isDown);
+            transform.localScale = new Vector3(1, 1, 1);
+            rigidbody2D.gravityScale = 5;
+            isDown = 0;
+            isGround = true;
+        }
+        if (notification.objc == null)
+        {
+            MGMsgModel msgModel = new MGMsgModel();
+            msgModel.eventId = EventEnum.upwardToLineFormerEventId;
             msgModel.timestamp = MGGlobalDataCenter.timestamp();
             mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(msgModel));
         }
@@ -141,7 +223,9 @@ public class JumpLater : MonoBehaviour
             log.label.text += "Role Update :" + MGGlobalDataCenter.timestamp() + "\r\n";
             isReceiveFlag = 0;
         }
-
+        //判断是否在地面上
+        //RaycastHit hitinfo;
+        //isGround = Physics.Raycast(transform.position + (isDown == 0 ? Vector3.up : Vector3.down) * 0.0f, (isDown == 1 ? Vector3.up : Vector3.down), out hitinfo, 0.1f, groundLayerMask);
         //判断键盘输入左右键， 用来说明位移
         float h = Input.GetAxis("Horizontal");
         //float h = 0.1f;
@@ -169,19 +253,31 @@ public class JumpLater : MonoBehaviour
         {
             transform.localScale = new Vector3(-1, rigidbody2D.gravityScale == 0 ? -1 : 1, 1);
         }
-
+        
+        //当下落过程中按了down按钮，则会在落地后下翻
+        if (isPressDown && isGround)
+        {
+            print("isPressDown && isGround");
+            rigidbody2D.gravityScale = 0;
+            transform.localScale = new Vector3(1, -1, 1);
+            isPressDown = false;
+            isDown = 1;
+        }
+        
 
     }
-
+    
     //判断角色是否在地面上
     public void OnCollisionEnter2D()
     {
         isGround = true;
+        print("OnCollisionEnter2D" + "is ground " + isGround);
     }
 
     public void OnCollisionExit2D()
     {
         isGround = false;
+        print("OnCollisionExit2D" + "is ground " + isGround);
     }
 
 
