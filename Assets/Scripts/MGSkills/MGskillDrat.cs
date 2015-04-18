@@ -2,8 +2,12 @@
 using System.Collections;
 
 public class MGskillDrat : MGSkillsBase{
-
+    public string releaseSkillObjcName;
     public int speed;
+    void Awake()
+    {
+        releaseSkillObjcName = null;
+    }
 	// Use this for initialization
 	void Start () {
         skillId = 1;
@@ -30,11 +34,27 @@ public class MGskillDrat : MGSkillsBase{
         playSkillAnimation();
         if (transform.position.x < MGGlobalDataCenter.defaultCenter().screenLiftX)
         {
-            this.Destroy();
+            Destroy(this.gameObject);
         }
 	}
+    /*
     void Destroy()
     {
-        DestroyImmediate(this.gameObject);
+        Destroy(this.gameObject);
+    }*/
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
+        {
+            print("被打中的是" + other.name+"，释放技能的是"+releaseSkillObjcName);
+            Destroy(this.gameObject);
+        }
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (releaseSkillObjcName == null)
+        {
+            releaseSkillObjcName = other.name;
+        }
     }
 }

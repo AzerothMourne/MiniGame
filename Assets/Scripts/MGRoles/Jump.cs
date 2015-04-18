@@ -188,9 +188,13 @@ public class Jump : MonoBehaviour {
 	}
     
 	//判断角色是否在地面上
-	public void OnCollisionEnter2D() {
-        print("OnCollisionEnter2D");
-		isGround = true;
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        //print("OnCollisionEnter2D:" + collision.gameObject.name);
+        if (collision.gameObject.name == "road" || collision.gameObject.name == "roadSecond")
+        {
+            isGround = true;
+        }
 	}
 
 }

@@ -21,4 +21,5 @@ public class MGSkillsBase : MonoBehaviour {
     /// 播放技能音效
     /// </summary>
     public virtual void playSkillSound() { }
+    
 }
