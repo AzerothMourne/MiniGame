@@ -347,7 +347,7 @@ Transform:
   m_PrefabInternal: {fileID: 2112769067}
   m_GameObject: {fileID: 292666263}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 914, y: -935, z: 0}
+  m_LocalPosition: {x: 536, y: -547, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 585750210}
@@ -525,6 +525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda2cae2dff638644962b66b4baf7715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isPressDartButton: 0
 --- !u!61 &349749211
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -644,11 +645,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -1929
+      value: -331
       objectReference: {fileID: 0}
     - target: {fileID: 455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 482
+      value: 555
       objectReference: {fileID: 0}
     - target: {fileID: 455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1379,7 +1380,7 @@ Transform:
   m_PrefabInternal: {fileID: 374000363}
   m_GameObject: {fileID: 1302076460}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1929, y: 482, z: 0}
+  m_LocalPosition: {x: -331, y: 555, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 761853391}
@@ -1752,7 +1753,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .0037313432, y: .0037313432, z: .0037313432}
+  m_LocalScale: {x: .00611620815, y: .00611620815, z: .00611620815}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1302076461}
@@ -2121,6 +2122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMove: 5
+  isGround: 0
   jumpVelocity: 18
   jumpSecond: 13
   jumpCount: 0
@@ -2130,6 +2132,9 @@ MonoBehaviour:
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
+  isPressJumpButton: 0
+  isFallDown: 0
+  isSecondJump: 0
 --- !u!50 &1852946985
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -2388,6 +2393,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forceMove: 5
+  isGround: 0
   jumpVelocity: 18
   jumpSecond: 13
   jumpCount: 0
@@ -2397,6 +2403,9 @@ MonoBehaviour:
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
+  isPressJumpButton: 0
+  isFallDown: 0
+  isSecondJump: 0
 --- !u!1001 &2112769067
 Prefab:
   m_ObjectHideFlags: 0
@@ -2410,11 +2419,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 914
+      value: 536
       objectReference: {fileID: 0}
     - target: {fileID: 455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -935
+      value: -547
       objectReference: {fileID: 0}
     - target: {fileID: 455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2479,6 +2488,14 @@ Prefab:
     - target: {fileID: 6555772, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
       propertyPath: m_Size.y
       value: 440
+      objectReference: {fileID: 0}
+    - target: {fileID: 155774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 155772, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11455774, guid: 511baab675b538f47b1376b1f02c3cbe, type: 2}
