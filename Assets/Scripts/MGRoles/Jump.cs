@@ -18,7 +18,7 @@ public static class EventEnum{
 public class Jump : MonoBehaviour {
 
 	public float forceMove ;
-	private bool isGround ;
+	public bool isGround ;
 	public float jumpVelocity ;
 	public float jumpSecond ;
 	public float jumpCount ;
@@ -29,6 +29,19 @@ public class Jump : MonoBehaviour {
 	public int isReceiveFlag;
 	public bool isPressDown;
     private MGNetWorking mgNetWorking;
+
+
+	//控制角色动作
+	public bool isPressJumpButton;
+	private Animator jumpAnim; 
+	public bool isFallDown;
+	int countJumpFrame;
+	Rigidbody2D player;
+	public bool isSecondJump;
+
+
+
+
 	// Use this for initialization
 	void Start () {
         groundLayerMask = LayerMask.GetMask("Default");
@@ -37,6 +50,13 @@ public class Jump : MonoBehaviour {
 		isReceiveFlag = 0;
 		isPressDown = false;
         mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
+
+		isPressJumpButton = false;
+		isFallDown = false;
+		isSecondJump = false;
+
+		jumpAnim = this.GetComponent<Animator> ();
+		player = this.GetComponent<Rigidbody2D> ();
 
 		//获取角色的名字，role则是前面的角色，role1则是后面的角色
 
@@ -85,6 +105,7 @@ public class Jump : MonoBehaviour {
             }
 		}
     }
+
     public void useSkillsRoadblock(MGNotification notification)
     {
         print("useSkillsRoadblock");
@@ -104,12 +125,16 @@ public class Jump : MonoBehaviour {
     }
     public void jump(MGNotification notification)
     {
-        print("is ground " + isGround);
+
+
         if (isDown == 1)
         {
             upwardToLine(notification);
             return;
         }
+
+		isPressJumpButton = true;
+		jumpAnim.SetBool ("jumpUP", isPressJumpButton);
 		if (isGround){
             isGround = false;
 			Vector2 velocity = rigidbody2D.velocity;
@@ -123,6 +148,11 @@ public class Jump : MonoBehaviour {
 		}
 		//如果不在地面上，且一段跳了，则二段跳
 		else if(!isGround && jumpCount == 1) {
+			isSecondJump = true;
+			print("second...");
+			isFallDown = false;
+			jumpAnim.SetBool ("fallDown", isFallDown);
+			jumpAnim.SetBool ("secondJump", isSecondJump);
 			Vector2 velocity = rigidbody2D.velocity;
 			if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
 			else velocity.y = jumpSecond;
@@ -165,6 +195,7 @@ public class Jump : MonoBehaviour {
             rigidbody2D.gravityScale = 5;
 			isDown = 0;
             isGround = true;
+
         }
 		if(notification.objc==null){
 			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.upwardToLineFormerEventId));
@@ -202,6 +233,37 @@ public class Jump : MonoBehaviour {
 			transform.localScale = new Vector3(1, -1, 1);
 			isPressDown = false;
             isDown = 1;
+		}
+
+
+		//检测角色的动作
+		//动作切换
+		
+		//jumpAnim.SetBool ("jumpUP", isPressJumpButton);
+		//jumpAnim.SetBool ("fallDown", isFallDown);
+
+		if (isSecondJump == false) {
+			if (player.velocity.y < -0.01f) {
+				print ("velocity.y : " + GameObject.Find ("role1").GetComponent<Rigidbody2D> ().velocity.y);
+				isPressJumpButton = false;
+				isFallDown = true;
+				jumpAnim.SetBool ("jumpUP", isPressJumpButton);
+				jumpAnim.SetBool ("fallDown", isFallDown);
+				print ("*****isPressJumpButton : " + isPressJumpButton);
+				print ("*****isFallDown : " + isFallDown);
+			}
+		} else if (isSecondJump == true && player.velocity.y < -0.01f ) {	
+			isSecondJump = false;
+			isFallDown = true;
+			print ("*****isSecondJump : " + isSecondJump);
+			jumpAnim.SetBool ("fallDown", isFallDown);
+			jumpAnim.SetBool ("secondJump", isSecondJump);
+		}
+		
+		if (isGround == true && isFallDown == true) {
+			isFallDown = false;	
+			jumpAnim.SetBool ("fallDown", isFallDown);
+			print ("*****isground isFallDown : "+isFallDown);
 		}
       
 	}
