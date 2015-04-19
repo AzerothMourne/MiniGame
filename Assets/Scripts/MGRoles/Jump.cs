@@ -12,8 +12,8 @@ public static class EventEnum{
 	public static string dowmToLineLatterEventId="1downToLine";
 	public static string upwardToLineFormerEventId="upwardToLine";
 	public static string upwardToLineLatterEventId="1upwardToLine";
-
-
+    public static string roadblockLatterEventId = "1upwardToLine";
+    public static string roadblockFormerEventId = "upwardToLine";
 }
 public class Jump : MonoBehaviour {
 
@@ -23,7 +23,7 @@ public class Jump : MonoBehaviour {
 	public float jumpSecond ;
 	public float jumpCount ;
 	public int isDown;
-    public MGskillDrat drat;
+    public MGSkillsBase drat,roadblock;
     private int groundLayerMask;
 	public UIInput log;
 	public int isReceiveFlag;
@@ -47,6 +47,7 @@ public class Jump : MonoBehaviour {
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblockFormerEventId);
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
@@ -55,6 +56,7 @@ public class Jump : MonoBehaviour {
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblockLatterEventId);
 		}
 	}
     private string objcToJson(string msg)
@@ -82,6 +84,23 @@ public class Jump : MonoBehaviour {
                 drat.createSkillSprite(pos);
             }
 		}
+    }
+    public void useSkillsRoadblock(MGNotification notification)
+    {
+        print("useSkillsRoadblock");
+        if (notification.objc == null && isGround)
+        {
+            GameObject role1 = this.gameObject;
+            Vector3 pos = new Vector3(role1.transform.position.x, role1.transform.position.y, role1.transform.position.z);
+            if (Network.peerType != NetworkPeerType.Disconnected)
+            {
+                mgNetWorking.Instantiate(roadblock, pos, new Quaternion(), 0);
+            }
+            else
+            {
+                roadblock.createSkillSprite(pos);
+            }
+        }
     }
     public void jump(MGNotification notification)
     {
@@ -191,6 +210,7 @@ public class Jump : MonoBehaviour {
     public void OnCollisionEnter2D(Collision2D collision)
     {
         //print("OnCollisionEnter2D:" + collision.gameObject.name);
+        
         if (collision.gameObject.name == "road" || collision.gameObject.name == "roadSecond")
         {
             isGround = true;

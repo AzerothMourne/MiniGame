@@ -5,7 +5,7 @@ public class MGSkillsBase : MonoBehaviour {
 
 	public int skillId;
     public int skillCD,skillHoldLevel,skillGCD;
-
+    public float posY = -10000;
     /// <summary>
     /// 虚函数
     /// 在屏幕上创建技能精灵

@@ -42,7 +42,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 749717e8d428b554faea95ce05a3d522, type: 2}
   mSprites:
   - name: dart
-    x: 298
+    x: 149
     y: 371
     width: 148
     height: 141
@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 12
     paddingBottom: 11
   - name: down
-    x: 0
-    y: 229
+    x: 298
+    y: 371
     width: 148
     height: 141
     borderLeft: 0
@@ -69,7 +69,7 @@ MonoBehaviour:
     paddingBottom: 10
   - name: jump
     x: 0
-    y: 87
+    y: 225
     width: 148
     height: 141
     borderLeft: 0
@@ -81,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: up
-    x: 149
-    y: 229
+    x: 0
+    y: 83
     width: 148
     height: 141
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 15
     paddingBottom: 8
   - name: "\u51B2\u523A\u6309\u94AE"
-    x: 0
-    y: 371
+    x: 149
+    y: 225
     width: 148
     height: 141
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u51B7\u5374\u6001"
-    x: 149
-    y: 110
+    x: 298
+    y: 106
     width: 118
     height: 118
     borderLeft: 0
@@ -119,9 +119,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u5C16\u5200"
+    x: 0
+    y: 367
+    width: 148
+    height: 145
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 9
+    paddingRight: 7
+    paddingTop: 9
+    paddingBottom: 10
   - name: "\u91D1\u949F\u7F69"
     x: 298
-    y: 229
+    y: 225
     width: 148
     height: 141
     borderLeft: 0
@@ -134,7 +147,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u95EA\u70C1\u6309\u94AE"
     x: 149
-    y: 371
+    y: 83
     width: 148
     height: 141
     borderLeft: 0

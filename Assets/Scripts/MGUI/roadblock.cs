@@ -1,29 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class cdSkillTest : MonoBehaviour {
+public class roadblock : MonoBehaviour {
     public float cdTime = 2;
     private bool isCD = false;
     private UISprite cdBack;
     public bool direction;// true 顺时针，false逆时针
     public bool addOrDec;// true 添加,false 减少
-    private GameObject cdBackObject;
-    void Awake()
+    public GameObject cdBackObject;
+    // Use this for initialization
+    void Start()
     {
-        cdBackObject = GameObject.Find("cdBack");
-        cdBack = cdBackObject.GetComponent<UISprite>();
-    }
-	// Use this for initialization
-	void Start () {
         direction = true;
         addOrDec = true;
-	}
-	
-	// Update is called once per frame
-	void Update () {
+        cdBack = cdBackObject.GetComponent<UISprite>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
         if (isCD)
         {
-            cdBack.fillAmount += (addOrDec?1:-1) * (1f / cdTime) * Time.deltaTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
             if (addOrDec)
             {
                 if (cdBack.fillAmount >= 0.95f)
@@ -40,9 +38,9 @@ public class cdSkillTest : MonoBehaviour {
                     cdBack.fillAmount = 0f;
                 }
             }
-            
+
         }
-	}
+    }
     public void OnMouseDown()
     {
         if (!isCD)
@@ -50,7 +48,13 @@ public class cdSkillTest : MonoBehaviour {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
+            if (MGGlobalDataCenter.defaultCenter().isHost == true)
+                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockFormerEventId, null);
+            else
+                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockLatterEventId, null);
         }
         print("OnMouseDown");
+       
+
     }
 }
