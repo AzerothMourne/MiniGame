@@ -8,6 +8,11 @@ public class MGMsgModel{
 	public string eventId { get; set;}
 	public long timestamp{ get; set;}
 }
+public class MGSkillModel
+{
+    public string eventId { get; set; }
+    public string gameobjectName { get; set; }
+}
 
 
 public class MGGlobalDataCenter  {
@@ -38,6 +43,7 @@ public class MGGlobalDataCenter  {
 
     private MGGlobalDataCenter()
     {
+        Debug.Log("Init GlobalData");
         this.role = null;
         this.roleLater = null;
         this.connecttions = 1;

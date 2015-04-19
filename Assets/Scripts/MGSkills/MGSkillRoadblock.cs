@@ -12,10 +12,7 @@ public class MGSkillRoadblock : MGSkillsBase{
     // Use this for initialization
     void Start()
     {
-        skillId = 1;
-        skillCD = 2;
-        skillGCD = 1;
-        skillHoldLevel = 3;
+
     }
     public override void createSkillSprite(Vector3 pos)
     {

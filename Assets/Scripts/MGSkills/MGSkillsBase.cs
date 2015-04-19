@@ -1,10 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+public static class MGSkillDartInfo
+{
+    public static string skillId = SkillEnum.dart;
+    public static int skillCD = 2;
+    public static int skillHoldLevel = 3;
+    public static int skillGCD = 1;
+}
 public class MGSkillsBase : MonoBehaviour {
 
-	public int skillId;
-    public int skillCD,skillHoldLevel,skillGCD;
     public float posY = -10000;
     /// <summary>
     /// 虚函数

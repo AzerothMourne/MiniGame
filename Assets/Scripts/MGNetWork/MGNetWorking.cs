@@ -5,11 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 public class MGNetWorking : MonoBehaviour {
-    void Start()
-    {
-        print("Init GlobalData");
-        MGGlobalDataCenter.defaultCenter();
-    }
+
 	[DllImport("__Internal")]
 	private static extern void _findHost();
 	[DllImport("__Internal")]
