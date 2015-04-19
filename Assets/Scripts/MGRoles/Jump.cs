@@ -252,7 +252,7 @@ public class Jump : MonoBehaviour {
 				print ("*****isPressJumpButton : " + isPressJumpButton);
 				print ("*****isFallDown : " + isFallDown);
 			}
-		} else if (isSecondJump == true && player.velocity.y < -0.01f ) {	
+		} else if (isSecondJump == true && player.velocity.y < -10f ) {	
 			isSecondJump = false;
 			isFallDown = true;
 			print ("*****isSecondJump : " + isSecondJump);
