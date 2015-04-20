@@ -1,20 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class roadblock : MonoBehaviour {
-    public float cdTime ;
+public class blink : MonoBehaviour {
+
+    public float cdTime = 2;
     private bool isCD = false;
     private UISprite cdBack;
     public bool direction;// true 顺时针，false逆时针
     public bool addOrDec;// true 添加,false 减少
-    public GameObject cdBackObject;
+    private GameObject cdBackObject;
+    void Awake()
+    {
+        cdBackObject = GameObject.Find("blinkBack");
+        cdBack = cdBackObject.GetComponent<UISprite>();
+    }
     // Use this for initialization
     void Start()
     {
-        cdTime = MGSkillRoadblockInfo.skillCD;
         direction = true;
         addOrDec = true;
-        cdBack = cdBackObject.GetComponent<UISprite>();
     }
 
     // Update is called once per frame
@@ -49,13 +53,7 @@ public class roadblock : MonoBehaviour {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockFormerEventId, null);
-            else
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockLatterEventId, null);
         }
         print("OnMouseDown");
-       
-
     }
 }

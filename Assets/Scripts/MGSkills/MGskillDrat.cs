@@ -45,7 +45,7 @@ public class MGskillDrat : MGSkillsBase{
 	
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.name == "road" || other.name == "roadSecond")
+        if (other.tag != "Player")
 			return;
 		if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
 		{

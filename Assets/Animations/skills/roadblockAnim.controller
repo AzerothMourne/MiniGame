@@ -26,7 +26,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: roadblockAnim
-  m_Speed: 1
+  m_Speed: 4
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 55ee60bd0078f8f4dbfb5bf91e1bfea1, type: 2}

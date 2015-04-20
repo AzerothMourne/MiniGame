@@ -1251,8 +1251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 0
-  manualHeight: 720
+  scalingStyle: 2
+  manualHeight: 960
   minimumHeight: 320
   maximumHeight: 1536
   adjustByDPI: 0
@@ -1317,7 +1317,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1602608899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.86000013, y: -3.47000003, z: 0}
+  m_LocalPosition: {x: 6, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 906247496}
@@ -1643,7 +1643,7 @@ GameObject:
   - 114: {fileID: 1852946984}
   m_Layer: 9
   m_Name: role1
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1666,7 +1666,7 @@ MonoBehaviour:
   jumpCount: 0
   isDown: 0
   drat: {fileID: 11450828, guid: 7d8414458bf43054ba5bea21f9b5b5c0, type: 2}
-  roadblock: {fileID: 11407842, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
+  roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
@@ -1795,7 +1795,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1875529167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.13999987, y: -3.44000006, z: 0}
+  m_LocalPosition: {x: -6, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 906247496}
@@ -1839,7 +1839,7 @@ GameObject:
   - 114: {fileID: 1985725682}
   m_Layer: 9
   m_Name: role
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1937,7 +1937,7 @@ MonoBehaviour:
   jumpCount: 0
   isDown: 0
   drat: {fileID: 11450828, guid: 7d8414458bf43054ba5bea21f9b5b5c0, type: 2}
-  roadblock: {fileID: 11407842, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
+  roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0

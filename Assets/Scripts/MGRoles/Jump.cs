@@ -12,8 +12,8 @@ public static class EventEnum{
 	public static string dowmToLineLatterEventId="1downToLine";
 	public static string upwardToLineFormerEventId="upwardToLine";
 	public static string upwardToLineLatterEventId="1upwardToLine";
-    public static string roadblockLatterEventId = "1upwardToLine";
-    public static string roadblockFormerEventId = "upwardToLine";
+    public static string roadblockLatterEventId = "1roadblock";
+    public static string roadblockFormerEventId = "roadblock";
 }
 public class Jump : MonoBehaviour {
 
@@ -67,7 +67,7 @@ public class Jump : MonoBehaviour {
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblockFormerEventId);
+            MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsRoadblock, EventEnum.roadblockFormerEventId);
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
@@ -113,13 +113,14 @@ public class Jump : MonoBehaviour {
         {
             GameObject role1 = this.gameObject;
             Vector3 pos = new Vector3(role1.transform.position.x, role1.transform.position.y, role1.transform.position.z);
+            
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
-                mgNetWorking.Instantiate(roadblock, pos, new Quaternion(), 0);
+                mgNetWorking.Instantiate(roadblock, pos, Quaternion.Euler(0, isDown*180, isDown*180), 0);
             }
             else
             {
-                roadblock.createSkillSprite(pos);
+                roadblock.createSkillSprite(pos, Quaternion.Euler(0, isDown * 180, isDown * 180));
             }
         }
     }

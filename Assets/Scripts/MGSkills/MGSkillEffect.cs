@@ -5,12 +5,9 @@ public static class SkillEnum
     public static string dart = "dart";
     public static string roadblock = "roadblock";
     public static string bones = "bones";
+    public static string blink = "blink";
 }
-public static class MGDartEffectDetail
-{
-    public static int dartSkillEffectSpeed = 2;
-    public static float durationTime = 0.5f;
-}
+
 public class MGSkillEffect : MonoBehaviour {
     private float timer;
     private MGNotification skillNotification;
@@ -33,9 +30,9 @@ public class MGSkillEffect : MonoBehaviour {
             MGSkillModel skillModel = (MGSkillModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             print("触发飞镖效果");
-            objc.transform.Translate(-Vector3.right * MGDartEffectDetail.dartSkillEffectSpeed * Time.deltaTime);
+            objc.transform.Translate(-Vector3.right * MGSkillDartInfo.dartSkillEffectSpeed * Time.deltaTime);
             timer += Time.deltaTime;
-            if (timer > MGDartEffectDetail.durationTime)
+            if (timer > MGSkillDartInfo.durationTime)
             {
                 timer = 0;
                 skillNotification = null;

@@ -5,6 +5,7 @@ public class MGSkillRoadblock : MGSkillsBase{
 
     public string releaseSkillObjcName;
     public int speed;
+
     void Awake()
     {
         releaseSkillObjcName = null;
@@ -17,7 +18,12 @@ public class MGSkillRoadblock : MGSkillsBase{
     public override void createSkillSprite(Vector3 pos)
     {
         base.createSkillSprite(pos);
-        GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
+        GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, 0));
+    }
+    public override void createSkillSprite(Vector3 pos, Quaternion rotation)
+    {
+        base.createSkillSprite(pos, rotation);
+        GameObject.Instantiate(this, pos, rotation);
     }
     public override void playSkillAnimation()
     {
@@ -45,7 +51,7 @@ public class MGSkillRoadblock : MGSkillsBase{
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.name == "road" || other.gameObject.name == "roadSecond")
+        if (other.tag != "Player")
             return;
         if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
         {
