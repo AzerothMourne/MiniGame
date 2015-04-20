@@ -32,7 +32,7 @@ public class MGSkillEffect : MonoBehaviour {
             skillNotification = notification;
             MGSkillModel skillModel = (MGSkillModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
-            print("触发飞镖效果");
+            //print("触发飞镖效果");
             objc.transform.Translate(-Vector3.right * MGDartEffectDetail.dartSkillEffectSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             if (timer > MGDartEffectDetail.durationTime)
