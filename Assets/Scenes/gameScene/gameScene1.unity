@@ -1641,6 +1641,7 @@ GameObject:
   - 61: {fileID: 1852946986}
   - 50: {fileID: 1852946985}
   - 114: {fileID: 1852946984}
+  - 114: {fileID: 1852946990}
   m_Layer: 9
   m_Name: role1
   m_TagString: Untagged
@@ -1670,9 +1671,6 @@ MonoBehaviour:
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
-  isPressJumpButton: 0
-  isFallDown: 0
-  isSecondJump: 0
 --- !u!50 &1852946985
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1748,6 +1746,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 906247496}
   m_RootOrder: 1
+--- !u!114 &1852946990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1852946983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b110f65c90144b4aa2daac996948bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPressJumpButton: 0
+  isFallDown: 0
+  isSecondJump: 0
 --- !u!1 &1875529167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,6 +1849,7 @@ GameObject:
   - 61: {fileID: 1985725678}
   - 50: {fileID: 1985725677}
   - 114: {fileID: 1985725682}
+  - 114: {fileID: 1985725683}
   m_Layer: 9
   m_Name: role
   m_TagString: Untagged
@@ -1941,6 +1954,17 @@ MonoBehaviour:
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
+--- !u!114 &1985725683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1985725676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b110f65c90144b4aa2daac996948bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   isPressJumpButton: 0
   isFallDown: 0
   isSecondJump: 0
