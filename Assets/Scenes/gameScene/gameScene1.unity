@@ -917,7 +917,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 454204, guid: 8fd95112e3102704cacb4b9f62321dbc, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -.360000014
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 454204, guid: 8fd95112e3102704cacb4b9f62321dbc, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1251,8 +1251,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 2
-  manualHeight: 960
+  scalingStyle: 0
+  manualHeight: 720
   minimumHeight: 320
   maximumHeight: 1536
   adjustByDPI: 0
@@ -1265,7 +1265,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00611620815, y: .00611620815, z: .00611620815}
+  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
   m_Children:
   - {fileID: 361695384}
   m_Father: {fileID: 0}
@@ -1486,7 +1486,7 @@ Transform:
   m_PrefabInternal: {fileID: 1049680106}
   m_GameObject: {fileID: 1822979339}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.360000014, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.60000002, y: 1.39999998, z: 1}
   m_Children: []
   m_Father: {fileID: 1224975071}
@@ -1673,7 +1673,6 @@ MonoBehaviour:
   isPressJumpButton: 0
   isFallDown: 0
   isSecondJump: 0
-  isRollBack: 0
 --- !u!50 &1852946985
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1945,4 +1944,3 @@ MonoBehaviour:
   isPressJumpButton: 0
   isFallDown: 0
   isSecondJump: 0
-  isRollBack: 0
