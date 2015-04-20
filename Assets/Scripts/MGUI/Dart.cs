@@ -94,10 +94,7 @@ public class Dart : MonoBehaviour {
             dartNum.text = num.ToString();
             isCD = true;
             cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.dartFormerEventId, null);
-            else
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.dartLatterEventId, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.dart, null);
         }
     }
 }

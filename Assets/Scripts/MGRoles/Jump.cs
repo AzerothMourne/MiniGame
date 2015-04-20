@@ -4,16 +4,12 @@ using LitJson;
 using System.Collections.Generic;
 using System;
 public static class EventEnum{
-	public static string dartFormerEventId="useSkillsDart";
-	public static string dartLatterEventId="1useSkillsDart";
 	public static string jumpFormerEventId="jump";
 	public static string jumpLatterEventId="1jump";
 	public static string downToLineFormerEventId="downToLine";
 	public static string dowmToLineLatterEventId="1downToLine";
 	public static string upwardToLineFormerEventId="upwardToLine";
 	public static string upwardToLineLatterEventId="1upwardToLine";
-    public static string roadblockLatterEventId = "1roadblock";
-    public static string roadblockFormerEventId = "roadblock";
 }
 public class Jump : MonoBehaviour {
 
@@ -23,8 +19,7 @@ public class Jump : MonoBehaviour {
 	public float jumpSecond ;
 	public float jumpCount ;
 	public int isDown;
-    public MGSkillsBase drat,roadblock;
-    private int groundLayerMask;
+    public MGSkillsBase drat,roadblock,blink;
 	public UIInput log;
 	public int isReceiveFlag;
 	public bool isPressDown;
@@ -44,7 +39,6 @@ public class Jump : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        groundLayerMask = LayerMask.GetMask("Default");
         isDown = 0;
         isGround = false;
 		isReceiveFlag = 0;
@@ -63,20 +57,23 @@ public class Jump : MonoBehaviour {
 		//前面角色的动作
 		if (this.gameObject.name == "role") {
 			print ("yes role");
-			MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsDart, EventEnum.dartFormerEventId);
+            //注册动作事件
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
-            MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsRoadblock, EventEnum.roadblockFormerEventId);
+            //注册技能事件
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, SkillEnum.dart);
+            MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsRoadblock, SkillEnum.roadblock);
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
 			print ("yes role1");
-			MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dartLatterEventId);
+            //注册动作事件
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblockLatterEventId);
+            //注册技能事件
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, SkillEnum.blink);
 		}
 	}
     private string objcToJson(string msg)
@@ -89,6 +86,23 @@ public class Jump : MonoBehaviour {
         //print("eventId : "+msgModel.eventId);
         msgModel.timestamp = MGGlobalDataCenter.timestamp();
         return JsonMapper.ToJson(msgModel);
+    }
+    public void useSkillsBlink(MGNotification notification)
+    {
+        if (notification.objc == null)
+        {
+            GameObject role1 = this.gameObject;
+            Vector3 pos = new Vector3(role1.transform.position.x, role1.transform.position.y , role1.transform.position.z);
+            ((MGSkillBlink)blink).releaseSkillObjcName = this.gameObject.name;
+            if (Network.peerType != NetworkPeerType.Disconnected)
+            {
+                mgNetWorking.Instantiate(blink, pos, new Quaternion(), 0);
+            }
+            else
+            {
+                blink.createSkillSprite(pos);
+            }
+        }
     }
     public void useSkillsDart(MGNotification notification)
     {

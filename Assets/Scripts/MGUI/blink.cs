@@ -53,7 +53,7 @@ public class blink : MonoBehaviour {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.blink, null);
         }
-        print("OnMouseDown");
     }
 }

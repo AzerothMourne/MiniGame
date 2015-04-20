@@ -14,7 +14,6 @@ public class JumpFront : MonoBehaviour
     public float jumpCount;
     public int isJump, isDown;
     public MGskillDrat drat;
-    private int groundLayerMask;
     public UIInput log;
     private int isReceiveFlag;
     private MGNetWorking mgNetWorking;
@@ -23,7 +22,6 @@ public class JumpFront : MonoBehaviour
     void Start()
     {
         MGGlobalDataCenter.defaultCenter().roleLater = this.gameObject;
-        groundLayerMask = LayerMask.GetMask("Ground");
         isJump = 0;
         isDown = 0;
         isGround = true;

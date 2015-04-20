@@ -49,12 +49,8 @@ public class roadblock : MonoBehaviour {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockFormerEventId, null);
-            else
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockLatterEventId, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.roadblock, null);
         }
-        print("OnMouseDown");
        
 
     }

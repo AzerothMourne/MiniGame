@@ -3,6 +3,7 @@ using System.Collections;
 
 public class createRoleUI : MonoBehaviour {
     public GameObject dartButton,roadblockButton,bonesButton;
+    public GameObject blinkButton;
     public GameObject NGUIRoot;
     void Awake()
     {
@@ -16,7 +17,7 @@ public class createRoleUI : MonoBehaviour {
         }
         else
         {
-
+            createLaterRoleUI();
         }
     }
 	public void createFrontRoleUI()
@@ -39,6 +40,12 @@ public class createRoleUI : MonoBehaviour {
     }
     public void createLaterRoleUI()
     {
+        print("createLaterRoleUI");
+        GameObject objc = GameObject.Instantiate(blinkButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, -1)) as GameObject;
+        objc.transform.parent = NGUIRoot.transform;
+        objc.transform.localPosition = new Vector3(2000, 500, 0);
+        objc.transform.localScale = new Vector3(1, 1, 1);
 
+        
     }
 }

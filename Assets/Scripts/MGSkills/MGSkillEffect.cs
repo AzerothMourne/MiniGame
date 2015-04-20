@@ -1,41 +1,53 @@
 ﻿using UnityEngine;
 using System.Collections;
-public static class SkillEnum
-{
-    public static string dart = "dart";
-    public static string roadblock = "roadblock";
-    public static string bones = "bones";
-    public static string blink = "blink";
-}
+
 
 public class MGSkillEffect : MonoBehaviour {
     private float timer;
-    private MGNotification skillNotification;
+    private MGNotification dartSwitch,blinkSwitch;
 	// Use this for initialization
 	void Start () {
         timer = 0;
-        skillNotification = null;
+        dartSwitch = null;
+        blinkSwitch = null;
         MGNotificationCenter.defaultCenter().addObserver(this, dartEffect,SkillEnum.dart);
+        MGNotificationCenter.defaultCenter().addObserver(this, blinkEffect, SkillEnum.blink);
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        dartEffect(skillNotification);
+        dartEffect(dartSwitch);
 	}
+    void blinkEffect(MGNotification notification)
+    {
+        if (notification != null)
+        {
+            blinkSwitch = notification;
+            MGSkillModel skillModel = (MGSkillModel)notification.objc;
+            GameObject objc = GameObject.Find(skillModel.gameobjectName);
+            print("触发闪现效果");
+            objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * Time.deltaTime);
+            timer += Time.deltaTime;
+            if (timer > MGSkillBlinkInfo.durationTime)
+            {
+                timer = 0;
+                blinkSwitch = null;
+            }
+        }
+    }
     void dartEffect(MGNotification notification)
     {
         if (notification!=null)
         {
-            skillNotification = notification;
+            dartSwitch = notification;
             MGSkillModel skillModel = (MGSkillModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
-            print("触发飞镖效果");
-            objc.transform.Translate(-Vector3.right * MGSkillDartInfo.dartSkillEffectSpeed * Time.deltaTime);
+            objc.transform.Translate(-Vector3.right * MGSkillDartInfo.SkillEffectSpeed * Time.deltaTime);
             timer += Time.deltaTime;
             if (timer > MGSkillDartInfo.durationTime)
             {
                 timer = 0;
-                skillNotification = null;
+                dartSwitch = null;
             }
         }
     }
