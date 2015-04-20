@@ -1616,6 +1616,7 @@ MonoBehaviour:
   dartButton: {fileID: 186730, guid: c5ec9112d9806bb4d9b784708c98a8c3, type: 2}
   roadblockButton: {fileID: 120268, guid: 1625af9c8949fe44da65074947807814, type: 2}
   bonesButton: {fileID: 151006, guid: f3a352ee023069a4481905854a62922b, type: 2}
+  blinkButton: {fileID: 188354, guid: d03f668dfcf45624a96c29af0f62d874, type: 2}
   NGUIRoot: {fileID: 1533371668}
 --- !u!114 &1844146925
 MonoBehaviour:
@@ -1667,6 +1668,7 @@ MonoBehaviour:
   isDown: 0
   drat: {fileID: 11450828, guid: 7d8414458bf43054ba5bea21f9b5b5c0, type: 2}
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
+  blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
@@ -1938,6 +1940,7 @@ MonoBehaviour:
   isDown: 0
   drat: {fileID: 11450828, guid: 7d8414458bf43054ba5bea21f9b5b5c0, type: 2}
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
+  blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0

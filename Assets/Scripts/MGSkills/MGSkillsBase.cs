@@ -1,16 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public static class SkillEnum
-{
-    public static string dart = "dart";
-    public static string roadblock = "roadblock";
-    public static string bones = "bones";
-    public static string blink = "blink";
-}
+
 public static class MGSkillDartInfo
 {
-    public static string skillId = SkillEnum.dart;
+    public static string skillId = SkillEffectEnum.dart;
     public static int skillCD = 2;
     public static int skillHoldLevel = 3;
     public static int skillGCD = 0;
@@ -19,7 +13,7 @@ public static class MGSkillDartInfo
 }
 public static class MGSkillRoadblockInfo
 {
-    public static string skillId = SkillEnum.roadblock;
+    public static string skillId = SkillEffectEnum.roadblock;
     public static int skillCD = 1;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
@@ -28,11 +22,11 @@ public static class MGSkillRoadblockInfo
 }
 public static class MGSkillBlinkInfo
 {
-    public static string skillId = SkillEnum.blink;
+    public static string skillId = SkillEffectEnum.blink;
     public static int skillCD = 3;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static int SkillEffectSpeed = 10;
+    public static int SkillEffectSpeed = 150;
     public static float durationTime = 0.1f;
 }
 public class MGSkillsBase : MonoBehaviour {
@@ -42,12 +36,12 @@ public class MGSkillsBase : MonoBehaviour {
     /// 虚函数 
     /// 在屏幕上创建技能精灵
     /// </summary>
-    public virtual void createSkillSprite(Vector3 pos) { }
+    public virtual Object createSkillSprite(Vector3 pos) { return null; }
     /// <summary>
     /// 虚函数 
     /// 在屏幕上创建技能精灵
     /// </summary>
-    public virtual void createSkillSprite(Vector3 pos, Quaternion rotation) { }
+    public virtual Object createSkillSprite(Vector3 pos, Quaternion rotation) { return null; }
     /// <summary>
     /// 虚函数
     /// 播放技能动画

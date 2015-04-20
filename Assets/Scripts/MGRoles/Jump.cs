@@ -10,6 +10,10 @@ public static class EventEnum{
 	public static string dowmToLineLatterEventId="1downToLine";
 	public static string upwardToLineFormerEventId="upwardToLine";
 	public static string upwardToLineLatterEventId="1upwardToLine";
+    //技能事件
+    public static string dart = "EventEnum_dart";
+    public static string blink = "EventEnum_blink";
+    public static string roadblock = "EventEnum_roadblock";
 }
 public class Jump : MonoBehaviour {
 
@@ -62,8 +66,8 @@ public class Jump : MonoBehaviour {
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
             //注册技能事件
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, SkillEnum.dart);
-            MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsRoadblock, SkillEnum.roadblock);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dart);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblock);
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
@@ -73,7 +77,7 @@ public class Jump : MonoBehaviour {
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
             //注册技能事件
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, SkillEnum.blink);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, EventEnum.blink);
 		}
 	}
     private string objcToJson(string msg)
@@ -83,8 +87,6 @@ public class Jump : MonoBehaviour {
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
             msgModel.eventId = msg;
         else msgModel.eventId = "1"+msg;
-        //print("eventId : "+msgModel.eventId);
-        msgModel.timestamp = MGGlobalDataCenter.timestamp();
         return JsonMapper.ToJson(msgModel);
     }
     public void useSkillsBlink(MGNotification notification)
@@ -93,15 +95,21 @@ public class Jump : MonoBehaviour {
         {
             GameObject role1 = this.gameObject;
             Vector3 pos = new Vector3(role1.transform.position.x, role1.transform.position.y , role1.transform.position.z);
-            ((MGSkillBlink)blink).releaseSkillObjcName = this.gameObject.name;
+            MGSkillBlink skillObjc = null;
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
-                mgNetWorking.Instantiate(blink, pos, new Quaternion(), 0);
+                skillObjc = mgNetWorking.Instantiate(blink, pos, new Quaternion(), 0) as MGSkillBlink;
             }
             else
             {
-                blink.createSkillSprite(pos);
+                skillObjc = blink.createSkillSprite(pos) as MGSkillBlink;
             }
+            if (skillObjc)
+            {
+                skillObjc.releaseSkillObjcName = this.gameObject.name;
+            }
+            
+            
         }
     }
     public void useSkillsDart(MGNotification notification)

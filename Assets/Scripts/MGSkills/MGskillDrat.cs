@@ -5,6 +5,7 @@ using LitJson;
 public class MGskillDrat : MGSkillsBase{
 	public string releaseSkillObjcName;
 	public int speed;
+    private MGNetWorking mgNetWorking;
 	void Awake()
 	{
 		releaseSkillObjcName = null;
@@ -12,12 +13,12 @@ public class MGskillDrat : MGSkillsBase{
 	// Use this for initialization
 	void Start()
 	{
-
+        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
 	}
-	public override void createSkillSprite(Vector3 pos)
+    public override Object createSkillSprite(Vector3 pos)
 	{
 		base.createSkillSprite(pos);
-		GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
+		return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
 	}
 	public override void playSkillAnimation()
 	{
@@ -49,13 +50,13 @@ public class MGskillDrat : MGSkillsBase{
 			return;
 		if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
 		{
-            MGSkillModel skillModel = new MGSkillModel();
-            skillModel.eventId = SkillEnum.dart;
+            MGMsgModel skillModel = new MGMsgModel();
+            skillModel.eventId = SkillEffectEnum.dart;
             skillModel.gameobjectName = other.name;
-            //发送给对面
-            //mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+            //发送给对面,产生技能效果
+            //mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
             //发送给自己
-            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.dart,skillModel);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
 			print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName+";gameobjc:"+other.gameObject);
 			Destroy(this.gameObject);
 		}

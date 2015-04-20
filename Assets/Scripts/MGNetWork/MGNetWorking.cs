@@ -89,9 +89,9 @@ public class MGNetWorking : MonoBehaviour {
 		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
 		MGNotificationCenter.defaultCenter().postNotification(msgModel.eventId,msgModel);
 	}
-    public void Instantiate(UnityEngine.Object prefab,Vector3 position,Quaternion rotation,int group)
+    public Object Instantiate(UnityEngine.Object prefab,Vector3 position,Quaternion rotation,int group)
     {
-        Network.Instantiate(prefab, position, rotation, group);
+        return Network.Instantiate(prefab, position, rotation, group);
     }
     //同步gameobject的方法
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)

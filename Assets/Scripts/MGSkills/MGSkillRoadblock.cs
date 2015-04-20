@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using LitJson;
 public class MGSkillRoadblock : MGSkillsBase{
-
+    private MGNetWorking mgNetWorking;
     public string releaseSkillObjcName;
     public int speed;
 
@@ -13,17 +13,17 @@ public class MGSkillRoadblock : MGSkillsBase{
     // Use this for initialization
     void Start()
     {
-
+        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
     }
-    public override void createSkillSprite(Vector3 pos)
+    public override Object createSkillSprite(Vector3 pos)
     {
         base.createSkillSprite(pos);
-        GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, 0));
+        return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, 0));
     }
-    public override void createSkillSprite(Vector3 pos, Quaternion rotation)
+    public override Object createSkillSprite(Vector3 pos, Quaternion rotation)
     {
         base.createSkillSprite(pos, rotation);
-        GameObject.Instantiate(this, pos, rotation);
+        return GameObject.Instantiate(this, pos, rotation);
     }
     public override void playSkillAnimation()
     {
@@ -55,6 +55,13 @@ public class MGSkillRoadblock : MGSkillsBase{
             return;
         if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
         {
+            MGMsgModel skillModel = new MGMsgModel();
+            skillModel.eventId = SkillEffectEnum.roadblock;
+            skillModel.gameobjectName = other.name;
+            //发送给对面,产生技能效果
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
+            //发送给自己
+            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.roadblock, skillModel);
             print("技能名：路障。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName);
             Destroy(this.gameObject);
         }

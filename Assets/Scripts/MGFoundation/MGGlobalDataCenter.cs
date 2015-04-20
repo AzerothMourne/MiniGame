@@ -6,11 +6,6 @@ using System;
 
 public class MGMsgModel{
 	public string eventId { get; set;}
-	public long timestamp{ get; set;}
-}
-public class MGSkillModel
-{
-    public string eventId { get; set; }
     public string gameobjectName { get; set; }
 }
 

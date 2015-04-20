@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LitJson;
 
 public class MGSkillBlink : MGSkillsBase
 {
+    private MGNetWorking mgNetWorking;
     public string releaseSkillObjcName;
     public int speed;
     private bool isBlinked;
@@ -13,12 +15,13 @@ public class MGSkillBlink : MGSkillsBase
     // Use this for initialization
     void Start()
     {
+        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
         isBlinked = false;
     }
-    public override void createSkillSprite(Vector3 pos)
+    public override Object createSkillSprite(Vector3 pos)
     {
         base.createSkillSprite(pos);
-        GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
+        return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
     }
     public override void playSkillAnimation()
     {
@@ -26,13 +29,13 @@ public class MGSkillBlink : MGSkillsBase
         if (isBlinked == false)//通知技能效果类执行相应的效果
         {
             isBlinked = true;
-            MGSkillModel skillModel = new MGSkillModel();
-            skillModel.eventId = SkillEnum.dart;
+            MGMsgModel skillModel = new MGMsgModel();
+            skillModel.eventId = SkillEffectEnum.blink;
             skillModel.gameobjectName = releaseSkillObjcName;
-            //发送给对面
-            //mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+            //发送给对面 产生技能效果
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
             //发送给自己
-            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.blink, skillModel);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
         }
     }
     public override void playSkillSound()
@@ -43,7 +46,9 @@ public class MGSkillBlink : MGSkillsBase
     void Update()
     {
         playSkillAnimation();
-        
     }
-    
+    void DestroyGameObject()
+    {
+        Destroy(this.gameObject);
+    }
 }

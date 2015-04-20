@@ -49,7 +49,7 @@ public class roadblock : MonoBehaviour {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.roadblock, null);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblock, null);
         }
        
 
