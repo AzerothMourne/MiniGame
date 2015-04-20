@@ -38,6 +38,7 @@ public class Jump : MonoBehaviour {
 	int countJumpFrame;
 	Rigidbody2D player;
 	public bool isSecondJump;
+	public bool isRollBack;
 
 
 
@@ -54,6 +55,7 @@ public class Jump : MonoBehaviour {
 		isPressJumpButton = false;
 		isFallDown = false;
 		isSecondJump = false;
+		isRollBack = false;
 
 		jumpAnim = this.GetComponent<Animator> ();
 		player = this.GetComponent<Rigidbody2D> ();
@@ -167,6 +169,9 @@ public class Jump : MonoBehaviour {
 
     public void downToLine(MGNotification notification)
     {
+
+		isRollBack = true;
+		jumpAnim.SetBool ("rollBack", isRollBack);
         //角色会根据下按钮，翻转到线下
         print("is ground " + isGround);
  		if (isDown == 0) {
