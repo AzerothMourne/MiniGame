@@ -25,7 +25,7 @@ public class Jump1 : MonoBehaviour {
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
         MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, "1useSkillsDart");
-        MGNotificationCenter.defaultCenter().addObserver(this, jump, "1jump");
+        MGNotificationCenter.defaultCenter().addObserver(this, firstJump, "1firstJump");
         MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "1secondJump");
         MGNotificationCenter.defaultCenter().addObserver(this, downToLine, "1downToLine");
 	}
@@ -41,7 +41,7 @@ public class Jump1 : MonoBehaviour {
 			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
 		}
     }
-    public void jump(MGNotification notification)
+    public void firstJump(MGNotification notification)
     {
         
             isJump = 0;
@@ -56,10 +56,10 @@ public class Jump1 : MonoBehaviour {
 			//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\n";
 
 			MGMsgModel msgModel=new MGMsgModel();
-			msgModel.eventId="1jump";
+			msgModel.eventId="1firstJump";
 			msgModel.timestamp=MGGlobalDataCenter.timestamp();
 			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson(msgModel));
-			//P2PBinding.sendMessageToPeer ("1jump ");
+			//P2PBinding.sendMessageToPeer ("1firstJump ");
 		} else {
 			//log.label.text+="jump receive:" + MGGlobalDataCenter.timestamp ()+"\n";
 			//isReceiveFlag=1;

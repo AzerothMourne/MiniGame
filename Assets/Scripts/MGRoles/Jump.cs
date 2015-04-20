@@ -6,8 +6,8 @@ using System;
 public static class EventEnum{
 	public static string dartFormerEventId="useSkillsDart";
 	public static string dartLatterEventId="1useSkillsDart";
-	public static string jumpFormerEventId="jump";
-	public static string jumpLatterEventId="1jump";
+	public static string jumpFormerEventId="firstJump";
+	public static string jumpLatterEventId="1firstJump";
 	public static string downToLineFormerEventId="downToLine";
 	public static string dowmToLineLatterEventId="1downToLine";
 	public static string upwardToLineFormerEventId="upwardToLine";
@@ -22,43 +22,41 @@ public class Jump : MonoBehaviour {
 	public float jumpVelocity ;
 	public float jumpSecond ;
 	public float jumpCount ;
-	public int isDown;
+	public int isJump,isDown;
     public MGskillDrat drat;
     private int groundLayerMask;
 	public UIInput log;
 	public int isReceiveFlag;
-	public bool isPressDown;
 	// Use this for initialization
 	void Start () {
         groundLayerMask = LayerMask.GetMask("Ground");
+		isJump = 1;
         isDown = 0;
         isGround = false;
 		isReceiveFlag = 0;
-		isPressDown = false;
 		//forceMove = 50;
 		//jumpVelocity = 25;
 		//jumpSecond = 15;
-
-		//获取角色的名字，role则是前面的角色，role1则是后面的角色
-
 		//前面角色的动作
-		if (this.gameObject.name == "role") {
-			print ("yes role");
+		if (MGGlobalDataCenter.defaultCenter ().isHost == 1) {
 			MGNotificationCenter.defaultCenter ().addObserver (this, useSkillsDart, EventEnum.dartFormerEventId);
-			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
+			MGNotificationCenter.defaultCenter ().addObserver (this, firstJump, EventEnum.jumpFormerEventId);
+			//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "secondJump");
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
 		} 
-		//后面的角色动作
-		else if(this.gameObject.name == "role1"){
-			print ("yes role1");
+		else {
+			//后面的角色动作
 			MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dartLatterEventId);
-			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
+			MGNotificationCenter.defaultCenter().addObserver(this, firstJump, EventEnum.jumpLatterEventId);
+			//MGNotificationCenter.defaultCenter().addObserver(this, secondJump, "1secondJump");
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
 		}
-	}
 
+
+
+	}
     public void useSkillsDart(MGNotification notification)
     {
         GameObject role1 = this.gameObject;
@@ -74,12 +72,11 @@ public class Jump : MonoBehaviour {
 			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
 		}
     }
-    public void jump(MGNotification notification)
+    public void firstJump(MGNotification notification)
     {
 		//如果在地面上，则一段跳
-		print ("time : " + System.DateTime.Now);
-		print (" the role is : " + this.gameObject.name);
-		if (isGround){
+		if (isGround && (Input.GetKeyDown (KeyCode.Space) || isJump == 1)) {
+			//isJump = 0;
 			Vector2 velocity = rigidbody2D.velocity;
 			velocity.y = 0;
 			print ("1:" + velocity.y);
@@ -92,8 +89,8 @@ public class Jump : MonoBehaviour {
 				//log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
 				MGMsgModel msgModel = new MGMsgModel ();
 				if(MGGlobalDataCenter.defaultCenter().isHost == 1) 
-					msgModel.eventId = "jump";
-				else msgModel.eventId = "1jump";
+					msgModel.eventId = "firstJump";
+				else msgModel.eventId = "1firstJump";
 				print("eventId : "+msgModel.eventId);
 				msgModel.timestamp = MGGlobalDataCenter.timestamp ();
 				MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
@@ -107,7 +104,8 @@ public class Jump : MonoBehaviour {
 			}
 		}
 		//如果不在地面上，且一段跳了，则二段跳
-		else if(!isGround && jumpCount == 1) {
+		else if(!isGround && (Input.GetKeyDown (KeyCode.Space)||isJump == 1) && jumpCount == 1) {
+			//isJump = 0;
 			Vector2 velocity = rigidbody2D.velocity;
 			if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
 			else velocity.y = jumpSecond;
@@ -115,27 +113,42 @@ public class Jump : MonoBehaviour {
 			jumpCount = 2;
 		}
 	}
-
+    /*
+    public void secondJump(MGNotification notification)
+    {
+        if (!isGround && (Input.GetKeyDown(KeyCode.Space) || isJump == 1) && jumpCount == 1)
+        {
+            isJump = 0;
+            Vector2 velocity = rigidbody2D.velocity;
+            if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
+            else velocity.y = jumpSecond;
+            rigidbody2D.velocity = velocity;
+            jumpCount = 2;
+        }
+    }
+     */
     public void downToLine(MGNotification notification)
     {
-        //角色会根据下按钮，翻转到线下
+        //角色会根据上下键反转
 		print ("gravityScale : " + rigidbody2D.gravityScale);
-
- 		if (rigidbody2D.gravityScale > 0) {
+       // isDown = (isDown + 1) & 1;
+       /* if (isDown==0)
+        {
+			print("isDown : "+isDown);
+            transform.localScale = new Vector3(1, 1, 1);
+            rigidbody2D.gravityScale = 5;
+        }
+        else*/ if (rigidbody2D.gravityScale > 0)
+        {
 			print("downToLine isDown : "+isDown);
-			if(isGround){
+			if(rigidbody2D.velocity.y == 0f) {
+				print ("rigidbody2D.velocity.y : " + rigidbody2D.velocity.y);
             	rigidbody2D.gravityScale = 0;
            		transform.localScale = new Vector3(1, -1, 1);
-			} else if (!isGround) {
-				print ("not on the ground");
-				rigidbody2D.gravityScale = 10;
-
-				isPressDown =true;
 			}
-			print ("is ground " + isGround);
 			isDown = 1;
-        }
 
+        }
 		if(notification.objc==null){
 			MGMsgModel msgModel = new MGMsgModel ();
 
@@ -150,7 +163,8 @@ public class Jump : MonoBehaviour {
 
 	public void upwardToLine(MGNotification notification)
 	{
-		//角色会根据上按钮从线下到线上
+		//角色会根据上下键反转
+		//isDown = (isDown + 1) & 1;
 		print ("up  gravityScale : " + rigidbody2D.gravityScale);
 		if (rigidbody2D.gravityScale == 0)
         {
@@ -159,7 +173,16 @@ public class Jump : MonoBehaviour {
             rigidbody2D.gravityScale = 5;
 			isDown = 0;
         }
-
+        /*else if (isDown==1)
+		{
+			print("isDown : "+isDown);
+			if(rigidbody2D.velocity.y == 0f) {
+				print ("rigidbody2D.velocity.y : " + rigidbody2D.velocity.y);
+				rigidbody2D.gravityScale = 0;
+				transform.localScale = new Vector3(1, -1, 1);
+			}
+			
+		}*/
 		if(notification.objc==null){
 			MGMsgModel msgModel = new MGMsgModel ();
 			
@@ -170,6 +193,11 @@ public class Jump : MonoBehaviour {
 			MGNetWorking.sendMessageToPeer (JsonMapper.ToJson (msgModel));
 		}
 	}
+
+
+
+
+
 
 	// Update is called once per frame
 	void Update () {
@@ -200,13 +228,7 @@ public class Jump : MonoBehaviour {
 			transform.localScale = new Vector3(-1,rigidbody2D.gravityScale==0?-1:1,1);
 		}
 
-		//当下落过程中按了down按钮，则会在落地后下翻
-		if (isPressDown && isGround) {
-			rigidbody2D.gravityScale = 0;
-			transform.localScale = new Vector3(1, -1, 1);
-			isPressDown = false;
-		}
-      
+        
 	}
 
 	//判断角色是否在地面上
