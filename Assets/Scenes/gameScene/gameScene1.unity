@@ -359,7 +359,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 3882736565
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: ab7188d3e33fd8442ab55c7a07d92c3d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cc3b2903c1ee27e42acb6f3c04db090c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &349749209
 Transform:
@@ -368,7 +368,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 349749207}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 6.69999981, y: 2.28999996, z: 0}
+  m_LocalPosition: {x: 3.5999999, y: -3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 906247496}
@@ -412,7 +412,7 @@ GameObject:
   - 114: {fileID: 361695385}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: UICamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1175,6 +1175,8 @@ GameObject:
   - 114: {fileID: 1533371671}
   - 114: {fileID: 1533371670}
   - 54: {fileID: 1533371669}
+  - 114: {fileID: 1533371673}
+  - 114: {fileID: 1533371674}
   m_Layer: 0
   m_Name: UI Root
   m_TagString: Untagged
@@ -1265,11 +1267,38 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
+  m_LocalScale: {x: .00208333344, y: .00208333344, z: .00208333344}
   m_Children:
   - {fileID: 361695384}
   m_Father: {fileID: 0}
   m_RootOrder: 2
+--- !u!114 &1533371673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1533371668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 925f7310799334dc8a64e30ca01e946d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1533371674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1533371668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 959e3e22c004cd047a4a8d20bae24c8d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dartButton: {fileID: 186730, guid: c5ec9112d9806bb4d9b784708c98a8c3, type: 2}
+  roadblockButton: {fileID: 120268, guid: 1625af9c8949fe44da65074947807814, type: 2}
+  bonesButton: {fileID: 151006, guid: f3a352ee023069a4481905854a62922b, type: 2}
+  blinkButton: {fileID: 188354, guid: d03f668dfcf45624a96c29af0f62d874, type: 2}
+  uiCamera: {fileID: 361695386}
 --- !u!1 &1602608899
 GameObject:
   m_ObjectHideFlags: 0
@@ -1505,7 +1534,6 @@ GameObject:
   - 81: {fileID: 1844146917}
   - 114: {fileID: 1844146922}
   - 148: {fileID: 1844146923}
-  - 114: {fileID: 1844146924}
   - 114: {fileID: 1844146925}
   m_Layer: 0
   m_Name: Main Camera
@@ -1602,22 +1630,6 @@ NetworkView:
   m_ViewID:
     m_ID: 3
     m_Type: 1
---- !u!114 &1844146924
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1844146916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 959e3e22c004cd047a4a8d20bae24c8d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dartButton: {fileID: 186730, guid: c5ec9112d9806bb4d9b784708c98a8c3, type: 2}
-  roadblockButton: {fileID: 120268, guid: 1625af9c8949fe44da65074947807814, type: 2}
-  bonesButton: {fileID: 151006, guid: f3a352ee023069a4481905854a62922b, type: 2}
-  blinkButton: {fileID: 188354, guid: d03f668dfcf45624a96c29af0f62d874, type: 2}
-  NGUIRoot: {fileID: 1533371668}
 --- !u!114 &1844146925
 MonoBehaviour:
   m_ObjectHideFlags: 0
