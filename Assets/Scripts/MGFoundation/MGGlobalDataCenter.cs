@@ -8,24 +8,31 @@ public class MGMsgModel{
 	public string eventId { get; set;}
 	public long timestamp{ get; set;}
 }
+public class MGSkillModel
+{
+    public string eventId { get; set; }
+    public string gameobjectName { get; set; }
+}
 
 
 public class MGGlobalDataCenter  {
     public bool isNetworkViewEnable;
-    public int isHost;
+    public bool isHost;
     public int connecttions;
     public int listenPort;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
+    public GameObject role, roleLater;
+    private string _serverIp;
     public string serverIp
     {
         get
         {
-            return serverIp;
+            return _serverIp;
         }
         set
         {
-            serverIp = value;
+            _serverIp = value;
             isNetworkViewEnable = true;
         }
     }
@@ -36,10 +43,18 @@ public class MGGlobalDataCenter  {
 
     private MGGlobalDataCenter()
     {
+        Debug.Log("Init GlobalData");
+        this.role = null;
+        this.roleLater = null;
         this.connecttions = 1;
         this.listenPort = 8899;
         this.isNetworkViewEnable = false;
+<<<<<<< HEAD
         this.isHost = 1;
+=======
+        this.isHost = true;
+		//this.isHost = false;
+>>>>>>> CEQ_DEV
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -10.0f;

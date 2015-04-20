@@ -10,7 +10,7 @@ public class findHostScript : MonoBehaviour {
     public void OnMouseDown()
     {
         print("finsHost");
-        MGGlobalDataCenter.defaultCenter().isHost = 0;
+        MGGlobalDataCenter.defaultCenter().isHost = false;
 		MGNetWorking.findHost();
 		print("finsHost is : "+ MGGlobalDataCenter.defaultCenter().isHost);
     }

@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
+public static class MGSkillDartInfo
+{
+    public static string skillId = SkillEnum.dart;
+    public static int skillCD = 2;
+    public static int skillHoldLevel = 3;
+    public static int skillGCD = 1;
+}
 public class MGSkillsBase : MonoBehaviour {
 
-	public int skillId;
-    public int skillCD,skillHoldLevel,skillGCD;
-
+    public float posY = -10000;
     /// <summary>
     /// 虚函数
     /// 在屏幕上创建技能精灵
@@ -21,4 +27,5 @@ public class MGSkillsBase : MonoBehaviour {
     /// 播放技能音效
     /// </summary>
     public virtual void playSkillSound() { }
+    
 }
