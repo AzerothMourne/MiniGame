@@ -24,7 +24,7 @@ public class createRoleUI : MonoBehaviour {
         print("createFrontRoleUI");
         GameObject objc= GameObject.Instantiate(dartButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, -1)) as GameObject;
         objc.transform.parent = NGUIRoot.transform;
-        objc.transform.localPosition = new Vector3(2000, 500, 0);
+        objc.transform.localPosition = new Vector3(1121, 510, 0);
         objc.transform.localScale = new Vector3(1, 1, 1);
 
         objc = GameObject.Instantiate(roadblockButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, -1)) as GameObject;
