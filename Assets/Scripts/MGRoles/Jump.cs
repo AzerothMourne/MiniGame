@@ -133,11 +133,12 @@ public class Jump : MonoBehaviour {
 		//如果不在地面上，且一段跳了，则二段跳
 		else if(!isGround && jumpCount == 1) {
 			this.GetComponent<RoleAnimController> ().isSecondJump = true;
+			print ("isSecondJump : "+this.GetComponent<RoleAnimController> ().isSecondJump);
 			this.GetComponent<RoleAnimController> ().isFallDown = false;
+			this.GetComponent<RoleAnimController> ().isRollBack = true;
 			jumpAnim.SetBool ("fallDown", this.GetComponent<RoleAnimController> ().isFallDown);
 			jumpAnim.SetBool ("secondJump", this.GetComponent<RoleAnimController> ().isSecondJump);
-
-
+			jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
 
 			Vector2 velocity = rigidbody2D.velocity;
 			if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
@@ -155,10 +156,13 @@ public class Jump : MonoBehaviour {
     {
         //角色会根据下按钮，翻转到线下
         print("is ground " + isGround);
+		print("is down " + isDown);
  		if (isDown == 0) {
 			if(isGround){
+				//增加翻滚动作
+				this.GetComponent<RoleAnimController> ().isRollBack = true;
+				jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
             	rigidbody2D.gravityScale = 0;
-           		transform.localScale = new Vector3(1, -1, 1);
                 isDown = 1;
 			} else if (!isGround) {
 				rigidbody2D.gravityScale = 10;
@@ -171,13 +175,16 @@ public class Jump : MonoBehaviour {
 		}
     }
 
-
 	public void upwardToLine(MGNotification notification)
 	{
         
 		if (isDown == 1)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+			//add
+			this.GetComponent<RoleAnimController> ().isRollBack = true;
+			jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
+
+            //transform.localScale = new Vector3(1, 1, 1);
             rigidbody2D.gravityScale = 5;
 			isDown = 0;
             isGround = true;

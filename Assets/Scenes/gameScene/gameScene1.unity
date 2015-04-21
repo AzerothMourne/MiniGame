@@ -1760,6 +1760,7 @@ MonoBehaviour:
   isPressJumpButton: 0
   isFallDown: 0
   isSecondJump: 0
+  isRollBack: 0
 --- !u!1 &1875529167
 GameObject:
   m_ObjectHideFlags: 0
@@ -1968,3 +1969,4 @@ MonoBehaviour:
   isPressJumpButton: 0
   isFallDown: 0
   isSecondJump: 0
+  isRollBack: 0

@@ -34,8 +34,6 @@ public class Upward : MonoBehaviour {
 	public void OnMouseDown () {
 		isClick = true;
 
-		print (".....OnMouseDown isPressJumpButton : " );
-
 		//将向上的按钮变为跳的按钮
 		this.GetComponent<SpriteRenderer>().sprite = jumpSprite;
 
