@@ -114,7 +114,7 @@ public class MGNetWorking : MonoBehaviour {
             MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = roleLaterVelocity;
         }
     }
-    void Start()
+    void Awake()
     {
         Camera camera=this.GetComponent<Camera>();
         Debug.Log("pixelWidth:" + camera.pixelWidth + ",pixelHight" + camera.pixelHeight + ",pixelRect:" + camera.pixelRect);

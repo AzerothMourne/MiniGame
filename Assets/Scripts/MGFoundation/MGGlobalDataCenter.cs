@@ -11,6 +11,7 @@ public class MGMsgModel{
 
 
 public class MGGlobalDataCenter  {
+    public float NGUI_ButtonWidth;
     public bool isNetworkViewEnable;
     public bool isHost;
     public int connecttions;
@@ -52,10 +53,11 @@ public class MGGlobalDataCenter  {
 		this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
-        this.screenLiftX = -10.0f;
+        this.screenLiftX = -8.9f;
         this.screenRightX = -1*this.screenLiftX;
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
+        this.NGUI_ButtonWidth = 1.65f;
 	}
 
     public static MGGlobalDataCenter defaultCenter()
