@@ -7,19 +7,7 @@ public class createRoleUI : MonoBehaviour {
     public GameObject blinkButton,bonesButton;
     public GameObject downButton, upButton;
 	public Camera uiCamera;
-    void Awake()
-    {
-        MGGlobalDataCenter singleInstance = MGGlobalDataCenter.defaultCenter();
-        Debug.Log("uiCamera.GetSides()=" + uiCamera.GetSides()[0] + uiCamera.GetSides()[1] + uiCamera.GetSides()[2] + uiCamera.GetSides()[3]);
-        singleInstance.screenBottomY = uiCamera.GetSides()[3].y;
-        singleInstance.screenTopY = -1 * singleInstance.screenBottomY;
-        singleInstance.screenLiftX = uiCamera.GetSides()[0].x;
-        singleInstance.screenRightX = -1 * singleInstance.screenLiftX;
-
-        Vector3 pos = MGFoundtion.pixelToWroldPoint(88f, 88f);
-        singleInstance.NGUI_ButtonWidth = Math.Abs( pos.x-singleInstance.screenLiftX );
-        Debug.Log(pos + "********" + singleInstance.NGUI_ButtonWidth);
-    }
+    
     void Start()
     {
         

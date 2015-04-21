@@ -32,6 +32,7 @@ public class MGGlobalDataCenter  {
             isNetworkViewEnable = true;
         }
     }
+    public Vector3 leftBottomPos, rightTopPos;
     /// <summary>
     /// 屏幕上下左右边框的坐标值
     /// </summary>
