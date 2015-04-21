@@ -8,6 +8,7 @@ public static class SkillEffectEnum
     public static string bones = "SkillEffectEnum_bones";
     public static string blink = "SkillEffectEnum_blink";
 }
+//主要用于技能对别的gameobject产生效果处理,MGSkill+技能名 是技能自己的效果处理
 public class MGSkillEffect : MonoBehaviour {
     private float timer;
     private MGNotification dartSwitch,blinkSwitch;
@@ -37,7 +38,7 @@ public class MGSkillEffect : MonoBehaviour {
             if (objc)
             {
                 Debug.Log("blinkObjc:" + objc + "name:" + objc.name);
-                objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * Time.deltaTime);
+                objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed*(MGGlobalDataCenter.defaultCenter().screenRightX-MGGlobalDataCenter.defaultCenter().screenLiftX));
             }
             timer += Time.deltaTime;
             if (timer > MGSkillBlinkInfo.durationTime)

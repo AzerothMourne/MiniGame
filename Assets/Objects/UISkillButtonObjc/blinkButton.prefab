@@ -199,7 +199,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11489748, guid: c30d6b32703c7f14083273b72704ab1a, type: 2}
-  mSpriteName: "\u51B7\u5374\u6001"
+  mSpriteName: "\u51B7\u5374\u6001_\u767D"
   mFillCenter: 1
 --- !u!114 &11488356
 MonoBehaviour:

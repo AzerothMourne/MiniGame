@@ -26,8 +26,17 @@ public static class MGSkillBlinkInfo
     public static int skillCD = 3;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static int SkillEffectSpeed = 150;
+    public static float SkillEffectSpeed = 1f/4f;
     public static float durationTime = 0.1f;
+}
+public static class MGSkillBonesInfo
+{
+    public static string skillId = SkillEffectEnum.bones;
+    public static int skillCD = 3;
+    public static int skillHoldLevel = 1;
+    public static int skillGCD = 0;
+    public static float SkillEffectSpeed = 1f / 4f;
+    public static float durationTime = 2.0f;
 }
 public class MGSkillsBase : MonoBehaviour {
 

@@ -5,6 +5,7 @@ public class bones : MonoBehaviour {
 
     public float cdTime = 2;
     private bool isCD = false;
+    private bool holdCD = false;
     private UISprite cdBack;
     public bool direction;// true 顺时针，false逆时针
     public bool addOrDec;// true 添加,false 减少
@@ -20,18 +21,24 @@ public class bones : MonoBehaviour {
         direction = true;
         addOrDec = true;
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (isCD)
+        if (isCD || holdCD)
         {
-            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
+            float time = MGSkillBonesInfo.skillCD;
+            if (holdCD) time = MGSkillBonesInfo.durationTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / time) * Time.deltaTime;
             if (addOrDec)
             {
                 if (cdBack.fillAmount >= 0.95f)
                 {
-                    isCD = false;
+                    if (holdCD == true)
+                    {
+                        addOrDec = !addOrDec;
+                        holdCD = false;
+                    }
+                    isCD = !isCD;
                     cdBack.fillAmount = 1f;
                 }
             }
@@ -39,7 +46,12 @@ public class bones : MonoBehaviour {
             {
                 if (cdBack.fillAmount <= 0.05f)
                 {
-                    isCD = false;
+                    if (holdCD == true)
+                    {
+                        addOrDec = !addOrDec;
+                        holdCD = false;
+                    }
+                    isCD = !isCD;
                     cdBack.fillAmount = 0f;
                 }
             }
@@ -48,12 +60,14 @@ public class bones : MonoBehaviour {
     }
     public void OnMouseDown()
     {
-        if (!isCD)
+        if (!isCD && !holdCD)
         {
+            addOrDec = false;
+            direction = false;
             cdBack.fillAmount = addOrDec ? 0f : 1f;
-            isCD = true;
-            cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
+            holdCD = true;
+            cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1)*(direction ? -1 : 1), 1, 1);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, null);
         }
-        print("OnMouseDown");
     }
 }

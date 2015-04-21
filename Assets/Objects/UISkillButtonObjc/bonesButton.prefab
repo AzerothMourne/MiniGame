@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e44f06d9de2da214ab69dbab25b9f85c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cdTime: 3
+  cdTime: 2
   direction: 1
   addOrDec: 1
 --- !u!114 &11451006
@@ -134,7 +134,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11489748, guid: c30d6b32703c7f14083273b72704ab1a, type: 2}
-  mSpriteName: "\u51B7\u5374\u6001"
+  mSpriteName: "\u51B7\u5374\u6001_\u767D"
   mFillCenter: 1
 --- !u!114 &11451008
 MonoBehaviour:
