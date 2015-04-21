@@ -28,12 +28,12 @@ public class createRoleUI : MonoBehaviour {
         GameObject objc = GameObject.Instantiate(downButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
         objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(-6f, -3.5f, 0f), uiCamera);
-        objc.transform.localScale = new Vector3(2, 2, 1);
+        objc.transform.localScale = new Vector3(1, 1, 1);
 
         objc = GameObject.Instantiate(upButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
         objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(6f, -3.5f, 0f), uiCamera);
-        objc.transform.localScale = new Vector3(2, 2, 1);
+        objc.transform.localScale = new Vector3(1, 1, 1);
 
     }
 	public void createFrontRoleUI()
@@ -43,12 +43,12 @@ public class createRoleUI : MonoBehaviour {
         GameObject objc= GameObject.Instantiate(dartButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
 		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(6.7f, 2.29f, 0f),uiCamera);
-        objc.transform.localScale = new Vector3(2, 2, 1);
+        objc.transform.localScale = new Vector3(1, 1, 1);
         //路障按钮UI
         objc = GameObject.Instantiate(roadblockButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
 		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(3.6f, -3.5f, 0f),uiCamera);
-        objc.transform.localScale = new Vector3(2, 2, 1);
+        objc.transform.localScale = new Vector3(1, 1, 1);
 
         
     }
@@ -59,12 +59,12 @@ public class createRoleUI : MonoBehaviour {
         GameObject objc = GameObject.Instantiate(blinkButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
 		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(6.7f, 2.29f, 0f),uiCamera);
-        objc.transform.localScale = new Vector3(2, 2, 1);
+        objc.transform.localScale = new Vector3(1, 1, 1);
         //金钟罩按钮UI
         objc = GameObject.Instantiate(bonesButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
         objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(-6.7f, 2.29f, 0f), uiCamera);
-        objc.transform.localScale = new Vector3(2, 2, 1);
+        objc.transform.localScale = new Vector3(1, 1, 1);
         /*
 		objc = GameObject.Instantiate(blinkButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
 		objc.transform.parent = transform;

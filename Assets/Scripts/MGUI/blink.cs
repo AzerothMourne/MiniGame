@@ -13,6 +13,8 @@ public class blink : MonoBehaviour {
     {
         cdBackObject = GameObject.Find("blinkBack");
         cdBack = cdBackObject.GetComponent<UISprite>();
+        UISprite selfSprite = this.gameObject.GetComponent<UISprite>();
+        Debug.Log("Dart Width:" + selfSprite.width + ",height:" + selfSprite.height);
     }
     // Use this for initialization
     void Start()
