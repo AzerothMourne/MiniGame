@@ -5,8 +5,8 @@ using System.Collections;
 public static class MGSkillDartInfo
 {
     public static string skillId = SkillEffectEnum.dart;
-    public static int skillCD = 2;
-    public static int skillHoldLevel = 3;
+    public static int skillCD = 1;
+    public static int skillHoldLevel = 10;
     public static int skillGCD = 0;
     public static int SkillEffectSpeed = 10;
     public static float durationTime = 0.1f;
@@ -26,7 +26,7 @@ public static class MGSkillBlinkInfo
     public static int skillCD = 3;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f/4f;
+    public static float SkillEffectSpeed = 1f/6f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillBonesInfo
