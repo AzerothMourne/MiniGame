@@ -2,10 +2,10 @@
 using System.Collections;
 
 public class Upward : MonoBehaviour {
-	public Sprite jumpSprite;
 	private float timer;
-	private bool isClick;
-
+    private float cameraMoveSpeed;
+	private bool isClick,isMoveCamera;
+    private Vector3 originVec3;
 /*	private Animator jumpAnim; 
 	public bool isPressJumpButton;
 	public bool isFallDown;
@@ -14,9 +14,11 @@ public class Upward : MonoBehaviour {
 */
 	// Use this for initialization
 	void Start () {
+        cameraMoveSpeed = 8f;
 		timer = 0.0f;
 		isClick = false;
-
+        isMoveCamera = false;
+        originVec3 = transform.localScale;
 		//isPressJumpButton = false;
 /*		isFallDown = false;
 		countJumpFrame = 0;
@@ -33,20 +35,31 @@ public class Upward : MonoBehaviour {
 	void Update(){
         
 		if (isClick) {
-			if(timer<=0.25f){
+			if(timer<=0.15f){
 				transform.localScale=new Vector3((transform.localScale.x-0.01f),(transform.localScale.y-0.01f),(transform.localScale.z-0.01f));
 				timer+=Time.deltaTime;
 			}
-			else if(timer<=0.5f) {
+			else if(timer<=0.3f) {
 				transform.localScale=new Vector3((transform.localScale.x+0.01f),(transform.localScale.y+0.01f),(transform.localScale.z+0.01f));
 				timer+=Time.deltaTime;
 			}
-			else if(timer>0.5f){
+			else if(timer>0.3f){
 				isClick=false;timer=0.0f;
-				transform.localScale=new Vector3(1,1,1);
+                transform.localScale = originVec3;
 			}
 		}
-
+        if (isMoveCamera)
+        {
+            Vector3 pos = Camera.main.transform.position;
+            pos.y +=cameraMoveSpeed*Time.deltaTime;
+            Camera.main.transform.position = pos;
+            if (pos.y >= 0f)
+            {
+                pos.y = 0f;
+                Camera.main.transform.position = pos;
+                isMoveCamera = false;
+            }
+        }
 		//动作切换
 
 /*		jumpAnim.SetBool ("jumpUP", isPressJumpButton);
@@ -76,8 +89,10 @@ public class Upward : MonoBehaviour {
 //		print (".....OnMouseDown isPressJumpButton : " + isPressJumpButton);
 
 		//将向上的按钮变为跳的按钮
-		this.GetComponent<SpriteRenderer>().sprite = jumpSprite;
+        isMoveCamera = true;
 
+		this.GetComponent<UISprite>().spriteName = "jump";
+        this.GetComponent<UIButton>().normalSprite = "jump";
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
             MGNotificationCenter.defaultCenter().postNotification("jump", null);
         else

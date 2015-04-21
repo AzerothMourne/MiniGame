@@ -4,6 +4,7 @@ using System.Collections;
 public class createRoleUI : MonoBehaviour {
     public GameObject dartButton,roadblockButton,bonesButton;
     public GameObject blinkButton;
+    public GameObject downButton, upButton;
 	public Camera uiCamera;
     void Awake()
     {
@@ -11,6 +12,7 @@ public class createRoleUI : MonoBehaviour {
     }
     void Start()
     {
+        createCommonUI();
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
         {
             createFrontRoleUI();
@@ -19,6 +21,20 @@ public class createRoleUI : MonoBehaviour {
         {
             createLaterRoleUI();
         }
+    }
+    public void createCommonUI()
+    {
+        print("createCommonUI");
+        GameObject objc = GameObject.Instantiate(downButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+        objc.transform.parent = transform;
+        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(-6f, -3.5f, 0f), uiCamera);
+        objc.transform.localScale = new Vector3(2, 2, 1);
+
+        objc = GameObject.Instantiate(upButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+        objc.transform.parent = transform;
+        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(6f, -3.5f, 0f), uiCamera);
+        objc.transform.localScale = new Vector3(2, 2, 1);
+
     }
 	public void createFrontRoleUI()
     {
@@ -45,7 +61,7 @@ public class createRoleUI : MonoBehaviour {
         objc.transform.parent = transform;
 		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(6.7f, 2.29f, 0f),uiCamera);
         objc.transform.localScale = new Vector3(2, 2, 1);
-
+        /*
 		objc = GameObject.Instantiate(blinkButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
 		objc.transform.parent = transform;
 		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(-6.7f, 2.29f, 0f),uiCamera);
@@ -55,7 +71,7 @@ public class createRoleUI : MonoBehaviour {
 		objc.transform.parent = transform;
 		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(3.6f, -3.5f, 0f),uiCamera);
 		objc.transform.localScale = new Vector3(2, 2, 1);
-
+        */
         
     }
 }

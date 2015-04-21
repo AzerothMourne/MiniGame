@@ -60,7 +60,7 @@ public class Jump : MonoBehaviour {
 
 		//前面角色的动作
 		if (this.gameObject.name == "role") {
-			print ("yes role");
+			//print ("yes role");
             //注册动作事件
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
@@ -71,7 +71,7 @@ public class Jump : MonoBehaviour {
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
-			print ("yes role1");
+			//print ("yes role1");
             //注册动作事件
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
@@ -267,18 +267,18 @@ public class Jump : MonoBehaviour {
 
 		if (isSecondJump == false) {
 			if (player.velocity.y < -0.01f) {
-				print ("velocity.y : " + GameObject.Find ("role1").GetComponent<Rigidbody2D> ().velocity.y);
+				//print ("velocity.y : " + GameObject.Find ("role1").GetComponent<Rigidbody2D> ().velocity.y);
 				isPressJumpButton = false;
 				isFallDown = true;
 				jumpAnim.SetBool ("jumpUP", isPressJumpButton);
 				jumpAnim.SetBool ("fallDown", isFallDown);
-				print ("*****isPressJumpButton : " + isPressJumpButton);
-				print ("*****isFallDown : " + isFallDown);
+				//print ("*****isPressJumpButton : " + isPressJumpButton);
+				//print ("*****isFallDown : " + isFallDown);
 			}
 		} else if (isSecondJump == true && player.velocity.y < -10f ) {	
 			isSecondJump = false;
 			isFallDown = true;
-			print ("*****isSecondJump : " + isSecondJump);
+			//print ("*****isSecondJump : " + isSecondJump);
 			jumpAnim.SetBool ("fallDown", isFallDown);
 			jumpAnim.SetBool ("secondJump", isSecondJump);
 		}
@@ -286,7 +286,7 @@ public class Jump : MonoBehaviour {
 		if (isGround == true && isFallDown == true) {
 			isFallDown = false;	
 			jumpAnim.SetBool ("fallDown", isFallDown);
-			print ("*****isground isFallDown : "+isFallDown);
+			//print ("*****isground isFallDown : "+isFallDown);
 		}
       
 	}

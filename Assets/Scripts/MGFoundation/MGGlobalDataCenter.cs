@@ -31,11 +31,15 @@ public class MGGlobalDataCenter  {
             isNetworkViewEnable = true;
         }
     }
+    public Vector3 leftBottomPos, rightTopPos;
     /// <summary>
     /// 屏幕上下左右边框的坐标值
     /// </summary>
     public float screenLiftX, screenRightX,screenTopY,screenBottomY;
-
+    /// <summary>
+    /// 屏幕的像素宽高
+    /// </summary>
+    public float pixelWidth, pixelHight;
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
@@ -44,8 +48,8 @@ public class MGGlobalDataCenter  {
         this.connecttions = 1;
         this.listenPort = 8899;
         this.isNetworkViewEnable = false;
-        this.isHost = true;
-//		this.isHost = false;
+        //this.isHost = true;
+		this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -10.0f;

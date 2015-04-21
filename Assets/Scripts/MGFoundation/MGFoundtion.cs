@@ -5,14 +5,17 @@ using System.Collections.Generic;
 public static class MGFoundtion  {
 
 	public static Vector3 WorldPointToNGUIPoint(Vector3 worldPos,Camera uiCamera){
-		Debug.Log ("worldPos:"+worldPos);
 		Vector3 pos = Camera.main.WorldToScreenPoint(worldPos);
-		Debug.Log ("pos:"+pos);
 		pos.z = 0f;   //z一定要为0.
 		Vector3 returnPos = uiCamera.ScreenToWorldPoint (pos);
-		Debug.Log ("returnPos:"+returnPos);
 		return returnPos;
 	}
+    public static Vector3 pixelToWroldPoint(float pixelX,float pixelY)
+    {
+        Vector3 pos=Camera.main.ScreenToWorldPoint(new Vector3(pixelX,pixelY,0f));
+        pos.z=0f;
+        return pos;
+    }
 	public static Vector3 NGUIPointToWroldPoint(Vector3 NGUIPos){
 		Vector3 pos = UICamera.currentCamera.ScreenToWorldPoint (NGUIPos);
 		return Camera.main.WorldToScreenPoint(pos);
