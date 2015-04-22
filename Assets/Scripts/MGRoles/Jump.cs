@@ -50,8 +50,6 @@ public class Jump : MonoBehaviour {
 		isPressDown = false;
         mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
 
-
-
 		isPressJumpButton = false;
 		isFallDown = false;
 		isSecondJump = false;
@@ -66,6 +64,7 @@ public class Jump : MonoBehaviour {
 			//print ("yes role");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleFront");
+			MGGlobalDataCenter.defaultCenter().role=this.gameObject;
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
@@ -78,6 +77,7 @@ public class Jump : MonoBehaviour {
 			//print ("yes role1");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleLater");
+			MGGlobalDataCenter.defaultCenter().roleLater=this.gameObject;
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
@@ -187,7 +187,7 @@ public class Jump : MonoBehaviour {
 			jumpCount = 1;
 			//如果没有发送给对方，则发送消息
 			if (notification.objc == null) {
-				mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.jumpFormerEventId));
+				//mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.jumpFormerEventId));
 			}
 		}
 		//如果不在地面上，且一段跳了，则二段跳
@@ -204,7 +204,7 @@ public class Jump : MonoBehaviour {
 			jumpCount = 2;
             if (notification.objc == null)
             {
-                mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+                //mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
             }
 		}
 	}

@@ -7,6 +7,7 @@ using System;
 public class MGMsgModel{
 	public string eventId { get; set;}
     public string gameobjectName { get; set; }
+	public long timestamp { get; set; }
 }
 
 
@@ -32,7 +33,7 @@ public class MGGlobalDataCenter  {
             isNetworkViewEnable = true;
         }
     }
-    public Vector3 leftBottomPos, rightTopPos;
+    public Vector3 leftBottomPos, rightTopPos,roleFrontPos,roleLaterPos;
     /// <summary>
     /// 屏幕上下左右边框的坐标值
     /// </summary>
@@ -58,6 +59,7 @@ public class MGGlobalDataCenter  {
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
         this.NGUI_ButtonWidth = 1.65f;
+		this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
 	}
 
     public static MGGlobalDataCenter defaultCenter()

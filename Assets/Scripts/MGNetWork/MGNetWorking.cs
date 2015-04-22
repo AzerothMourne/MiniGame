@@ -96,7 +96,7 @@ public class MGNetWorking : MonoBehaviour {
     //同步gameobject的方法
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
-
+		Debug.Log ("OnSerializeNetworkView");
         if (stream.isWriting)
         {
             Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;

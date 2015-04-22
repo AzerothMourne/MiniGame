@@ -52,6 +52,10 @@ public class blink : MonoBehaviour {
     {
         if (!isCD)
         {
+			UILabel label=GameObject.Find("Control - Simple Text Box").GetComponent<UIInput>().label;
+			Vector3 pos1=GameObject.Find("role1").transform.position;
+			Vector3 pos=GameObject.Find("role").transform.position;
+			label.text+="\r\nrole.x="+pos.x+";role1.x="+pos1.x;
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
