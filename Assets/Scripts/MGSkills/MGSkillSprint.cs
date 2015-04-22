@@ -19,6 +19,8 @@ public class MGSkillSprint : MGSkillsBase
     // Use this for initialization
     void Start()
     {
+        UILabel label = GameObject.Find("Control - Simple Text Box").GetComponent<UIInput>().label;
+        label.text += "开始放大招冲刺";
         Debug.Log("开始放大招冲刺");
         timer = 0f;
         duration = 3f;
@@ -49,7 +51,8 @@ public class MGSkillSprint : MGSkillsBase
         GameObject gamemask = GameObject.Instantiate(this.plane) as GameObject;
         gamemask.transform.parent = this.m_cloneCamera.transform;
         gamemask.transform.localPosition = new Vector3(0f, 0f, 1f);
-        gamemask.transform.LookAt(this.m_cloneCamera.transform);
+        gamemask.transform.rotation = Quaternion.Euler(90, 0, 0);
+        gamemask.transform.localScale = new Vector3(2f, 1f, 1f);
         gamemask.layer = sprintLayer;
     }
     public override Object createSkillSprite(Vector3 pos)
@@ -78,11 +81,9 @@ public class MGSkillSprint : MGSkillsBase
                 isEndedFreeze = true;
                 timer = 0;
                 Time.timeScale = 1f;
+                DestroyImmediate(this.m_cloneCamera, true);
+                Destroy(this.gameObject);
             }
         }
-    }
-    void DestroyGameObject()
-    {
-        Destroy(this.gameObject);
     }
 }

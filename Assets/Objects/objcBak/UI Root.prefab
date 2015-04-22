@@ -218,6 +218,7 @@ MonoBehaviour:
   roadblockButton: {fileID: 120268, guid: 1625af9c8949fe44da65074947807814, type: 2}
   blinkButton: {fileID: 188354, guid: d03f668dfcf45624a96c29af0f62d874, type: 2}
   bonesButton: {fileID: 151006, guid: f3a352ee023069a4481905854a62922b, type: 2}
+  sprintButton: {fileID: 0}
   downButton: {fileID: 123110, guid: d4767184f3dfc2045b686a31109c9e56, type: 2}
   upButton: {fileID: 113138, guid: 245a6c38919fd604d83fa107552dfcb1, type: 2}
   uiCamera: {fileID: 2082638}

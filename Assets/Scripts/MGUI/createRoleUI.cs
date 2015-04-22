@@ -46,7 +46,7 @@ public class createRoleUI : MonoBehaviour {
         //路障按钮UI
         objc = GameObject.Instantiate(roadblockButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = transform;
-		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(3.6f, -4f, 0f),uiCamera);
+        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f), uiCamera);
         objc.transform.localScale = new Vector3(1, 1, 1);
 
         

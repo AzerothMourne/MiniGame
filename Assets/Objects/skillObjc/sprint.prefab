@@ -42,7 +42,7 @@ MonoBehaviour:
   posY: -10000
   releaseSkillObjcName: 
   speed: 0
-  plane: {fileID: 0}
+  plane: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

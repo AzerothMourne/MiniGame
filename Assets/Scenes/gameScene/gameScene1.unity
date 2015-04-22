@@ -720,16 +720,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.x
-      value: .00337268133
+      value: .00374531839
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.y
-      value: .00337268133
+      value: .00374531839
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.z
-      value: .00337268133
+      value: .00374531839
       objectReference: {fileID: 0}
+    - target: {fileID: 2082638, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
+      propertyPath: m_Depth
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2082638, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 11482644, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
+      propertyPath: sprintButton
+      value: 
+      objectReference: {fileID: 127528, guid: 9aaf379d0424f594aa086b16f3b640a5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
   m_RootGameObject: {fileID: 1533371668}
@@ -994,6 +1006,18 @@ Prefab:
       propertyPath: m_ViewID.m_Type
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2032088, guid: 858f8dd45fe18bd408e9e3890ad60a77, type: 2}
+      propertyPath: m_Depth
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032088, guid: 858f8dd45fe18bd408e9e3890ad60a77, type: 2}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294962175
+      objectReference: {fileID: 0}
+    - target: {fileID: 2032088, guid: 858f8dd45fe18bd408e9e3890ad60a77, type: 2}
+      propertyPath: m_ClearFlags
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 858f8dd45fe18bd408e9e3890ad60a77, type: 2}
   m_RootGameObject: {fileID: 1844146916}
@@ -1104,7 +1128,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
+  m_LocalScale: {x: .00374531839, y: .00374531839, z: .00374531839}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1958965421}
@@ -1126,6 +1150,7 @@ MonoBehaviour:
   roadblockButton: {fileID: 120268, guid: 1625af9c8949fe44da65074947807814, type: 2}
   blinkButton: {fileID: 188354, guid: d03f668dfcf45624a96c29af0f62d874, type: 2}
   bonesButton: {fileID: 151006, guid: f3a352ee023069a4481905854a62922b, type: 2}
+  sprintButton: {fileID: 127528, guid: 9aaf379d0424f594aa086b16f3b640a5, type: 2}
   downButton: {fileID: 123110, guid: d4767184f3dfc2045b686a31109c9e56, type: 2}
   upButton: {fileID: 113138, guid: 245a6c38919fd604d83fa107552dfcb1, type: 2}
   uiCamera: {fileID: 361695386}
@@ -1371,7 +1396,7 @@ Camera:
   m_GameObject: {fileID: 1844146916}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 3
   m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
   m_NormalizedViewPortRect:
     serializedVersion: 2
@@ -1387,7 +1412,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294966271
+    m_Bits: 4294962175
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -1486,6 +1511,7 @@ MonoBehaviour:
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
   bones: {fileID: 11447552, guid: f55dbfc367e96104fbf8eec2416ecbb6, type: 2}
+  sprint: {fileID: 11464208, guid: 7416dca293cb56b43ab72d89402acead, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
@@ -1815,6 +1841,7 @@ MonoBehaviour:
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
   bones: {fileID: 0}
+  sprint: {fileID: 0}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
@@ -1868,6 +1895,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11486672, guid: a0b3091a143e9194a88bae17420be147, type: 2}
+      propertyPath: sprint
+      value: 
+      objectReference: {fileID: 11464208, guid: 7416dca293cb56b43ab72d89402acead,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0b3091a143e9194a88bae17420be147, type: 2}
   m_RootGameObject: {fileID: 906247495}
