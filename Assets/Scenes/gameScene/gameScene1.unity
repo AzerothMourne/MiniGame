@@ -724,15 +724,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.x
-      value: .00374531839
+      value: .00337268133
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.y
-      value: .00374531839
+      value: .00337268133
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.z
-      value: .00374531839
+      value: .00337268133
       objectReference: {fileID: 0}
     - target: {fileID: 2082638, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_Depth
@@ -1174,7 +1174,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00374531839, y: .00374531839, z: .00374531839}
+  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1958965421}
@@ -1946,7 +1946,7 @@ NetworkView:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2074290060}
   m_Enabled: 1
-  m_StateSynchronization: 2
+  m_StateSynchronization: 1
   m_Observed: {fileID: 2074290063}
   m_ViewID:
     m_ID: 1

@@ -86,8 +86,10 @@ public class MGNetWorking : MonoBehaviour {
     //同步gameobject的方法
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
-        UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-        label.text += "\r\nOnSerializeNetworkView";
+		GameObject log = GameObject.Find ("log");
+		if(log != null){
+			log.GetComponent<UIInput>().label.text+="\r\nOnSerializeNetworkView";
+		}
         if (stream.isWriting)
         {
             Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;
@@ -128,7 +130,7 @@ public class MGNetWorking : MonoBehaviour {
     
     void Awake()
     {
-        Camera camera=this.GetComponent<Camera>();
+		Camera camera=GameObject.Find("Main Camera").GetComponent<Camera>();
         Debug.Log("pixelWidth:" + camera.pixelWidth + ",pixelHight" + camera.pixelHeight + ",pixelRect:" + camera.pixelRect);
         MGGlobalDataCenter singleInstance = MGGlobalDataCenter.defaultCenter();
         singleInstance.pixelHight = camera.pixelHeight;
