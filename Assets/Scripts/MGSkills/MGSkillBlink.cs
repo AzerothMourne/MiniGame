@@ -15,7 +15,7 @@ public class MGSkillBlink : MGSkillsBase
     // Use this for initialization
     void Start()
     {
-        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
+        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
         isBlinked = false;
     }
     public override Object createSkillSprite(Vector3 pos)

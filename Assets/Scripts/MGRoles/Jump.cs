@@ -49,7 +49,7 @@ public class Jump : MonoBehaviour {
         isGround = false;
 		isReceiveFlag = 0;
 		isPressDown = false;
-        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
+        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 
 		isPressJumpButton = false;
 		isFallDown = false;

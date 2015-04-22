@@ -43,7 +43,7 @@ public class MGSkillEffect : MonoBehaviour {
                 objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * dis);
             }
             timer += Time.deltaTime;
-            UILabel label = GameObject.Find("Control - Simple Text Box").GetComponent<UIInput>().label;
+            UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             Vector3 pos1 = GameObject.Find("role1").transform.position;
             Vector3 pos = GameObject.Find("role").transform.position;
             label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x;

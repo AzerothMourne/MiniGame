@@ -19,8 +19,8 @@ public class MGSkillSprint : MGSkillsBase
     // Use this for initialization
     void Start()
     {
-        UILabel label = GameObject.Find("Control - Simple Text Box").GetComponent<UIInput>().label;
-        label.text += "开始放大招冲刺";
+        UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+        label.text += "\r\nsprint start";
         Debug.Log("开始放大招冲刺");
         timer = 0f;
         duration = 3f;
@@ -30,7 +30,7 @@ public class MGSkillSprint : MGSkillsBase
         sprintLayer = 12;
 
         GameObject cameraObj = GameObject.Find("Main Camera");
-        mgNetWorking = cameraObj.GetComponent<MGNetWorking>();
+        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 
         //将摄像机特效渲染层从主摄像机渲染中剔除
         cameraObj.GetComponent<Camera>().cullingMask -= (1 << sprintLayer);
@@ -78,6 +78,8 @@ public class MGSkillSprint : MGSkillsBase
             timer += Time.deltaTime;
             if (timer >= duration)
             {
+                UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+                label.text += "\r\nsprint end";
                 isEndedFreeze = true;
                 timer = 0;
                 Time.timeScale = 1f;

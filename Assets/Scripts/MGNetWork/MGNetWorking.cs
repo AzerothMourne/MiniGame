@@ -83,6 +83,38 @@ public class MGNetWorking : MonoBehaviour {
             receiverMessageFromPeer(msg);
         }
     }
+    //同步gameobject的方法
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+        UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+        label.text += "\r\nOnSerializeNetworkView";
+        if (stream.isWriting)
+        {
+            Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;
+            Vector3 roleLaterVelocity = MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity;
+            Vector3 rolePos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+            Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+            stream.Serialize(ref roleVelocity);
+            stream.Serialize(ref roleLaterVelocity);
+            stream.Serialize(ref rolePos);
+            stream.Serialize(ref roleLaterPos);
+        }
+        else
+        {
+            Vector3 roleVelocity = Vector3.zero;
+            Vector3 roleLaterVelocity = Vector3.zero;
+            Vector3 rolePos = Vector3.zero;
+            Vector3 roleLaterPos = Vector3.zero;
+            stream.Serialize(ref roleVelocity);
+            stream.Serialize(ref roleLaterVelocity);
+            stream.Serialize(ref rolePos);
+            stream.Serialize(ref roleLaterPos);
+            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = roleVelocity;
+            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = roleLaterVelocity;
+            MGGlobalDataCenter.defaultCenter().role.transform.position = rolePos;
+            MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
+        }
+    }
 	public void receiverMessageFromPeer ( string msg)
 	{
 		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());

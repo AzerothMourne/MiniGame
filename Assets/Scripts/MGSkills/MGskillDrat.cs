@@ -14,7 +14,7 @@ public class MGskillDrat : MGSkillsBase{
 	// Use this for initialization
 	void Start()
 	{
-        mgNetWorking = GameObject.Find("Main Camera").GetComponent<MGNetWorking>();
+        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 		timestamp = MGGlobalDataCenter.timestamp ();
 	}
     public override Object createSkillSprite(Vector3 pos)
@@ -61,7 +61,7 @@ public class MGskillDrat : MGSkillsBase{
             MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
 			print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName+";gameobjc:"+other.gameObject);
 			Debug.Log("***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString());
-			UILabel label=GameObject.Find("Control - Simple Text Box").GetComponent<UIInput>().label;
+            UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
 			label.text+="\r\n***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString();
 			Destroy(this.gameObject);
 		}
