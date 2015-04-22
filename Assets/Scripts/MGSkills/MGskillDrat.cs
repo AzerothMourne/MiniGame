@@ -20,7 +20,7 @@ public class MGskillDrat : MGSkillsBase{
     public override Object createSkillSprite(Vector3 pos)
 	{
 		base.createSkillSprite(pos);
-		return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
+		return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, 0));
 	}
 	public override void playSkillAnimation()
 	{

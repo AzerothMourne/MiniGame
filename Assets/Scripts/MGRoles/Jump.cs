@@ -15,6 +15,7 @@ public static class EventEnum{
     public static string blink = "EventEnum_blink";
     public static string roadblock = "EventEnum_roadblock";
     public static string bones = "EventEnum_bones";
+    public static string sprint = "EventEnum_sprint";
 }
 public class Jump : MonoBehaviour {
 
@@ -24,7 +25,7 @@ public class Jump : MonoBehaviour {
 	public float jumpSecond ;
 	public float jumpCount ;
 	public int isDown;
-    public MGSkillsBase drat,roadblock,blink,bones;
+    public MGSkillsBase drat,roadblock,blink,bones,sprint;
 	public UIInput log;
 	public int isReceiveFlag;
 	public bool isPressDown;
@@ -84,6 +85,7 @@ public class Jump : MonoBehaviour {
             //注册技能事件
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, EventEnum.blink);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
 		}
 	}
     private string objcToJson(string msg)
@@ -94,6 +96,26 @@ public class Jump : MonoBehaviour {
             msgModel.eventId = msg;
         else msgModel.eventId = "1"+msg;
         return JsonMapper.ToJson(msgModel);
+    }
+    public void useSkillsSprint(MGNotification notification)
+    {
+        if (notification.objc == null)
+        {
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            MGSkillSprint skillObjc = null;
+            if (Network.peerType != NetworkPeerType.Disconnected)
+            {
+                skillObjc = mgNetWorking.Instantiate(sprint, pos, new Quaternion(), 0) as MGSkillSprint;
+            }
+            else
+            {
+                skillObjc = sprint.createSkillSprite(pos) as MGSkillSprint;
+            }
+            if (skillObjc)
+            {
+                skillObjc.releaseSkillObjcName = this.gameObject.name;
+            }
+        }
     }
     public void useSkillsBlink(MGNotification notification)
     {
@@ -187,7 +209,7 @@ public class Jump : MonoBehaviour {
 			jumpCount = 1;
 			//如果没有发送给对方，则发送消息
 			if (notification.objc == null) {
-				//mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.jumpFormerEventId));
+				mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.jumpFormerEventId));
 			}
 		}
 		//如果不在地面上，且一段跳了，则二段跳
@@ -204,7 +226,7 @@ public class Jump : MonoBehaviour {
 			jumpCount = 2;
             if (notification.objc == null)
             {
-                //mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+                mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
             }
 		}
 	}
@@ -320,5 +342,4 @@ public class Jump : MonoBehaviour {
             isGround = true;
         }
 	}
-
 }

@@ -1,17 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class blink : MonoBehaviour {
+public class sprint : MonoBehaviour {
 
     public float cdTime = 2;
     private bool isCD = false;
+    private bool holdCD = false;
     private UISprite cdBack;
     public bool direction;// true 顺时针，false逆时针
     public bool addOrDec;// true 添加,false 减少
     private GameObject cdBackObject;
     void Awake()
     {
-        cdBackObject = GameObject.Find("blinkBack");
+        cdBackObject = GameObject.Find("sprintBack");
         cdBack = cdBackObject.GetComponent<UISprite>();
     }
     // Use this for initialization
@@ -20,18 +21,24 @@ public class blink : MonoBehaviour {
         direction = true;
         addOrDec = true;
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (isCD)
+        if (isCD || holdCD)
         {
-            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
+            float time = MGSkillSprintInfo.skillCD;
+            if (holdCD) time = MGSkillSprintInfo.durationTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / time) * Time.deltaTime;
             if (addOrDec)
             {
                 if (cdBack.fillAmount >= 0.95f)
                 {
-                    isCD = false;
+                    if (holdCD == true)
+                    {
+                        addOrDec = !addOrDec;
+                        holdCD = false;
+                    }
+                    isCD = !isCD;
                     cdBack.fillAmount = 1f;
                 }
             }
@@ -39,7 +46,12 @@ public class blink : MonoBehaviour {
             {
                 if (cdBack.fillAmount <= 0.05f)
                 {
-                    isCD = false;
+                    if (holdCD == true)
+                    {
+                        addOrDec = !addOrDec;
+                        holdCD = false;
+                    }
+                    isCD = !isCD;
                     cdBack.fillAmount = 0f;
                 }
             }
@@ -48,12 +60,14 @@ public class blink : MonoBehaviour {
     }
     public void OnMouseDown()
     {
-        if (!isCD)
+        if (!isCD && !holdCD)
         {
+            addOrDec = false;
+            direction = false;
             cdBack.fillAmount = addOrDec ? 0f : 1f;
-            isCD = true;
+            holdCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.blink, null);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.sprint, null);
         }
     }
 }

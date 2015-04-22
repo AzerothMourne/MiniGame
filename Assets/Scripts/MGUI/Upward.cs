@@ -6,6 +6,7 @@ public class Upward : MonoBehaviour {
     private float cameraMoveSpeed;
 	private bool isClick,isMoveCamera;
     private Vector3 originVec3;
+    private float duration;
 /*	private Animator jumpAnim; 
 	public bool isPressJumpButton;
 	public bool isFallDown;
@@ -16,6 +17,7 @@ public class Upward : MonoBehaviour {
 	void Start () {
         cameraMoveSpeed = 8f;
 		timer = 0.0f;
+        duration = 0.15f;
 		isClick = false;
         isMoveCamera = false;
         originVec3 = transform.localScale;
@@ -35,15 +37,18 @@ public class Upward : MonoBehaviour {
 	void Update(){
         
 		if (isClick) {
-			if(timer<=0.15f){
+            if (timer <= duration * Time.timeScale)
+            {
 				transform.localScale=new Vector3((transform.localScale.x-0.01f),(transform.localScale.y-0.01f),(transform.localScale.z-0.01f));
 				timer+=Time.deltaTime;
 			}
-			else if(timer<=0.3f) {
+            else if (timer <= 2 * duration * Time.timeScale)
+            {
 				transform.localScale=new Vector3((transform.localScale.x+0.01f),(transform.localScale.y+0.01f),(transform.localScale.z+0.01f));
-				timer+=Time.deltaTime;
+                timer += Time.deltaTime;
 			}
-			else if(timer>0.3f){
+            else if (timer > 2 * duration * Time.timeScale)
+            {
 				isClick=false;timer=0.0f;
                 transform.localScale = originVec3;
 			}

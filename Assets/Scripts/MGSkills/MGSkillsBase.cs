@@ -8,7 +8,7 @@ public static class MGSkillDartInfo
     public static int skillCD = 1;
     public static int skillHoldLevel = 10;
     public static int skillGCD = 0;
-    public static int SkillEffectSpeed = 10;
+    public static float SkillEffectSpeed = 1f/6f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillRoadblockInfo
@@ -17,7 +17,7 @@ public static class MGSkillRoadblockInfo
     public static int skillCD = 1;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static int SkillEffectSpeed = 10;
+    public static float SkillEffectSpeed = 1f/4f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillBlinkInfo
@@ -36,6 +36,15 @@ public static class MGSkillBonesInfo
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
     public static float SkillEffectSpeed = 1f / 4f;
+    public static float durationTime = 2.0f;
+}
+public static class MGSkillSprintInfo
+{
+    public static string skillId = SkillEffectEnum.sprint;
+    public static int skillCD = 3;
+    public static int skillHoldLevel = 1;
+    public static int skillGCD = 0;
+    public static float SkillEffectSpeed = 1f / 2f;
     public static float durationTime = 2.0f;
 }
 public class MGSkillsBase : MonoBehaviour {
