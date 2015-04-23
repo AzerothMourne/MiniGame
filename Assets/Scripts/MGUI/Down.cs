@@ -40,7 +40,7 @@ public class Down : MonoBehaviour {
             else if (timer > 0.2f * Time.timeScale)
             {
 				isClick=false;timer=0.0f;
-				transform.localScale=new Vector3(1,1,1);
+				transform.localScale=new Vector3(MGGlobalDataCenter.defaultCenter().UIScale,MGGlobalDataCenter.defaultCenter().UIScale,1);
 			}
 		}
 	}

@@ -158,7 +158,7 @@ public class MGNetWorking : MonoBehaviour {
         singleInstance.screenRightX = -1 * singleInstance.screenLiftX;
 
         Vector3 pos = MGFoundtion.pixelToWroldPoint(88f, 88f);
-        singleInstance.NGUI_ButtonWidth = pos.x - singleInstance.screenLiftX;
+		singleInstance.NGUI_ButtonWidth = (pos.x - singleInstance.screenLiftX)*MGGlobalDataCenter.defaultCenter().UIScale;
         Debug.Log(pos + "********" + singleInstance.NGUI_ButtonWidth);
     }
 }

@@ -22,6 +22,7 @@ public class MGGlobalDataCenter  {
     public int rRoleBlood, lRoleBlood;
     public GameObject role, roleLater;
     private string _serverIp;
+	public float UIScale;
     public string serverIp
     {
         get
@@ -61,6 +62,7 @@ public class MGGlobalDataCenter  {
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
         this.NGUI_ButtonWidth = 1.65f;
+		this.UIScale = 1.5f;
 		this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
 	}
 
