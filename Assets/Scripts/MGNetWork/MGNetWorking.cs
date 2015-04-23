@@ -3,7 +3,9 @@ using System.Collections;
 using LitJson;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+/// <summary>
+/// 还需要建立一个误差校正机制，保证客户机以服务器端的数据为主（重要）
+/// </summary>
 public class MGNetWorking : MonoBehaviour {
 
 	[DllImport("__Internal")]

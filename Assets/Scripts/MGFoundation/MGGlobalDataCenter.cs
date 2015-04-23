@@ -8,6 +8,7 @@ public class MGMsgModel{
 	public string eventId { get; set;}
     public string gameobjectName { get; set; }
 	public long timestamp { get; set; }
+    public string posJson;
 }
 
 

@@ -642,6 +642,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11482644, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
+      propertyPath: buttonPanel
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
   m_RootGameObject: {fileID: 1533371668}
@@ -719,6 +723,10 @@ Prefab:
     - target: {fileID: 100002, guid: 23c0cd5b08147994c821cf4615b25bc7, type: 2}
       propertyPath: m_Name
       value: log
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 23c0cd5b08147994c821cf4615b25bc7, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 23c0cd5b08147994c821cf4615b25bc7, type: 2}

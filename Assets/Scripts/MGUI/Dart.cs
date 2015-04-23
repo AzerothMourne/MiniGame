@@ -51,7 +51,7 @@ public class Dart : MonoBehaviour {
                 gcdTimer = 0;
             }
         }
-        if (int.Parse(dartNum.text)<3)
+        if (int.Parse(dartNum.text) < MGSkillDartInfo.skillHoldLevel)
 		{
 			cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / MGSkillDartInfo.skillCD) * Time.deltaTime;
 			if (addOrDec)
