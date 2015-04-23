@@ -11,7 +11,7 @@ public class MGSkillSprint : MGSkillsBase
     private float timer;
     private bool isEndedFreeze;
     public GameObject plane,wordSprite;
-    private int sprintLayer;
+    private int sprintLayer,wordMask;//wordMask用来做word字体出现的掩码，对应index出现后相应位置1，防止重复实例化
     public Sprite[] wordSpriteArrayList;
     public Vector3[] wordPosArrayList;
     public float[] wordDelayTimeArrayList;
@@ -30,6 +30,7 @@ public class MGSkillSprint : MGSkillsBase
         Time.timeScale = 0.05f;
         duration *= Time.timeScale;
         sprintLayer = 12;
+        wordMask = 0;
         int length = wordDelayTimeArrayList.Length;
         for (int i = length - 1; i >= 0; --i)
         {
@@ -90,10 +91,12 @@ public class MGSkillSprint : MGSkillsBase
             for (int i = length - 1; i >= 0; --i)
             {
                 //Debug.Log("time=" + timer.ToString() + ";wordDelayTimeArrayList[i]=" + wordDelayTimeArrayList[i]);
-                if (timer >= wordDelayTimeArrayList[i])
+                int isInstance=(wordMask>>i)&1;
+                if (isInstance == 0 && timer >= wordDelayTimeArrayList[i])
                 {
                     //出现一个字
-                    Debug.Log("此处应该出现一个字");
+                    Debug.Log("此处应该出现一个字:" + wordSpriteArrayList[i]);
+                    wordMask += 1 << i;
                     GameObject oneWord = GameObject.Instantiate(this.wordSprite) as GameObject;
                     oneWord.transform.parent = this.plane.transform;
                     oneWord.transform.position = wordPosArrayList[i];
