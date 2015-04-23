@@ -5,13 +5,13 @@ AnimatorController:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: roadblockAnim
+  m_Name: sprintStep2Controller
   serializedVersion: 2
   m_AnimatorParameters: []
   m_AnimatorLayers:
   - serializedVersion: 3
     m_Name: Base Layer
-    m_StateMachine: {fileID: 110743456}
+    m_StateMachine: {fileID: 110743256}
     m_Mask: {fileID: 0}
     m_BlendingMode: 0
     m_SyncedLayerIndex: -1
@@ -20,31 +20,31 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1102 &110243456
+--- !u!1102 &110243256
 State:
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: roadblockAnim
-  m_Speed: 4
+  m_Name: sprintStep2
+  m_Speed: 1
   m_CycleOffset: 0
   m_Motions:
-  - {fileID: 7400000, guid: 55ee60bd0078f8f4dbfb5bf91e1bfea1, type: 2}
-  m_ParentStateMachine: {fileID: 110743456}
+  - {fileID: 7400000, guid: af1fbdc96e3629544b183d931de0d459, type: 2}
+  m_ParentStateMachine: {fileID: 110743256}
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
---- !u!1107 &110743456
+--- !u!1107 &110743256
 StateMachine:
   serializedVersion: 2
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Base Layer
-  m_DefaultState: {fileID: 110243456}
+  m_DefaultState: {fileID: 110243256}
   m_States:
-  - {fileID: 110243456}
+  - {fileID: 110243256}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions: {}
