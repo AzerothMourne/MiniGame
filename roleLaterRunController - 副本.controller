@@ -264,7 +264,10 @@ StateMachine:
       first: {fileID: 110229748}
       second:
       - {fileID: 110141194}
+<<<<<<< HEAD
+=======
       - {fileID: 110100578}
+>>>>>>> origin/zhouqing_new
     data:
       first: {fileID: 110245482}
       second:
@@ -278,7 +281,12 @@ StateMachine:
       first: {fileID: 110204368}
       second:
       - {fileID: 110184064}
+<<<<<<< HEAD
+  m_MotionSetCount: 1
+  m_AnyStatePosition: {x: 72, y: 0, z: 0}
+=======
       - {fileID: 110117760}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 480, y: 120, z: 0}
+>>>>>>> origin/zhouqing_new
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

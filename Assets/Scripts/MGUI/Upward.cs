@@ -3,36 +3,19 @@ using System.Collections;
 
 public class Upward : MonoBehaviour {
 	private float timer;
-<<<<<<< HEAD
     private float cameraMoveSpeed;
 	private bool isClick,isMoveCamera;
     private Vector3 originVec3;
     private float duration;
-/*	private Animator jumpAnim; 
-	public bool isPressJumpButton;
-	public bool isFallDown;
-	int countJumpFrame;
-	Rigidbody2D player;
-*/
-=======
-	private bool isClick;
-	
->>>>>>> origin/zhouqing_new
+
 	// Use this for initialization
 	void Start () {
         cameraMoveSpeed = 8f;
 		timer = 0.0f;
-        duration = 0.15f;
+        duration = 0.10f;
 		isClick = false;
-<<<<<<< HEAD
         isMoveCamera = false;
         originVec3 = transform.localScale;
-		//isPressJumpButton = false;
-/*		isFallDown = false;
-		countJumpFrame = 0;
-*/
-=======
->>>>>>> origin/zhouqing_new
 	}
 
 	void Update(){
@@ -54,7 +37,6 @@ public class Upward : MonoBehaviour {
                 transform.localScale = originVec3;
 			}
 		}
-<<<<<<< HEAD
         if (isMoveCamera)
         {
             Vector3 pos = Camera.main.transform.position;
@@ -67,27 +49,6 @@ public class Upward : MonoBehaviour {
                 isMoveCamera = false;
             }
         }
-		//动作切换
-
-/*		jumpAnim.SetBool ("jumpUP", isPressJumpButton);
-		jumpAnim.SetBool ("fallDown", isFallDown);
-
-		if (player.velocity.y < -0.01f) {
-			print ("velocity.y : " + GameObject.Find ("role1").GetComponent<Rigidbody2D> ().velocity.y);
-			isPressJumpButton = false;
-			isFallDown = true;
-			print ("*****isPressJumpButton : "+isPressJumpButton);
-			print ("*****isFallDown : "+isFallDown);
-		}
-
-		if (GameObject.Find ("role1").GetComponent<Jump> ().isGround == true) {
-			isFallDown = false;	
-			//print ("*****isground isFallDown : "+isFallDown);
-		}
-*/
-			
-=======
->>>>>>> origin/zhouqing_new
 	}
 	
 	// Update is called once per frame

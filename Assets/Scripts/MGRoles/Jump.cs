@@ -30,24 +30,9 @@ public class Jump : MonoBehaviour {
 	public int isReceiveFlag;
 	public bool isPressDown;
     private MGNetWorking mgNetWorking;
-<<<<<<< HEAD
-    //private GameObject rolePlayer;
-
-	//控制角色动作
-	public bool isPressJumpButton;
-	private Animator jumpAnim; 
-	public bool isFallDown;
-	int countJumpFrame;
-	Rigidbody2D player;
-	public bool isSecondJump;
-
-
-
-=======
 
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
 	private Animator jumpAnim;
->>>>>>> origin/zhouqing_new
 
 	// Use this for initialization
 	void Start () {
@@ -304,43 +289,7 @@ public class Jump : MonoBehaviour {
 			transform.localScale = new Vector3(1, -1, 1);
 			isPressDown = false;
             isDown = 1;
-<<<<<<< HEAD
-		}
-
-
-		//检测角色的动作
-		//动作切换
-		
-		//jumpAnim.SetBool ("jumpUP", isPressJumpButton);
-		//jumpAnim.SetBool ("fallDown", isFallDown);
-
-		if (isSecondJump == false) {
-			if (player.velocity.y < -0.01f) {
-				//print ("velocity.y : " + GameObject.Find ("role1").GetComponent<Rigidbody2D> ().velocity.y);
-				isPressJumpButton = false;
-				isFallDown = true;
-				jumpAnim.SetBool ("jumpUP", isPressJumpButton);
-				jumpAnim.SetBool ("fallDown", isFallDown);
-				//print ("*****isPressJumpButton : " + isPressJumpButton);
-				//print ("*****isFallDown : " + isFallDown);
-			}
-		} else if (isSecondJump == true && player.velocity.y < -10f ) {	
-			isSecondJump = false;
-			isFallDown = true;
-			//print ("*****isSecondJump : " + isSecondJump);
-			jumpAnim.SetBool ("fallDown", isFallDown);
-			jumpAnim.SetBool ("secondJump", isSecondJump);
-		}
-		
-		if (isGround == true && isFallDown == true) {
-			isFallDown = false;	
-			jumpAnim.SetBool ("fallDown", isFallDown);
-			//print ("*****isground isFallDown : "+isFallDown);
-		}
-      
-=======
 		} 
->>>>>>> origin/zhouqing_new
 	}
     
 	//判断角色是否在地面上

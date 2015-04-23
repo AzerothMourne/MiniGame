@@ -324,14 +324,6 @@ StateMachine:
   m_OrderedTransitions:
     data:
       first: {fileID: 110268284}
-<<<<<<< HEAD
-      second:
-      - {fileID: 110133674}
-    data:
-      first: {fileID: 110281786}
-      second:
-      - {fileID: 110160838}
-=======
       second:
       - {fileID: 110133674}
       - {fileID: 110120792}
@@ -354,7 +346,6 @@ StateMachine:
       second:
       - {fileID: 110125068}
       - {fileID: 110147860}
->>>>>>> origin/zhouqing_new
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 228, y: 96, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
