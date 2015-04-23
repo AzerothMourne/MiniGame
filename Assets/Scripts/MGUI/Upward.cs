@@ -3,6 +3,7 @@ using System.Collections;
 
 public class Upward : MonoBehaviour {
 	private float timer;
+<<<<<<< HEAD
     private float cameraMoveSpeed;
 	private bool isClick,isMoveCamera;
     private Vector3 originVec3;
@@ -13,27 +14,27 @@ public class Upward : MonoBehaviour {
 	int countJumpFrame;
 	Rigidbody2D player;
 */
+=======
+	private bool isClick;
+	
+>>>>>>> origin/zhouqing_new
 	// Use this for initialization
 	void Start () {
         cameraMoveSpeed = 8f;
 		timer = 0.0f;
         duration = 0.15f;
 		isClick = false;
+<<<<<<< HEAD
         isMoveCamera = false;
         originVec3 = transform.localScale;
 		//isPressJumpButton = false;
 /*		isFallDown = false;
 		countJumpFrame = 0;
 */
+=======
+>>>>>>> origin/zhouqing_new
 	}
 
-
-/*	void Awake() {
-		jumpAnim = GameObject.Find("role1").GetComponent<Animator> ();
-		player = GameObject.Find ("role1").GetComponent<Rigidbody2D> ();
-	}
-
-*/
 	void Update(){
         
 		if (isClick) {
@@ -53,6 +54,7 @@ public class Upward : MonoBehaviour {
                 transform.localScale = originVec3;
 			}
 		}
+<<<<<<< HEAD
         if (isMoveCamera)
         {
             Vector3 pos = Camera.main.transform.position;
@@ -84,14 +86,13 @@ public class Upward : MonoBehaviour {
 		}
 */
 			
+=======
+>>>>>>> origin/zhouqing_new
 	}
 	
 	// Update is called once per frame
 	public void OnMouseDown () {
 		isClick = true;
-
-//		isPressJumpButton = true;
-//		print (".....OnMouseDown isPressJumpButton : " + isPressJumpButton);
 
 		//将向上的按钮变为跳的按钮
         isMoveCamera = true;

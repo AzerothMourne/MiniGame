@@ -63,11 +63,16 @@ public class MGSkillEffect : MonoBehaviour {
             dartSwitch = notification;
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
+<<<<<<< HEAD
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
             if (objc)
             {
                 objc.transform.Translate(Vector3.left * MGSkillDartInfo.SkillEffectSpeed * dis );
             }
+=======
+            //print("触发飞镖效果");
+            objc.transform.Translate(-Vector3.right * MGDartEffectDetail.dartSkillEffectSpeed * Time.deltaTime);
+>>>>>>> origin/zhouqing_new
             timer += Time.deltaTime;
             if (timer >= MGSkillDartInfo.durationTime)
             {

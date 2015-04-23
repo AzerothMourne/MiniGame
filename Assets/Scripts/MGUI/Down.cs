@@ -2,15 +2,29 @@
 using System.Collections;
 
 public class Down : MonoBehaviour {
+<<<<<<< HEAD
     private float cameraMoveSpeed;
     private bool isClick, isMoveCamera;
 	// Use this for initialization
 	void Start () {
         cameraMoveSpeed = 8f;
+=======
+	public Sprite upWardSprite;
+    public GameObject upButton;
+
+	private float timer;
+	private bool isClick;
+
+	// Use this for initialization
+	void Start () {
+		timer = 0.0f;
+		isClick = false;
+>>>>>>> origin/zhouqing_new
 	}
 	
 	// Update is called once per frame
 	void Update () {
+<<<<<<< HEAD
         if (isMoveCamera)
         {
             Vector3 pos = Camera.main.transform.position;
@@ -23,9 +37,27 @@ public class Down : MonoBehaviour {
                 isMoveCamera = false;
             }
         }
+=======
+		if (isClick) {
+			if(timer <= 0.25f){
+				transform.localScale = new Vector3((transform.localScale.x-0.01f),(transform.localScale.y-0.01f),(transform.localScale.z-0.01f));
+				timer+=Time.deltaTime;
+			}
+			else if(timer<=0.5f) {
+				transform.localScale=new Vector3((transform.localScale.x+0.01f),(transform.localScale.y+0.01f),(transform.localScale.z+0.01f));
+				timer+=Time.deltaTime;
+			}
+			else if(timer>0.5f){
+				isClick=false;timer=0.0f;
+				transform.localScale=new Vector3(1,1,1);
+			}
+		}
+>>>>>>> origin/zhouqing_new
 	}
 
 	public void OnMouseDown () {
+		isClick = true;
+
         //print("Down OnMouseDown time : " + MGGlobalDataCenter.timestamp());
         if(MGGlobalDataCenter.defaultCenter().isHost==true)
             MGNotificationCenter.defaultCenter().postNotification("downToLine", null);

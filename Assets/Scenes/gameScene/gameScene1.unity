@@ -1487,7 +1487,11 @@ GameObject:
   - 95: {fileID: 1852946987}
   - 61: {fileID: 1852946986}
   - 114: {fileID: 1852946984}
+<<<<<<< HEAD
   - 50: {fileID: 1852946985}
+=======
+  - 114: {fileID: 1852946990}
+>>>>>>> origin/zhouqing_new
   m_Layer: 9
   m_Name: role1
   m_TagString: Player
@@ -1521,9 +1525,6 @@ MonoBehaviour:
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
-  isPressJumpButton: 0
-  isFallDown: 0
-  isSecondJump: 0
 --- !u!50 &1852946985
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1589,7 +1590,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 3075914691
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3d2afc3691ae2b64e9767f1a248578cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2730cd6054077274bb621be4b458e409, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1852946989
 Transform:
@@ -1601,9 +1602,30 @@ Transform:
   m_LocalPosition: {x: -.531000018, y: -.632000029, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
+<<<<<<< HEAD
   m_Father: {fileID: 1631812097}
   m_RootOrder: 0
 --- !u!1 &1958965417
+=======
+  m_Father: {fileID: 906247496}
+  m_RootOrder: 1
+--- !u!114 &1852946990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1852946983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b110f65c90144b4aa2daac996948bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPressJumpButton: 0
+  isFallDown: 0
+  isSecondJump: 0
+  isRollBack: 0
+--- !u!1 &1875529167
+>>>>>>> origin/zhouqing_new
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 100002, guid: 23c0cd5b08147994c821cf4615b25bc7, type: 2}
@@ -1738,7 +1760,11 @@ GameObject:
   - 95: {fileID: 1985725679}
   - 61: {fileID: 1985725678}
   - 114: {fileID: 1985725682}
+<<<<<<< HEAD
   - 50: {fileID: 1985725677}
+=======
+  - 114: {fileID: 1985725683}
+>>>>>>> origin/zhouqing_new
   m_Layer: 9
   m_Name: role
   m_TagString: Player
@@ -1811,7 +1837,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 3075914691
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4595547a51e79764f9cadfa7e89a6618, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7b462f5466bac3142bd4724878db12e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1985725681
 Transform:
@@ -1851,9 +1877,21 @@ MonoBehaviour:
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
+--- !u!114 &1985725683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1985725676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b110f65c90144b4aa2daac996948bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   isPressJumpButton: 0
   isFallDown: 0
   isSecondJump: 0
+<<<<<<< HEAD
 --- !u!1001 &2008504137
 Prefab:
   m_ObjectHideFlags: 0
@@ -1963,3 +2001,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+=======
+  isRollBack: 0
+>>>>>>> origin/zhouqing_new

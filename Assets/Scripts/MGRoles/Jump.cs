@@ -30,6 +30,7 @@ public class Jump : MonoBehaviour {
 	public int isReceiveFlag;
 	public bool isPressDown;
     private MGNetWorking mgNetWorking;
+<<<<<<< HEAD
     //private GameObject rolePlayer;
 
 	//控制角色动作
@@ -42,6 +43,11 @@ public class Jump : MonoBehaviour {
 
 
 
+=======
+
+	//记录控制的当前角色动画，由于用的次数多，直接提取出来
+	private Animator jumpAnim;
+>>>>>>> origin/zhouqing_new
 
 	// Use this for initialization
 	void Start () {
@@ -51,15 +57,10 @@ public class Jump : MonoBehaviour {
 		isPressDown = false;
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 
-		isPressJumpButton = false;
-		isFallDown = false;
-		isSecondJump = false;
-
+		//初始化动画
 		jumpAnim = this.GetComponent<Animator> ();
-		player = this.GetComponent<Rigidbody2D> ();
 
 		//获取角色的名字，role则是前面的角色，role1则是后面的角色
-
 		//前面角色的动作
 		if (this.gameObject.name == "role") {
 			//print ("yes role");
@@ -191,16 +192,14 @@ public class Jump : MonoBehaviour {
     }
     public void jump(MGNotification notification)
     {
-
-
         if (isDown == 1)
         {
             upwardToLine(notification);
             return;
         }
+		this.GetComponent<RoleAnimController> ().isPressJumpButton = true;
+		jumpAnim.SetBool ("jumpUP", this.GetComponent<RoleAnimController> ().isPressJumpButton);
 
-		isPressJumpButton = true;
-		jumpAnim.SetBool ("jumpUP", isPressJumpButton);
 		if (isGround){
             isGround = false;
 			Vector2 velocity = rigidbody2D.velocity;
@@ -214,11 +213,14 @@ public class Jump : MonoBehaviour {
 		}
 		//如果不在地面上，且一段跳了，则二段跳
 		else if(!isGround && jumpCount == 1) {
-			isSecondJump = true;
-			print("second...");
-			isFallDown = false;
-			jumpAnim.SetBool ("fallDown", isFallDown);
-			jumpAnim.SetBool ("secondJump", isSecondJump);
+			this.GetComponent<RoleAnimController> ().isSecondJump = true;
+			print ("isSecondJump : "+this.GetComponent<RoleAnimController> ().isSecondJump);
+			this.GetComponent<RoleAnimController> ().isFallDown = false;
+			this.GetComponent<RoleAnimController> ().isRollBack = true;
+			jumpAnim.SetBool ("fallDown", this.GetComponent<RoleAnimController> ().isFallDown);
+			jumpAnim.SetBool ("secondJump", this.GetComponent<RoleAnimController> ().isSecondJump);
+			jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
+
 			Vector2 velocity = rigidbody2D.velocity;
 			if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
 			else velocity.y = jumpSecond;
@@ -235,10 +237,13 @@ public class Jump : MonoBehaviour {
     {
         //角色会根据下按钮，翻转到线下
         print("is ground " + isGround);
+		print("is down " + isDown);
  		if (isDown == 0) {
 			if(isGround){
+				//增加翻滚动作
+				this.GetComponent<RoleAnimController> ().isRollBack = true;
+				jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
             	rigidbody2D.gravityScale = 0;
-           		transform.localScale = new Vector3(1, -1, 1);
                 isDown = 1;
 			} else if (!isGround) {
 				rigidbody2D.gravityScale = 10;
@@ -251,13 +256,16 @@ public class Jump : MonoBehaviour {
 		}
     }
 
-
 	public void upwardToLine(MGNotification notification)
 	{
         
 		if (isDown == 1)
         {
-            transform.localScale = new Vector3(1, 1, 1);
+			//add
+			this.GetComponent<RoleAnimController> ().isRollBack = true;
+			jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
+
+            //transform.localScale = new Vector3(1, 1, 1);
             rigidbody2D.gravityScale = 5;
 			isDown = 0;
             isGround = true;
@@ -283,7 +291,6 @@ public class Jump : MonoBehaviour {
 			else rigidbody2D.AddForce (-Vector2.right * forceMove);
 		}
 
-
 		//角色会根据左右键反转
 		if (h > 0.05f) {
 			transform.localScale = new Vector3(1,rigidbody2D.gravityScale==0?-1:1,1);
@@ -297,6 +304,7 @@ public class Jump : MonoBehaviour {
 			transform.localScale = new Vector3(1, -1, 1);
 			isPressDown = false;
             isDown = 1;
+<<<<<<< HEAD
 		}
 
 
@@ -330,6 +338,9 @@ public class Jump : MonoBehaviour {
 			//print ("*****isground isFallDown : "+isFallDown);
 		}
       
+=======
+		} 
+>>>>>>> origin/zhouqing_new
 	}
     
 	//判断角色是否在地面上

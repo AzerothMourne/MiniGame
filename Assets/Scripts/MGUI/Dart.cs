@@ -33,14 +33,14 @@ public class Dart : MonoBehaviour {
 
 		if (isPressDartButton == true) {
 			countDartFrame += 1;
-			print ("countFrame : " + countDartFrame);
+			//print ("countFrame : " + countDartFrame);
 		}
-		if (countDartFrame == 30) {
+		if (countDartFrame >= 30) {
 			isPressDartButton = false;
             //触发放飞镖的动作
 		    dartAnim.SetBool ("pressDartButton", isPressDartButton);
 			countDartFrame = 0;
-		    //	print ("update ********isPressDartButton : " + isPressDartButton);
+		    print ("update ********isPressDartButton : " + isPressDartButton);
 		}
         if (isCD)
         {
@@ -85,7 +85,10 @@ public class Dart : MonoBehaviour {
         int num = int.Parse(dartNum.text);
         if (!isCD && num > 0)//如果不是GCD 且个数大于0 就可以放技能
         {
+            print("update ********isPressDartButton : " + isPressDartButton);
             isPressDartButton = true;
+            dartAnim.SetBool("pressDartButton", isPressDartButton);
+            print("update ********isPressDartButton : " + isPressDartButton);
             if (num == MGSkillDartInfo.skillHoldLevel)//只有个数等于最大数量时才重置fillAmount
             {
                 cdBack.fillAmount = addOrDec ? 0f : 1f;
