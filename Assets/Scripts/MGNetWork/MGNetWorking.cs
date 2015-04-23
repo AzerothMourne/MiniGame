@@ -5,11 +5,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 public class MGNetWorking : MonoBehaviour {
-    void Start()
-    {
-        print("Init GlobalData");
-        MGGlobalDataCenter.defaultCenter();
-    }
+
 	[DllImport("__Internal")]
 	private static extern void _findHost();
 	[DllImport("__Internal")]
@@ -87,35 +83,80 @@ public class MGNetWorking : MonoBehaviour {
             receiverMessageFromPeer(msg);
         }
     }
+    //同步gameobject的方法
+    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    {
+		GameObject log = GameObject.Find ("log");
+		if(log != null){
+			log.GetComponent<UIInput>().label.text+="\r\nOnSerializeNetworkView";
+		}
+        if (stream.isWriting)
+        {
+            Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;
+            Vector3 roleLaterVelocity = MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity;
+            Vector3 rolePos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+            Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+            stream.Serialize(ref roleVelocity);
+            stream.Serialize(ref roleLaterVelocity);
+            stream.Serialize(ref rolePos);
+            stream.Serialize(ref roleLaterPos);
+        }
+        else
+        {
+            Vector3 roleVelocity = Vector3.zero;
+            Vector3 roleLaterVelocity = Vector3.zero;
+            Vector3 rolePos = Vector3.zero;
+            Vector3 roleLaterPos = Vector3.zero;
+            stream.Serialize(ref roleVelocity);
+            stream.Serialize(ref roleLaterVelocity);
+            stream.Serialize(ref rolePos);
+            stream.Serialize(ref roleLaterPos);
+            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = roleVelocity;
+            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = roleLaterVelocity;
+            MGGlobalDataCenter.defaultCenter().role.transform.position = rolePos;
+            MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
+        }
+    }
 	public void receiverMessageFromPeer ( string msg)
 	{
 		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
 		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
 		MGNotificationCenter.defaultCenter().postNotification(msgModel.eventId,msgModel);
 	}
-    public void Instantiate(UnityEngine.Object prefab,Vector3 position,Quaternion rotation,int group)
+    public Object Instantiate(UnityEngine.Object prefab,Vector3 position,Quaternion rotation,int group)
     {
-        Network.Instantiate(prefab, position, rotation, group);
+        return Network.Instantiate(prefab, position, rotation, group);
     }
-    //同步gameobject的方法
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+    
+    void Awake()
     {
+		Camera camera=GameObject.Find("Main Camera").GetComponent<Camera>();
+        Debug.Log("pixelWidth:" + camera.pixelWidth + ",pixelHight" + camera.pixelHeight + ",pixelRect:" + camera.pixelRect);
+        MGGlobalDataCenter singleInstance = MGGlobalDataCenter.defaultCenter();
+        singleInstance.pixelHight = camera.pixelHeight;
+        singleInstance.pixelWidth = camera.pixelWidth;
+        //0,0在屏幕的左下方 即正常手机的左上
+        Vector3 zeroPos = MGFoundtion.pixelToWroldPoint(camera.pixelWidth / 2.0f, camera.pixelHeight/2.0f);
+        Debug.Log("zeroPos:"+zeroPos);
+        Vector3 leftTopPos = MGFoundtion.pixelToWroldPoint(0, singleInstance.pixelHight);
+        Debug.Log("leftTopPos:" + leftTopPos);
+        Vector3 rightTopPos = MGFoundtion.pixelToWroldPoint(singleInstance.pixelWidth, singleInstance.pixelHight);
+        Debug.Log("rightTopPos:" + rightTopPos);
+        Vector3 leftBottomPos = MGFoundtion.pixelToWroldPoint(0, 0);
+        Debug.Log("leftBottomPos:" + leftBottomPos);
+        Vector3 rightBottomPos = MGFoundtion.pixelToWroldPoint(singleInstance.pixelWidth, 0);
+        Debug.Log("rightBottomPos:" + rightBottomPos);
 
-        if (stream.isWriting)
-        {
-            Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;
-            Vector3 roleLaterVelocity = MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity;
-            stream.Serialize(ref roleVelocity);
-            stream.Serialize(ref roleLaterVelocity);
-        }
-        else
-        {
-            Vector3 roleVelocity = Vector3.zero;
-            Vector3 roleLaterVelocity = Vector3.zero;
-            stream.Serialize(ref roleVelocity);
-            stream.Serialize(ref roleLaterVelocity);
-            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = roleVelocity;
-            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = roleLaterVelocity;
-        }
+        singleInstance.leftBottomPos = leftBottomPos;
+        singleInstance.rightTopPos = rightTopPos;
+
+        singleInstance.screenBottomY = leftBottomPos.y;
+        singleInstance.screenTopY = -1 * singleInstance.screenBottomY;
+        singleInstance.screenLiftX = leftBottomPos.x;
+        singleInstance.screenRightX = -1 * singleInstance.screenLiftX;
+
+        Vector3 pos = MGFoundtion.pixelToWroldPoint(88f, 88f);
+        singleInstance.NGUI_ButtonWidth = pos.x - singleInstance.screenLiftX;
+        Debug.Log(pos + "********" + singleInstance.NGUI_ButtonWidth);
     }
 }
