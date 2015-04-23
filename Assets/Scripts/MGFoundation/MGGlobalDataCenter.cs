@@ -6,11 +6,13 @@ using System;
 
 public class MGMsgModel{
 	public string eventId { get; set;}
-	public long timestamp{ get; set;}
+    public string gameobjectName { get; set; }
+	public long timestamp { get; set; }
 }
 
 
 public class MGGlobalDataCenter  {
+    public float NGUI_ButtonWidth;
     public bool isNetworkViewEnable;
     public bool isHost;
     public int connecttions;
@@ -31,25 +33,33 @@ public class MGGlobalDataCenter  {
             isNetworkViewEnable = true;
         }
     }
+    public Vector3 leftBottomPos, rightTopPos,roleFrontPos,roleLaterPos;
     /// <summary>
     /// 屏幕上下左右边框的坐标值
     /// </summary>
     public float screenLiftX, screenRightX,screenTopY,screenBottomY;
-
+    /// <summary>
+    /// 屏幕的像素宽高
+    /// </summary>
+    public float pixelWidth, pixelHight;
     private MGGlobalDataCenter()
     {
+        Debug.Log("Init GlobalData");
         this.role = null;
         this.roleLater = null;
         this.connecttions = 1;
         this.listenPort = 8899;
         this.isNetworkViewEnable = false;
-        this.isHost = true;
+        //this.isHost = true;
+		this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
-        this.screenLiftX = -10.0f;
+        this.screenLiftX = -8.9f;
         this.screenRightX = -1*this.screenLiftX;
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
+        this.NGUI_ButtonWidth = 1.65f;
+		this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
 	}
 
     public static MGGlobalDataCenter defaultCenter()
