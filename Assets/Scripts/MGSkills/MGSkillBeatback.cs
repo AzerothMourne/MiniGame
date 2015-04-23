@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
-using LitJson;
-public class MGSkillSprint : MGSkillsBase
-{
 
+public class MGSkillBeatback : MGSkillsBase
+{
     private MGNetWorking mgNetWorking;
     public int speed;
     private GameObject roleLater, roleFront;
     private float timer;
     private bool isEndedFreeze;
     public GameObject wordSprite;
-    private int sprintLayer,wordMask;//wordMask用来做word字体出现的掩码，对应index出现后相应位置1，防止重复实例化
+    private int sprintLayer, wordMask;//wordMask用来做word字体出现的掩码，对应index出现后相应位置1，防止重复实例化
     public Sprite[] wordSpriteArrayList;
     public Vector3[] wordPosArrayList;
     public float[] wordDelayTimeArrayList;
@@ -23,9 +22,8 @@ public class MGSkillSprint : MGSkillsBase
     void Start()
     {
         MGGlobalDataCenter.defaultCenter().isBigSkilling = true;
-
         UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-        label.text += "\r\nsprint start";
+        label.text += "\r\nbeatback start";
         timer = 0f;
         isEndedFreeze = false;
         Time.timeScale = 0.05f;
@@ -38,7 +36,7 @@ public class MGSkillSprint : MGSkillsBase
         }
 
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
-        this.releaseSkillObjectName = "role1";
+        this.releaseSkillObjectName = "role";
         base.scaleAnimationFofBigSkill();
     }
     public override Object createSkillSprite(Vector3 pos)
@@ -49,7 +47,7 @@ public class MGSkillSprint : MGSkillsBase
     public override void playSkillAnimation()
     {
         base.playSkillAnimation();
-        
+
     }
     public override void playSkillSound()
     {
@@ -66,7 +64,7 @@ public class MGSkillSprint : MGSkillsBase
             for (int i = length - 1; i >= 0; --i)
             {
                 //Debug.Log("time=" + timer.ToString() + ";wordDelayTimeArrayList[i]=" + wordDelayTimeArrayList[i]);
-                int isInstance=(wordMask>>i)&1;
+                int isInstance = (wordMask >> i) & 1;
                 if (isInstance == 0 && timer >= wordDelayTimeArrayList[i])
                 {
                     //出现一个字
@@ -85,34 +83,13 @@ public class MGSkillSprint : MGSkillsBase
             }
             if (timer >= duration)
             {
-                GameObject roleLater = GameObject.Find("role1");
-                roleLater.GetComponent<RoleAnimController>().isSprint = true;
-                roleLater.GetComponent<Animator>().SetBool("sprint", true);
-                roleLater.GetComponent<SpriteRenderer>().material = new Material(Shader.Find("long/ghost"));
-                GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");
-                for (int i = 0; i < backgroundList.Length; ++i)
-                {
-                    backgroundList[i].GetComponent<bgnear>().speed += 20;
-                }
-                backgroundList = GameObject.FindGameObjectsWithTag("Road");
-                for (int i = 0; i < backgroundList.Length; ++i)
-                {
-                    backgroundList[i].GetComponent<bgnear>().speed += 20;
-                }
-
-                MGMsgModel skillModel = new MGMsgModel();
-                skillModel.eventId = SkillEffectEnum.sprint;
-                skillModel.gameobjectName = this.releaseSkillObjectName;
-                //发送给自己
-                MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.sprint, skillModel);
-
                 MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
                 UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-                label.text += "\r\nsprint end";
+                label.text += "\r\nbeatback end";
                 isEndedFreeze = true;
                 timer = 0;
                 Time.timeScale = 1f;
-                GameObject releaseRole = GameObject.Find("role1");
+                GameObject releaseRole = GameObject.Find("role");
                 releaseRole.layer = 9;//gamelayer
                 DestroyImmediate(this.m_cloneCamera, true);
                 Destroy(this.gameObject);

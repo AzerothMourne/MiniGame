@@ -11,6 +11,7 @@ public class RoleAnimController : MonoBehaviour {
 	Rigidbody2D player;
 	public bool isSecondJump;//是否采用二段跳翻滚的动作
 	public bool isRollBack;//上下线时是否翻滚
+    public bool isSprint;//用来判断冲刺的控制变量
 	float timeSum;
 	float timeRoll;
 	float speed;
@@ -21,6 +22,7 @@ public class RoleAnimController : MonoBehaviour {
 		isFallDown = false;
 		isSecondJump = false;
 		isRollBack = false;
+        isSprint = false;
 		timeSum = 0f;
 		timeRoll = 0.2f;
 		speed = 5.0f;

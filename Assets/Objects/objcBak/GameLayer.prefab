@@ -12,11 +12,11 @@ GameObject:
   - 114: {fileID: 11486660}
   m_Layer: 9
   m_Name: bgNear
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186662
 GameObject:
   m_ObjectHideFlags: 1
@@ -32,7 +32,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186664
 GameObject:
   m_ObjectHideFlags: 0
@@ -41,13 +41,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486664}
+  - 114: {fileID: 11429632}
   m_Layer: 9
   m_Name: roleFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186666
 GameObject:
   m_ObjectHideFlags: 1
@@ -63,7 +64,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186668
 GameObject:
   m_ObjectHideFlags: 1
@@ -76,11 +77,11 @@ GameObject:
   - 114: {fileID: 11486662}
   m_Layer: 9
   m_Name: bgNearSecond
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186670
 GameObject:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ GameObject:
   - 114: {fileID: 11486664}
   m_Layer: 9
   m_Name: bgFarSecond
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -145,7 +146,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186678
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,13 +155,14 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 486678}
+  - 114: {fileID: 11429634}
   m_Layer: 9
   m_Name: roleLater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186680
 GameObject:
   m_ObjectHideFlags: 1
@@ -178,7 +180,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &186682
 GameObject:
   m_ObjectHideFlags: 1
@@ -191,7 +193,7 @@ GameObject:
   - 114: {fileID: 11486670}
   m_Layer: 9
   m_Name: bgFar
-  m_TagString: Untagged
+  m_TagString: Background
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -209,6 +211,7 @@ GameObject:
   - 61: {fileID: 6186664}
   - 114: {fileID: 11486672}
   - 50: {fileID: 5086660}
+  - 114: {fileID: 11429636}
   m_Layer: 9
   m_Name: role1
   m_TagString: Player
@@ -229,6 +232,7 @@ GameObject:
   - 61: {fileID: 6186666}
   - 114: {fileID: 11486674}
   - 50: {fileID: 5086662}
+  - 114: {fileID: 11429638}
   m_Layer: 9
   m_Name: role
   m_TagString: Player
@@ -521,6 +525,60 @@ Animator:
   m_ApplyRootMotion: 1
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11429632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1991ae6f02b6468d85ae73e1d8ad6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11429634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6420dcd6253d42b487f0c607ea37214, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11429636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b110f65c90144b4aa2daac996948bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPressJumpButton: 0
+  isFallDown: 0
+  isSecondJump: 0
+  isRollBack: 0
+  isSprint: 0
+--- !u!114 &11429638
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 186686}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b110f65c90144b4aa2daac996948bea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isPressJumpButton: 0
+  isFallDown: 0
+  isSecondJump: 0
+  isRollBack: 0
+  isSprint: 0
 --- !u!114 &11486660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -533,8 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  minPositionX: -24
-  terPositionX: 0
+  orginPositionX: 0
 --- !u!114 &11486662
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -547,8 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 5
-  minPositionX: 0
-  terPositionX: 24
+  orginPositionX: 0
 --- !u!114 &11486664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,9 +616,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1540eb07db57a6c42a7c1c141524c3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  minPositionX: 0
-  terPositionX: 24
+  speed: 0
+  orginPositionX: 24
 --- !u!114 &11486666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -575,8 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  minPositionX: 0
-  terPositionX: 24
+  orginPositionX: 0
 --- !u!114 &11486668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -589,8 +643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 12
-  minPositionX: -24
-  terPositionX: 0
+  orginPositionX: 0
 --- !u!114 &11486670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -602,9 +655,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1540eb07db57a6c42a7c1c141524c3f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
-  minPositionX: -24
-  terPositionX: 0
+  speed: 0
+  orginPositionX: 24
 --- !u!114 &11486672
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,12 +678,11 @@ MonoBehaviour:
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
   bones: {fileID: 11447552, guid: f55dbfc367e96104fbf8eec2416ecbb6, type: 2}
+  sprint: {fileID: 11464208, guid: 7416dca293cb56b43ab72d89402acead, type: 2}
+  beatback: {fileID: 0}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
-  isPressJumpButton: 0
-  isFallDown: 0
-  isSecondJump: 0
 --- !u!114 &11486674
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -653,12 +704,11 @@ MonoBehaviour:
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
   bones: {fileID: 0}
+  sprint: {fileID: 0}
+  beatback: {fileID: 11451452, guid: 3471221c0c24cf546a4aa7e84ca445a7, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
   isPressDown: 0
-  isPressJumpButton: 0
-  isFallDown: 0
-  isSecondJump: 0
 --- !u!212 &21286660
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -855,7 +905,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 3075914691
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 3d2afc3691ae2b64e9767f1a248578cf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2730cd6054077274bb621be4b458e409, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!212 &21286678
 SpriteRenderer:
@@ -877,7 +927,7 @@ SpriteRenderer:
   m_ScaleInLightmap: 1
   m_SortingLayerID: 3075914691
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4595547a51e79764f9cadfa7e89a6618, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7b462f5466bac3142bd4724878db12e6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:

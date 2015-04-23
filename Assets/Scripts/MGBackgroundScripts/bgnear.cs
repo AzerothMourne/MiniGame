@@ -8,8 +8,7 @@ public class bgnear : MonoBehaviour {
 
 	public float speed;  
 	private float movespeed;
-	public float minPositionX;  
-	public float terPositionX;  
+	public float orginPositionX;  
 	// Use this for initialization
 	void Start () {
 	
@@ -19,9 +18,9 @@ public class bgnear : MonoBehaviour {
 	void Update () {
 		movespeed = speed * Time.deltaTime;  
 		transform.Translate(Vector3.left * movespeed, Space.World); //向左移动  
-		if (transform.localPosition.x < minPositionX)  
-		{  		
-			transform.localPosition = new Vector3(terPositionX, transform.localPosition.y,transform.localPosition.z);  
+		if (transform.localPosition.x < MGGlobalDataCenter.defaultCenter().screenLiftX - transform.GetComponent<SpriteRenderer>().bounds.size.x/2)  
+		{
+            transform.localPosition = new Vector3(orginPositionX, transform.localPosition.y, transform.localPosition.z);  
 		}  
 	}
 }

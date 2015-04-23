@@ -16,6 +16,7 @@ public static class EventEnum{
     public static string roadblock = "EventEnum_roadblock";
     public static string bones = "EventEnum_bones";
     public static string sprint = "EventEnum_sprint";
+    public static string beatback = "EventEnum_beatback";
 }
 public class Jump : MonoBehaviour {
 
@@ -25,7 +26,7 @@ public class Jump : MonoBehaviour {
 	public float jumpSecond ;
 	public float jumpCount ;
 	public int isDown;
-    public MGSkillsBase drat,roadblock,blink,bones,sprint;
+    public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
 	public int isReceiveFlag;
 	public bool isPressDown;
@@ -58,6 +59,7 @@ public class Jump : MonoBehaviour {
             //注册技能事件
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dart);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblock);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBeatback, EventEnum.beatback);
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
@@ -83,6 +85,26 @@ public class Jump : MonoBehaviour {
         else msgModel.eventId = "1"+msg;
         return JsonMapper.ToJson(msgModel);
     }
+    public void useSkillsBeatback(MGNotification notification)
+    {
+        if (notification.objc == null)
+        {
+            Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            MGSkillBeatback skillObjc = null;
+            if (Network.peerType != NetworkPeerType.Disconnected)
+            {
+                skillObjc = mgNetWorking.Instantiate(sprint, pos, new Quaternion(), 0) as MGSkillBeatback;
+            }
+            else
+            {
+                skillObjc = beatback.createSkillSprite(pos) as MGSkillBeatback;
+            }
+            if (skillObjc)
+            {
+                skillObjc.releaseSkillObjectName = this.gameObject.name;
+            }
+        }
+    }
     public void useSkillsSprint(MGNotification notification)
     {
         if (notification.objc == null)
@@ -99,7 +121,7 @@ public class Jump : MonoBehaviour {
             }
             if (skillObjc)
             {
-                skillObjc.releaseSkillObjcName = this.gameObject.name;
+                skillObjc.releaseSkillObjectName = this.gameObject.name;
             }
         }
     }
@@ -302,4 +324,8 @@ public class Jump : MonoBehaviour {
             isGround = true;
         }
 	}
+    void OnTriggerExit2D(Collider2D other)
+    {
+        print("JUMP OnTriggerExit2D");
+    }
 }

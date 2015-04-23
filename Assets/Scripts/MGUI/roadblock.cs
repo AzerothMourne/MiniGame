@@ -44,7 +44,7 @@ public class roadblock : MonoBehaviour {
     }
     public void OnMouseDown()
     {
-        if (!isCD)
+        if (!isCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;

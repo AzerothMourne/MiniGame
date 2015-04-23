@@ -83,7 +83,7 @@ public class Dart : MonoBehaviour {
     public void OnMouseDown()
     {
         int num = int.Parse(dartNum.text);
-        if (!isCD && num > 0)//如果不是GCD 且个数大于0 就可以放技能
+        if (!isCD && num > 0 && !MGGlobalDataCenter.defaultCenter().isBigSkilling)//如果不是GCD 且个数大于0 就可以放技能
         {
             print("update ********isPressDartButton : " + isPressDartButton);
             isPressDartButton = true;

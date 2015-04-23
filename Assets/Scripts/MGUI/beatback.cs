@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class sprint : MonoBehaviour {
+public class beatback : MonoBehaviour {
 
     public float cdTime = 2;
     private bool isCD = false;
@@ -12,7 +12,7 @@ public class sprint : MonoBehaviour {
     private GameObject cdBackObject;
     void Awake()
     {
-        cdBackObject = GameObject.Find("sprintBack");
+        cdBackObject = GameObject.Find("beatbackBack");
         cdBack = cdBackObject.GetComponent<UISprite>();
     }
     // Use this for initialization
@@ -26,8 +26,8 @@ public class sprint : MonoBehaviour {
     {
         if (isCD || holdCD)
         {
-            float time = MGSkillSprintInfo.skillCD;
-            if (holdCD) time = MGSkillSprintInfo.durationTime;
+            float time = MGSkillBeatbackInfo.skillCD;
+            if (holdCD) time = MGSkillBeatbackInfo.durationTime;
             cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / time) * Time.deltaTime;
             if (addOrDec)
             {
@@ -67,7 +67,7 @@ public class sprint : MonoBehaviour {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             holdCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.sprint, null);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.beatback, null);
         }
     }
 }

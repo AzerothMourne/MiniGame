@@ -58,8 +58,6 @@ public class MGSkillRoadblock : MGSkillsBase{
             MGMsgModel skillModel = new MGMsgModel();
             skillModel.eventId = SkillEffectEnum.roadblock;
             skillModel.gameobjectName = other.name;
-            //发送给对面,产生技能效果
-            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
             //发送给自己
             MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.roadblock, skillModel);
             print("技能名：路障。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName);

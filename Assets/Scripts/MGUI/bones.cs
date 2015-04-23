@@ -60,7 +60,7 @@ public class bones : MonoBehaviour {
     }
     public void OnMouseDown()
     {
-        if (!isCD && !holdCD)
+        if (!isCD && !holdCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             addOrDec = false;
             direction = false;

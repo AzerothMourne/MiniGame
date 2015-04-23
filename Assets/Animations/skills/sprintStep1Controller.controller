@@ -26,7 +26,7 @@ State:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: sprintStep1
-  m_Speed: 1
+  m_Speed: 50
   m_CycleOffset: 0
   m_Motions:
   - {fileID: 7400000, guid: 886c349a913113046ad74553944bcf75, type: 2}
