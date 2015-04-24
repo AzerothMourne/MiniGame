@@ -14,7 +14,7 @@ GameObject:
   - 61: {fileID: 6189748}
   m_Layer: 9
   m_Name: dart
-  m_TagString: MGSkill
+  m_TagString: frontSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +68,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 456fec58a3756fe4e8e76f2cf56c0da0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plane: {fileID: 0}
   posY: -10000
+  releaseSkillObjectName: 
   releaseSkillObjcName: 
   speed: 10
 --- !u!212 &21288462

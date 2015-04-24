@@ -15,7 +15,7 @@ GameObject:
   - 50: {fileID: 5095756}
   m_Layer: 9
   m_Name: roadblock
-  m_TagString: MGSkill
+  m_TagString: frontSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14b23db783b0e814ca49a9d47bd8cab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plane: {fileID: 0}
   posY: -10000
+  releaseSkillObjectName: 
   releaseSkillObjcName: 
   speed: 10
 --- !u!212 &21295756

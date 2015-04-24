@@ -15,7 +15,7 @@ GameObject:
   - 50: {fileID: 5034284}
   m_Layer: 9
   m_Name: bones
-  m_TagString: Untagged
+  m_TagString: laterSkill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,7 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e66e6bd38b114fb499aeb721214d737f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plane: {fileID: 0}
   posY: -10000
+  releaseSkillObjectName: 
   releaseSkillObjcName: 
 --- !u!212 &21219988
 SpriteRenderer:

@@ -32,7 +32,7 @@ public class MGSkillBones : MGSkillsBase
             holdTimer += Time.deltaTime;
             if (releaseObject) { 
                 Vector3 pos = new Vector3(releaseObject.transform.position.x + 3 * releaseObject.renderer.bounds.size.x / 16, 
-                    releaseObject.transform.position.y + (releaseObject.GetComponent<Jump>().isDown == 0 ? 1 : -1) * releaseObject.renderer.bounds.size.y / 2, 
+                    releaseObject.transform.position.y + (releaseObject.transform.localScale.y > 0 ? 1 : -1) * releaseObject.renderer.bounds.size.y / 2, 
                     releaseObject.transform.position.z);
                 transform.position = pos;
             }
@@ -55,9 +55,10 @@ public class MGSkillBones : MGSkillsBase
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag != "MGSkill")
-            return;
-        print("技能名：金钟罩。打在上面的是" + other.name + "，释放技能的是" + releaseSkillObjcName + ";gameobjc:" + other.gameObject);
-        Destroy(GameObject.Find(other.name));
+        if (other.tag == "frontSkill") 
+        {
+            print("技能名：金钟罩。打在上面的是" + other.name + "，释放技能的是" + releaseSkillObjcName + ";gameobjc:" + other.gameObject);
+            Destroy(GameObject.Find(other.name));
+        }
     }
 }

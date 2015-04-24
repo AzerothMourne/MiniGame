@@ -3,17 +3,14 @@ using System.Collections;
 using LitJson;
 
 public class MGskillDrat : MGSkillsBase{
-	public string releaseSkillObjcName;
 	public int speed;
+    public Vector3 direction;
     private MGNetWorking mgNetWorking;
 	private long timestamp;
-	void Awake()
-	{
-		releaseSkillObjcName = null;
-	}
 	// Use this for initialization
 	void Start()
 	{
+        direction = Vector3.left;
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 		timestamp = MGGlobalDataCenter.timestamp ();
 	}
@@ -25,12 +22,7 @@ public class MGskillDrat : MGSkillsBase{
 	public override void playSkillAnimation()
 	{
 		base.playSkillAnimation();
-		if (posY == -10000)
-		{
-			posY = transform.position.y;
-		}
-		transform.Translate(-Vector3.right * speed * Time.deltaTime);
-		transform.position = new Vector3(transform.position.x,posY,transform.position.z);
+        transform.Translate(direction * speed * Time.deltaTime);
 	}
 	public override void playSkillSound()
 	{
@@ -50,7 +42,7 @@ public class MGskillDrat : MGSkillsBase{
 	{
         if (other.tag != "Player")
 			return;
-		if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
+		if (other.name != releaseSkillObjectName)
 		{
             MGMsgModel skillModel = new MGMsgModel();
             skillModel.eventId = SkillEffectEnum.dart;
@@ -59,18 +51,11 @@ public class MGskillDrat : MGSkillsBase{
             //mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
             //发送给自己
             MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
-			print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName+";gameobjc:"+other.gameObject);
+            print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjectName + ";gameobjc:" + other.gameObject);
 			Debug.Log("***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString());
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
 			label.text+="\r\n***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString();
 			Destroy(this.gameObject);
-		}
-	}
-	void OnTriggerExit2D(Collider2D other)
-	{
-		if (releaseSkillObjcName == null)
-		{
-			releaseSkillObjcName = other.name;
 		}
 	}
 }

@@ -28,12 +28,7 @@ public class MGSkillRoadblock : MGSkillsBase{
     public override void playSkillAnimation()
     {
         base.playSkillAnimation();
-        if (posY == -10000)
-        {
-            posY = transform.position.y;
-        }
         transform.Translate(-Vector3.right * speed * Time.deltaTime);
-        transform.position = new Vector3(transform.position.x,posY,transform.position.z);
     }
     public override void playSkillSound()
     {

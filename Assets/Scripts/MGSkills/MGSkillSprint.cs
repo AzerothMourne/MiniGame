@@ -6,7 +6,7 @@ public class MGSkillSprint : MGSkillsBase
 
     private MGNetWorking mgNetWorking;
     public int speed;
-    private GameObject roleLater, roleFront;
+    private GameObject releaseRole;
     private float timer;
     private bool isEndedFreeze;
     public GameObject wordSprite;
@@ -23,7 +23,7 @@ public class MGSkillSprint : MGSkillsBase
     void Start()
     {
         MGGlobalDataCenter.defaultCenter().isBigSkilling = true;
-
+        releaseRole = GameObject.Find("role1");
         UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
         label.text += "\r\nsprint start";
         timer = 0f;
@@ -110,12 +110,41 @@ public class MGSkillSprint : MGSkillsBase
                 UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
                 label.text += "\r\nsprint end";
                 isEndedFreeze = true;
-                timer = 0;
                 Time.timeScale = 1f;
                 GameObject releaseRole = GameObject.Find("role1");
                 releaseRole.layer = 9;//gamelayer
                 DestroyImmediate(this.m_cloneCamera, true);
-                Destroy(this.gameObject);
+            }
+        }
+    }
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "frontSkill")
+        {
+            print("技能名：冲刺。打在上面的是" + other.name + "，释放技能的是" + this.releaseSkillObjectName + ";gameobjc:" + other.gameObject);
+            MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
+            UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+            label.text += "\r\n Skill："+other.name;
+            GameObject otherObject = other.gameObject;
+            otherObject.GetComponent<Collider2D>().enabled = false;
+            
+            float otherObjectY = otherObject.transform.position.y;
+            float releaseObjectY = releaseRole.transform.position.y + releaseRole.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+            label.text += "\r\n otherObjectY：" + otherObjectY + ",releaseObjectY=" + releaseObjectY;
+            int angle = Random.Range(0, 25) + 135;//随机生成135到160度的角度
+            Vector3 direction = otherObject.GetComponent<MGskillDrat>().direction;
+            if (otherObjectY >= releaseObjectY)
+            {
+                //向上飞
+                
+                otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f),direction.z);
+                label.text += "\r\n up:" + angle + ";" + otherObject.GetComponent<MGskillDrat>().direction;
+            }
+            else
+            {
+                //向下飞
+                otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, -1 * Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
+                label.text += "\r\n down:" + angle + ";" + otherObject.GetComponent<MGskillDrat>().direction;
             }
         }
     }
