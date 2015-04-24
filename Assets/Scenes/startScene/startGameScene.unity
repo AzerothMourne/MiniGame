@@ -87,7 +87,6 @@ GameObject:
   - 65: {fileID: 69806158}
   - 114: {fileID: 69806157}
   - 114: {fileID: 69806160}
-  - 114: {fileID: 69806161}
   m_Layer: 8
   m_Name: startButton
   m_TagString: Untagged
@@ -102,7 +101,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 69806155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62, y: -190, z: 0}
+  m_LocalPosition: {x: 143, y: -194, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 937347960}
@@ -132,7 +131,7 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick:
-  - mTarget: {fileID: 69806161}
+  - mTarget: {fileID: 325997151}
     mMethodName: OnStartButtonClick
     mParameters: []
     oneShot: 0
@@ -236,18 +235,62 @@ MonoBehaviour:
   callWhenFinished: 
   from: {x: 0, y: 1, z: 1}
   to: {x: 1, y: 1, z: 1}
-  updateTable: 0
---- !u!114 &69806161
+  updateTable: 1
+--- !u!1 &325997148
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 325997150}
+  - 114: {fileID: 325997149}
+  - 114: {fileID: 325997151}
+  m_Layer: 0
+  m_Name: StartScript
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &325997149
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 69806155}
+  m_GameObject: {fileID: 325997148}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f026f0a71b946bd43af744a3dc322111, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &325997150
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325997148}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.0323454812, y: -.00718803424, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+--- !u!114 &325997151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 325997148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 25a8aa242a1b678439d0bac6884bb829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chooseButton: {fileID: 187400, guid: a3b59b356603aaa418aac5fe1112686d, type: 2}
+  NGUIRoot: {fileID: 937347956}
+  isPressStartButton: 0
+  countPress: 0
 --- !u!1 &336384769
 GameObject:
   m_ObjectHideFlags: 0

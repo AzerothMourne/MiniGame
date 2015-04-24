@@ -42,10 +42,23 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: ae5862275993a7e488bd552de305acb8, type: 2}
   mSprites:
   - name: button
-    x: 1514
-    y: 1904
+    x: 0
+    y: 516
     width: 322
     height: 144
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: choosePlayer
+    x: 1025
+    y: 1700
+    width: 488
+    height: 348
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -59,6 +72,32 @@ MonoBehaviour:
     y: 1472
     width: 1024
     height: 576
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: mingyue
+    x: 1514
+    y: 1579
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: mingyuePress
+    x: 0
+    y: 774
+    width: 466
+    height: 120
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -94,7 +133,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: popup
-    x: 1025
+    x: 1514
     y: 1700
     width: 488
     height: 348
@@ -107,8 +146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pressButton
-    x: 1514
-    y: 1759
+    x: 0
+    y: 371
     width: 322
     height: 144
     borderLeft: 0
@@ -124,6 +163,32 @@ MonoBehaviour:
     y: 895
     width: 1024
     height: 576
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya
+    x: 467
+    y: 782
+    width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianyaPress
+    x: 0
+    y: 661
+    width: 467
+    height: 112
     borderLeft: 0
     borderRight: 0
     borderTop: 0
