@@ -22,7 +22,7 @@ public class MGGlobalDataCenter  {
     public int rRoleBlood, lRoleBlood;
     public GameObject role, roleLater;
     private string _serverIp;
-	public float UIScale;
+	public float UIScale,roadOrignY;
     public string serverIp
     {
         get
@@ -53,8 +53,8 @@ public class MGGlobalDataCenter  {
         this.connecttions = 1;
         this.listenPort = 8899;
         this.isNetworkViewEnable = false;
-        this.isHost = true;
-		//this.isHost = false;
+        //this.isHost = true;
+		this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -8.9f;
@@ -63,6 +63,7 @@ public class MGGlobalDataCenter  {
         this.screenBottomY = -1 * this.screenBottomY;
         this.NGUI_ButtonWidth = 1.65f;
 		this.UIScale = 1.5f;
+        this.roadOrignY = -1000;
 		this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
 	}
 

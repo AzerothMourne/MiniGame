@@ -213,6 +213,7 @@ public class Jump : MonoBehaviour {
     public void jump(MGNotification notification)
     {
         MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.upFormerEventId), null);
+        if (roleAnimaController.isRoll || roleAnimaController.isPressDown) return;
         if (transform.localScale.y < 0)
         {
             upwardToLine(notification);
@@ -248,16 +249,6 @@ public class Jump : MonoBehaviour {
         //角色会根据下按钮，翻转到线下
  		if (transform.localScale.y > 0) {
             MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.downFormerEventId), null);
-            if (isGround)
-            {
-                rigidbody2D.gravityScale = 0f;
-                collider2D.isTrigger = true;
-            }
-            else
-            {
-				rigidbody2D.gravityScale = 10f;
-                collider2D.isTrigger = false;
-			}
         }
 		if(notification.objc==null){
 			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.downToLineFormerEventId));
@@ -266,21 +257,20 @@ public class Jump : MonoBehaviour {
 
 	public void upwardToLine(MGNotification notification)
 	{
-
-        rigidbody2D.gravityScale = 0f;
-        collider2D.isTrigger = true;
 		if(notification.objc==null){
 			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.upwardToLineFormerEventId));
 		}
 	}
 	// Update is called once per frame
 	void Update () {
-        
-		//当下落过程中按了down按钮，则会在落地后下翻
-        if (roleAnimaController.isPressDown && isGround)
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            downToLine(null);
-		} 
+            if (MGGlobalDataCenter.defaultCenter().isHost == true)
+                MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
+            else
+                MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
+        }
 	}
     
 	//判断角色是否在地面上
@@ -289,7 +279,8 @@ public class Jump : MonoBehaviour {
         
         if (collision.gameObject.name == "road" || collision.gameObject.name == "roadSecond")
         {
-            Debug.Log("OnCollisionEnter2D");
+            if (MGGlobalDataCenter.defaultCenter().roadOrignY == -1000)
+                MGGlobalDataCenter.defaultCenter().roadOrignY = transform.position.y;
             isGround = true;
         }
 	}
