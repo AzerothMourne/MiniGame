@@ -11,6 +11,10 @@ public class startUI : MonoBehaviour {
 	
 		isPressStartButton = false;
 		countPress = 0;
+
+		//加上背景音乐
+		print ("2");
+		AudioManager._instance.MusicBackground();
 	}
 	
 	// Update is called once per frame
