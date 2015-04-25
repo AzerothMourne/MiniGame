@@ -35,6 +35,10 @@ public class MGNetWorking : MonoBehaviour {
         else if (Application.platform == RuntimePlatform.IPhonePlayer)
 			_createHost();
 	}
+    public static void disconnect()
+    {
+        Network.Disconnect();
+    }
     /// <summary>
     /// 重载sendMessageToPeer支持unity提供的NetworkView，方便在局域网条件下跨平台
     /// </summary>

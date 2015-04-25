@@ -1,17 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class roadblock : MonoBehaviour {
-    public float cdTime ;
-    private bool isCD = false;
-    private UISprite cdBack;
-    public bool direction;// true 顺时针，false逆时针
-    public bool addOrDec;// true 添加,false 减少
-    public GameObject cdBackObject;
+public class roadblock : UIBase
+{
     // Use this for initialization
     void Start()
     {
-        cdTime = MGSkillRoadblockInfo.skillCD;
         direction = true;
         addOrDec = true;
         cdBack = cdBackObject.GetComponent<UISprite>();
@@ -22,10 +16,10 @@ public class roadblock : MonoBehaviour {
     {
         if (isCD)
         {
-            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / MGSkillRoadblockInfo.skillCD) * Time.deltaTime;
             if (addOrDec)
             {
-                if (cdBack.fillAmount >= 0.95f)
+                if (cdBack.fillAmount >= 1f)
                 {
                     isCD = false;
                     cdBack.fillAmount = 1f;
@@ -33,7 +27,7 @@ public class roadblock : MonoBehaviour {
             }
             else
             {
-                if (cdBack.fillAmount <= 0.05f)
+                if (cdBack.fillAmount <= 0f)
                 {
                     isCD = false;
                     cdBack.fillAmount = 0f;
@@ -44,6 +38,7 @@ public class roadblock : MonoBehaviour {
     }
     public void OnMouseDown()
     {
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
         if (!isCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             cdBack.fillAmount = addOrDec ? 0f : 1f;

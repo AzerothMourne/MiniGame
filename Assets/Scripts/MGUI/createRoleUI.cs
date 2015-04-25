@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
-
+using LitJson;
+public static class uiEvent
+{
+    public static string stopGame = "uiEvent_stopGame";
+    public static string continueGame = "uiEvent_continueGame";
+}
 public class createRoleUI : MonoBehaviour {
     public GameObject dartButton,roadblockButton,beatbackButton;
     public GameObject blinkButton,bonesButton,sprintButton;
@@ -11,8 +16,12 @@ public class createRoleUI : MonoBehaviour {
     public GameObject NGUIRoot;
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
     private int UILayerMask = 7;
+    private MGNetWorking mgNetWorking;
     void Start()
     {
+        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
+        MGNotificationCenter.defaultCenter().addObserver(this, stopNotification, uiEvent.stopGame);
+        MGNotificationCenter.defaultCenter().addObserver(this, continueNotification, uiEvent.continueGame);
         createCommonUI();
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
         {
@@ -23,10 +32,32 @@ public class createRoleUI : MonoBehaviour {
             createLaterRoleUI();
         }
     }
+    public void continueNotification(MGNotification notification)
+    {
+        if (notification.objc != null)
+        {
+            continueGame(null);
+        }
+    }
+    public void stopNotification(MGNotification notification)
+    {
+        if (notification.objc != null)
+        {
+            clickStop(null);
+        }
+    }
     public void clickStop(GameObject button)
     {
         if (MGGlobalDataCenter.defaultCenter().isStop == false)
         {
+
+            if (button)
+            {
+                MGMsgModel uiMsg = new MGMsgModel();
+                uiMsg.eventId = uiEvent.stopGame;
+                mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(uiMsg));
+            }
+
             MGGlobalDataCenter.defaultCenter().isStop = true;
             Time.timeScale = 0;
             stopLayerObj = GameObject.Instantiate(stopLayer, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
@@ -47,7 +78,7 @@ public class createRoleUI : MonoBehaviour {
             homeButtonObj.transform.parent = NGUIRoot.transform;
             homeButtonObj.GetComponent<UISprite>().depth = 3;
             homeButtonObj.layer = UILayerMask;
-            homeButtonObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + 0.5f, MGGlobalDataCenter.defaultCenter().screenBottomY + 0.5f, 0f), uiCamera);
+            homeButtonObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2+0.3f, MGGlobalDataCenter.defaultCenter().screenBottomY + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2+0.3f, 0f), uiCamera);
 			homeButtonObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
             UIEventListener.Get(homeButtonObj).onClick = homeClick;
         }
@@ -56,6 +87,14 @@ public class createRoleUI : MonoBehaviour {
     {
         if (MGGlobalDataCenter.defaultCenter().isStop == true)
         {
+
+            if (button)
+            {
+                MGMsgModel uiMsg = new MGMsgModel();
+                uiMsg.eventId = uiEvent.continueGame;
+                mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(uiMsg));
+            }
+
             MGGlobalDataCenter.defaultCenter().isStop = false;
             Time.timeScale = 1;
             DestroyObject(stopLayerObj);
@@ -65,7 +104,12 @@ public class createRoleUI : MonoBehaviour {
     }
     public void homeClick(GameObject button)
     {
-        Debug.Log("click home");
+        UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+        label.text += "\r\nhomeClick";
+        MGNetWorking.disconnect();
+        label.text += "\r\ndisconnect";
+        Application.LoadLevel("startGameScene");
+        label.text += "\r\nApplication.LoadLevel(\"startGameScene\")";
     }
     public void createCommonUI()
     {
@@ -85,7 +129,7 @@ public class createRoleUI : MonoBehaviour {
         objc = GameObject.Instantiate(stopButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
         objc.transform.parent = NGUIRoot.transform;
         objc.layer = UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX, MGGlobalDataCenter.defaultCenter().screenTopY, 0f), uiCamera);
+        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 0f), uiCamera);
         objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
         UIEventListener.Get(objc).onClick = clickStop;
 

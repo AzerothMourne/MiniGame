@@ -1,15 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class beatback : MonoBehaviour {
-
-    public float cdTime = 2;
-    private bool isCD = false;
-    private bool holdCD = false;
-    private UISprite cdBack;
-    public bool direction;// true 顺时针，false逆时针
-    public bool addOrDec;// true 添加,false 减少
-    private GameObject cdBackObject;
+public class beatback : UIBase
+{
     void Awake()
     {
         cdBackObject = GameObject.Find("beatbackBack");
@@ -31,7 +24,7 @@ public class beatback : MonoBehaviour {
             cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / time) * Time.deltaTime;
             if (addOrDec)
             {
-                if (cdBack.fillAmount >= 0.95f)
+                if (cdBack.fillAmount >= 1f)
                 {
                     if (holdCD == true)
                     {
@@ -44,7 +37,7 @@ public class beatback : MonoBehaviour {
             }
             else
             {
-                if (cdBack.fillAmount <= 0.05f)
+                if (cdBack.fillAmount <= 0f)
                 {
                     if (holdCD == true)
                     {
@@ -60,6 +53,7 @@ public class beatback : MonoBehaviour {
     }
     public void OnMouseDown()
     {
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
         if (!isCD && !holdCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             addOrDec = false;

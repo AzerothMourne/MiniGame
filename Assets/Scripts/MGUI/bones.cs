@@ -1,15 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class bones : MonoBehaviour {
+public class bones : UIBase
+{
 
-    public float cdTime = 2;
-    private bool isCD = false;
-    private bool holdCD = false;
-    private UISprite cdBack;
-    public bool direction;// true 顺时针，false逆时针
-    public bool addOrDec;// true 添加,false 减少
-    private GameObject cdBackObject;
     void Awake()
     {
         cdBackObject = GameObject.Find("bonesBack");
@@ -60,6 +54,7 @@ public class bones : MonoBehaviour {
     }
     public void OnMouseDown()
     {
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
         if (!isCD && !holdCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             addOrDec = false;

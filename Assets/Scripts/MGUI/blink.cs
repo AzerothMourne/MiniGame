@@ -1,14 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class blink : MonoBehaviour {
-
-    public float cdTime = 2;
-    private bool isCD = false;
-    private UISprite cdBack;
-    public bool direction;// true 顺时针，false逆时针
-    public bool addOrDec;// true 添加,false 减少
-    private GameObject cdBackObject;
+public class blink : UIBase
+{
     void Awake()
     {
         cdBackObject = GameObject.Find("blinkBack");
@@ -26,10 +20,10 @@ public class blink : MonoBehaviour {
     {
         if (isCD)
         {
-            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / MGSkillBlinkInfo.skillCD) * Time.deltaTime;
             if (addOrDec)
             {
-                if (cdBack.fillAmount >= 0.95f)
+                if (cdBack.fillAmount >= 1f)
                 {
                     isCD = false;
                     cdBack.fillAmount = 1f;
@@ -37,7 +31,7 @@ public class blink : MonoBehaviour {
             }
             else
             {
-                if (cdBack.fillAmount <= 0.05f)
+                if (cdBack.fillAmount <= 0f)
                 {
                     isCD = false;
                     cdBack.fillAmount = 0f;
@@ -48,6 +42,7 @@ public class blink : MonoBehaviour {
     }
     public void OnMouseDown()
     {
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
         if (!isCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
