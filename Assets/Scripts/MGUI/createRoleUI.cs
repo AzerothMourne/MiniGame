@@ -33,14 +33,14 @@ public class createRoleUI : MonoBehaviour {
             stopLayerObj.transform.parent = NGUIRoot.transform;
             stopLayerObj.layer = UILayerMask;
             stopLayerObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(Vector3.zero, uiCamera);
-            stopLayerObj.transform.localScale = new Vector3(1, 1, 1);
+			stopLayerObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
 
             continueButtonObj = GameObject.Instantiate(continueButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
             continueButtonObj.transform.parent = NGUIRoot.transform;
             continueButtonObj.GetComponent<UISprite>().depth = 3;
             continueButtonObj.layer = UILayerMask;
             continueButtonObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(Vector3.zero, uiCamera);
-            continueButtonObj.transform.localScale = new Vector3(1, 1, 1);
+			continueButtonObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
             UIEventListener.Get(continueButtonObj).onClick = continueGame;
 
             homeButtonObj = GameObject.Instantiate(homeButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
@@ -48,7 +48,7 @@ public class createRoleUI : MonoBehaviour {
             homeButtonObj.GetComponent<UISprite>().depth = 3;
             homeButtonObj.layer = UILayerMask;
             homeButtonObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + 0.5f, MGGlobalDataCenter.defaultCenter().screenBottomY + 0.5f, 0f), uiCamera);
-            homeButtonObj.transform.localScale = new Vector3(1, 1, 1);
+			homeButtonObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
             UIEventListener.Get(homeButtonObj).onClick = homeClick;
         }
     }
