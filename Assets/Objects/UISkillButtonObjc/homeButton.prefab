@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11463152}
   - 65: {fileID: 6563152}
   - 114: {fileID: 11463150}
+  - 114: {fileID: 11419446}
   m_Layer: 10
   m_Name: homeButton
   m_TagString: Untagged
@@ -42,6 +43,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 440, y: 440, z: 0}
   m_Center: {x: -220, y: -220, z: 0}
+--- !u!114 &11419446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 163152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1bd99dcf43f97d48bb6215c70f0cd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11463150
 MonoBehaviour:
   m_ObjectHideFlags: 1
