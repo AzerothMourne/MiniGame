@@ -5,7 +5,7 @@ using System;
 public class createRoleUI : MonoBehaviour {
     public GameObject dartButton,roadblockButton,beatbackButton;
     public GameObject blinkButton,bonesButton,sprintButton;
-    public GameObject downButton, upButton;
+    public GameObject downButton, upButton, stopButton;
 	public Camera uiCamera;
     private int UILayerMask = 7;
     void Start()
@@ -35,6 +35,12 @@ public class createRoleUI : MonoBehaviour {
         objc.layer =  UILayerMask;
         objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 1.5f*MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f), uiCamera);
 		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
+
+        objc = GameObject.Instantiate(stopButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+        objc.transform.parent = transform;
+        objc.layer = UILayerMask;
+        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX, MGGlobalDataCenter.defaultCenter().screenTopY, 0f), uiCamera);
+        objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
 
     }
 	public void createFrontRoleUI()

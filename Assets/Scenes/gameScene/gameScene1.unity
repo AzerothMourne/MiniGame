@@ -612,6 +612,10 @@ Prefab:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 11482644, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
+      propertyPath: stopButton
+      value: 
+      objectReference: {fileID: 195530, guid: 24d775aba0d517c43851dd4b138704b5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
   m_RootGameObject: {fileID: 1533371668}
@@ -1240,6 +1244,7 @@ MonoBehaviour:
   sprintButton: {fileID: 127528, guid: 9aaf379d0424f594aa086b16f3b640a5, type: 2}
   downButton: {fileID: 123110, guid: d4767184f3dfc2045b686a31109c9e56, type: 2}
   upButton: {fileID: 113138, guid: 245a6c38919fd604d83fa107552dfcb1, type: 2}
+  stopButton: {fileID: 195530, guid: 24d775aba0d517c43851dd4b138704b5, type: 2}
   uiCamera: {fileID: 361695386}
 --- !u!1 &1792413802
 GameObject:

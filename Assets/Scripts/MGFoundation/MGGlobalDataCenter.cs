@@ -15,7 +15,7 @@ public class MGMsgModel{
 public class MGGlobalDataCenter  {
     public float NGUI_ButtonWidth;
     public bool isNetworkViewEnable;
-    public bool isHost,isBigSkilling;
+    public bool isHost,isBigSkilling,isStop;
     public int connecttions;
     public int listenPort;
     private static MGGlobalDataCenter instance;
@@ -47,6 +47,7 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
+        this.isStop = false;
         this.isBigSkilling = false;
         this.role = null;
         this.roleLater = null;

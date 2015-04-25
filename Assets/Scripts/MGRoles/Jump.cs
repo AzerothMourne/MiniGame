@@ -8,8 +8,6 @@ public static class EventEnum{
 	public static string jumpLatterEventId="1jump";
 	public static string downToLineFormerEventId="downToLine";
 	public static string dowmToLineLatterEventId="1downToLine";
-	public static string upwardToLineFormerEventId="upwardToLine";
-	public static string upwardToLineLatterEventId="1upwardToLine";
     //技能事件
     public static string dart = "EventEnum_dart";
     public static string blink = "EventEnum_blink";
@@ -53,7 +51,6 @@ public class Jump : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter().role=this.gameObject;
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
-			MGNotificationCenter.defaultCenter ().addObserver (this, upwardToLine, EventEnum.upwardToLineFormerEventId);
             //注册技能事件
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dart);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblock);
@@ -67,7 +64,6 @@ public class Jump : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter().roleLater=this.gameObject;
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
-			MGNotificationCenter.defaultCenter().addObserver(this, upwardToLine, EventEnum.upwardToLineLatterEventId);
             //注册技能事件
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, EventEnum.blink);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
@@ -218,10 +214,13 @@ public class Jump : MonoBehaviour {
     public void jump(MGNotification notification)
     {
         MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.upFormerEventId), notification);
-        if (roleAnimaController.isRoll || roleAnimaController.isPressDown) return;
+        //if (roleAnimaController.isRoll || roleAnimaController.isPressDown) return;
         if (transform.localScale.y < 0)
         {
-            upwardToLine(notification);
+            if (notification.objc == null)
+            {
+                mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+            }
             return;
         }
         if (roleAnimaController.isFirstJump && !roleAnimaController.isSecondJump)
@@ -261,13 +260,6 @@ public class Jump : MonoBehaviour {
 			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.downToLineFormerEventId));
 		}
     }
-
-	public void upwardToLine(MGNotification notification)
-	{
-		if(notification.objc==null){
-			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.upwardToLineFormerEventId));
-		}
-	}
 	// Update is called once per frame
 	void Update () {
         if (Input.GetKeyDown(KeyCode.DownArrow))
