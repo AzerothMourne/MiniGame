@@ -12,16 +12,20 @@ public static class SkillEffectEnum
 }
 //主要用于技能对别的gameobject产生效果处理,MGSkill+技能名 是技能自己的效果处理
 public class MGSkillEffect : MonoBehaviour {
-    private float timer;
+    private string shortBonesName;
+    public bones blinkSkillBones;
+    private float timer, blinkSkillBonesTimer;
     private MGNotification dartSwitch,blinkSwitch,sprintSwitch;
     private GameObject tempObjcet;
 	// Use this for initialization
 	void Start () {
         timer = 0;
+        blinkSkillBonesTimer = 1;
         dartSwitch = null;
         blinkSwitch = null;
         sprintSwitch = null;
         tempObjcet = null;
+        shortBonesName = "bones_short";
         MGNotificationCenter.defaultCenter().addObserver(this, dartEffect, SkillEffectEnum.dart);
         MGNotificationCenter.defaultCenter().addObserver(this, blinkEffect, SkillEffectEnum.blink);
         MGNotificationCenter.defaultCenter().addObserver(this, sprintEffect, SkillEffectEnum.sprint);
@@ -32,6 +36,17 @@ public class MGSkillEffect : MonoBehaviour {
         //dartEffect(dartSwitch);
         //blinkEffect(blinkSwitch);只要一下就闪到前面 所以不需要再Update里慢慢移动
         sprintEffect(sprintSwitch);
+        if (blinkSkillBonesTimer < 0.2f)
+        {
+            blinkSkillBonesTimer += Time.deltaTime;
+            if (blinkSkillBonesTimer >= 0.2f)
+            {
+                UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+                label.text += "\r\nDestroy:" + shortBonesName;
+                DestroyImmediate(GameObject.Find(shortBonesName),true);
+                //Destroy(GameObject.Find(shortBonesName));
+            }
+        }
 	}
     void sprintEffect(MGNotification notification)
     {
@@ -87,7 +102,7 @@ public class MGSkillEffect : MonoBehaviour {
     {
         if (notification != null)
         {
-           
+            blinkSkillBonesTimer = 0;
             blinkSwitch = notification;
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             Debug.Log("skillModel:" + skillModel + ",eventId:" + skillModel.eventId + ",gameobjectName:" + skillModel.gameobjectName);
@@ -98,11 +113,14 @@ public class MGSkillEffect : MonoBehaviour {
 				float dis=MGGlobalDataCenter.defaultCenter().roleFrontPos.x-MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
                 objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * dis);
             }
+
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, shortBonesName);//发送bones技能的事件
+
             timer += Time.deltaTime;
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             Vector3 pos1 = GameObject.Find("role1").transform.position;
             Vector3 pos = GameObject.Find("role").transform.position;
-            label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x;
+            label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x + ";shortBonesName:" + shortBonesName;
             if (timer > MGSkillBlinkInfo.durationTime)
             {
 				

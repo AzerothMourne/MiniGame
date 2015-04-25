@@ -50,6 +50,8 @@ public class blink : MonoBehaviour {
     {
         if (!isCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
+            UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+            label.text += "\r\n blink OnMouseDown";
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);

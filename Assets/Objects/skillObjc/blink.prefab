@@ -57,10 +57,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 0}
-  posY: -10000
   releaseSkillObjectName: 
   releaseSkillObjcName: 
-  speed: 0
+  speed: 8
 --- !u!212 &21212000
 SpriteRenderer:
   m_ObjectHideFlags: 1

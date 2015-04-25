@@ -58,7 +58,7 @@ public class MGSkillBones : MGSkillsBase
         if (other.tag == "frontSkill") 
         {
             print("技能名：金钟罩。打在上面的是" + other.name + "，释放技能的是" + releaseSkillObjcName + ";gameobjc:" + other.gameObject);
-            Destroy(GameObject.Find(other.name));
+            flyDuang(other, releaseObject);
         }
     }
 }

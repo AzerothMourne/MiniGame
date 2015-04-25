@@ -125,6 +125,8 @@ public class MGSkillSprint : MGSkillsBase
             MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             label.text += "\r\n Skill："+other.name;
+            flyDuang(other, releaseRole);
+            /*
             GameObject otherObject = other.gameObject;
             otherObject.GetComponent<Collider2D>().enabled = false;
             
@@ -145,7 +147,7 @@ public class MGSkillSprint : MGSkillsBase
                 //向下飞
                 otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, -1 * Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
                 label.text += "\r\n down:" + angle + ";" + otherObject.GetComponent<MGskillDrat>().direction;
-            }
+            }*/
         }
     }
 }

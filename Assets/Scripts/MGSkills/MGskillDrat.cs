@@ -42,7 +42,7 @@ public class MGskillDrat : MGSkillsBase{
 	{
         if (other.tag != "Player")
 			return;
-		if (other.name != releaseSkillObjectName)
+		if (other.name != "role")
 		{
             MGMsgModel skillModel = new MGMsgModel();
             skillModel.eventId = SkillEffectEnum.dart;
@@ -54,7 +54,7 @@ public class MGskillDrat : MGSkillsBase{
             print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjectName + ";gameobjc:" + other.gameObject);
 			Debug.Log("***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString());
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-			label.text+="\r\n***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString();
+            label.text += "\r\n***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString() + ";releaseSkillObjectName" + releaseSkillObjectName;
 			Destroy(this.gameObject);
 		}
 	}

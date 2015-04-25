@@ -31,7 +31,7 @@ public class bones : MonoBehaviour {
             cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / time) * Time.deltaTime;
             if (addOrDec)
             {
-                if (cdBack.fillAmount >= 0.95f)
+                if (cdBack.fillAmount >= 1f)
                 {
                     if (holdCD == true)
                     {
@@ -44,7 +44,7 @@ public class bones : MonoBehaviour {
             }
             else
             {
-                if (cdBack.fillAmount <= 0.05f)
+                if (cdBack.fillAmount <= 0f)
                 {
                     if (holdCD == true)
                     {

@@ -83,7 +83,6 @@ public class MGSkillsBase : MonoBehaviour {
     public virtual void playSkillSound() { }
     public void scaleAnimationFofBigSkill()
     {
-        Debug.Log("123123");
         GameObject cameraObj = GameObject.Find("Main Camera");
         //将摄像机特效渲染层从主摄像机渲染中剔除
         cameraObj.GetComponent<Camera>().cullingMask -= (1 << bigSkillPlaneLayer);
@@ -109,17 +108,39 @@ public class MGSkillsBase : MonoBehaviour {
         this.plane.layer = bigSkillPlaneLayer;
 
         GameObject releaseRole = GameObject.Find(releaseSkillObjectName);
-        releaseRole.layer = bigSkillPlaneLayer;
-
-        int childCount=releaseRole.transform.childCount;
-        Transform childObject = null;
-        for (int i = 0; i < childCount; ++i)
+        if (releaseRole)
         {
-            childObject = releaseRole.transform.GetChild(i);
-            if (childObject)
+            releaseRole.layer = bigSkillPlaneLayer;
+            int childCount = releaseRole.transform.childCount;
+            Transform childObject = null;
+            for (int i = 0; i < childCount; ++i)
             {
-                childObject.gameObject.layer = bigSkillPlaneLayer;
+                childObject = releaseRole.transform.GetChild(i);
+                if (childObject)
+                {
+                    childObject.gameObject.layer = bigSkillPlaneLayer;
+                }
             }
+        }
+    }
+    public void flyDuang(Collider2D other,GameObject releaseRole)
+    {
+        GameObject otherObject = other.gameObject;
+        otherObject.GetComponent<Collider2D>().enabled = false;
+
+        float otherObjectY = otherObject.transform.position.y;
+        float releaseObjectY = releaseRole.transform.position.y + releaseRole.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+        int angle = Random.Range(0, 25) + 135;//随机生成135到160度的角度
+        Vector3 direction = otherObject.GetComponent<MGskillDrat>().direction;
+        if (otherObjectY >= releaseObjectY)
+        {
+            //向上飞
+            otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
+        }
+        else
+        {
+            //向下飞
+            otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, -1 * Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
         }
     }
     

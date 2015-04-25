@@ -140,16 +140,16 @@ public class Jump : MonoBehaviour {
             }
             if (skillObjc)
             {
-                skillObjc.releaseSkillObjcName = this.gameObject.name;
+                skillObjc.releaseSkillObjectName = this.gameObject.name;
             }
         }
     }
     public void useSkillsBones(MGNotification notification)
     {
-        if (notification.objc == null)
+        Vector3 pos = new Vector3(transform.position.x + 3 * renderer.bounds.size.x / 16, transform.position.y + (transform.localScale.y > 0 ? 1 : -1) * renderer.bounds.size.y / 2, transform.position.z);
+        MGSkillBones skillObjc = bones as MGSkillBones;
+        if (notification.objc == null)//需要在对方客户端同步的
         {
-            Vector3 pos = new Vector3(transform.position.x + 3 * renderer.bounds.size.x / 16, transform.position.y + (transform.localScale.y > 0 ? 1 : -1) * renderer.bounds.size.y / 2, transform.position.z);
-            MGSkillBones skillObjc = bones as MGSkillBones;
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
                 skillObjc = mgNetWorking.Instantiate(bones, pos, new Quaternion(), 0) as MGSkillBones;
@@ -157,12 +157,17 @@ public class Jump : MonoBehaviour {
             else
             {
                 skillObjc = bones.createSkillSprite(pos) as MGSkillBones;
-            }
-            if (skillObjc)
-            {
-                skillObjc.releaseSkillObjcName = this.gameObject.name;
-                skillObjc.transform.parent=this.transform;
-            }
+            } 
+        }
+        else//不需要再对方客户端同步的,短时间的bones
+        {
+            skillObjc = bones.createSkillSprite(pos) as MGSkillBones;
+            skillObjc.name = notification.objc as string;
+        }
+        if (skillObjc)
+        {
+            skillObjc.releaseSkillObjcName = this.gameObject.name;
+            skillObjc.transform.parent = this.transform;
         }
     }
     public void useSkillsDart(MGNotification notification)
@@ -265,7 +270,6 @@ public class Jump : MonoBehaviour {
 	}
 	// Update is called once per frame
 	void Update () {
-
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (MGGlobalDataCenter.defaultCenter().isHost == true)
