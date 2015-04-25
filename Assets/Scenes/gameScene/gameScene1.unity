@@ -1240,6 +1240,127 @@ MonoBehaviour:
   downButton: {fileID: 123110, guid: d4767184f3dfc2045b686a31109c9e56, type: 2}
   upButton: {fileID: 113138, guid: 245a6c38919fd604d83fa107552dfcb1, type: 2}
   uiCamera: {fileID: 361695386}
+--- !u!1 &1595828468
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+  m_PrefabInternal: {fileID: 1675069248}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1595828472}
+  - 33: {fileID: 1595828471}
+  - 64: {fileID: 1595828470}
+  - 23: {fileID: 1595828469}
+  m_Layer: 0
+  m_Name: stopPlane
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1595828469
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2328842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711,
+    type: 2}
+  m_PrefabInternal: {fileID: 1675069248}
+  m_GameObject: {fileID: 1595828468}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 2100000, guid: b1319e47c49127b4dac74400d1187482, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!64 &1595828470
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711,
+    type: 2}
+  m_PrefabInternal: {fileID: 1675069248}
+  m_GameObject: {fileID: 1595828468}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_SmoothSphereCollisions: 0
+  m_Convex: 0
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!33 &1595828471
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3328842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711,
+    type: 2}
+  m_PrefabInternal: {fileID: 1675069248}
+  m_GameObject: {fileID: 1595828468}
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1595828472
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+  m_PrefabInternal: {fileID: 1675069248}
+  m_GameObject: {fileID: 1595828468}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+--- !u!1001 &1675069248
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 428842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+      propertyPath: m_Name
+      value: stopPlane
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+  m_RootGameObject: {fileID: 1595828468}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
 --- !u!1 &1792413802
 GameObject:
   m_ObjectHideFlags: 0
@@ -1397,6 +1518,7 @@ GameObject:
   - 92: {fileID: 1844146919}
   - 124: {fileID: 1844146918}
   - 81: {fileID: 1844146917}
+  - 114: {fileID: 1844146922}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1473,6 +1595,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &1844146922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844146916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 918c43296927ad1428ac7cffaf8dad9a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1852946983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1520,6 +1653,7 @@ MonoBehaviour:
   beatback: {fileID: 0}
   log: {fileID: 0}
   isReceiveFlag: 0
+  mgNetWorking: {fileID: 0}
 --- !u!50 &1852946985
 Rigidbody2D:
   m_ObjectHideFlags: 0
@@ -1594,7 +1728,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1852946983}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.53000021, y: -1.37, z: 0}
+  m_LocalPosition: {x: -5.53000021, y: -1.39999998, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 906247496}
@@ -1616,7 +1750,10 @@ MonoBehaviour:
   isSecondJump: 0
   isFirstJump: 0
   isRoll: 0
+  downOrUp: 0
+  isChangeDownOrUp: 0
   isPressDown: 0
+  isPressDownToGround: 0
 --- !u!114 &1852946991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1754,6 +1891,7 @@ MonoBehaviour:
   beatback: {fileID: 11451452, guid: 3471221c0c24cf546a4aa7e84ca445a7, type: 2}
   log: {fileID: 0}
   isReceiveFlag: 0
+  mgNetWorking: {fileID: 0}
 --- !u!114 &1985725683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1771,7 +1909,10 @@ MonoBehaviour:
   isSecondJump: 0
   isFirstJump: 0
   isRoll: 0
+  downOrUp: 0
+  isChangeDownOrUp: 0
   isPressDown: 0
+  isPressDownToGround: 0
 --- !u!114 &1985725684
 MonoBehaviour:
   m_ObjectHideFlags: 0

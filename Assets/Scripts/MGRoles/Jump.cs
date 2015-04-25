@@ -29,7 +29,7 @@ public class Jump : MonoBehaviour {
 	public UIInput log;
 	public int isReceiveFlag;
 	
-    private MGNetWorking mgNetWorking;
+    public MGNetWorking mgNetWorking;
 
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
 	private Animator jumpAnim;
@@ -74,7 +74,7 @@ public class Jump : MonoBehaviour {
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
 		}
 	}
-    private string objcToJson(string msg)
+    public string objcToJson(string msg)
     {
         //log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
         MGMsgModel msgModel = new MGMsgModel();
@@ -212,16 +212,18 @@ public class Jump : MonoBehaviour {
     }
     public void jump(MGNotification notification)
     {
-        MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.upFormerEventId), null);
+        MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.upFormerEventId), notification);
         if (roleAnimaController.isRoll || roleAnimaController.isPressDown) return;
         if (transform.localScale.y < 0)
         {
             upwardToLine(notification);
             return;
         }
-		if (isGround){
+        if (roleAnimaController.isFirstJump && !roleAnimaController.isSecondJump)
+        {
+            Debug.Log("一段跳");
             isGround = false;
-			Vector2 velocity = rigidbody2D.velocity;
+			Vector3 velocity = rigidbody2D.velocity;
 			velocity.y = jumpVelocity;
 			rigidbody2D.velocity = velocity;
 			jumpCount = 1;
@@ -231,8 +233,10 @@ public class Jump : MonoBehaviour {
 			}
 		}
 		//如果不在地面上，且一段跳了，则二段跳
-		else if(!isGround && jumpCount == 1) {
-			Vector2 velocity = rigidbody2D.velocity;
+        else if (roleAnimaController.isFirstJump && roleAnimaController.isSecondJump && jumpCount==1)
+        {
+            Debug.Log("二段跳");
+			Vector3 velocity = rigidbody2D.velocity;
 			if (velocity.y < -1.0f) velocity.y = jumpSecond + 3;
 			else velocity.y = jumpSecond;
 			rigidbody2D.velocity = velocity;
@@ -247,9 +251,7 @@ public class Jump : MonoBehaviour {
     public void downToLine(MGNotification notification)
     {
         //角色会根据下按钮，翻转到线下
- 		if (transform.localScale.y > 0) {
-            MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.downFormerEventId), null);
-        }
+        MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.downFormerEventId), null);
 		if(notification.objc==null){
 			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.downToLineFormerEventId));
 		}
