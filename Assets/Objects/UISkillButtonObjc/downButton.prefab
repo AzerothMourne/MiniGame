@@ -131,7 +131,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11489748, guid: c30d6b32703c7f14083273b72704ab1a, type: 2}
-  mSpriteName: stop
+  mSpriteName: down
   mFillCenter: 1
 --- !u!1001 &100100000
 Prefab:
