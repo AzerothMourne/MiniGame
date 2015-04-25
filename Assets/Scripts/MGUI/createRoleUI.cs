@@ -10,15 +10,21 @@ public static class uiEvent
 public class createRoleUI : MonoBehaviour {
     public GameObject dartButton,roadblockButton,beatbackButton;
     public GameObject blinkButton,bonesButton,sprintButton;
-    public GameObject downButton, upButton, stopButton;
+    public GameObject downButton, upButton, stopButton,gameTimerLabel;
     public GameObject stopLayer, homeButton, continueButton;
 	public Camera uiCamera;
     public GameObject NGUIRoot;
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
     private int UILayerMask = 7;
+    private float totalGameTime;
     private MGNetWorking mgNetWorking;
+    void Awake()
+    {
+        totalGameTime = 60f;
+    }
     void Start()
     {
+        InvokeRepeating("gameTimer", 0, 0.01f);
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
         MGNotificationCenter.defaultCenter().addObserver(this, stopNotification, uiEvent.stopGame);
         MGNotificationCenter.defaultCenter().addObserver(this, continueNotification, uiEvent.continueGame);
@@ -31,6 +37,30 @@ public class createRoleUI : MonoBehaviour {
         {
             createLaterRoleUI();
         }
+    }
+    GameObject createOneUI(GameObject gameObject, Vector3 pos)
+    {
+        GameObject objc = GameObject.Instantiate(gameObject, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
+        objc.transform.parent = NGUIRoot.transform;
+        objc.layer = UILayerMask;
+        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(pos, uiCamera);
+        objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
+        return objc;
+    }
+    public void gameTimer()
+    {
+        totalGameTime -= 0.01f;
+        int frontNum=(int)Math.Floor(totalGameTime);
+        int laterNum=(int)((totalGameTime-frontNum)*100);
+        if (laterNum < 10)
+        {
+            gameTimerLabel.GetComponent<UILabel>().text = frontNum + ":0" + laterNum;
+        }
+        else
+        {
+            gameTimerLabel.GetComponent<UILabel>().text = frontNum + ":" + laterNum;
+        }
+        
     }
     public void continueNotification(MGNotification notification)
     {
@@ -60,26 +90,13 @@ public class createRoleUI : MonoBehaviour {
 
             MGGlobalDataCenter.defaultCenter().isStop = true;
             Time.timeScale = 0;
-            stopLayerObj = GameObject.Instantiate(stopLayer, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-            stopLayerObj.transform.parent = NGUIRoot.transform;
-            stopLayerObj.layer = UILayerMask;
-            stopLayerObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(Vector3.zero, uiCamera);
-			stopLayerObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
 
-            continueButtonObj = GameObject.Instantiate(continueButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-            continueButtonObj.transform.parent = NGUIRoot.transform;
+            stopLayerObj=createOneUI(stopLayer, Vector3.zero);
+            continueButtonObj = createOneUI(continueButton, Vector3.zero);
             continueButtonObj.GetComponent<UISprite>().depth = 3;
-            continueButtonObj.layer = UILayerMask;
-            continueButtonObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(Vector3.zero, uiCamera);
-			continueButtonObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
             UIEventListener.Get(continueButtonObj).onClick = continueGame;
-
-            homeButtonObj = GameObject.Instantiate(homeButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-            homeButtonObj.transform.parent = NGUIRoot.transform;
+            homeButtonObj=createOneUI(homeButton,new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2+0.3f, MGGlobalDataCenter.defaultCenter().screenBottomY + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2+0.3f, 0f));
             homeButtonObj.GetComponent<UISprite>().depth = 3;
-            homeButtonObj.layer = UILayerMask;
-            homeButtonObj.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2+0.3f, MGGlobalDataCenter.defaultCenter().screenBottomY + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2+0.3f, 0f), uiCamera);
-			homeButtonObj.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
             UIEventListener.Get(homeButtonObj).onClick = homeClick;
         }
     }
@@ -114,71 +131,31 @@ public class createRoleUI : MonoBehaviour {
     public void createCommonUI()
     {
         print("createCommonUI");
-        GameObject objc = GameObject.Instantiate(downButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + 1.5f*MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
-
-        objc = GameObject.Instantiate(upButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 1.5f*MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
-
-        objc = GameObject.Instantiate(stopButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer = UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.4f, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.4f, 0f), uiCamera);
-        objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
+        createOneUI(downButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + 1.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        createOneUI(upButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 1.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        GameObject objc = createOneUI(stopButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.4f, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.4f, 0f));
         UIEventListener.Get(objc).onClick = clickStop;
-
+        gameTimerLabel = createOneUI(gameTimerLabel, new Vector3(1.2f, MGGlobalDataCenter.defaultCenter().screenTopY, 0));
+        gameTimerLabel.GetComponent<UILabel>().text = "60:00";
     }
 	public void createFrontRoleUI()
     {
         print("createFrontRoleUI");
         //飞镖按钮UI
-        GameObject objc= GameObject.Instantiate(dartButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-		objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX-MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f),uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
+        createOneUI(dartButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
         //路障按钮UI
-        objc = GameObject.Instantiate(roadblockButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
+        createOneUI(roadblockButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
         //击退按钮
-        objc = GameObject.Instantiate(beatbackButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer = UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
-
-        
+        createOneUI(beatbackButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f)); 
     }
     public void createLaterRoleUI()
     {
         print("createLaterRoleUI");
         //闪现按钮UI
-        GameObject objc = GameObject.Instantiate(blinkButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX-MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
+        createOneUI(blinkButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
         //金钟罩按钮UI
-        objc = GameObject.Instantiate(bonesButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
-        
-		objc = GameObject.Instantiate(sprintButton, new Vector3(0, 0, 0), Quaternion.Euler(0, 0, 0)) as GameObject;
-        objc.transform.parent = NGUIRoot.transform;
-        objc.layer =  UILayerMask;
-        objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth , -4f, 0f), uiCamera);
-		objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
-        
+        createOneUI(bonesButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        //冲刺
+        createOneUI(sprintButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
     }
 }
