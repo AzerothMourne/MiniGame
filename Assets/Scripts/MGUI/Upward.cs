@@ -8,6 +8,8 @@ public class Upward : MonoBehaviour {
     private Vector3 originVec3;
     private float duration;
 
+    private MusicPlayer music;
+
 	// Use this for initialization
 	void Start () {
         cameraMoveSpeed = 8f;
@@ -16,6 +18,8 @@ public class Upward : MonoBehaviour {
 		isClick = false;
         isMoveCamera = false;
         originVec3 = transform.localScale;
+
+        music = (GetComponent("MusicPlayer") as MusicPlayer);
 	}
 
 	void Update(){
@@ -57,6 +61,9 @@ public class Upward : MonoBehaviour {
 
 		//将向上的按钮变为跳的按钮
         isMoveCamera = true;
+        //
+        if (this.GetComponent<UISprite>().spriteName == "up")
+            music.play("Sound/updown_roll");
 
 		this.GetComponent<UISprite>().spriteName = "jump";
         this.GetComponent<UIButton>().normalSprite = "jump";
