@@ -23,6 +23,6 @@ public class AudioManager : MonoBehaviour {
 	}
 
 	public  void  MusicBackground() {
-		//audio.PlayOneShot(background);
+		//audio.Play (background);//(backgrd);
 	}
 }
