@@ -62,7 +62,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 187396}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -52, z: 0}
+  m_LocalPosition: {x: 0, y: -75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 487400}
@@ -152,12 +152,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 187396}
   hover: {r: 1, g: 1, b: .999945939, a: 1}
-  pressed: {r: 1, g: 1, b: 1, a: 1}
+  pressed: {r: 1, g: 0, b: 0, a: 1}
   disabledColor: {r: 1, g: 1, b: 1, a: 1}
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 
-  pressedSprite: mingyuePress
+  pressedSprite: 
   disabledSprite: 
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
@@ -177,12 +177,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tweenTarget: {fileID: 187398}
   hover: {r: 1, g: 1, b: 1, a: 1}
-  pressed: {r: 1, g: .992647052, b: .977941155, a: 1}
+  pressed: {r: 1, g: 0, b: 0, a: 1}
   disabledColor: {r: 1, g: 1, b: 1, a: 1}
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 
-  pressedSprite: tianyaPress
+  pressedSprite: 
   disabledSprite: 
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
@@ -258,13 +258,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 256
-  mHeight: 56
+  mWidth: 362
+  mHeight: 78
   mDepth: 7
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.57142878
+  aspectRatio: 4.64102554
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -308,13 +308,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 256
-  mHeight: 56
+  mWidth: 362
+  mHeight: 78
   mDepth: 6
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 4.57142878
+  aspectRatio: 4.64102554
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -358,12 +358,12 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 266
-  mHeight: 172
+  mWidth: 400
+  mHeight: 259
   mDepth: 5
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
-  keepAspectRatio: 0
+  keepAspectRatio: 1
   aspectRatio: 1.54651165
   mType: 0
   mFillDirection: 4

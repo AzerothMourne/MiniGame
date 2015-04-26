@@ -110,6 +110,8 @@ public class MyNetworkTest : MonoBehaviour {
         }
         else
         {
+
+            //收到IP，连接主机
             MGGlobalDataCenter.defaultCenter().serverIp = resultstr;
             MGNetWorking.findHost();
         }
