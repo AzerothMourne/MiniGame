@@ -67,7 +67,7 @@ public class startUI : MonoBehaviour {
 		//实例化选择角色的界面
 		ChooseUIObj = GameObject.Instantiate (chooseButton, new Vector3 (0, 0, 0), Quaternion.Euler (0, 0, 0)) as GameObject;
 		ChooseUIObj.transform.parent = NGUIRoot.transform;
-		ChooseUIObj.transform.localPosition = new Vector3 (4, -13, 0);
+		ChooseUIObj.transform.localPosition = new Vector3 (0, 0, 0);
 		ChooseUIObj.transform.localScale = new Vector3 (1, 1, 1);
 		ChooseUIObj.GetComponent<UISprite>().depth = 7;
 		clicktianya ();
@@ -78,7 +78,7 @@ public class startUI : MonoBehaviour {
 		print ("createFuzzyBG");
 		FuzzyUIObj = GameObject.Instantiate(fuzzyButton, new Vector3(0,0,0),Quaternion.Euler(0,0,0)) as GameObject;
 		FuzzyUIObj.transform.parent = NGUIRoot.transform;
-		FuzzyUIObj.transform.localPosition = new Vector3(-1, 1, 0);
+		FuzzyUIObj.transform.localPosition = new Vector3(0, 0, 0);
 		FuzzyUIObj.transform.localScale = new Vector3(1, 1, 1);
 	}
 }

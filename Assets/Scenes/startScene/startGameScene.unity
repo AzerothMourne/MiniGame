@@ -276,7 +276,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chooseButton: {fileID: 187400, guid: a3b59b356603aaa418aac5fe1112686d, type: 2}
-  fuzzyButton: {fileID: 0}
+  fuzzyButton: {fileID: 143902, guid: d14fdcfa26d09844a8daa6e7561525bb, type: 2}
   NGUIRoot: {fileID: 937347956}
   isPressStartButton: 0
   countPress: 0
@@ -1029,11 +1029,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6792b57255bb15d48a982ad291c0dfe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ipInput: {fileID: 1035888131}
   connecttions: 10
   listenPort: 8899
   mySocketPort: 9000
-  log: {fileID: 124124540}
+  log: {fileID: 0}
   cube: {fileID: 1035888128}
 --- !u!4 &1594390664
 Transform:
