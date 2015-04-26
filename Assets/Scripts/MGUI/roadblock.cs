@@ -1,13 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class roadblock : MonoBehaviour {
-    public float cdTime = 2;
-    private bool isCD = false;
-    private UISprite cdBack;
-    public bool direction;// true 顺时针，false逆时针
-    public bool addOrDec;// true 添加,false 减少
-    public GameObject cdBackObject;
+public class roadblock : UIBase
+{
     // Use this for initialization
     void Start()
     {
@@ -21,10 +16,10 @@ public class roadblock : MonoBehaviour {
     {
         if (isCD)
         {
-            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / MGSkillRoadblockInfo.skillCD) * Time.deltaTime;
             if (addOrDec)
             {
-                if (cdBack.fillAmount >= 0.95f)
+                if (cdBack.fillAmount >= 1f)
                 {
                     isCD = false;
                     cdBack.fillAmount = 1f;
@@ -32,7 +27,7 @@ public class roadblock : MonoBehaviour {
             }
             else
             {
-                if (cdBack.fillAmount <= 0.05f)
+                if (cdBack.fillAmount <= 0f)
                 {
                     isCD = false;
                     cdBack.fillAmount = 0f;
@@ -43,17 +38,14 @@ public class roadblock : MonoBehaviour {
     }
     public void OnMouseDown()
     {
-        if (!isCD)
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
+        if (!isCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
-            cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockFormerEventId, null);
-            else
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblockLatterEventId, null);
+            cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblock, null);
         }
-        print("OnMouseDown");
        
 
     }

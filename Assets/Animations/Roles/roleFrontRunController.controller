@@ -8,31 +8,49 @@ AnimatorController:
   m_Name: roleFrontRunController
   serializedVersion: 2
   m_AnimatorParameters:
-  - m_Name: pressDartButton
+  - m_Name: RunToFirstJump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: jumpUP
+  - m_Name: FirstJumpToSecondJump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: fallDown
+  - m_Name: FallDownToRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: secondJump
+  - m_Name: RollToFallDown
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: rollBack
+  - m_Name: FirstJumpToFallDown
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: RunToRoll
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: FallDownToRoll
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: RollToRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -50,27 +68,7 @@ AnimatorController:
     m_IKPass: 0
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
---- !u!1101 &110120792
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110268284}
-  m_DstState: {fileID: 110206318}
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: jumpUP
-    m_EventTreshold: 0
-    m_ExitTime: 1
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110125068
+--- !u!1101 &110114812
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -83,14 +81,14 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: fallDown
+    m_ConditionEvent: RollToFallDown
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110133674
+--- !u!1101 &110120792
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -98,19 +96,39 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 110268284}
-  m_DstState: {fileID: 110281786}
-  m_TransitionDuration: 0
+  m_DstState: {fileID: 110206318}
+  m_TransitionDuration: .00412517786
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: pressDartButton
+    m_ConditionEvent: RunToFirstJump
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110146986
+--- !u!1101 &110123574
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110206318}
+  m_DstState: {fileID: 110278196}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: FirstJumpToFallDown
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110132538
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -123,27 +141,27 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: rollBack
+    m_ConditionEvent: RunToRoll
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110147860
+--- !u!1101 &110136004
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_SrcState: {fileID: 110213520}
+  m_SrcState: {fileID: 110278196}
   m_DstState: {fileID: 110268284}
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: rollBack
+  - m_ConditionMode: 1
+    m_ConditionEvent: FallDownToRun
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -163,54 +181,34 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: secondJump
+    m_ConditionEvent: FirstJumpToSecondJump
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110158606
+--- !u!1101 &110183610
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: 
-  m_SrcState: {fileID: 110206318}
-  m_DstState: {fileID: 110278196}
-  m_TransitionDuration: 0
-  m_TransitionOffset: 0
-  m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: fallDown
-    m_EventTreshold: 0
-    m_ExitTime: 1
-  m_Atomic: 1
-  m_Solo: 0
-  m_Mute: 0
-  m_CanTransitionToSelf: 0
---- !u!1101 &110160838
-Transition:
-  serializedVersion: 2
-  m_ObjectHideFlags: 3
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_Name: 
-  m_SrcState: {fileID: 110281786}
+  m_SrcState: {fileID: 110213520}
   m_DstState: {fileID: 110268284}
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: pressDartButton
+  - m_ConditionMode: 1
+    m_ConditionEvent: RollToRun
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
   m_Solo: 0
   m_Mute: 0
   m_CanTransitionToSelf: 0
---- !u!1101 &110179860
+--- !u!1101 &110190882
 Transition:
   serializedVersion: 2
   m_ObjectHideFlags: 3
@@ -218,12 +216,12 @@ Transition:
   m_PrefabInternal: {fileID: 0}
   m_Name: 
   m_SrcState: {fileID: 110278196}
-  m_DstState: {fileID: 110268284}
+  m_DstState: {fileID: 110213520}
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: fallDown
+  - m_ConditionMode: 1
+    m_ConditionEvent: FallDownToRoll
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -241,7 +239,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 668a40aec0e624f44861a534d3391d54, type: 2}
   m_ParentStateMachine: {fileID: 110768284}
-  m_Position: {x: 552, y: 204, z: 0}
+  m_Position: {x: 408, y: 300, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -256,7 +254,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: dbe7e8366d162e647b8c40f945e3d842, type: 2}
   m_ParentStateMachine: {fileID: 110768284}
-  m_Position: {x: 552, y: 324, z: 0}
+  m_Position: {x: 408, y: 420, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -271,7 +269,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 98dc28812fd736941a9f30737bca9993, type: 2}
   m_ParentStateMachine: {fileID: 110768284}
-  m_Position: {x: 228, y: 204, z: 0}
+  m_Position: {x: 84, y: 300, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -286,7 +284,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 755b6ee35abb2794ba489f740cc1cb00, type: 2}
   m_ParentStateMachine: {fileID: 110768284}
-  m_Position: {x: 228, y: 324, z: 0}
+  m_Position: {x: 84, y: 420, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -301,7 +299,7 @@ State:
   m_Motions:
   - {fileID: 7400000, guid: 1f8c9d08969ca6540b028d0ec5d102c4, type: 2}
   m_ParentStateMachine: {fileID: 110768284}
-  m_Position: {x: 480, y: 96, z: 0}
+  m_Position: {x: 336, y: 180, z: 0}
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
@@ -323,29 +321,28 @@ StateMachine:
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
     data:
-      first: {fileID: 110268284}
-      second:
-      - {fileID: 110133674}
-      - {fileID: 110120792}
-      - {fileID: 110146986}
-    data:
-      first: {fileID: 110281786}
-      second:
-      - {fileID: 110160838}
-    data:
       first: {fileID: 110206318}
       second:
       - {fileID: 110156638}
-      - {fileID: 110158606}
-    data:
-      first: {fileID: 110278196}
-      second:
-      - {fileID: 110179860}
+      - {fileID: 110123574}
     data:
       first: {fileID: 110213520}
       second:
-      - {fileID: 110125068}
-      - {fileID: 110147860}
+      - {fileID: 110114812}
+      - {fileID: 110183610}
+    data:
+      first: {fileID: 110268284}
+      second:
+      - {fileID: 110120792}
+      - {fileID: 110132538}
+    data:
+      first: {fileID: 110278196}
+      second:
+      - {fileID: 110136004}
+      - {fileID: 110190882}
+    data:
+      first: {fileID: 110281786}
+      second: []
   m_MotionSetCount: 1
-  m_AnyStatePosition: {x: 228, y: 96, z: 0}
+  m_AnyStatePosition: {x: 84, y: 180, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

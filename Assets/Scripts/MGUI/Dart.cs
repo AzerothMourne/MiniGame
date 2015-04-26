@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Dart : MonoBehaviour {
+public class Dart : UIBase
+{
 
     private Animator dartAnim; 
 	public bool isPressDartButton;
 	int countDartFrame;
-	private bool isCD = false;//isCD表示内置CD 即GCD
-	private UISprite cdBack;
-	public bool direction;// true 顺时针，false逆时针
-	public bool addOrDec;// true 添加,false 减少
-	public GameObject cdBackObject;
     public UILabel dartNum;
     private float gcdTimer;
 	// Use this for initialization
@@ -51,12 +47,12 @@ public class Dart : MonoBehaviour {
                 gcdTimer = 0;
             }
         }
-        if (int.Parse(dartNum.text)<3)
+        if (int.Parse(dartNum.text) < MGSkillDartInfo.skillHoldLevel)
 		{
 			cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / MGSkillDartInfo.skillCD) * Time.deltaTime;
 			if (addOrDec)
 			{
-				if (cdBack.fillAmount >= 0.995f)
+				if (cdBack.fillAmount >= 1f)
 				{
                     int num = int.Parse(dartNum.text);
                     num++;
@@ -69,7 +65,7 @@ public class Dart : MonoBehaviour {
 			}
 			else
 			{
-				if (cdBack.fillAmount <= 0.005f)
+				if (cdBack.fillAmount <= 0f)
 				{
                     int num = int.Parse(dartNum.text);
                     num++;
@@ -82,8 +78,9 @@ public class Dart : MonoBehaviour {
 	}
     public void OnMouseDown()
     {
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
         int num = int.Parse(dartNum.text);
-        if (!isCD && num > 0)//如果不是GCD 且个数大于0 就可以放技能
+        if (!isCD && num > 0 && !MGGlobalDataCenter.defaultCenter().isBigSkilling)//如果不是GCD 且个数大于0 就可以放技能
         {
             print("update ********isPressDartButton : " + isPressDartButton);
             isPressDartButton = true;
@@ -96,11 +93,8 @@ public class Dart : MonoBehaviour {
             --num;
             dartNum.text = num.ToString();
             isCD = true;
-            cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.dartFormerEventId, null);
-            else
-                MGNotificationCenter.defaultCenter().postNotification(EventEnum.dartLatterEventId, null);
+            cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.dart, null);
         }
     }
 }

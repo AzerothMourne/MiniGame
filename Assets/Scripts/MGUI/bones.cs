@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class bones : MonoBehaviour {
+public class bones : UIBase
+{
 
-    public float cdTime = 2;
-    private bool isCD = false;
-    private UISprite cdBack;
-    public bool direction;// true 顺时针，false逆时针
-    public bool addOrDec;// true 添加,false 减少
-    private GameObject cdBackObject;
     void Awake()
     {
         cdBackObject = GameObject.Find("bonesBack");
@@ -20,26 +15,37 @@ public class bones : MonoBehaviour {
         direction = true;
         addOrDec = true;
     }
-
     // Update is called once per frame
     void Update()
     {
-        if (isCD)
+        if (isCD || holdCD)
         {
-            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / cdTime) * Time.deltaTime;
+            float time = MGSkillBonesInfo.skillCD;
+            if (holdCD) time = MGSkillBonesInfo.durationTime;
+            cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / time) * Time.deltaTime;
             if (addOrDec)
             {
-                if (cdBack.fillAmount >= 0.95f)
+                if (cdBack.fillAmount >= 1f)
                 {
-                    isCD = false;
+                    if (holdCD == true)
+                    {
+                        addOrDec = !addOrDec;
+                        holdCD = false;
+                    }
+                    isCD = !isCD;
                     cdBack.fillAmount = 1f;
                 }
             }
             else
             {
-                if (cdBack.fillAmount <= 0.05f)
+                if (cdBack.fillAmount <= 0f)
                 {
-                    isCD = false;
+                    if (holdCD == true)
+                    {
+                        addOrDec = !addOrDec;
+                        holdCD = false;
+                    }
+                    isCD = !isCD;
                     cdBack.fillAmount = 0f;
                 }
             }
@@ -48,12 +54,15 @@ public class bones : MonoBehaviour {
     }
     public void OnMouseDown()
     {
-        if (!isCD)
+        if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
+        if (!isCD && !holdCD && !MGGlobalDataCenter.defaultCenter().isBigSkilling)
         {
+            addOrDec = false;
+            direction = false;
             cdBack.fillAmount = addOrDec ? 0f : 1f;
-            isCD = true;
-            cdBackObject.transform.localScale = new Vector3(direction ? -1 : 1, 1, 1);
+            holdCD = true;
+            cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1)*(direction ? -1 : 1), 1, 1);
+            MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, null);
         }
-        print("OnMouseDown");
     }
 }

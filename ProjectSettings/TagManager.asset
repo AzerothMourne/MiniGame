@@ -3,6 +3,12 @@
 --- !u!78 &1
 TagManager:
   tags:
+  - UICamera
+  - Road
+  - MGSkill
+  - Background
+  - frontSkill
+  - laterSkill
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX
@@ -16,7 +22,7 @@ TagManager:
   User Layer 9: GameLayer
   User Layer 10: UILayer
   User Layer 11: front
-  User Layer 12: 
+  User Layer 12: sprintLayer
   User Layer 13: 
   User Layer 14: 
   User Layer 15: 

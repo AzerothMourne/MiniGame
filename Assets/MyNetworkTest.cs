@@ -8,7 +8,6 @@ public class MyNetworkTest : MonoBehaviour {
     public UILabel clientLog, serverLog;
     private Vector3 acceleration;
     public GameObject cube;
-    private bool cubeInitialed = false;
 	private string ip = "127.0.0.1";
     void Start()
     {

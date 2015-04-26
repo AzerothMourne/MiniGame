@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &141390
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 441390}
+  - 114: {fileID: 11451452}
+  m_Layer: 0
+  m_Name: beatback
+  m_TagString: frontSkill
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &441390
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141390}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -9.8171978, y: -2.01824665, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11451452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141390}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35620d2486fd9ec449555c8fbdbe2c73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plane: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+  posY: -10000
+  releaseSkillObjectName: 
+  speed: 0
+  wordSprite: {fileID: 137618, guid: 43ed0ac597380014f8eefedffb01ebea, type: 2}
+  wordSpriteArrayList:
+  - {fileID: 21300000, guid: bb48a068d410ee54d9fb72a71dbd70f0, type: 3}
+  - {fileID: 21300000, guid: a259ec7918124ef42992cf0e4deec8d6, type: 3}
+  - {fileID: 21300000, guid: 35f7deeda6251f44593764e2cc808a16, type: 3}
+  - {fileID: 21300000, guid: 225842dae96d97e4dbee4942450c03f8, type: 3}
+  wordPosArrayList:
+  - {x: .689999998, y: 1.79999995, z: 0}
+  - {x: 3.02999997, y: 1.16999996, z: 0}
+  - {x: 1.00999999, y: -.479999989, z: 0}
+  - {x: 3.38000011, y: -1.05999994, z: 0}
+  wordDelayTimeArrayList:
+  - .5
+  - 1
+  - 1.5
+  - 2
+  duration: 3
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 141390}
+  m_IsPrefabParent: 1
+  m_IsExploded: 1

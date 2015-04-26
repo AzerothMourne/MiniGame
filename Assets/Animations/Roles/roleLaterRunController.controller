@@ -8,25 +8,55 @@ AnimatorController:
   m_Name: roleLaterRunController
   serializedVersion: 2
   m_AnimatorParameters:
-  - m_Name: jumpUP
+  - m_Name: RunToFirstJump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: fallDown
+  - m_Name: FirstJumpToSecondJump
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: secondJump
+  - m_Name: FallDownToRun
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: rollBack
+  - m_Name: RollToFallDown
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: FirstJumpToFallDown
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: RunToRoll
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: FallDownToRoll
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: RollToRun
+    m_Type: 4
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 9100000}
+  - m_Name: sprint
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -57,7 +87,27 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: rollBack
+    m_ConditionEvent: RunToRoll
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110108708
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110260990}
+  m_DstState: {fileID: 110229748}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: sprint
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -76,8 +126,8 @@ Transition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: rollBack
+  - m_ConditionMode: 1
+    m_ConditionEvent: RollToRun
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -97,7 +147,27 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: jumpUP
+    m_ConditionEvent: RunToFirstJump
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110146794
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110229748}
+  m_DstState: {fileID: 110260990}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: sprint
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -117,7 +187,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: secondJump
+    m_ConditionEvent: FirstJumpToSecondJump
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -136,8 +206,28 @@ Transition:
   m_TransitionDuration: 0
   m_TransitionOffset: 0
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: fallDown
+  - m_ConditionMode: 1
+    m_ConditionEvent: FallDownToRun
+    m_EventTreshold: 0
+    m_ExitTime: 1
+  m_Atomic: 1
+  m_Solo: 0
+  m_Mute: 0
+  m_CanTransitionToSelf: 0
+--- !u!1101 &110171258
+Transition:
+  serializedVersion: 2
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: 
+  m_SrcState: {fileID: 110210394}
+  m_DstState: {fileID: 110204368}
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_Conditions:
+  - m_ConditionMode: 1
+    m_ConditionEvent: FallDownToRoll
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -157,7 +247,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: fallDown
+    m_ConditionEvent: RollToFallDown
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -177,7 +267,7 @@ Transition:
   m_TransitionOffset: 0
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: fallDown
+    m_ConditionEvent: FirstJumpToFallDown
     m_EventTreshold: 0
     m_ExitTime: 1
   m_Atomic: 1
@@ -244,6 +334,21 @@ State:
   m_IKOnFeet: 0
   m_Mirror: 0
   m_Tag: 
+--- !u!1102 &110260990
+State:
+  m_ObjectHideFlags: 3
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: sprintStep2
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Motions:
+  - {fileID: 7400000, guid: af1fbdc96e3629544b183d931de0d459, type: 2}
+  m_ParentStateMachine: {fileID: 110729748}
+  m_Position: {x: 72, y: 108, z: 0}
+  m_IKOnFeet: 0
+  m_Mirror: 0
+  m_Tag: 
 --- !u!1107 &110729748
 StateMachine:
   serializedVersion: 2
@@ -257,28 +362,35 @@ StateMachine:
   - {fileID: 110245482}
   - {fileID: 110210394}
   - {fileID: 110204368}
+  - {fileID: 110260990}
   m_ChildStateMachine: []
   m_ChildStateMachinePosition: []
   m_OrderedTransitions:
+    data:
+      first: {fileID: 110204368}
+      second:
+      - {fileID: 110184064}
+      - {fileID: 110117760}
+    data:
+      first: {fileID: 110210394}
+      second:
+      - {fileID: 110170268}
+      - {fileID: 110171258}
     data:
       first: {fileID: 110229748}
       second:
       - {fileID: 110141194}
       - {fileID: 110100578}
+      - {fileID: 110146794}
     data:
       first: {fileID: 110245482}
       second:
       - {fileID: 110184650}
       - {fileID: 110159486}
     data:
-      first: {fileID: 110210394}
+      first: {fileID: 110260990}
       second:
-      - {fileID: 110170268}
-    data:
-      first: {fileID: 110204368}
-      second:
-      - {fileID: 110184064}
-      - {fileID: 110117760}
+      - {fileID: 110108708}
   m_MotionSetCount: 1
   m_AnyStatePosition: {x: 480, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}

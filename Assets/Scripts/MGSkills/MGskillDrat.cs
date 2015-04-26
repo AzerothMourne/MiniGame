@@ -3,31 +3,26 @@ using System.Collections;
 using LitJson;
 
 public class MGskillDrat : MGSkillsBase{
-	public string releaseSkillObjcName;
 	public int speed;
-	void Awake()
-	{
-		releaseSkillObjcName = null;
-	}
+    public Vector3 direction;
+    private MGNetWorking mgNetWorking;
+	private long timestamp;
 	// Use this for initialization
 	void Start()
 	{
-
+        direction = Vector3.left;
+        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
+		timestamp = MGGlobalDataCenter.timestamp ();
 	}
-	public override void createSkillSprite(Vector3 pos)
+    public override Object createSkillSprite(Vector3 pos)
 	{
 		base.createSkillSprite(pos);
-		GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, -1));
+		return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, 0));
 	}
 	public override void playSkillAnimation()
 	{
 		base.playSkillAnimation();
-		if (posY == -10000)
-		{
-			posY = transform.position.y;
-		}
-		transform.Translate(-Vector3.right * speed * Time.deltaTime);
-		transform.position = new Vector3(transform.position.x,posY,transform.position.z);
+        transform.Translate(direction * speed * Time.deltaTime);
 	}
 	public override void playSkillSound()
 	{
@@ -45,26 +40,22 @@ public class MGskillDrat : MGSkillsBase{
 	
 	void OnTriggerEnter2D(Collider2D other)
 	{
-		if (other.name == "road" || other.name == "roadSecond")
+        if (other.tag != "Player")
 			return;
-		if (other.name != releaseSkillObjcName && releaseSkillObjcName != null)
+		if (other.name != "role")
 		{
-            MGSkillModel skillModel = new MGSkillModel();
-            skillModel.eventId = SkillEnum.dart;
+            MGMsgModel skillModel = new MGMsgModel();
+            skillModel.eventId = SkillEffectEnum.dart;
             skillModel.gameobjectName = other.name;
-            //发送给对面
-            //mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+            //发送给对面,产生技能效果
+            //mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
             //发送给自己
-            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.dart,skillModel);
-			print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName+";gameobjc:"+other.gameObject);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
+            print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjectName + ";gameobjc:" + other.gameObject);
+			Debug.Log("***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString());
+            UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+            label.text += "\r\n***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString() + ";releaseSkillObjectName" + releaseSkillObjectName;
 			Destroy(this.gameObject);
-		}
-	}
-	void OnTriggerExit2D(Collider2D other)
-	{
-		if (releaseSkillObjcName == null)
-		{
-			releaseSkillObjcName = other.name;
 		}
 	}
 }
