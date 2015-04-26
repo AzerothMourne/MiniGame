@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11487402}
   - 65: {fileID: 6587396}
   - 114: {fileID: 11487396}
+  - 114: {fileID: 11454890}
   m_Layer: 8
   m_Name: mingyue
   m_TagString: Untagged
@@ -29,6 +30,7 @@ GameObject:
   - 114: {fileID: 11487404}
   - 65: {fileID: 6587398}
   - 114: {fileID: 11487398}
+  - 114: {fileID: 11483884}
   m_Layer: 8
   m_Name: tianya
   m_TagString: Untagged
@@ -115,6 +117,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 194, y: 48, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11454890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1bd99dcf43f97d48bb6215c70f0cd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &11483884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1bd99dcf43f97d48bb6215c70f0cd40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11487396
 MonoBehaviour:
   m_ObjectHideFlags: 1

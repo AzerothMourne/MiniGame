@@ -244,7 +244,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 325997150}
-  - 114: {fileID: 325997149}
   - 114: {fileID: 325997151}
   m_Layer: 0
   m_Name: StartScript
@@ -253,17 +252,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &325997149
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 325997148}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f026f0a71b946bd43af744a3dc322111, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &325997150
 Transform:
   m_ObjectHideFlags: 0
@@ -288,9 +276,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   chooseButton: {fileID: 187400, guid: a3b59b356603aaa418aac5fe1112686d, type: 2}
+  fuzzyButton: {fileID: 0}
   NGUIRoot: {fileID: 937347956}
   isPressStartButton: 0
   countPress: 0
+  ChooseUIObj: {fileID: 187400, guid: a3b59b356603aaa418aac5fe1112686d, type: 2}
+  FuzzyUIObj: {fileID: 143902, guid: d14fdcfa26d09844a8daa6e7561525bb, type: 2}
+  tianyaObj: {fileID: 187398, guid: a3b59b356603aaa418aac5fe1112686d, type: 2}
+  mingyueObj: {fileID: 187396, guid: a3b59b356603aaa418aac5fe1112686d, type: 2}
 --- !u!1 &336384769
 GameObject:
   m_ObjectHideFlags: 0
