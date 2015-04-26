@@ -31,6 +31,7 @@ public class Jump : MonoBehaviour {
 	public bool isPressDown;
     private MGNetWorking mgNetWorking;
 
+	private MusicPlayer music;
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
 	private Animator jumpAnim;
 
@@ -42,6 +43,8 @@ public class Jump : MonoBehaviour {
 		isPressDown = false;
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 
+		//获取播放器对象
+		music = (GetComponent("MusicPlayer") as MusicPlayer);
 		//初始化动画
 		jumpAnim = this.GetComponent<Animator> ();
 
@@ -179,6 +182,7 @@ public class Jump : MonoBehaviour {
     {
         if (isDown == 1)
         {
+			music.play("Sound/updown_roll");
             upwardToLine(notification);
             return;
         }
@@ -226,6 +230,7 @@ public class Jump : MonoBehaviour {
  		if (isDown == 0) {
 			if(isGround){
 				//增加翻滚动作
+				music.play("Sound/updown_roll");
 				this.GetComponent<RoleAnimController> ().isRollBack = true;
 				jumpAnim.SetBool ("rollBack", this.GetComponent<RoleAnimController> ().isRollBack);
             	rigidbody2D.gravityScale = 0;

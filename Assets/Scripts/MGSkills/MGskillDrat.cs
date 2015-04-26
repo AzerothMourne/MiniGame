@@ -7,6 +7,10 @@ public class MGskillDrat : MGSkillsBase{
 	public int speed;
     private MGNetWorking mgNetWorking;
 	private long timestamp;
+	public bool isPlayDart;
+
+	//
+	private MusicPlayer music;
 	void Awake()
 	{
 		releaseSkillObjcName = null;
@@ -16,6 +20,10 @@ public class MGskillDrat : MGSkillsBase{
 	{
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 		timestamp = MGGlobalDataCenter.timestamp ();
+		
+		//获取播放器对象
+		isPlayDart = false;
+		music = (GetComponent("MusicPlayer") as MusicPlayer);
 	}
     public override Object createSkillSprite(Vector3 pos)
 	{
@@ -57,9 +65,12 @@ public class MGskillDrat : MGSkillsBase{
             skillModel.gameobjectName = other.name;
             //发送给对面,产生技能效果
             //mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
-            //发送给自己
-            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
+            //发送给自己/
+            //发送给自己/
+			MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
 			print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName+";gameobjc:"+other.gameObject);
+			//isPlayDart = true;
+			MGGlobalDataCenter.defaultCenter().isDartHit = true;
 			Debug.Log("***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString());
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
 			label.text+="\r\n***dart fly time:"+(MGGlobalDataCenter.timestamp()-timestamp).ToString();
