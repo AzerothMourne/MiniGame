@@ -164,12 +164,12 @@ public class RoleAnimController : MonoBehaviour {
         //通过速度判断是否下落,下落有2中情况，正常下落和加速下落 对应不同动画,前提条件是必须在空中，否则isRollBack表示上下翻滚。
         if (isPressDown && isFirstJump)//加速下落，切换到翻滚动作
         {
-            Debug.Log("切换加速下落动画");
+            //Debug.Log("切换加速下落动画");
             rigidbody2D.gravityScale = 10f;//保证加速下落过程中的重力
             //判断翻滚是否结束
             if (MGGlobalDataCenter.defaultCenter().roadOrignY - transform.position.y >= 0)
             {
-                Debug.Log("pressDown过程中接触地面");
+                //Debug.Log("pressDown过程中接触地面");
                 rigidbody2D.gravityScale = 0f;
                 rigidbody2D.velocity = Vector3.zero;
                 transform.Translate(Vector3.down * this.GetComponent<SpriteRenderer>().sprite.bounds.size.y * Time.deltaTime / rollDuration);
@@ -179,7 +179,7 @@ public class RoleAnimController : MonoBehaviour {
             }
             if (isPressDownToGround && isChangeDownOrUp)//如果接触地面 且切换了方向 则切换到上下翻滚判断逻辑
             {
-                Debug.Log("接触地面后切换方向");
+                //Debug.Log("接触地面后切换方向");
                 isFirstJump = false;
                 isPressDownToGround = false;
                 rigidbody2D.gravityScale = 0.0f;
@@ -187,10 +187,10 @@ public class RoleAnimController : MonoBehaviour {
             }
             else if (transform.position.y < MGGlobalDataCenter.defaultCenter().roadOrignY && Mathf.Abs(MGGlobalDataCenter.defaultCenter().roadOrignY - transform.position.y) > this.GetComponent<SpriteRenderer>().sprite.bounds.size.y )
             {
-                Debug.Log("MGGlobalDataCenter.defaultCenter().roadOrignY" + MGGlobalDataCenter.defaultCenter().roadOrignY);
-                Debug.Log("transform.position.y" + transform.position.y);
-                Debug.Log("this.GetComponent<SpriteRenderer>().sprite.bounds.size.y" + this.GetComponent<SpriteRenderer>().sprite.bounds.size.y);
-                Debug.Log("加速下翻动作完成");
+                //Debug.Log("MGGlobalDataCenter.defaultCenter().roadOrignY" + MGGlobalDataCenter.defaultCenter().roadOrignY);
+                //Debug.Log("transform.position.y" + transform.position.y);
+                //Debug.Log("this.GetComponent<SpriteRenderer>().sprite.bounds.size.y" + this.GetComponent<SpriteRenderer>().sprite.bounds.size.y);
+                //Debug.Log("加速下翻动作完成");
                 toNomalRun();
                 changeRollBackState();
             }

@@ -18,6 +18,7 @@ public class Dart : UIBase
         gcdTimer = 0;
 		direction = true;
 		addOrDec = true;
+        cdBackObject = GameObject.Find("dartBack");
 		cdBack = cdBackObject.GetComponent<UISprite>();
         dartNum.text = MGSkillDartInfo.skillHoldLevel.ToString();
 	}

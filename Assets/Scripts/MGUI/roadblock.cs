@@ -8,6 +8,7 @@ public class roadblock : UIBase
     {
         direction = true;
         addOrDec = true;
+        cdBackObject = GameObject.Find("roadblockBack");
         cdBack = cdBackObject.GetComponent<UISprite>();
     }
 

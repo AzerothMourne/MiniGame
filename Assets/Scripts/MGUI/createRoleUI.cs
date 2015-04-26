@@ -141,21 +141,21 @@ public class createRoleUI : MonoBehaviour {
 	public void createFrontRoleUI()
     {
         print("createFrontRoleUI");
-        //飞镖按钮UI
-        createOneUI(dartButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
         //路障按钮UI
-        createOneUI(roadblockButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        createOneUI(roadblockButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        //飞镖按钮UI
+        createOneUI(dartButton , new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
         //击退按钮
         createOneUI(beatbackButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f)); 
     }
     public void createLaterRoleUI()
     {
         print("createLaterRoleUI");
-        //闪现按钮UI
-        createOneUI(blinkButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
         //金钟罩按钮UI
-        createOneUI(bonesButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        createOneUI(bonesButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
         //冲刺
-        createOneUI(sprintButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        createOneUI(sprintButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        //闪现按钮UI
+        createOneUI(blinkButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
     }
 }

@@ -112,10 +112,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b4362171241d4f4f95940d7a496b181, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cdTime: 2
   direction: 1
   addOrDec: 1
-  cdBackObject: {fileID: 120270}
 --- !u!114 &11420272
 MonoBehaviour:
   m_ObjectHideFlags: 1

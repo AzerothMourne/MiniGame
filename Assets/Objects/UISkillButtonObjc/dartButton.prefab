@@ -174,10 +174,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda2cae2dff638644962b66b4baf7715, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isPressDartButton: 0
   direction: 0
   addOrDec: 0
-  cdBackObject: {fileID: 186728}
+  isPressDartButton: 0
   dartNum: {fileID: 11486726}
 --- !u!114 &11486730
 MonoBehaviour:
