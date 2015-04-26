@@ -26,7 +26,7 @@ public class RoleAnimController : MonoBehaviour {
 	float rollTimer,rollDuration;
     private float downSpeed;
     GameObject road;
-	
+    private MusicPlayer music;
 	// Use this for initialization
 	void Start () {
         isFirstJump = false;
@@ -39,6 +39,9 @@ public class RoleAnimController : MonoBehaviour {
         rollTimer = 0;
         rollDuration = 0.2f;
         road = GameObject.Find("road");
+
+        //获取播放器对象
+        music = (GetComponent("MusicPlayer") as MusicPlayer);
 
         jumpSprict = this.GetComponent<Jump>();
 		jumpAnim = this.GetComponent<Animator> ();
@@ -112,6 +115,7 @@ public class RoleAnimController : MonoBehaviour {
             downOrUp = false;
             rigidbody2D.gravityScale = 0f;
             collider2D.isTrigger = true;
+            music.play("Sound/updown_roll");
             setAllAnimStateToFalse();
             animStateToRoll();
             return;
@@ -153,6 +157,7 @@ public class RoleAnimController : MonoBehaviour {
             isRoll = true;
             downOrUp = true;
             rigidbody2D.gravityScale = 0f;
+            music.play("Sound/updown_roll");
             setAllAnimStateToFalse();
             animStateToRoll();
         }

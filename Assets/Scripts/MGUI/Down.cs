@@ -6,11 +6,15 @@ public class Down : UIBase
     private float cameraMoveSpeed;
     private bool isClick, isMoveCamera;
     private float timer;
+
+   // private MusicPlayer music;
 	// Use this for initialization
 	void Start () {
         cameraMoveSpeed = 8f;
 		timer = 0.0f;
 		isClick = false;
+
+    //    music = (GetComponent("MusicPlayer") as MusicPlayer);//获取播放器对象
 	}
 	
 	// Update is called once per frame
@@ -53,8 +57,12 @@ public class Down : UIBase
             MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
         else
             MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
-		//按向下后调出向上按钮
-        GameObject upButton=GameObject.Find("upButton(Clone)");
+        //按向下后调出向上按钮
+        GameObject upButton = GameObject.Find("upButton(Clone)");
+        //播放音效
+        //if(upButton.GetComponent<UISprite>().spriteName != "up")
+        //    music.play("Sound/updown_roll");
+     
         upButton.GetComponent<UISprite>().spriteName= "up";
         upButton.GetComponent<UIButton>().normalSprite = "up";
         isMoveCamera = true;

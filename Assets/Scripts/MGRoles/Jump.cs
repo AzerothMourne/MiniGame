@@ -18,24 +18,22 @@ public static class EventEnum{
 }
 public class Jump : MonoBehaviour {
 
-	public float forceMove ;
 	public bool isGround;
 	public float jumpVelocity ;
 	public float jumpSecond ;
-	public float jumpCount ;
+	private float jumpCount ;
     public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
-	public int isReceiveFlag;
 	
     public MGNetWorking mgNetWorking;
 
+	
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
 	private Animator jumpAnim;
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
 	void Start () {
         isGround = false;
-		isReceiveFlag = 0;
         roleAnimaController = this.GetComponent<RoleAnimController>();
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 

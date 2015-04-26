@@ -17,6 +17,7 @@ public class Upward : UIBase
 		isClick = false;
         isMoveCamera = false;
         originVec3 = transform.localScale;
+
 	}
 
 	void Update(){

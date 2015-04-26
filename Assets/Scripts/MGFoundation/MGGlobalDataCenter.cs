@@ -23,6 +23,9 @@ public class MGGlobalDataCenter  {
     public GameObject role, roleLater;
     private string _serverIp;
 	public float UIScale,roadOrignY;
+
+	public bool isDartHit;
+	public bool isDartDefence;
     public string serverIp
     {
         get
@@ -60,12 +63,15 @@ public class MGGlobalDataCenter  {
         this.lRoleBlood = 2;
         this.screenLiftX = -8.9f;
         this.screenRightX = -1*this.screenLiftX;
+
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
         this.NGUI_ButtonWidth = 1.65f;
 		this.UIScale = 1.5f;
         this.roadOrignY = -1000;
 		this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
+		this.isDartHit = false;
+		this.isDartDefence = false;
 	}
 
     public static MGGlobalDataCenter defaultCenter()
