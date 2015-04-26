@@ -75,13 +75,23 @@ NavMeshSettings:
     heightInaccuracy: 10
     tileSizeHint: 0
   m_NavMesh: {fileID: 0}
+<<<<<<< HEAD
+--- !u!1 &124124538
+=======
 --- !u!1 &69806155
+>>>>>>> origin/zhouqing_new
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
+<<<<<<< HEAD
+  - 4: {fileID: 124124539}
+  - 114: {fileID: 124124540}
+  m_Layer: 8
+  m_Name: log
+=======
   - 4: {fileID: 69806156}
   - 114: {fileID: 69806159}
   - 65: {fileID: 69806158}
@@ -89,16 +99,31 @@ GameObject:
   - 114: {fileID: 69806160}
   m_Layer: 8
   m_Name: startButton
+>>>>>>> origin/zhouqing_new
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
+--- !u!4 &124124539
+=======
 --- !u!4 &69806156
+>>>>>>> origin/zhouqing_new
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
+  m_GameObject: {fileID: 124124538}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -20, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 937347960}
+  m_RootOrder: 4
+--- !u!114 &124124540
+=======
   m_GameObject: {fileID: 69806155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 143, y: -194, z: 0}
@@ -107,10 +132,17 @@ Transform:
   m_Father: {fileID: 937347960}
   m_RootOrder: 3
 --- !u!114 &69806157
+>>>>>>> origin/zhouqing_new
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
+  m_GameObject: {fileID: 124124538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+=======
   m_GameObject: {fileID: 69806155}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -156,6 +188,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+>>>>>>> origin/zhouqing_new
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
@@ -177,6 +210,41 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
+<<<<<<< HEAD
+  mWidth: 548
+  mHeight: 418
+  mDepth: 3
+  autoResizeBoxCollider: 0
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 1.31100476
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 0}
+  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mText: 
+  mFontSize: 20
+  mFontStyle: 0
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 1
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!1 &315859424
+=======
   mWidth: 202
   mHeight: 84
   mDepth: 2
@@ -237,26 +305,50 @@ MonoBehaviour:
   to: {x: 1, y: 1, z: 1}
   updateTable: 1
 --- !u!1 &325997148
+>>>>>>> origin/zhouqing_new
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
+<<<<<<< HEAD
+  - 4: {fileID: 315859425}
+  - 114: {fileID: 315859428}
+  - 65: {fileID: 315859427}
+  - 114: {fileID: 315859426}
+  m_Layer: 8
+  m_Name: createHost
+=======
   - 4: {fileID: 325997150}
   - 114: {fileID: 325997151}
   m_Layer: 0
   m_Name: StartScript
+>>>>>>> origin/zhouqing_new
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+<<<<<<< HEAD
+--- !u!4 &315859425
+=======
 --- !u!4 &325997150
+>>>>>>> origin/zhouqing_new
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
+  m_GameObject: {fileID: 315859424}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -382, y: 226, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 937347960}
+  m_RootOrder: 2
+--- !u!114 &315859426
+=======
   m_GameObject: {fileID: 325997148}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -.0323454812, y: -.00718803424, z: 0}
@@ -265,10 +357,58 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!114 &325997151
+>>>>>>> origin/zhouqing_new
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
+  m_GameObject: {fileID: 315859424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 315859424}
+  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
+  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
+  disabledColor: {r: .5, g: .5, b: .5, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 1594390663}
+    mMethodName: createHost
+    mParameters: []
+    oneShot: 0
+--- !u!65 &315859427
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 315859424}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 150, y: 46, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &315859428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 315859424}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+=======
   m_GameObject: {fileID: 325997148}
   m_Enabled: 1
   m_EditorHideFlags: 0
@@ -322,6 +462,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+>>>>>>> origin/zhouqing_new
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
@@ -343,6 +484,41 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
+<<<<<<< HEAD
+  mWidth: 150
+  mHeight: 46
+  mDepth: 2
+  autoResizeBoxCollider: 1
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 3.2608695
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 0}
+  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mText: createHost
+  mFontSize: 20
+  mFontStyle: 0
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 1
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+--- !u!1 &661454545
+=======
   mWidth: 1034
   mHeight: 586
   mDepth: -3
@@ -364,30 +540,104 @@ MonoBehaviour:
   mSpriteName: mainBackground
   mFillCenter: 1
 --- !u!1 &632054397
+>>>>>>> origin/zhouqing_new
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
+<<<<<<< HEAD
+  - 4: {fileID: 661454546}
+  - 114: {fileID: 661454549}
+  - 65: {fileID: 661454548}
+  - 114: {fileID: 661454547}
+  m_Layer: 8
+  m_Name: findHost
+=======
   - 4: {fileID: 632054399}
   - 114: {fileID: 632054398}
   m_Layer: 8
   m_Name: player
+>>>>>>> origin/zhouqing_new
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &632054398
+<<<<<<< HEAD
+--- !u!4 &661454546
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 661454545}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -382, y: 166, z: 0}
+  m_LocalScale: {x: .999915004, y: .999915004, z: .999915004}
+  m_Children: []
+  m_Father: {fileID: 937347960}
+  m_RootOrder: 3
+--- !u!114 &661454547
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 661454545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fdca5042b1d12a4890ec1bd4f04290d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tweenTarget: {fileID: 661454545}
+  hover: {r: .882352948, g: .784313738, b: .588235319, a: 1}
+  pressed: {r: .717647076, g: .639215708, b: .482352942, a: 1}
+  disabledColor: {r: .5, g: .5, b: .5, a: 1}
+  duration: .200000003
+  dragHighlight: 0
+  hoverSprite: 
+  pressedSprite: 
+  disabledSprite: 
+  hoverSprite2D: {fileID: 0}
+  pressedSprite2D: {fileID: 0}
+  disabledSprite2D: {fileID: 0}
+  pixelSnap: 0
+  onClick:
+  - mTarget: {fileID: 1594390663}
+    mMethodName: findHost
+    mParameters: []
+    oneShot: 0
+--- !u!65 &661454548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 661454545}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 150, y: 46, z: 0}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &661454549
+=======
+--- !u!114 &632054398
+>>>>>>> origin/zhouqing_new
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+<<<<<<< HEAD
+  m_GameObject: {fileID: 661454545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9d0b5f3bbe925a408bd595c79d0bf63, type: 3}
+=======
   m_GameObject: {fileID: 632054397}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b3dc54f924693f41b5cbecb267e647a, type: 3}
+>>>>>>> origin/zhouqing_new
   m_Name: 
   m_EditorClassIdentifier: 
   leftAnchor:
@@ -409,6 +659,40 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
+<<<<<<< HEAD
+  mWidth: 150
+  mHeight: 46
+  mDepth: 2
+  autoResizeBoxCollider: 1
+  hideIfOffScreen: 0
+  keepAspectRatio: 0
+  aspectRatio: 3.2608695
+  keepCrispWhenShrunk: 1
+  mTrueTypeFont: {fileID: 0}
+  mFont: {fileID: 11400000, guid: 29056518aafb01b49a5b08faf8e30cff, type: 2}
+  mText: findHost
+  mFontSize: 20
+  mFontStyle: 0
+  mAlignment: 0
+  mEncoding: 1
+  mMaxLineCount: 0
+  mEffectStyle: 0
+  mEffectColor: {r: 0, g: 0, b: 0, a: 1}
+  mSymbols: 1
+  mEffectDistance: {x: 1, y: 1}
+  mOverflow: 0
+  mMaterial: {fileID: 0}
+  mApplyGradient: 1
+  mGradientTop: {r: 1, g: 1, b: 1, a: 1}
+  mGradientBottom: {r: .699999988, g: .699999988, b: .699999988, a: 1}
+  mSpacingX: 0
+  mSpacingY: 0
+  mShrinkToFit: 0
+  mMaxLineWidth: 0
+  mMaxLineHeight: 0
+  mLineWidth: 0
+  mMultiline: 1
+=======
   mWidth: 226
   mHeight: 98
   mDepth: 3
@@ -441,6 +725,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 937347960}
   m_RootOrder: 4
+>>>>>>> origin/zhouqing_new
 --- !u!1001 &729478550
 Prefab:
   m_ObjectHideFlags: 0
@@ -450,11 +735,19 @@ Prefab:
     m_Modifications:
     - target: {fileID: 400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_LocalPosition.x
+<<<<<<< HEAD
+      value: -160
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 249
+=======
       value: -132
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_LocalPosition.y
       value: 170
+>>>>>>> origin/zhouqing_new
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 45edf347f9f51214dbfbab27b16fbf01, type: 2}
       propertyPath: m_LocalPosition.z
@@ -590,10 +883,16 @@ Transform:
   m_Children:
   - {fileID: 993013705}
   - {fileID: 1035888129}
+<<<<<<< HEAD
+  - {fileID: 315859425}
+  - {fileID: 661454546}
+  - {fileID: 124124539}
+=======
   - {fileID: 336384770}
   - {fileID: 69806156}
   - {fileID: 632054399}
   - {fileID: 1869607284}
+>>>>>>> origin/zhouqing_new
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!1 &993013704
@@ -717,7 +1016,11 @@ Transform:
   m_PrefabInternal: {fileID: 729478550}
   m_GameObject: {fileID: 1035888128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+<<<<<<< HEAD
+  m_LocalPosition: {x: -160, y: 249, z: 0}
+=======
   m_LocalPosition: {x: -132, y: 170, z: 0}
+>>>>>>> origin/zhouqing_new
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1091894770}
