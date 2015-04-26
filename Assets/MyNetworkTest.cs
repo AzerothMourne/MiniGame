@@ -8,7 +8,7 @@ using System.Net.NetworkInformation;
 
 public delegate string UDPDelegate(int port);
 public class MyNetworkTest : MonoBehaviour {
-    public int connecttions = 10;
+    public int connecttions = 1;
     public int listenPort = 8899 , mySocketPort=10000;
     public UILabel log;
     private Vector3 acceleration;
