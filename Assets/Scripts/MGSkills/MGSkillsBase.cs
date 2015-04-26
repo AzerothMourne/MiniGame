@@ -94,7 +94,7 @@ public class MGSkillsBase : MonoBehaviour {
         component.depth += 1;                            //效果摄像机深度高于主摄像机
         component.cullingMask = 1 << bigSkillPlaneLayer;  //辅助渲染摄像机只渲染指定的层
         //防止复制多个声音侦听
-        AudioListener component2 = cameraObj.GetComponent<AudioListener>();
+		AudioListener component2 = this.m_cloneCamera.GetComponent<AudioListener>();
         if (component2 != null)
         {
             DestroyImmediate(component2);
