@@ -8,7 +8,6 @@ using System.Net.NetworkInformation;
 
 public delegate string UDPDelegate(int port);
 public class MyNetworkTest : MonoBehaviour {
-    public UIInput ipInput;
     public int connecttions = 10;
     public int listenPort = 8899 , mySocketPort=10000;
     public UILabel log;
@@ -52,7 +51,6 @@ public class MyNetworkTest : MonoBehaviour {
     {
         if (NetworkPeerType.Disconnected == Network.peerType)
         {
-            MGGlobalDataCenter.defaultCenter().serverIp = ipInput.label.text;
             //Debug.Log(MGGlobalDataCenter.defaultCenter().serverIp);
             //MGNetWorking.findHost();
             udpReceive.BeginInvoke(mySocketPort, UDPStartToReceiveCallback, null);

@@ -127,6 +127,8 @@ public class createRoleUI : MonoBehaviour {
         label.text += "\r\ndisconnect";
         Application.LoadLevel("startGameScene");
         label.text += "\r\nApplication.LoadLevel(\"startGameScene\")";
+        Time.timeScale = 1;
+        MGGlobalDataCenter.defaultCenter().isStop = false;
     }
     public void createCommonUI()
     {

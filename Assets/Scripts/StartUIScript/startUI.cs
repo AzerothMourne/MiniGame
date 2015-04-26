@@ -16,9 +16,7 @@ public class startUI : MonoBehaviour {
 	
 		isPressStartButton = false;
 		countPress = 0;
-
 		//加上背景音乐
-		print ("2");
 		AudioManager._instance.MusicBackground();
 	}
 	
@@ -55,11 +53,13 @@ public class startUI : MonoBehaviour {
 
 	public void OnChoosePlayer_tianya(GameObject button) {
 		print ("1 click start tianya");
+        this.GetComponent<MyNetworkTest>().findHost();
 	}
 
 
 	public void OnChoosePlayer_mingyue(GameObject button) {
 		print ("2 click start mingyue");
+        this.GetComponent<MyNetworkTest>().createHost();
 	}
 
 	public void createChooseUI() {
