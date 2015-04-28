@@ -13,8 +13,7 @@ public class startUI : MonoBehaviour {
 	public GameObject CloseButtonObj;
 	public GameObject tianyaObj;
 	public GameObject mingyueObj;
-
-	public bool isPressSlogan;
+	public bool isPressSlogan; //标语
 	public GameObject SloganObj;
 
 	// Use this for initialization
@@ -24,7 +23,6 @@ public class startUI : MonoBehaviour {
 		countPress = 0;
 		//加上背景音乐
 		AudioManager._instance.MusicBackground();
-
 		isPressSlogan = false;
 	}
 	
@@ -38,22 +36,19 @@ public class startUI : MonoBehaviour {
 			countPress += 1;
 		}
 
-
 		if(isPressSlogan || isPressStartButton && countPress == 1) {
-			print("1");
 			SloganObj.GetComponent<TypewriterEffect>().charsPerSecond = 2000;
 			isPressSlogan = false;
-			countPress += 1;
+			if(countPress == 1) {
+				countPress += 1;
+			}
 		}
-
-
 	}
 
 	public void OnStartButtonClick() {
 		isPressStartButton = true;
 		print ("click start button");
 	}
-
 	
 	public void clicktianya() {
 		print ("click tianya");
@@ -73,13 +68,11 @@ public class startUI : MonoBehaviour {
 		print("click CloseButton ");
 		UIEventListener.Get(CloseButtonObj).onClick = OnCloseButton;
 	}
-
-
+	
 	public void OnChoosePlayer_tianya(GameObject button) {
 		print ("1 click start tianya");
         this.GetComponent<MyNetworkTest>().findHost();
 	}
-
 
 	public void OnChoosePlayer_mingyue(GameObject button) {
 		print ("2 click start mingyue");
@@ -88,8 +81,20 @@ public class startUI : MonoBehaviour {
 
 	public void OnCloseButton(GameObject button) {
 		print ("3 click CloseButton");
+		resetParams();
+		Destroy(ChooseUIObj);
+		Destroy(FuzzyUIObj);
+		Destroy(tianyaObj);
+		Destroy(mingyueObj);
+		Destroy(CloseButtonObj);
 	}
 
+	public void resetParams() {
+		isPressStartButton = false;
+		countPress = 0;
+		isPressSlogan = true;
+	}
+	
 	public void createChooseUI() {
 		print ("createChooseUI");
 		//实例化选择角色的界面
@@ -124,7 +129,6 @@ public class startUI : MonoBehaviour {
 	public void OnSloganClick() {
 		isPressSlogan = true;
 		SloganObj = GameObject.Find ("slogan");
-		//SloganObj.GetComponent<TypewriterEffect>().charsPerSecond = 2000;
 		print("OnSloganClick");
 	}
 }
