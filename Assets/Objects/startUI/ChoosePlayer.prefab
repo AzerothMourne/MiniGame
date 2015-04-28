@@ -12,6 +12,7 @@ GameObject:
   - 65: {fileID: 6587396}
   - 114: {fileID: 11487396}
   - 114: {fileID: 11454890}
+  - 114: {fileID: 11417282}
   m_Layer: 8
   m_Name: mingyue
   m_TagString: Untagged
@@ -31,6 +32,7 @@ GameObject:
   - 65: {fileID: 6587398}
   - 114: {fileID: 11487398}
   - 114: {fileID: 11483884}
+  - 114: {fileID: 11433626}
   m_Layer: 8
   m_Name: tianya
   m_TagString: Untagged
@@ -47,7 +49,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 487400}
   - 114: {fileID: 11487406}
-  - 114: {fileID: 11487400}
   m_Layer: 8
   m_Name: ChoosePlayer
   m_TagString: Untagged
@@ -117,6 +118,36 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 194, y: 48, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &11417282
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187396}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b5083cfe83bb875479bd797c61594131, type: 3}
+  trigger: 0
+  volume: 1
+  pitch: 1
+--- !u!114 &11433626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 187398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d44bc69c2ca5f943b845318866dc1bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClip: {fileID: 8300000, guid: b5083cfe83bb875479bd797c61594131, type: 3}
+  trigger: 0
+  volume: 1
+  pitch: 1
 --- !u!114 &11454890
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -189,45 +220,6 @@ MonoBehaviour:
   disabledSprite2D: {fileID: 0}
   pixelSnap: 0
   onClick: []
---- !u!114 &11487400
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 187400}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e7459110b9666449485c40f25362a5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  method: 0
-  style: 0
-  animationCurve:
-    serializedVersion: 2
-    m_Curve:
-    - time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 1
-      tangentMode: 0
-    - time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 0
-      tangentMode: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-  ignoreTimeScale: 1
-  delay: 0
-  duration: .5
-  steeperCurves: 0
-  tweenGroup: 0
-  onFinished: []
-  eventReceiver: {fileID: 0}
-  callWhenFinished: 
-  from: {x: 0, y: 1, z: 1}
-  to: {x: 1, y: 1, z: 1}
-  updateTable: 0
 --- !u!114 &11487402
 MonoBehaviour:
   m_ObjectHideFlags: 1
