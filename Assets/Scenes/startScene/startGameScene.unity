@@ -265,8 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connecttions: 10
-  listenPort: 8899
-  mySocketPort: 10000
   log: {fileID: 0}
   cube: {fileID: 0}
 --- !u!4 &325997150

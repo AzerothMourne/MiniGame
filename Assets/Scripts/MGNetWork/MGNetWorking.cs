@@ -3,11 +3,11 @@ using System.Collections;
 using LitJson;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+
 /// <summary>
 /// 还需要建立一个误差校正机制，保证客户机以服务器端的数据为主（重要）
 /// </summary>
 public class MGNetWorking : MonoBehaviour {
-
 	[DllImport("__Internal")]
 	private static extern void _findHost();
 	[DllImport("__Internal")]
@@ -24,7 +24,6 @@ public class MGNetWorking : MonoBehaviour {
 		else if(Application.platform==RuntimePlatform.IPhonePlayer)
 			_findHost();
 	}
-
 	public static void createHost()
 	{
         MGGlobalDataCenter.defaultCenter().isHost = true;
@@ -89,40 +88,7 @@ public class MGNetWorking : MonoBehaviour {
             receiverMessageFromPeer(msg);
         }
     }
-    //同步gameobject的方法
-    void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
-    {
-		GameObject log = GameObject.Find ("log");
-		if(log != null){
-			log.GetComponent<UIInput>().label.text+="\r\nOnSerializeNetworkView";
-		}
-        if (stream.isWriting)
-        {
-            Vector3 roleVelocity = MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity;
-            Vector3 roleLaterVelocity = MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity;
-            Vector3 rolePos = MGGlobalDataCenter.defaultCenter().role.transform.position;
-            Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            stream.Serialize(ref roleVelocity);
-            stream.Serialize(ref roleLaterVelocity);
-            stream.Serialize(ref rolePos);
-            stream.Serialize(ref roleLaterPos);
-        }
-        else
-        {
-            Vector3 roleVelocity = Vector3.zero;
-            Vector3 roleLaterVelocity = Vector3.zero;
-            Vector3 rolePos = Vector3.zero;
-            Vector3 roleLaterPos = Vector3.zero;
-            stream.Serialize(ref roleVelocity);
-            stream.Serialize(ref roleLaterVelocity);
-            stream.Serialize(ref rolePos);
-            stream.Serialize(ref roleLaterPos);
-            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = roleVelocity;
-            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = roleLaterVelocity;
-            MGGlobalDataCenter.defaultCenter().role.transform.position = rolePos;
-            MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
-        }
-    }
+    
 	public void receiverMessageFromPeer ( string msg)
 	{
 		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
@@ -133,7 +99,7 @@ public class MGNetWorking : MonoBehaviour {
     {
         return Network.Instantiate(prefab, position, rotation, group);
     }
-    
+    /*
     void Awake()
     {
 		Camera camera=GameObject.Find("Main Camera").GetComponent<Camera>();
@@ -165,4 +131,6 @@ public class MGNetWorking : MonoBehaviour {
 		singleInstance.NGUI_ButtonWidth = (pos.x - singleInstance.screenLiftX)*MGGlobalDataCenter.defaultCenter().UIScale;
         Debug.Log(pos + "********" + singleInstance.NGUI_ButtonWidth);
     }
+    */
+    
 }

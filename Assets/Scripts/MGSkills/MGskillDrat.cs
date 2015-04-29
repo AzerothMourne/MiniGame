@@ -5,20 +5,16 @@ using LitJson;
 public class MGskillDrat : MGSkillsBase{
 	public int speed;
     public Vector3 direction;
-    private MGNetWorking mgNetWorking;
 	private long timestamp;
 	public bool isPlayDart;
-	private MusicPlayer music;
 	// Use this for initialization
 	void Start()
 	{
         direction = Vector3.left;
-        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 		timestamp = MGGlobalDataCenter.timestamp ();
 		
 		//获取播放器对象
 		isPlayDart = false;
-		music = (GetComponent("MusicPlayer") as MusicPlayer);
 	}
     public override Object createSkillSprite(Vector3 pos)
 	{

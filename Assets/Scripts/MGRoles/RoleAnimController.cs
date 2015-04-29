@@ -25,7 +25,6 @@ public class RoleAnimController : MonoBehaviour {
     public bool isPressDown,isPressDownToGround;//在空中按了下
 	float rollTimer,rollDuration;
     private float downSpeed;
-    GameObject road;
     private MusicPlayer music;
 	// Use this for initialization
 	void Start () {
@@ -38,7 +37,6 @@ public class RoleAnimController : MonoBehaviour {
 
         rollTimer = 0;
         rollDuration = 0.2f;
-        road = GameObject.Find("road");
 
         //获取播放器对象
         music = (GetComponent("MusicPlayer") as MusicPlayer);

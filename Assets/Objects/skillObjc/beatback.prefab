@@ -40,7 +40,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
-  posY: -10000
   releaseSkillObjectName: 
   speed: 0
   wordSprite: {fileID: 137618, guid: 43ed0ac597380014f8eefedffb01ebea, type: 2}
@@ -59,7 +58,7 @@ MonoBehaviour:
   - 1
   - 1.5
   - 2
-  duration: 3
+  duration: 30
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

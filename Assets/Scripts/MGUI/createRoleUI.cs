@@ -16,12 +16,7 @@ public class createRoleUI : MonoBehaviour {
     public GameObject NGUIRoot;
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
     private int UILayerMask = 7;
-    private float totalGameTime;
     private MGNetWorking mgNetWorking;
-    void Awake()
-    {
-        totalGameTime = 60f;
-    }
     void Start()
     {
         InvokeRepeating("gameTimer", 0, 0.01f);
@@ -49,9 +44,9 @@ public class createRoleUI : MonoBehaviour {
     }
     public void gameTimer()
     {
-        totalGameTime -= 0.01f;
-        int frontNum=(int)Math.Floor(totalGameTime);
-        int laterNum=(int)((totalGameTime-frontNum)*100);
+        MGGlobalDataCenter.defaultCenter().totalGameTime -= 0.01f;
+        int frontNum = (int)Math.Floor(MGGlobalDataCenter.defaultCenter().totalGameTime);
+        int laterNum = (int)((MGGlobalDataCenter.defaultCenter().totalGameTime - frontNum) * 100);
         if (laterNum < 10)
         {
             gameTimerLabel.GetComponent<UILabel>().text = frontNum + ":0" + laterNum;
@@ -128,7 +123,7 @@ public class createRoleUI : MonoBehaviour {
         Application.LoadLevel("startGameScene");
         label.text += "\r\nApplication.LoadLevel(\"startGameScene\")";
         Time.timeScale = 1;
-        MGGlobalDataCenter.defaultCenter().isStop = false;
+        this.GetComponent<MGInitGameData>().destroyGameData();
     }
     public void createCommonUI()
     {

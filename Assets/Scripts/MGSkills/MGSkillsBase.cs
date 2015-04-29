@@ -36,7 +36,7 @@ public static class MGSkillBonesInfo
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
     public static float SkillEffectSpeed = 1f / 4f;
-    public static float durationTime = 2.0f;
+    public static float durationTime = 20.0f;
 }
 public static class MGSkillSprintInfo
 {
@@ -45,7 +45,7 @@ public static class MGSkillSprintInfo
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
     public static float SkillEffectSpeed = 1f / 2f;
-    public static float durationTime = 2.0f;
+    public static float durationTime = 20.0f;
 }
 public static class MGSkillBeatbackInfo
 {
@@ -59,7 +59,7 @@ public static class MGSkillBeatbackInfo
 public class MGSkillsBase : MonoBehaviour {
     protected GameObject m_cloneCamera;
     public GameObject plane;
-    private int bigSkillPlaneLayer=12;
+    public int bigSkillPlaneLayer=12;
     public string releaseSkillObjectName;
     /// <summary>
     /// 虚函数 

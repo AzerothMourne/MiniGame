@@ -223,6 +223,7 @@ MonoBehaviour:
   downButton: {fileID: 123110, guid: d4767184f3dfc2045b686a31109c9e56, type: 2}
   upButton: {fileID: 113138, guid: 245a6c38919fd604d83fa107552dfcb1, type: 2}
   stopButton: {fileID: 0}
+  gameTimerLabel: {fileID: 0}
   stopLayer: {fileID: 0}
   homeButton: {fileID: 0}
   continueButton: {fileID: 0}

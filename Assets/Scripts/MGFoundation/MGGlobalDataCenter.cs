@@ -17,12 +17,13 @@ public class MGGlobalDataCenter  {
     public bool isNetworkViewEnable;
     public bool isHost,isBigSkilling,isStop;
     public int connecttions;
-    public int listenPort;
+    public int listenPort,mySocketPort;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
     public GameObject role, roleLater;
     private string _serverIp;
 	public float UIScale,roadOrignY;
+    public float totalGameTime;
 
 	public bool isDartHit;
 	public bool isDartDefence;
@@ -50,30 +51,36 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
+        backToDefaultValues();
+	}
+    public void backToDefaultValues()
+    {
+        Time.timeScale = 1;
+        this.totalGameTime = 60f;
         this.isStop = false;
         this.isBigSkilling = false;
         this.role = null;
         this.roleLater = null;
         this.connecttions = 1;
         this.listenPort = 8899;
+        this.mySocketPort = 10000;
         this.isNetworkViewEnable = false;
-        this.isHost = true;
-		//this.isHost = false;
+        //this.isHost = true;
+        this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -8.9f;
-        this.screenRightX = -1*this.screenLiftX;
+        this.screenRightX = -1 * this.screenLiftX;
 
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
         this.NGUI_ButtonWidth = 1.65f;
-		this.UIScale = 1.5f;
+        this.UIScale = 1.5f;
         this.roadOrignY = -1000;
-		this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
-		this.isDartHit = false;
-		this.isDartDefence = false;
-	}
-
+        this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
+        this.isDartHit = false;
+        this.isDartDefence = false;
+    }
     public static MGGlobalDataCenter defaultCenter()
     {
 		if (instance == null) {

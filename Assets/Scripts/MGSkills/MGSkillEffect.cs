@@ -15,14 +15,12 @@ public class MGSkillEffect : MonoBehaviour {
     private string shortBonesName;
     public bones blinkSkillBones;
     private float timer, blinkSkillBonesTimer;
-    private MGNotification dartSwitch,blinkSwitch,sprintSwitch;
+    private MGNotification sprintSwitch;
     private GameObject tempObjcet;
 	// Use this for initialization
 	void Start () {
         timer = 0;
         blinkSkillBonesTimer = 1;
-        dartSwitch = null;
-        blinkSwitch = null;
         sprintSwitch = null;
         tempObjcet = null;
         shortBonesName = "bones_short";
@@ -103,7 +101,6 @@ public class MGSkillEffect : MonoBehaviour {
         if (notification != null)
         {
             blinkSkillBonesTimer = 0;
-            blinkSwitch = notification;
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             Debug.Log("skillModel:" + skillModel + ",eventId:" + skillModel.eventId + ",gameobjectName:" + skillModel.gameobjectName);
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
@@ -125,8 +122,6 @@ public class MGSkillEffect : MonoBehaviour {
             {
 				
                 timer = 0;
-                blinkSwitch = null;
-
             }
         }
     }
@@ -134,7 +129,6 @@ public class MGSkillEffect : MonoBehaviour {
     {
         if (notification!=null)
         {
-            dartSwitch = notification;
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
@@ -146,7 +140,6 @@ public class MGSkillEffect : MonoBehaviour {
             if (timer >= MGSkillDartInfo.durationTime)
             {
                 timer = 0;
-                dartSwitch = null;
             }
         }
     }

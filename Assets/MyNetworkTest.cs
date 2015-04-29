@@ -7,9 +7,9 @@ using System;
 using System.Net.NetworkInformation;
 
 public delegate string UDPDelegate(int port);
+public delegate void SyncNetworkDelegate();
 public class MyNetworkTest : MonoBehaviour {
     public int connecttions = 1;
-    public int listenPort = 8899 , mySocketPort=10000;
     public UILabel log;
     private Vector3 acceleration;
     public GameObject cube;
@@ -44,7 +44,7 @@ public class MyNetworkTest : MonoBehaviour {
         if (NetworkPeerType.Disconnected == Network.peerType)
         {
             MGNetWorking.createHost();
-            InvokeRepeating("UDPSendBroadcast", 0f, 1f);
+            InvokeRepeating("UDPSendBroadcast", 0f, 0.1f);
         }
     }
     public void findHost()
@@ -53,7 +53,7 @@ public class MyNetworkTest : MonoBehaviour {
         {
             //Debug.Log(MGGlobalDataCenter.defaultCenter().serverIp);
             //MGNetWorking.findHost();
-            udpReceive.BeginInvoke(mySocketPort, UDPStartToReceiveCallback, null);
+            udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
         }
     }
     void Update()
@@ -61,7 +61,11 @@ public class MyNetworkTest : MonoBehaviour {
         if (Network.peerType == NetworkPeerType.Server)
         {
             if (Network.connections.Length == 1)
+            {
+                CancelInvoke();
                 OnConnect();
+            }
+                
         }
         else if (Network.peerType == NetworkPeerType.Client)
         {
@@ -70,8 +74,9 @@ public class MyNetworkTest : MonoBehaviour {
     }
     public void UDPSendBroadcast()
     {
+        Debug.Log("UDPSendBroadcast"+ip);
         Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
-        IPEndPoint iep = new IPEndPoint(IPAddress.Broadcast, mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
+        IPEndPoint iep = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
         sock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
         byte[] buffer = Encoding.Unicode.GetBytes(ip);
         sock.SendTo(buffer, iep);
@@ -81,9 +86,9 @@ public class MyNetworkTest : MonoBehaviour {
     public string UDPStartToReceive(int port)
     {
         Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket协议
-        IPEndPoint iep = new IPEndPoint(IPAddress.Any, port);//初始化一个侦听局域网内部所有IP和指定端口
-        EndPoint ep = (EndPoint)iep;
-        socket.Bind(iep);//绑定这个实例
+        IPEndPoint receiveIEP = new IPEndPoint(IPAddress.Any, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个侦听局域网内部所有IP和指定端口
+        EndPoint ep = (EndPoint)receiveIEP;
+        socket.Bind(receiveIEP);//绑定这个实例
         byte[] buffer = new byte[1024];//设置缓冲数据流
         string ip = null;
         while (true)
@@ -92,13 +97,8 @@ public class MyNetworkTest : MonoBehaviour {
             ip = Encoding.Unicode.GetString(buffer);
             if (ip.Length>0) break;
         }
+        socket.Close();
         return ip;
-    }
-
-    //异步回调函数
-    public void UDPSendBroadcastCallback(IAsyncResult data)
-    {
-
     }
     public void UDPStartToReceiveCallback(IAsyncResult data)
     {
@@ -106,12 +106,11 @@ public class MyNetworkTest : MonoBehaviour {
         string resultstr = udpReceive.EndInvoke(data);
         if (resultstr.Length == 0)
         {
-            udpReceive.BeginInvoke(mySocketPort, UDPStartToReceiveCallback, null);
+            udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
         }
         else
         {
             //收到IP，连接主机
-            CancelInvoke();
             MGGlobalDataCenter.defaultCenter().serverIp = resultstr;
             MGNetWorking.findHost();
         }
@@ -125,6 +124,7 @@ public class MyNetworkTest : MonoBehaviour {
             cubeInitialed = true;
         }*/
         //连接成功 需要切换场景
+        
         Application.LoadLevel("gameScene1");
     }
 }

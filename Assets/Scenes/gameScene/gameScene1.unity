@@ -1243,6 +1243,11 @@ Prefab:
       propertyPath: music
       value: 
       objectReference: {fileID: 1852946993}
+    - target: {fileID: 11452476, guid: a0b3091a143e9194a88bae17420be147, type: 2}
+      propertyPath: roadblock
+      value: 
+      objectReference: {fileID: 11499956, guid: 2dc3781813f63404fb84807f8e80b3fb,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a0b3091a143e9194a88bae17420be147, type: 2}
   m_RootGameObject: {fileID: 906247495}
@@ -1712,6 +1717,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1844225680}
   - 114: {fileID: 1844225679}
+  - 114: {fileID: 1844225681}
   m_Layer: 0
   m_Name: CreateUI
   m_TagString: Untagged
@@ -1757,6 +1763,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &1844225681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1844225678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 028d3af0561e6fd4f98d86abf476a263, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1852946983
 GameObject:
   m_ObjectHideFlags: 0
@@ -2129,7 +2146,7 @@ MonoBehaviour:
   jumpSecond: 13
   jumpCount: 0
   drat: {fileID: 11450828, guid: 7d8414458bf43054ba5bea21f9b5b5c0, type: 2}
-  roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
+  roadblock: {fileID: 11499956, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   blink: {fileID: 0}
   bones: {fileID: 0}
   sprint: {fileID: 0}

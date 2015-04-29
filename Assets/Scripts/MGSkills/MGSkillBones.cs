@@ -18,6 +18,7 @@ public class MGSkillBones : MGSkillsBase
         isEnded = false;
         releaseObject = GameObject.Find(releaseSkillObjcName);
         if (!releaseObject) releaseObject = GameObject.Find("role1");
+        transform.parent = releaseObject.transform;
     }
     public override Object createSkillSprite(Vector3 pos)
     {

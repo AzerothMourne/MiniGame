@@ -29,7 +29,6 @@ public class Jump : MonoBehaviour {
 
 	
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
-	private Animator jumpAnim;
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
 	void Start () {
@@ -37,9 +36,6 @@ public class Jump : MonoBehaviour {
         isGround = false;
         roleAnimaController = this.GetComponent<RoleAnimController>();
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
-
-		//初始化动画
-		jumpAnim = this.GetComponent<Animator> ();
 
 		//获取角色的名字，role则是前面的角色，role1则是后面的角色
 		//前面角色的动作
@@ -282,4 +278,8 @@ public class Jump : MonoBehaviour {
             jumpCount = 0;
         }
 	}
+    void OnDestroy()
+    {
+        MGNotificationCenter.defaultCenter().removeObserver(this);
+    }
 }

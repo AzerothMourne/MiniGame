@@ -3,13 +3,12 @@ using System.Collections;
 
 public class MGSkillBeatback : MGSkillsBase
 {
-    private MGNetWorking mgNetWorking;
     public int speed;
     private GameObject roleLater, roleFront;
     private float timer;
     private bool isEndedFreeze;
     public GameObject wordSprite;
-    private int sprintLayer, wordMask;//wordMask用来做word字体出现的掩码，对应index出现后相应位置1，防止重复实例化
+    private int wordMask;//wordMask用来做word字体出现的掩码，对应index出现后相应位置1，防止重复实例化
     public Sprite[] wordSpriteArrayList;
     public Vector3[] wordPosArrayList;
     public float[] wordDelayTimeArrayList;
@@ -35,7 +34,6 @@ public class MGSkillBeatback : MGSkillsBase
             wordDelayTimeArrayList[i] *= Time.timeScale;
         }
 
-        mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
         this.releaseSkillObjectName = "role";
         base.scaleAnimationFofBigSkill();
     }
@@ -75,7 +73,7 @@ public class MGSkillBeatback : MGSkillsBase
                     oneWord.transform.position = wordPosArrayList[i];
                     oneWord.transform.rotation = Quaternion.Euler(0, 0, 0);
                     oneWord.transform.localScale = new Vector3(0.5f, 1f, 1f);
-                    oneWord.layer = sprintLayer;
+                    oneWord.layer = bigSkillPlaneLayer;
                     oneWord.GetComponent<SpriteRenderer>().sortingLayerID = 3;
                     oneWord.GetComponent<SpriteRenderer>().sprite = wordSpriteArrayList[i];
                     break;
