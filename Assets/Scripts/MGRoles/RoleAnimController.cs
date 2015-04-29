@@ -101,13 +101,15 @@ public class RoleAnimController : MonoBehaviour {
         isFirstJump = false;
         isSecondJump = false;
         isPressDownToGround = false;
+        jumpSprict.jumpCount = 0;
         setAllAnimStateToFalse();
     }
     public void upButtonClick(MGNotification notification)
     {
-        if (isPressDown && !isPressDownToGround) return;
+        //if (isPressDown && !isPressDownToGround) return;
+        if (isSecondJump) return;
         Debug.Log(this.gameObject.name + " upButtonClick");
-        if (downOrUp == true)//上翻
+        if (transform.localScale.y < 0 || (isRoll && downOrUp))//上翻
         {
             Debug.Log("上翻");
             if (isRoll && downOrUp == true) isChangeDownOrUp = true;
@@ -120,7 +122,7 @@ public class RoleAnimController : MonoBehaviour {
             animStateToRoll();
             return;
         }
-        if (isPressDown || isRoll) return;
+        if (isRoll) return;
         Debug.Log(this.gameObject.name + " jumpButtonClick");
         if (isFirstJump == false)//一段跳
         {
@@ -144,6 +146,7 @@ public class RoleAnimController : MonoBehaviour {
         {
             Debug.Log("在空中");
             isPressDown = true;
+            isPressDownToGround = false;
             downOrUp = true;
             rigidbody2D.gravityScale = 10f;
             rigidbody2D.velocity = new Vector3(0,-10,0);
@@ -169,12 +172,12 @@ public class RoleAnimController : MonoBehaviour {
         //通过速度判断是否下落,下落有2中情况，正常下落和加速下落 对应不同动画,前提条件是必须在空中，否则isRollBack表示上下翻滚。
         if (isPressDown && isFirstJump)//加速下落，切换到翻滚动作
         {
-            //Debug.Log("切换加速下落动画");
+            Debug.Log("切换加速下落动画");
             rigidbody2D.gravityScale = 10f;//保证加速下落过程中的重力
-            //判断翻滚是否结束
             if (MGGlobalDataCenter.defaultCenter().roadOrignY - transform.position.y >= 0)
             {
-                //Debug.Log("pressDown过程中接触地面");
+                Debug.Log("pressDown过程中接触地面");
+                isSecondJump = false;
                 rigidbody2D.gravityScale = 0f;
                 rigidbody2D.velocity = Vector3.zero;
                 transform.Translate(Vector3.down * this.GetComponent<SpriteRenderer>().sprite.bounds.size.y * Time.deltaTime / rollDuration);
@@ -184,12 +187,13 @@ public class RoleAnimController : MonoBehaviour {
             }
             if (isPressDownToGround && isChangeDownOrUp)//如果接触地面 且切换了方向 则切换到上下翻滚判断逻辑
             {
-                //Debug.Log("接触地面后切换方向");
+                Debug.Log("接触地面后切换方向");
                 isFirstJump = false;
                 isPressDownToGround = false;
                 rigidbody2D.gravityScale = 0.0f;
                 rigidbody2D.velocity = Vector3.zero;
             }
+            //判断翻滚是否结束
             else if (transform.position.y < MGGlobalDataCenter.defaultCenter().roadOrignY && Mathf.Abs(MGGlobalDataCenter.defaultCenter().roadOrignY - transform.position.y) > this.GetComponent<SpriteRenderer>().sprite.bounds.size.y )
             {
                 //Debug.Log("MGGlobalDataCenter.defaultCenter().roadOrignY" + MGGlobalDataCenter.defaultCenter().roadOrignY);

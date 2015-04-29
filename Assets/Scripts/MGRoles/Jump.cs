@@ -21,7 +21,7 @@ public class Jump : MonoBehaviour {
 	public bool isGround;
 	public float jumpVelocity ;
 	public float jumpSecond ;
-	private float jumpCount ;
+	public float jumpCount ;
     public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
 	
@@ -33,6 +33,7 @@ public class Jump : MonoBehaviour {
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
 	void Start () {
+        jumpCount = 0;
         isGround = false;
         roleAnimaController = this.GetComponent<RoleAnimController>();
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
@@ -213,7 +214,7 @@ public class Jump : MonoBehaviour {
     {
         MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.upFormerEventId), notification);
         //if (roleAnimaController.isRoll || roleAnimaController.isPressDown) return;
-        if (transform.localScale.y < 0)
+        if (transform.localScale.y < 0 || (roleAnimaController.isRoll && roleAnimaController.downOrUp))
         {
             if (notification.objc == null)
             {
@@ -221,7 +222,7 @@ public class Jump : MonoBehaviour {
             }
             return;
         }
-        if (roleAnimaController.isFirstJump && !roleAnimaController.isSecondJump)
+        if (roleAnimaController.isFirstJump && !roleAnimaController.isSecondJump && jumpCount==0)
         {
             Debug.Log("一段跳");
             isGround = false;
@@ -278,6 +279,7 @@ public class Jump : MonoBehaviour {
             if (MGGlobalDataCenter.defaultCenter().roadOrignY == -1000)
                 MGGlobalDataCenter.defaultCenter().roadOrignY = transform.position.y;
             isGround = true;
+            jumpCount = 0;
         }
 	}
 }

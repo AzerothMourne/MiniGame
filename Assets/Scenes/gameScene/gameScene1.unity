@@ -574,15 +574,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.x
-      value: .00373831787
+      value: .00362976408
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.y
-      value: .00373831787
+      value: .00362976408
       objectReference: {fileID: 0}
     - target: {fileID: 482640, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_LocalScale.z
-      value: .00373831787
+      value: .00362976408
       objectReference: {fileID: 0}
     - target: {fileID: 2082638, guid: 3faec79c82e90a846b8847a88865e948, type: 2}
       propertyPath: m_Depth
@@ -1419,7 +1419,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00373831787, y: .00373831787, z: .00373831787}
+  m_LocalScale: {x: .00362976408, y: .00362976408, z: .00362976408}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1139895024}
@@ -1887,6 +1887,7 @@ MonoBehaviour:
   isGround: 0
   jumpVelocity: 18
   jumpSecond: 13
+  jumpCount: 0
   drat: {fileID: 0}
   roadblock: {fileID: 0}
   blink: {fileID: 11412000, guid: 2757681a55ee9b24aaadcca60b263287, type: 2}
@@ -2126,6 +2127,7 @@ MonoBehaviour:
   isGround: 0
   jumpVelocity: 18
   jumpSecond: 13
+  jumpCount: 0
   drat: {fileID: 11450828, guid: 7d8414458bf43054ba5bea21f9b5b5c0, type: 2}
   roadblock: {fileID: 11495756, guid: 2dc3781813f63404fb84807f8e80b3fb, type: 2}
   blink: {fileID: 0}
