@@ -10,6 +10,7 @@ public class MGInitGameData : MonoBehaviour {
     private IPEndPoint syncIEP;
     private EndPoint syncEP;
     private static MGInitGameData instance;
+    private Thread loomThread;
     void Awake()
     {
         initGameData();
@@ -46,7 +47,10 @@ public class MGInitGameData : MonoBehaviour {
         singleInstance.NGUI_ButtonWidth = (pos.x - singleInstance.screenLiftX) * MGGlobalDataCenter.defaultCenter().UIScale;
         Debug.Log(pos + "********" + singleInstance.NGUI_ButtonWidth);
 
-        startThreadForSync();
+        if (NetworkPeerType.Disconnected != Network.peerType)
+        {
+            startThreadForSync();
+        }
     }
     void startThreadForSync()
     {
@@ -63,7 +67,7 @@ public class MGInitGameData : MonoBehaviour {
             syncEP = (EndPoint)syncIEP;
             syncSock.Bind(syncIEP);//绑定这个实例
             //Run the action on a new thread
-            Loom.RunAsync(() =>
+            loomThread = Loom.RunAsync(() =>
             {
                 byte[] buffer = new byte[1024];//设置缓冲数据流
                 string receiveString = null;
@@ -100,10 +104,20 @@ public class MGInitGameData : MonoBehaviour {
     public void destroyGameData()
     {
         Debug.Log("destroyGameDate");
+        MGNotificationCenter.defaultCenter().removeAllObserver();
         if (syncSock != null)
         {
             syncSock.Close();
         }
+        if (loomThread!=null)
+        {
+            loomThread.Abort();
+            while (loomThread.ThreadState != System.Threading.ThreadState.Stopped)//必须等线程完全停止了，否则会出现冲突。  
+            {
+                Thread.Sleep(1000);
+            }
+        }
+         
         CancelInvoke();
         MGGlobalDataCenter.defaultCenter().backToDefaultValues();
     }

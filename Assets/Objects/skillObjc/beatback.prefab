@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+  bigSkillPlaneLayer: 12
   releaseSkillObjectName: 
   speed: 0
   wordSprite: {fileID: 137618, guid: 43ed0ac597380014f8eefedffb01ebea, type: 2}
@@ -54,11 +55,11 @@ MonoBehaviour:
   - {x: 1.00999999, y: -.479999989, z: 0}
   - {x: 3.38000011, y: -1.05999994, z: 0}
   wordDelayTimeArrayList:
-  - .5
-  - 1
-  - 1.5
-  - 2
-  duration: 30
+  - .25
+  - .400000006
+  - .550000012
+  - .699999988
+  duration: 1
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

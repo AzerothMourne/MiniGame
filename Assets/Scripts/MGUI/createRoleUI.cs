@@ -13,12 +13,13 @@ public class createRoleUI : MonoBehaviour {
     public GameObject downButton, upButton, stopButton,gameTimerLabel;
     public GameObject stopLayer, homeButton, continueButton;
 	public Camera uiCamera;
-    public GameObject NGUIRoot;
+    private GameObject NGUIRoot;
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
     private int UILayerMask = 7;
     private MGNetWorking mgNetWorking;
     void Start()
     {
+        NGUIRoot = GameObject.Find("UI Root");
         InvokeRepeating("gameTimer", 0, 0.01f);
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
         MGNotificationCenter.defaultCenter().addObserver(this, stopNotification, uiEvent.stopGame);

@@ -96,6 +96,16 @@ public class MGNotificationCenter  {
         this.removeObserver(nameListDic[name], name);
         nameListDic.Remove(name);
 	}
+    /// <summary>
+    /// 删除所有的观察者
+    /// </summary>
+    /// <param name="observer"></param>
+    /// <param name="name"></param>
+    public void removeAllObserver()
+    {
+        this.objcNamesSel.Clear();
+        this.nameHastable.Clear();
+    }
     private void removeObserver(List<MGNotificationSelector> selList, string name)
     {
         if (selList == null) return;

@@ -228,7 +228,6 @@ MonoBehaviour:
   homeButton: {fileID: 0}
   continueButton: {fileID: 0}
   uiCamera: {fileID: 2082638}
-  NGUIRoot: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

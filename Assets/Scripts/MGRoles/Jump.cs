@@ -82,7 +82,7 @@ public class Jump : MonoBehaviour {
             MGSkillBeatback skillObjc = null;
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
-                skillObjc = mgNetWorking.Instantiate(sprint, pos, new Quaternion(), 0) as MGSkillBeatback;
+                skillObjc = mgNetWorking.Instantiate(beatback, pos, new Quaternion(), 0) as MGSkillBeatback;
             }
             else
             {

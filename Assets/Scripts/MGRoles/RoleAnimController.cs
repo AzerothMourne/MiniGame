@@ -266,4 +266,8 @@ public class RoleAnimController : MonoBehaviour {
         toNomalRun();
         animStateToRun();
     }
+    void OnDestroy()
+    {
+        MGNotificationCenter.defaultCenter().removeObserver(this);
+    }
 }

@@ -124,7 +124,7 @@ public class MyNetworkTest : MonoBehaviour {
             cubeInitialed = true;
         }*/
         //连接成功 需要切换场景
-        
+        MGNotificationCenter.defaultCenter().removeAllObserver();
         Application.LoadLevel("gameScene1");
     }
 }
