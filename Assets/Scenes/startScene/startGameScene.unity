@@ -951,7 +951,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1510104751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 294, y: -73, z: 0}
+  m_LocalPosition: {x: 323, y: -77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -986,17 +986,17 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: .0220588446, g: .000648790156, b: .000648790156, a: 1}
   mPivot: 4
-  mWidth: 588
-  mHeight: 200
+  mWidth: 646
+  mHeight: 208
   mDepth: 4
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.94000006
+  aspectRatio: 3.10576916
   keepCrispWhenShrunk: 1
   mTrueTypeFont: {fileID: 12800000, guid: ab656f522f2ddc74cb36f46fbea1f729, type: 3}
   mFont: {fileID: 0}
-  mText: "\u5C0F\u4F19\u4F34\u4EEC\u51C6\u5907\u597D\u4F60\u7684\u5192\u9669\u4E4B\u65C5\u4E86\u5417\uFF1F\u62FF\u8D77\u4F60\u7684\u6B66\u5668\u6218\u6597\u5427\uFF01\u5C0F\u4F19\u4F34\u4EEC\u51C6\u5907\u597D\u4F60\u7684\u5192\u9669\u4E4B\u65C5\u4E86\u5417\uFF1F\u62FF\u8D77\u4F60\u7684\u6B66\u5668\u6218\u6597\u5427\uFF01\u5C0F\u4F19\u4F34\u4EEC\u51C6\u5907\u597D\u4F60\u7684\u5192\u9669\u4E4B\u65C5\u4E86\u5417\uFF1F\u62FF\u8D77\u4F60\u7684\u6B66\u5668\u6218\u6597\u5427\uFF01"
+  mText: "\u5929\u5251\u95E8\u4E0E\u660E\u6708\u9601\u4E16\u4EE3\u4EA4\u597D\uFF0C\u5341\u4E94\u5E74\u524D\uFF0C\u4E00\u80A1\u9ED1\u6697\u52BF\u529B\u6A2A\u626B\u5929\u5251\u95E8\uFF0C\u5929\u6C0F\u5BB6\u65CF\u4EC5\u5269\u5929\u6DAF\u4E00\u4EBA\u88AB\u660E\u6708\u6781\u529B\u6551\u4E0B\u3002\u4EC7\u5BB6\u9041\u53BB\uFF0C\u5929\u6DAF\u65E0\u5904\u5BFB\u4EC7\uFF0C\u7EC8\u65E5\u840E\u9761\uFF0C\u660E\u6708\u4E0D\u5F97\u5DF2\u7559\u4E66\u51FA\u8D70\uFF0C\u81EA\u8BA4\u51F6\u624B\uFF0C\u5341\u4E94\u5E74\u540E\uFF0C\u5929\u6DAF\u7EC8\u4E8E\u627E\u5230\u660E\u6708\u2026\u2026\r"
   mFontSize: 40
   mFontStyle: 0
   mAlignment: 0
@@ -1046,7 +1046,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 588, y: 200, z: 0}
+  m_Size: {x: 646, y: 208, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1510104757
 MonoBehaviour:
