@@ -56,7 +56,7 @@ public class MGSkillRoadblock : MGSkillsBase{
             //发送给自己
             MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.roadblock, skillModel);
             print("技能名：路障。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjcName);
-            //this.GetComponent<Animator>().SetBool("isBreak", true);
+            MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadLatterEventId, other.name);
         }
     }
     public void DestroySelf()

@@ -16,7 +16,7 @@ GameObject:
   - 114: {fileID: 11430532}
   m_Layer: 10
   m_Name: downButton
-  m_TagString: Untagged
+  m_TagString: UIButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,6 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8304ce6ceeb364ea0477437a100500, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  direction: 0
+  addOrDec: 0
 --- !u!114 &11423112
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -11,6 +11,7 @@ GameObject:
   - 114: {fileID: 11469946}
   - 58: {fileID: 5869946}
   - 50: {fileID: 5069946}
+  - 212: {fileID: 21224510}
   m_Layer: 0
   m_Name: sprint
   m_TagString: laterSkill
@@ -68,6 +69,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plane: {fileID: 128842, guid: 6d7dbaa7e10ba5e4db1723d4d504c711, type: 2}
+  bigSkillPlaneLayer: 12
   releaseSkillObjectName: 
   speed: 0
   wordSprite: {fileID: 137618, guid: 43ed0ac597380014f8eefedffb01ebea, type: 2}
@@ -87,6 +89,28 @@ MonoBehaviour:
   - .550000012
   - .699999988
   duration: 1
+--- !u!212 &21224510
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 169946}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_SortingLayerID: 3075914691
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: ff7a94174f60b044bb2df3d827d023df, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

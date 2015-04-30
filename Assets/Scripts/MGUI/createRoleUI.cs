@@ -6,6 +6,7 @@ public static class uiEvent
 {
     public static string stopGame = "uiEvent_stopGame";
     public static string continueGame = "uiEvent_continueGame";
+    public static string enableAllUIButton = "uiEvent_enableAllUIButton";
 }
 public class createRoleUI : MonoBehaviour {
     public GameObject dartButton,roadblockButton,beatbackButton;
@@ -17,6 +18,10 @@ public class createRoleUI : MonoBehaviour {
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
     private int UILayerMask = 7;
     private MGNetWorking mgNetWorking;
+    void OnDestroy()
+    {
+        MGNotificationCenter.defaultCenter().removeObserver(this);
+    }
     void Start()
     {
         NGUIRoot = GameObject.Find("UI Root");
@@ -24,6 +29,7 @@ public class createRoleUI : MonoBehaviour {
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
         MGNotificationCenter.defaultCenter().addObserver(this, stopNotification, uiEvent.stopGame);
         MGNotificationCenter.defaultCenter().addObserver(this, continueNotification, uiEvent.continueGame);
+        MGNotificationCenter.defaultCenter().addObserver(this, enableAllUIButton, uiEvent.enableAllUIButton);
         createCommonUI();
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
         {
@@ -42,6 +48,14 @@ public class createRoleUI : MonoBehaviour {
         objc.transform.position = MGFoundtion.WorldPointToNGUIPoint(pos, uiCamera);
         objc.transform.localScale = new Vector3(MGGlobalDataCenter.defaultCenter().UIScale, MGGlobalDataCenter.defaultCenter().UIScale, 1);
         return objc;
+    }
+    public void enableAllUIButton(MGNotification notification)
+    {
+        GameObject[] buttons = GameObject.FindGameObjectsWithTag("UIButton");
+        for (int i = 0; i < buttons.Length; ++i)
+        {
+            buttons[i].GetComponent<UIButton>().enabled = (bool)notification.objc;
+        }
     }
     public void gameTimer()
     {

@@ -1,9 +1,9 @@
-﻿Shader "long/ghost" 
+﻿Shader "long/sprint" 
 {
 	Properties 
 	{
 		_MainTex ("Base (RGB) Trans (A)", 2D) = "white" {}
-		_pow("pow",float)=1
+		_pow("pow",float)=1.5
 		_Color("Color",color)=(1,1,1,1)
 	}
 	SubShader
@@ -38,7 +38,7 @@
 			float4 frag(v2f i):SV_Target{
 			half4 tmpColor = tex2D(_MainTex, i.texcoord);
 			if(tmpColor.a>0.1)
-			tmpColor.a=0.15;
+			tmpColor.a=0.11;
 			return tmpColor*_Color;	
 			}
 			ENDCG
@@ -70,7 +70,7 @@
 			float4 frag(v2f i):SV_Target{
 			half4 tmpColor = tex2D(_MainTex, i.texcoord);
 			if(tmpColor.a>0.1)
-			tmpColor.a=0.25;
+			tmpColor.a=0.2;
 			return tmpColor*_Color;	
 			}
 			ENDCG
@@ -103,7 +103,7 @@
 			float4 frag(v2f i):SV_Target{
 			half4 tmpColor = tex2D(_MainTex, i.texcoord);
 			if(tmpColor.a>0.1)
-			tmpColor.a=0.5;
+			tmpColor.a=0.3;
 			return tmpColor*_Color;	
 			}
 			ENDCG

@@ -83,19 +83,20 @@ public class MGInitGameData : MonoBehaviour {
                             if (MGGlobalDataCenter.defaultCenter().roleLater != null)
                             {
                                 Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-                                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(0, pos.y, pos.z);
+                                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(float.Parse(receiveString), pos.y, pos.z);
                             }
                         });
                     }
                 }
             });
+            loomThread.IsBackground = true;
         }
     }
     public void syncNetwork()//主机向客户端发送UDP包让客户端同步主机的数据
     {
         if (MGGlobalDataCenter.defaultCenter().isHost && MGGlobalDataCenter.defaultCenter().roleLater!=null)
         {
-            Debug.Log("syncNetwork");
+            //Debug.Log("syncNetwork");
             Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
             byte[] buffer = Encoding.Unicode.GetBytes(roleLaterPos.x.ToString());
             syncSock.SendTo(buffer, syncIEP);

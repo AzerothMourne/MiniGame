@@ -65,8 +65,8 @@ public class MGGlobalDataCenter  {
         this.listenPort = 8899;
         this.mySocketPort = 10000;
         this.isNetworkViewEnable = false;
-        //this.isHost = true;
-        this.isHost = false;
+        this.isHost = true;
+        //this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -8.9f;

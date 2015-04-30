@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11488356}
   m_Layer: 0
   m_Name: blinkButton
-  m_TagString: Untagged
+  m_TagString: UIButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,7 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 194fa557753e61548a534e5bea1d1761, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cdTime: 3
   direction: 1
   addOrDec: 1
 --- !u!1001 &100100000

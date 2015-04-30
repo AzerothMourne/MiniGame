@@ -30,7 +30,7 @@ GameObject:
   - 114: {fileID: 11425868}
   m_Layer: 10
   m_Name: beatbackButton
-  m_TagString: Untagged
+  m_TagString: UIButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,7 +212,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11489748, guid: c30d6b32703c7f14083273b72704ab1a, type: 2}
-  mSpriteName: "\u51B2\u523A\u6309\u94AE"
+  mSpriteName: "\u6309\u94AE\u51FB\u9000"
   mFillCenter: 1
 --- !u!1001 &100100000
 Prefab:

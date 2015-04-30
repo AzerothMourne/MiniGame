@@ -6,6 +6,9 @@ public static class RoleButtonEvent
     public static string upLatterEventId = "1RoleButtonEvent_up";
     public static string downFormerEventId = "RoleButtonEvent_down";
     public static string downLatterEventId = "1RoleButtonEvent_down";
+    public static string deadFormerEventId = "RoleButtonEvent_dead";
+    public static string deadLatterEventId = "1RoleButtonEvent_dead";
+    public static string killLatterEventId = "1RoleButtonEvent_kill";
 }
 //动画状态机需要注意的事
 /// <summary>
@@ -23,6 +26,7 @@ public class RoleAnimController : MonoBehaviour {
 	public bool isSecondJump,isFirstJump;//是否采用二段跳翻滚的动作
 	public bool isRoll,downOrUp,isChangeDownOrUp;//是否切换到上下翻滚的动画
     public bool isPressDown,isPressDownToGround;//在空中按了下
+    public bool isDead;
 	float rollTimer,rollDuration;
     private float downSpeed;
     private MusicPlayer music;
@@ -34,6 +38,7 @@ public class RoleAnimController : MonoBehaviour {
         isPressDownToGround = false;
 		isSecondJump = false;
         isRoll = false;
+        isDead = false;
 
         rollTimer = 0;
         rollDuration = 0.2f;
@@ -48,19 +53,41 @@ public class RoleAnimController : MonoBehaviour {
         {
             MGNotificationCenter.defaultCenter().addObserver(this, upButtonClick, RoleButtonEvent.upFormerEventId);
             MGNotificationCenter.defaultCenter().addObserver(this, downButtonClick, RoleButtonEvent.downFormerEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, roleDeadAnimController, RoleButtonEvent.deadFormerEventId);
         }
         //后面的角色动作
         else if (this.gameObject.name == "role1")
         {
             MGNotificationCenter.defaultCenter().addObserver(this, upButtonClick, RoleButtonEvent.upLatterEventId);
             MGNotificationCenter.defaultCenter().addObserver(this, downButtonClick, RoleButtonEvent.downLatterEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, roleDeadAnimController, RoleButtonEvent.deadLatterEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, roleKillAnimController, RoleButtonEvent.killLatterEventId);
         }
 
 	}
+    public void changeKillFlag()
+    {
+        if (this.gameObject.name == "role1")
+        {
+            MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
+            toNomalRun();
+            animStateToRun();
+        }  
+    }
+    void animStateToKill()
+    {
+        jumpAnim.SetBool("AnyStateToKill", true);
+    }
+    void animStateToDead()
+    {
+        jumpAnim.SetBool("AnyStateToDead", true);
+    }
     void animStateToRun()
     {
         jumpAnim.SetBool("FallDownToRun", true);
         jumpAnim.SetBool("RollToRun", true);
+        jumpAnim.SetBool("killToRun", true);
+
     }
     void animStateToFirstJump()
     {
@@ -87,6 +114,13 @@ public class RoleAnimController : MonoBehaviour {
         jumpAnim.SetBool("RunToRoll", false);
         jumpAnim.SetBool("FallDownToRoll", false);
         jumpAnim.SetBool("RollToRun", false);
+        jumpAnim.SetBool("AnyStateToDead", false);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("sprint", false);
+            jumpAnim.SetBool("AnyStateToKill", false);
+            jumpAnim.SetBool("killToRun", false);
+        }
     }
     void toNomalRun()
     {
@@ -101,6 +135,35 @@ public class RoleAnimController : MonoBehaviour {
         isPressDownToGround = false;
         jumpSprict.jumpCount = 0;
         setAllAnimStateToFalse();
+    }
+    void roleKillAnimController(MGNotification notification)
+    {
+        if (notification.objc.Equals("role1"))
+        {
+            Debug.Log("roleKillAnimController:" + notification.objc);
+            setAllAnimStateToFalse();
+            animStateToKill();
+        }
+        MGNotificationCenter.defaultCenter().postNotification(uiEvent.enableAllUIButton, false);
+    }
+    void roleDeadAnimController(MGNotification notification)
+    {
+        if (notification.objc.Equals("role"))
+        {
+            Debug.Log("roleDeadAnimController:" + notification.objc);
+            setAllAnimStateToFalse();
+            animStateToDead();
+        }
+        else if (notification.objc.Equals("role1"))
+        {
+            Debug.Log("roleDeadAnimController:" + notification.objc);
+            setAllAnimStateToFalse();
+            animStateToDead();
+        }
+        rigidbody2D.gravityScale = 0f;
+        collider2D.isTrigger = true;
+        isDead = true;
+        MGNotificationCenter.defaultCenter().postNotification(uiEvent.enableAllUIButton, false);
     }
     public void upButtonClick(MGNotification notification)
     {
@@ -166,6 +229,17 @@ public class RoleAnimController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//检测角色的动作
+        if (isDead)
+        {
+            if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f)
+                transform.Translate(Vector3.left * 4 * Time.deltaTime);
+            else
+            {
+                isDead = false;
+                Application.LoadLevel("overSence");
+            }
+            return;
+        }
 		//动作切换
         //通过速度判断是否下落,下落有2中情况，正常下落和加速下落 对应不同动画,前提条件是必须在空中，否则isRollBack表示上下翻滚。
         if (isPressDown && isFirstJump)//加速下落，切换到翻滚动作

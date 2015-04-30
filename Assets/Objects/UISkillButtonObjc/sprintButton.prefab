@@ -14,7 +14,7 @@ GameObject:
   - 114: {fileID: 11427530}
   m_Layer: 10
   m_Name: sprintButton
-  m_TagString: Untagged
+  m_TagString: UIButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -212,7 +212,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f8323868f3a9f14c8b7ba51bab5f851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cdTime: 3
   direction: 0
   addOrDec: 0
 --- !u!1001 &100100000

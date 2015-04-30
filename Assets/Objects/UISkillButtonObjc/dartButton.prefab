@@ -46,7 +46,7 @@ GameObject:
   - 114: {fileID: 11486728}
   m_Layer: 0
   m_Name: dartButton
-  m_TagString: Untagged
+  m_TagString: UIButton
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

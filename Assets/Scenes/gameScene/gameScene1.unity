@@ -1592,6 +1592,7 @@ MonoBehaviour:
   isChangeDownOrUp: 0
   isPressDown: 0
   isPressDownToGround: 0
+  isDead: 0
 --- !u!82 &1852946993
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1774,6 +1775,7 @@ MonoBehaviour:
   isChangeDownOrUp: 0
   isPressDown: 0
   isPressDownToGround: 0
+  isDead: 0
 --- !u!114 &1985725683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1795,7 +1797,7 @@ MonoBehaviour:
   blink: {fileID: 0}
   bones: {fileID: 0}
   sprint: {fileID: 0}
-  beatback: {fileID: 11451452, guid: 3471221c0c24cf546a4aa7e84ca445a7, type: 2}
+  beatback: {fileID: 11477352, guid: 3471221c0c24cf546a4aa7e84ca445a7, type: 2}
   log: {fileID: 0}
   mgNetWorking: {fileID: 0}
 --- !u!114 &1985725684

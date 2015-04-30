@@ -24,6 +24,7 @@ public class Jump : MonoBehaviour {
 	public float jumpCount ;
     public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
+    private bool isGameOver;
 	
     public MGNetWorking mgNetWorking;
 
@@ -32,6 +33,7 @@ public class Jump : MonoBehaviour {
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
 	void Start () {
+        isGameOver = false;
         jumpCount = 0;
         isGround = false;
         roleAnimaController = this.GetComponent<RoleAnimController>();
@@ -78,7 +80,7 @@ public class Jump : MonoBehaviour {
     {
         if (notification.objc == null)
         {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+            Vector3 pos = new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX+beatback.GetComponent<SpriteRenderer>().bounds.size.y/2, 0, 0);
             MGSkillBeatback skillObjc = null;
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
@@ -91,6 +93,7 @@ public class Jump : MonoBehaviour {
             if (skillObjc)
             {
                 skillObjc.releaseSkillObjectName = this.gameObject.name;
+                skillObjc.transform.parent = this.transform;
             }
         }
     }
@@ -264,8 +267,36 @@ public class Jump : MonoBehaviour {
             else
                 MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
         }
+        
+        if (!isGameOver)
+        {
+            Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+            Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+            if (roleFrontPos.x - roleLaterPos.x < 1.0f)
+            {
+                //强制roleLater出现在role的后面一点点。
+                MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = new Vector3(1, 1, 1);
+                MGGlobalDataCenter.defaultCenter().role.transform.localScale = new Vector3(1, 1, 1);
+                roleLaterPos.x = roleFrontPos.x-0.5f;
+                roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
+                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
+                MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
+                gameOver();
+            }
+            if (this.gameObject.name == "role1" && transform.position.x + 1.4 < MGGlobalDataCenter.defaultCenter().screenLiftX)
+            {
+                isGameOver = transform;
+                //切换场景
+                Debug.Log("role1 out of screen");
+            }
+        }
 	}
-    
+    public void gameOver()
+    {
+        isGameOver = true;
+        if (this.gameObject.name == "role1")
+            MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
+    }
 	//判断角色是否在地面上
     public void OnCollisionEnter2D(Collision2D collision)
     {
@@ -276,6 +307,10 @@ public class Jump : MonoBehaviour {
                 MGGlobalDataCenter.defaultCenter().roadOrignY = transform.position.y;
             isGround = true;
             jumpCount = 0;
+        }
+        if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
+        {
+            gameOver();
         }
 	}
     void OnDestroy()
