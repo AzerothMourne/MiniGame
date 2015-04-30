@@ -15,7 +15,7 @@ public class MGSkillEffect : MonoBehaviour {
     private string shortBonesName;
     public bones blinkSkillBones;
     private float timer, blinkSkillBonesTimer;
-    private MGNotification sprintSwitch;
+    private MGNotification sprintSwitch,beatbackSwitch;
     private GameObject tempObjcet;
 	// Use this for initialization
 	void Start () {
@@ -27,6 +27,7 @@ public class MGSkillEffect : MonoBehaviour {
         MGNotificationCenter.defaultCenter().addObserver(this, dartEffect, SkillEffectEnum.dart);
         MGNotificationCenter.defaultCenter().addObserver(this, blinkEffect, SkillEffectEnum.blink);
         MGNotificationCenter.defaultCenter().addObserver(this, sprintEffect, SkillEffectEnum.sprint);
+        MGNotificationCenter.defaultCenter().addObserver(this, beatbackEffect, SkillEffectEnum.beatback);
 	}
 	
 	// Update is called once per frame
@@ -34,6 +35,7 @@ public class MGSkillEffect : MonoBehaviour {
         //dartEffect(dartSwitch);
         //blinkEffect(blinkSwitch);只要一下就闪到前面 所以不需要再Update里慢慢移动
         sprintEffect(sprintSwitch);
+        beatbackEffect(beatbackSwitch);
         if (blinkSkillBonesTimer < 0.2f)
         {
             blinkSkillBonesTimer += Time.deltaTime;
@@ -46,6 +48,29 @@ public class MGSkillEffect : MonoBehaviour {
             }
         }
 	}
+    void beatbackEffect(MGNotification notification)
+    {
+        if (notification != null)
+        {
+
+            beatbackSwitch = notification;
+            MGMsgModel skillModel = (MGMsgModel)notification.objc;
+            GameObject objc = GameObject.Find(skillModel.gameobjectName);
+            float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
+            if (objc)
+            {
+                objc.transform.Translate(Vector3.left * MGSkillBeatbackInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillBeatbackInfo.durationTime);
+            }
+            timer += Time.deltaTime;
+            if (timer > MGSkillBeatbackInfo.durationTime * Time.timeScale)
+            {
+                timer = 0;
+                beatbackSwitch = null;
+                MGSkillBeatback beatbackObject = GameObject.Find("beatback(Clone)").GetComponent<MGSkillBeatback>();
+                beatbackObject.DestroySelf();
+            }
+        }
+    }
     void sprintEffect(MGNotification notification)
     {
         if (notification != null)

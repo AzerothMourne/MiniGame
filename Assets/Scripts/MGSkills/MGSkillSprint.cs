@@ -85,7 +85,7 @@ public class MGSkillSprint : MGSkillsBase
                 GameObject roleLater = GameObject.Find("role1");
                 roleLater.GetComponent<RoleAnimController>().isSprint = true;
                 roleLater.GetComponent<Animator>().SetBool("sprint", true);
-                roleLater.GetComponent<SpriteRenderer>().material = new Material(Shader.Find("long/ghost"));
+                roleLater.GetComponent<SpriteRenderer>().material = new Material(Shader.Find("long/sprint"));
                 GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");
                 for (int i = 0; i < backgroundList.Length; ++i)
                 {
@@ -123,28 +123,6 @@ public class MGSkillSprint : MGSkillsBase
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             label.text += "\r\n Skill："+other.name;
             flyDuang(other, releaseRole);
-            /*
-            GameObject otherObject = other.gameObject;
-            otherObject.GetComponent<Collider2D>().enabled = false;
-            
-            float otherObjectY = otherObject.transform.position.y;
-            float releaseObjectY = releaseRole.transform.position.y + releaseRole.GetComponent<SpriteRenderer>().bounds.size.y / 2;
-            label.text += "\r\n otherObjectY：" + otherObjectY + ",releaseObjectY=" + releaseObjectY;
-            int angle = Random.Range(0, 25) + 135;//随机生成135到160度的角度
-            Vector3 direction = otherObject.GetComponent<MGskillDrat>().direction;
-            if (otherObjectY >= releaseObjectY)
-            {
-                //向上飞
-                
-                otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f),direction.z);
-                label.text += "\r\n up:" + angle + ";" + otherObject.GetComponent<MGskillDrat>().direction;
-            }
-            else
-            {
-                //向下飞
-                otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, -1 * Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
-                label.text += "\r\n down:" + angle + ";" + otherObject.GetComponent<MGskillDrat>().direction;
-            }*/
         }
     }
 }
