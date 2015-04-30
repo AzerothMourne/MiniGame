@@ -84,8 +84,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 21738720}
   m_Layer: 8
-  m_Name: ' failLaterGameUI'
-  m_TagString: Untagged
+  m_Name: failLaterGameUI
+  m_TagString: overUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -214,9 +214,9 @@ Transform:
   m_LocalScale: {x: .00362318847, y: .00362318847, z: .00362318847}
   m_Children:
   - {fileID: 1231342012}
-  - {fileID: 166011614}
-  - {fileID: 21738720}
   - {fileID: 1568492366}
+  - {fileID: 21738720}
+  - {fileID: 166011614}
   - {fileID: 429847785}
   m_Father: {fileID: 0}
   m_RootOrder: 1
@@ -305,11 +305,11 @@ GameObject:
   - 4: {fileID: 166011614}
   m_Layer: 8
   m_Name: victoryLaterGameUI
-  m_TagString: Untagged
+  m_TagString: overUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &166011614
 Transform:
   m_ObjectHideFlags: 0
@@ -326,7 +326,7 @@ Transform:
   - {fileID: 1123372000}
   - {fileID: 651722005}
   m_Father: {fileID: 164351979}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!1 &185746789
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,12 +737,12 @@ GameObject:
   m_Component:
   - 4: {fileID: 429847785}
   m_Layer: 8
-  m_Name: ' failFrontGameUI'
-  m_TagString: Untagged
+  m_Name: failFrontGameUI
+  m_TagString: overUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &429847785
 Transform:
   m_ObjectHideFlags: 0
@@ -2013,11 +2013,11 @@ GameObject:
   - 4: {fileID: 1568492366}
   m_Layer: 8
   m_Name: victoryFrontGameUI
-  m_TagString: Untagged
+  m_TagString: overUI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1568492366
 Transform:
   m_ObjectHideFlags: 0
@@ -2034,7 +2034,7 @@ Transform:
   - {fileID: 185746790}
   - {fileID: 1156913240}
   m_Father: {fileID: 164351979}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!1 &1708241265
 GameObject:
   m_ObjectHideFlags: 0

@@ -118,8 +118,8 @@ public class MGInitGameData : MonoBehaviour {
                 Thread.Sleep(1000);
             }
         }
-         
         CancelInvoke();
+        MGNetWorking.disconnect();
         MGGlobalDataCenter.defaultCenter().backToDefaultValues();
     }
     void OnDestroy()

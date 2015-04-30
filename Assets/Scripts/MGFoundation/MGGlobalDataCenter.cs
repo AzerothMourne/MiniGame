@@ -24,7 +24,7 @@ public class MGGlobalDataCenter  {
     private string _serverIp;
 	public float UIScale,roadOrignY;
     public float totalGameTime;
-
+    public string overSenceUIName;
 	public bool isDartHit;
 	public bool isDartDefence;
     public string serverIp
@@ -51,6 +51,9 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
+        //this.isHost = true;
+        this.isHost = false;
+        this.overSenceUIName = null;
         backToDefaultValues();
 	}
     public void backToDefaultValues()
@@ -65,8 +68,6 @@ public class MGGlobalDataCenter  {
         this.listenPort = 8899;
         this.mySocketPort = 10000;
         this.isNetworkViewEnable = false;
-        this.isHost = true;
-        //this.isHost = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
         this.screenLiftX = -8.9f;

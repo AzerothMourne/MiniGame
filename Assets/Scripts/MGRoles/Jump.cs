@@ -24,7 +24,7 @@ public class Jump : MonoBehaviour {
 	public float jumpCount ;
     public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
-    private bool isGameOver;
+    private bool isGameOver, isCollisionOver;
 	
     public MGNetWorking mgNetWorking;
 
@@ -33,6 +33,7 @@ public class Jump : MonoBehaviour {
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
 	void Start () {
+        isCollisionOver = false;
         isGameOver = false;
         jumpCount = 0;
         isGround = false;
@@ -270,32 +271,38 @@ public class Jump : MonoBehaviour {
         
         if (!isGameOver)
         {
-            Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
-            if (roleFrontPos.x - roleLaterPos.x < 1.0f)
-            {
-                //强制roleLater出现在role的后面一点点。
-                MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = new Vector3(1, 1, 1);
-                MGGlobalDataCenter.defaultCenter().role.transform.localScale = new Vector3(1, 1, 1);
-                roleLaterPos.x = roleFrontPos.x-0.5f;
-                roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
-                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
-                MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
-                gameOver();
-            }
-            if (this.gameObject.name == "role1" && transform.position.x + 1.4 < MGGlobalDataCenter.defaultCenter().screenLiftX)
-            {
-                isGameOver = transform;
-                //切换场景
-                Debug.Log("role1 out of screen");
-            }
+            gameOver();
         }
 	}
     public void gameOver()
     {
-        isGameOver = true;
-        if (this.gameObject.name == "role1")
-            MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
+        
+        Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+        Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+        if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
+        {
+            isGameOver = true;
+            //强制roleLater出现在role的后面一点点。
+            MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = MGGlobalDataCenter.defaultCenter().role.transform.localScale;
+            if (MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale.y < 0)
+            {
+                MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.gravityScale = 0f;
+            }
+            roleLaterPos.x = roleFrontPos.x - 0.5f;
+            roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
+            MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
+            MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
+            if (this.gameObject.name == "role1")
+                MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
+        }
+        if (this.gameObject.name == "role1" && transform.position.x + 1.4 < MGGlobalDataCenter.defaultCenter().screenLiftX)//后者出屏幕结束，还有一个后者死掉结束在RoleAnimController里
+        {
+            isGameOver = true;
+            //切换场景
+            Debug.Log("role1 out of screen");
+            MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+            Application.LoadLevel("overSence");
+        }
     }
 	//判断角色是否在地面上
     public void OnCollisionEnter2D(Collision2D collision)
@@ -310,6 +317,7 @@ public class Jump : MonoBehaviour {
         }
         if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
         {
+            isCollisionOver = true;
             gameOver();
         }
 	}

@@ -2,10 +2,29 @@
 using System.Collections;
 
 public class overUI : MonoBehaviour {
-
+     
 	// Use this for initialization
 	void Start () {
-	
+        GameObject[] overUI = GameObject.FindGameObjectsWithTag("overUI");
+        Debug.Log(MGGlobalDataCenter.defaultCenter().overSenceUIName);
+        if (MGGlobalDataCenter.defaultCenter().isHost == false)
+        {
+            if (MGGlobalDataCenter.defaultCenter().overSenceUIName == "victoryFrontGameUI")
+            {
+                MGGlobalDataCenter.defaultCenter().overSenceUIName = "failLaterGameUI";
+            }
+            else if (MGGlobalDataCenter.defaultCenter().overSenceUIName == "failFrontGameUI")
+            {
+                MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryLaterGameUI";
+            }
+        }
+        for (int i = 0; i < overUI.Length; ++i)
+        {
+            if (overUI[i].name == MGGlobalDataCenter.defaultCenter().overSenceUIName)
+                overUI[i].SetActive(true);
+            else
+                overUI[i].SetActive(false);
+        }
 	}
 	
 	// Update is called once per frame
@@ -15,6 +34,7 @@ public class overUI : MonoBehaviour {
 
 	public void OnOverButtonClick() {
 		//isPressOverButton = true;
+        Application.LoadLevel("startGameScene");
 		print ("click over again button");
 	}
 }

@@ -160,7 +160,11 @@ public class RoleAnimController : MonoBehaviour {
             setAllAnimStateToFalse();
             animStateToDead();
         }
-        rigidbody2D.gravityScale = 0f;
+        if(downOrUp)
+            rigidbody2D.gravityScale = 0.5f;
+        else
+            rigidbody2D.gravityScale = 0f;
+        rigidbody2D.velocity = Vector3.zero;
         collider2D.isTrigger = true;
         isDead = true;
         MGNotificationCenter.defaultCenter().postNotification(uiEvent.enableAllUIButton, false);
@@ -229,13 +233,23 @@ public class RoleAnimController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		//检测角色的动作
-        if (isDead)
+        if (isDead)//死亡导致结束
         {
-            if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f)
+            if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f && transform.position.y >MGGlobalDataCenter.defaultCenter().screenBottomY - 1f)
+            {
                 transform.Translate(Vector3.left * 4 * Time.deltaTime);
+            }   
             else
             {
                 isDead = false;
+                if (this.gameObject.name == "role")
+                {
+                    MGGlobalDataCenter.defaultCenter().overSenceUIName = "failFrontGameUI";
+                }
+                else if (this.gameObject.name == "role1")
+                {
+                    MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+                }
                 Application.LoadLevel("overSence");
             }
             return;
@@ -343,5 +357,14 @@ public class RoleAnimController : MonoBehaviour {
     void OnDestroy()
     {
         MGNotificationCenter.defaultCenter().removeObserver(this);
+    }
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (isDead && other.name == "role1" && this.gameObject.name == "role")
+        {
+            Debug.Log("123:"+this.gameObject);
+            collider2D.isTrigger = false;
+            rigidbody2D.gravityScale = 0.5f;
+        }
     }
 }
