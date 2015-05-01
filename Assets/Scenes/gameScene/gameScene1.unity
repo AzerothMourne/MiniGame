@@ -762,6 +762,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blinkSkillBones: {fileID: 0}
+  speedSwitch: 1
 --- !u!4 &1122012132
 Transform:
   m_ObjectHideFlags: 0

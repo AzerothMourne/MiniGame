@@ -17,6 +17,7 @@ public class MGSkillEffect : MonoBehaviour {
     private float timer, blinkSkillBonesTimer;
     private MGNotification sprintSwitch,beatbackSwitch;
     private GameObject tempObjcet;
+    public int speedSwitch;
 	// Use this for initialization
 	void Start () {
         timer = 0;
@@ -91,7 +92,7 @@ public class MGSkillEffect : MonoBehaviour {
                 tempObjcet.transform.position = pos;//同步sprint技能的gameobject位置和role1的位置
                 //Debug.Log("sprint.position=" + tempObjcet.transform.position);
                 float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-                objc.transform.Translate(Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.smoothDeltaTime / MGSkillSprintInfo.durationTime);
+                objc.transform.Translate( speedSwitch*Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.smoothDeltaTime / MGSkillSprintInfo.durationTime);
             }
             timer += Time.deltaTime;
             if (timer > MGSkillSprintInfo.durationTime)

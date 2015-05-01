@@ -19,19 +19,19 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: 7e23a4a7fa653614082b00e260613769, type: 3}
-    - time: .166666672
+    - time: .0833333358
       value: {fileID: 21300000, guid: 85310d74d31ec77459298d639e3cfd32, type: 3}
-    - time: .333333343
+    - time: .166666672
       value: {fileID: 21300000, guid: d9de4d05f4bebc443a2f71a417f507d7, type: 3}
-    - time: .5
+    - time: .25
       value: {fileID: 21300000, guid: 286cb5be27950cb4c96d5c744717b2f2, type: 3}
-    - time: .666666687
+    - time: .333333343
       value: {fileID: 21300000, guid: 320d3efec562e384eb74e403452b10bd, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 30
+  m_SampleRate: 60
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -53,7 +53,7 @@ AnimationClip:
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .700000048
+    m_StopTime: .350000024
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -70,7 +70,7 @@ AnimationClip:
   m_EditorCurves: []
   m_EulerEditorCurves: []
   m_Events:
-  - time: .666666687
+  - time: .333333343
     functionName: changeKillFlag
     data: 
     objectReferenceParameter: {fileID: 0}

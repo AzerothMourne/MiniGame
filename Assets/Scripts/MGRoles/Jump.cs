@@ -288,7 +288,7 @@ public class Jump : MonoBehaviour {
             {
                 MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.gravityScale = 0f;
             }
-            roleLaterPos.x = roleFrontPos.x - 0.5f;
+            roleLaterPos.x = roleFrontPos.x - 1f;
             roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
             MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
             MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
@@ -318,6 +318,19 @@ public class Jump : MonoBehaviour {
         if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
         {
             isCollisionOver = true;
+            if (collision.gameObject.name == "role")
+            {
+                if (roleAnimaController.downOrUp)
+                    rigidbody2D.gravityScale = 0.5f;
+                else
+                    rigidbody2D.gravityScale = 0f;
+                rigidbody2D.velocity = Vector3.zero;
+                collider2D.isTrigger = true;
+            }
+            else if (collision.gameObject.name == "role1")
+            {
+                GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 0;
+            }
             gameOver();
         }
 	}
