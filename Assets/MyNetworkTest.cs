@@ -13,7 +13,6 @@ public class MyNetworkTest : MonoBehaviour {
     public UILabel log;
     private Vector3 acceleration;
     public GameObject cube;
-	private string ip = "127.0.0.1";
     private UDPDelegate udpReceive;
     void Start()
     {
@@ -56,11 +55,11 @@ public class MyNetworkTest : MonoBehaviour {
     }
     public void UDPSendBroadcast()
     {
-        Debug.Log("UDPSendBroadcast"+ip);
+		Debug.Log("UDPSendBroadcast"+MGGlobalDataCenter.defaultCenter().serverIp);
         Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
         IPEndPoint iep = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
         sock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
-        byte[] buffer = Encoding.Unicode.GetBytes(ip);
+		byte[] buffer = Encoding.Unicode.GetBytes(MGGlobalDataCenter.defaultCenter().serverIp);
         sock.SendTo(buffer, iep);
         sock.Close();
     }

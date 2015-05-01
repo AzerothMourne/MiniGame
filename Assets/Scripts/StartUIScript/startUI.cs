@@ -99,7 +99,7 @@ public class startUI : MonoBehaviour {
 		print ("createChooseUI");
 		//实例化选择角色的界面
 		ChooseUIObj = GameObject.Instantiate (chooseButton, new Vector3 (0, 0, 0), Quaternion.Euler (0, 0, 0)) as GameObject;
-		ChooseUIObj.transform.parent = NGUIRoot.transform;
+		ChooseUIObj.transform.parent = GameObject.Find("start").transform;
 		ChooseUIObj.transform.localPosition = new Vector3 (0, 0, 0);
 		ChooseUIObj.transform.localScale = new Vector3 (1, 1, 1);
 		ChooseUIObj.GetComponent<UISprite>().depth = 7;
@@ -110,7 +110,7 @@ public class startUI : MonoBehaviour {
 	public void createFuzzyBG() {
 		print ("createFuzzyBG");
 		FuzzyUIObj = GameObject.Instantiate(fuzzyButton, new Vector3(0,0,0),Quaternion.Euler(0,0,0)) as GameObject;
-		FuzzyUIObj.transform.parent = NGUIRoot.transform;
+		FuzzyUIObj.transform.parent = GameObject.Find("start").transform;
 		FuzzyUIObj.transform.localPosition = new Vector3(0, 0, 0);
 		FuzzyUIObj.transform.localScale = new Vector3(1, 1, 1);
 	}
@@ -118,7 +118,7 @@ public class startUI : MonoBehaviour {
 	public void creatCloseButton() {
 		print("creatCloseButton");
 		CloseButtonObj = GameObject.Instantiate(closeButton, new Vector3(0,0,0),Quaternion.Euler(0,0,0)) as GameObject;
-		CloseButtonObj.transform.parent = NGUIRoot.transform;
+		CloseButtonObj.transform.parent = GameObject.Find("start").transform;
 		CloseButtonObj.transform.localPosition = new Vector3(-187, 120, 0);
 		CloseButtonObj.transform.localScale = new Vector3(1, 1, 1);
 		CloseButtonObj.GetComponent<UISprite>().depth = 8;
