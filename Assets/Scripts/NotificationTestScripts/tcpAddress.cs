@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿/*
+using UnityEngine;
 using System.Collections;
 using System.Net;
 using NATUPNPLib;
@@ -104,3 +105,4 @@ public class tcpAddress : MonoBehaviour
         }
     }
 }
+*/
