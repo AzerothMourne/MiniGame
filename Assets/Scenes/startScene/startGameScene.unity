@@ -590,7 +590,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5ecb5660b11414fb042fb826e03b73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scalingStyle: 2
+  scalingStyle: 0
   manualHeight: 750
   minimumHeight: 600
   maximumHeight: 1600
@@ -604,7 +604,7 @@ Transform:
   m_GameObject: {fileID: 937347956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00266666664, y: .00266666664, z: .00266666664}
+  m_LocalScale: {x: .00333333341, y: .00333333341, z: .00333333341}
   m_Children:
   - {fileID: 993013705}
   - {fileID: 1254167064}
@@ -716,7 +716,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 1092618719}
   - 114: {fileID: 1092618720}
-  - 114: {fileID: 1092618721}
   m_Layer: 0
   m_Name: CreatStartUI
   m_TagString: Untagged
@@ -752,18 +751,6 @@ MonoBehaviour:
   height: 750
   x_k: 0
   y_k: 0
---- !u!114 &1092618721
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1092618718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 028d3af0561e6fd4f98d86abf476a263, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isSync: 0
 --- !u!1 &1254167063
 GameObject:
   m_ObjectHideFlags: 0
