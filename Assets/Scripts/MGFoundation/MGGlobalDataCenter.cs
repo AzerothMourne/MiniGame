@@ -17,7 +17,7 @@ public class MGGlobalDataCenter  {
     public bool isNetworkViewEnable;
     public bool isHost,isBigSkilling,isStop;
     public int connecttions;
-    public int listenPort,mySocketPort;
+    public int listenPort,mySocketPort,UPNPPort;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
     public GameObject role, roleLater;

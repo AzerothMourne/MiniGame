@@ -134,7 +134,16 @@ public class MGSkillEffect : MonoBehaviour {
             {
                 Debug.Log("blinkObjc:" + objc + "name:" + objc.name);
 				float dis=MGGlobalDataCenter.defaultCenter().roleFrontPos.x-MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-                objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * dis);
+                Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+                Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+                if (roleFrontPos.x - roleLaterPos.x < MGSkillBlinkInfo.SkillEffectSpeed * dis)
+                {
+                    objc.transform.Translate(Vector3.right * (roleFrontPos.x - roleLaterPos.x-1f));
+                }
+                else
+                {
+                    objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * dis);
+                }
             }
 
             MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, shortBonesName);//发送bones技能的事件

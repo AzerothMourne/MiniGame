@@ -17,26 +17,8 @@ public class MyNetworkTest : MonoBehaviour {
     private UDPDelegate udpReceive;
     void Start()
     {
-        NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-        foreach (NetworkInterface adapter in adapters)
-        {
-            if (adapter.Supports(NetworkInterfaceComponent.IPv4))
-            {
-                UnicastIPAddressInformationCollection uniCast = adapter.GetIPProperties().UnicastAddresses;
-                if (uniCast.Count > 0)
-                {
-                    foreach (UnicastIPAddressInformation uni in uniCast)
-                    {
-                        //得到IPv4的地址。 AddressFamily.InterNetwork指的是IPv4
-                        if (uni.Address.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            ip = uni.Address.ToString();
-                        }
-                    }
-                }
-            }
-        }
-        MGGlobalDataCenter.defaultCenter().serverIp = ip;
+        
+        MGGlobalDataCenter.defaultCenter().serverIp = MGFoundtion.getInternIP();
         udpReceive = new UDPDelegate(UDPStartToReceive);
     }
     public void createHost()

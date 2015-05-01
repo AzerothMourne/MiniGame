@@ -1,9 +1,35 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System;
+using System.Net.NetworkInformation;
 public static class MGFoundtion  {
-
+    public static string getInternIP(){
+        string ip=null;
+        NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+        foreach (NetworkInterface adapter in adapters)
+        {
+            if (adapter.Supports(NetworkInterfaceComponent.IPv4))
+            {
+                UnicastIPAddressInformationCollection uniCast = adapter.GetIPProperties().UnicastAddresses;
+                if (uniCast.Count > 0)
+                {
+                    foreach (UnicastIPAddressInformation uni in uniCast)
+                    {
+                        //得到IPv4的地址。 AddressFamily.InterNetwork指的是IPv4
+                        if (uni.Address.AddressFamily == AddressFamily.InterNetwork)
+                        {
+                            ip = uni.Address.ToString();
+                        }
+                    }
+                }
+            }
+        }
+        return ip;
+    }
 	public static Vector3 WorldPointToNGUIPoint(Vector3 worldPos,Camera uiCamera){
 		Vector3 pos = Camera.main.WorldToScreenPoint(worldPos);
 		pos.z = 0f;   //z一定要为0.
