@@ -140,7 +140,7 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (notification.objc.Equals("role1"))
         {
-            Debug.Log("roleKillAnimController:" + notification.objc);
+            //Debug.Log("roleKillAnimController:" + notification.objc);
             setAllAnimStateToFalse();
             animStateToKill();
         }
@@ -150,13 +150,13 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (notification.objc.Equals("role"))
         {
-            Debug.Log("roleDeadAnimController:" + notification.objc);
+            //Debug.Log("roleDeadAnimController:" + notification.objc);
             setAllAnimStateToFalse();
             animStateToDead();
         }
         else if (notification.objc.Equals("role1"))
         {
-            Debug.Log("roleDeadAnimController:" + notification.objc);
+            //Debug.Log("roleDeadAnimController:" + notification.objc);
             setAllAnimStateToFalse();
             animStateToDead();
         }
@@ -176,7 +176,7 @@ public class RoleAnimController : MonoBehaviour {
         Debug.Log(this.gameObject.name + " upButtonClick");
         if (transform.localScale.y < 0 || (isRoll && downOrUp))//上翻
         {
-            Debug.Log("上翻");
+            //Debug.Log("上翻");
             if (isRoll && downOrUp == true) isChangeDownOrUp = true;
             isRoll = true;
             downOrUp = false;
@@ -188,7 +188,7 @@ public class RoleAnimController : MonoBehaviour {
             return;
         }
         if (isRoll) return;
-        Debug.Log(this.gameObject.name + " jumpButtonClick");
+        //Debug.Log(this.gameObject.name + " jumpButtonClick");
         if (isFirstJump == false)//一段跳
         {
             isFirstJump = true;
@@ -205,11 +205,11 @@ public class RoleAnimController : MonoBehaviour {
     public void downButtonClick(MGNotification notification)
     {
         if (!isRoll && !isPressDown && transform.lossyScale.y < 0) return;
-        Debug.Log(this.gameObject.name + " downButtonClick");
+        //Debug.Log(this.gameObject.name + " downButtonClick");
         collider2D.isTrigger = true;
         if (isFirstJump)//在空中
         {
-            Debug.Log("在空中");
+            //Debug.Log("在空中");
             isPressDown = true;
             isPressDownToGround = false;
             downOrUp = true;
@@ -220,7 +220,7 @@ public class RoleAnimController : MonoBehaviour {
         }
         else//在绳子上
         {
-            Debug.Log("在绳子上");
+            //Debug.Log("在绳子上");
             if (isRoll && !downOrUp) isChangeDownOrUp = true;
             isRoll = true;
             downOrUp = true;
@@ -258,7 +258,7 @@ public class RoleAnimController : MonoBehaviour {
         //通过速度判断是否下落,下落有2中情况，正常下落和加速下落 对应不同动画,前提条件是必须在空中，否则isRollBack表示上下翻滚。
         if (isPressDown && isFirstJump)//加速下落，切换到翻滚动作
         {
-            Debug.Log("切换加速下落动画");
+            //Debug.Log("切换加速下落动画");
             rigidbody2D.gravityScale = 10f;//保证加速下落过程中的重力
             if (MGGlobalDataCenter.defaultCenter().roadOrignY - transform.position.y >= 0)
             {
@@ -273,7 +273,7 @@ public class RoleAnimController : MonoBehaviour {
             }
             if (isPressDownToGround && isChangeDownOrUp)//如果接触地面 且切换了方向 则切换到上下翻滚判断逻辑
             {
-                Debug.Log("接触地面后切换方向");
+                //Debug.Log("接触地面后切换方向");
                 isFirstJump = false;
                 isPressDownToGround = false;
                 rigidbody2D.gravityScale = 0.0f;
@@ -294,14 +294,14 @@ public class RoleAnimController : MonoBehaviour {
         {
             if(isSecondJump == false && isFirstJump == true)//正常下落
             {
-                Debug.Log("一段跳后切换正常下落动画");
+                //Debug.Log("一段跳后切换正常下落动画");
                 isFallDown = true;
                 setAllAnimStateToFalse();
                 animStateToFallDown();
             }
             else if (isSecondJump == true && player.velocity.y < -8f)
             {
-                Debug.Log("二段跳后切换正常下落动画");
+                //Debug.Log("二段跳后切换正常下落动画");
                 isFallDown = true;
                 setAllAnimStateToFalse();
                 animStateToFallDown();
@@ -310,7 +310,7 @@ public class RoleAnimController : MonoBehaviour {
         //正常下落后回到地面需要切换回正常动画
         if (this.GetComponent<Jump>().isGround == true && isFirstJump && !isPressDown)
         {
-            Debug.Log("切换回正常动画");
+            //Debug.Log("切换回正常动画");
             toNomalRun();
             animStateToRun();
         }
@@ -318,7 +318,7 @@ public class RoleAnimController : MonoBehaviour {
         //说明正在上下翻滚
         if (isRoll == true && !isFirstJump)
         {
-            Debug.Log("正在上下翻滚：" + rollTimer);
+            //Debug.Log("正在上下翻滚：" + rollTimer);
             //判断翻滚是否结束
             float dis = this.GetComponent<SpriteRenderer>().sprite.bounds.size.y;
             rollTimer += Time.deltaTime;
@@ -346,7 +346,7 @@ public class RoleAnimController : MonoBehaviour {
 	}
     public void changeRollBackState()
     {
-        Debug.Log("翻滚结束切换回正常动画");
+        //Debug.Log("翻滚结束切换回正常动画");
         rollTimer = 0f;
         float flag = downOrUp?1:-1;
         transform.localScale = new Vector3(1, -1 * flag, 1);
@@ -362,7 +362,7 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (isDead && other.name == "role1" && this.gameObject.name == "role")
         {
-            Debug.Log("123:"+this.gameObject);
+            //Debug.Log("123:"+this.gameObject);
             collider2D.isTrigger = false;
             rigidbody2D.gravityScale = 0.5f;
         }

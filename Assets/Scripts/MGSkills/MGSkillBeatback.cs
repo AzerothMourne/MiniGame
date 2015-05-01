@@ -4,7 +4,6 @@ using System.Collections;
 public class MGSkillBeatback : MGSkillsBase
 {
     public int speed;
-    private GameObject roleLater, roleFront;
     private float timer;
     private bool isEndedFreeze;
     public GameObject wordSprite;
@@ -37,9 +36,7 @@ public class MGSkillBeatback : MGSkillsBase
         }
 
         this.releaseSkillObjectName = "role";
-        roleLater = GameObject.Find("role1");
-        roleFront = GameObject.Find("role");
-        transform.parent = roleFront.transform;
+		transform.parent = MGGlobalDataCenter.defaultCenter ().role.transform;
         this.gameObject.layer = 9;
         base.scaleAnimationFofBigSkill();
     }
@@ -98,7 +95,7 @@ public class MGSkillBeatback : MGSkillsBase
     }
     public void DestroySelf()
     {
-        MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
+		MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
         UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
         label.text += "\r\nbeatback end";
         isEndedFreeze = true;
@@ -106,7 +103,7 @@ public class MGSkillBeatback : MGSkillsBase
         Time.timeScale = 1f;
         GameObject releaseRole = GameObject.Find("role");
         releaseRole.layer = 9;//gamelayer
-        DestroyImmediate(this.m_cloneCamera, true);
+        Destroy(this.m_cloneCamera);
         Destroy(this.gameObject);
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -114,7 +111,7 @@ public class MGSkillBeatback : MGSkillsBase
         if (other.name == "role1")
         {
             print("技能名：击退。被击中的是" + other.name + "，释放技能的是" + this.releaseSkillObjectName + ";gameobjc:" + other.gameObject);
-            MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
+            //MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             label.text += "\r\n Skill：" + other.name;
             //发送给自己

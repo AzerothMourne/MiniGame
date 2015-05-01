@@ -82,6 +82,7 @@ public class MGSkillSprint : MGSkillsBase
             }
             if (timer >= duration)
             {
+
                 GameObject roleLater = GameObject.Find("role1");
                 roleLater.GetComponent<RoleAnimController>().isSprint = true;
                 roleLater.GetComponent<Animator>().SetBool("sprint", true);
@@ -103,23 +104,22 @@ public class MGSkillSprint : MGSkillsBase
                 //发送给自己
                 MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.sprint, skillModel);
 
-                MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
+                
                 UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
                 label.text += "\r\nsprint end";
                 isEndedFreeze = true;
                 Time.timeScale = 1f;
                 GameObject releaseRole = GameObject.Find("role1");
                 releaseRole.layer = 9;//gamelayer
-                DestroyImmediate(this.m_cloneCamera, true);
+                Destroy(this.m_cloneCamera);
             }
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.tag == "frontSkill")
+        if (other.tag == "frontSkill" && other.name != "beatback(Clone)")
         {
             print("技能名：冲刺。打在上面的是" + other.name + "，释放技能的是" + this.releaseSkillObjectName + ";gameobjc:" + other.gameObject);
-            MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             label.text += "\r\n Skill："+other.name;
             flyDuang(other, releaseRole);

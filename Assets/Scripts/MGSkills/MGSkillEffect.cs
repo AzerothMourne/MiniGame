@@ -14,14 +14,15 @@ public static class SkillEffectEnum
 public class MGSkillEffect : MonoBehaviour {
     private string shortBonesName;
     public bones blinkSkillBones;
-    private float timer, blinkSkillBonesTimer;
+    private float sprintTimer,beatbackTimer, blinkSkillBonesTimer;
     private MGNotification sprintSwitch,beatbackSwitch;
     private GameObject tempObjcet;
     public int speedSwitch;
 	// Use this for initialization
 	void Start () {
-        timer = 0;
-        blinkSkillBonesTimer = 1;
+		sprintTimer = 0;
+		beatbackTimer = 0;
+		blinkSkillBonesTimer = 1;
         sprintSwitch = null;
         tempObjcet = null;
         shortBonesName = "bones_short";
@@ -62,11 +63,11 @@ public class MGSkillEffect : MonoBehaviour {
             {
                 objc.transform.Translate(Vector3.left * MGSkillBeatbackInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillBeatbackInfo.durationTime);
             }
-            timer += Time.deltaTime;
-            if (timer > MGSkillBeatbackInfo.durationTime * Time.timeScale)
+			beatbackTimer += Time.deltaTime;
+			if (beatbackTimer > MGSkillBeatbackInfo.durationTime * Time.timeScale)
             {
-                timer = 0;
-                beatbackSwitch = null;
+				beatbackTimer = 0;
+				beatbackSwitch = null;
                 MGSkillBeatback beatbackObject = GameObject.Find("beatback(Clone)").GetComponent<MGSkillBeatback>();
                 beatbackObject.DestroySelf();
             }
@@ -92,10 +93,10 @@ public class MGSkillEffect : MonoBehaviour {
                 tempObjcet.transform.position = pos;//同步sprint技能的gameobject位置和role1的位置
                 //Debug.Log("sprint.position=" + tempObjcet.transform.position);
                 float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-                objc.transform.Translate( speedSwitch*Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.smoothDeltaTime / MGSkillSprintInfo.durationTime);
+				objc.transform.Translate( speedSwitch*Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillSprintInfo.durationTime);
             }
-            timer += Time.deltaTime;
-            if (timer > MGSkillSprintInfo.durationTime)
+			sprintTimer += Time.deltaTime;
+			if (sprintTimer > MGSkillSprintInfo.durationTime)
             {
                 //修改背景的移动速度
                 GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");
@@ -116,8 +117,9 @@ public class MGSkillEffect : MonoBehaviour {
                 Vector3 pos1 = GameObject.Find("role1").transform.position;
                 Vector3 pos = GameObject.Find("role").transform.position;
                 label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x;
-                timer = 0;
-                sprintSwitch = null;
+				sprintTimer = 0;
+				sprintSwitch = null;
+				MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
                 Destroy(tempObjcet);
             }
         }
@@ -148,16 +150,11 @@ public class MGSkillEffect : MonoBehaviour {
 
             MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, shortBonesName);//发送bones技能的事件
 
-            timer += Time.deltaTime;
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             Vector3 pos1 = GameObject.Find("role1").transform.position;
             Vector3 pos = GameObject.Find("role").transform.position;
             label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x + ";shortBonesName:" + shortBonesName;
-            if (timer > MGSkillBlinkInfo.durationTime)
-            {
-				
-                timer = 0;
-            }
+
         }
     }
     void dartEffect(MGNotification notification)
@@ -170,11 +167,6 @@ public class MGSkillEffect : MonoBehaviour {
             if (objc)
             {
                 objc.transform.Translate(Vector3.left * MGSkillDartInfo.SkillEffectSpeed * dis );
-            }
-            timer += Time.deltaTime;
-            if (timer >= MGSkillDartInfo.durationTime)
-            {
-                timer = 0;
             }
         }
     }

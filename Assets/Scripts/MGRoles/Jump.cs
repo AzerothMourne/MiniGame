@@ -25,7 +25,6 @@ public class Jump : MonoBehaviour {
     public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
     private bool isGameOver, isCollisionOver;
-	
     public MGNetWorking mgNetWorking;
 
 	
@@ -81,7 +80,7 @@ public class Jump : MonoBehaviour {
     {
         if (notification.objc == null)
         {
-            Vector3 pos = new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX+beatback.GetComponent<SpriteRenderer>().bounds.size.y/2, 0, 0);
+            Vector3 pos = new Vector3(11f, 0, 0);
             MGSkillBeatback skillObjc = null;
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
@@ -214,8 +213,9 @@ public class Jump : MonoBehaviour {
     {
         MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.upFormerEventId), notification);
         //if (roleAnimaController.isRoll || roleAnimaController.isPressDown) return;
-        if (transform.localScale.y < 0 || (roleAnimaController.isRoll && roleAnimaController.downOrUp))
+        if (transform.localScale.y < 0 || roleAnimaController.isRoll)
         {
+			Debug.Log("jump");
             if (notification.objc == null)
             {
                 mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));

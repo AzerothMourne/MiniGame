@@ -31,7 +31,7 @@ public class MGInitGameData : MonoBehaviour {
         {
             syncIEP = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
             syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
-            InvokeRepeating("syncNetwork", 0.05f, 0.032f);
+            InvokeRepeating("syncNetwork", 0.05f, 0.016f);
         }
         else
         {
@@ -61,7 +61,7 @@ public class MGInitGameData : MonoBehaviour {
                     }
                 }
             });
-            loomThread.IsBackground = true;
+//            loomThread.IsBackground = true;
         }
     }
     public void syncNetwork()//主机向客户端发送UDP包让客户端同步主机的数据

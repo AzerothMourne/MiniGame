@@ -91,7 +91,7 @@ public class MGNetWorking : MonoBehaviour {
     
 	public void receiverMessageFromPeer ( string msg)
 	{
-		print ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
+		Debug.Log ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
 		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
 		MGNotificationCenter.defaultCenter().postNotification(msgModel.eventId,msgModel);
 	}

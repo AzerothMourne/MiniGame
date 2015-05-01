@@ -9,8 +9,8 @@ GameObject:
   m_Component:
   - 4: {fileID: 477352}
   - 114: {fileID: 11477352}
-  - 212: {fileID: 21277352}
   - 68: {fileID: 6877352}
+  - 212: {fileID: 21226272}
   m_Layer: 9
   m_Name: beatback
   m_TagString: frontSkill
@@ -85,7 +85,7 @@ MonoBehaviour:
   - .550000012
   - .699999988
   duration: 1
---- !u!212 &21277352
+--- !u!212 &21226272
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -97,7 +97,7 @@ SpriteRenderer:
   m_LightmapIndex: 255
   m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
   m_Materials:
-  - {fileID: 2100000, guid: 920f06acf5d6cce49baf4b6c3fb83c07, type: 2}
+  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
