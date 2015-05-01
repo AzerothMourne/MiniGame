@@ -13,6 +13,8 @@ public class sprint : UIBase
     {
         direction = true;
         addOrDec = true;
+        cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
+        isCD = true;
     }
     // Update is called once per frame
     void Update()
