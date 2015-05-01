@@ -25,8 +25,16 @@ public class MGGlobalDataCenter  {
 	public float UIScale,roadOrignY;
     public float totalGameTime;
     public string overSenceUIName;
+	//@aragornwang
+	//play music 
 	public bool isDartHit;
 	public bool isDartDefence;
+	public bool isDartRelease;
+	public bool isKillMingyue;
+
+	public bool isWin;
+	public bool isLose;
+
     public string serverIp
     {
         get

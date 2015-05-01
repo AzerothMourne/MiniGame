@@ -25,5 +25,23 @@ public class AudioPlay : MonoBehaviour {
 			music.playoneshot ("Sound/dart_defence");
 			MGGlobalDataCenter.defaultCenter ().isDartDefence = false;
 		}
+		//以下未添加
+		if (MGGlobalDataCenter.defaultCenter().isDartRelease){
+			music.playoneshot("Sound/dart_relase");
+			MGGlobalDataCenter.defaultCenter ().isDartRelease = false;
+		}
+		if (MGGlobalDataCenter.defaultCenter ().isKillMingyue) {
+			music.playoneshot("Sound/kill_mingyue");
+			MGGlobalDataCenter.defaultCenter().isKillMingyue = false;
+		}
+		if (MGGlobalDataCenter.defaultCenter ().isWin) {
+			music.play("Sound/win");
+			MGGlobalDataCenter.defaultCenter().isWin = false;
+		}
+		if (MGGlobalDataCenter.defaultCenter ().isLose) {
+			music.play("Sound/lose");
+			MGGlobalDataCenter.defaultCenter().isLose = false;
+		}
+
 	}
 }
