@@ -27,7 +27,7 @@ public class Jump : MonoBehaviour {
 	public UIInput log;
     private bool isGameOver, isCollisionOver;
     public MGNetWorking mgNetWorking;
-
+    public float roleSpeed;
 	
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
     private RoleAnimController roleAnimaController;
@@ -46,6 +46,7 @@ public class Jump : MonoBehaviour {
 			//print ("yes role");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleFront");
+            roleSpeed = 0;
 			MGGlobalDataCenter.defaultCenter().role=this.gameObject;
 			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
 			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
@@ -59,6 +60,7 @@ public class Jump : MonoBehaviour {
 			//print ("yes role1");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleLater");
+            roleSpeed = 1f / 30f;
 			MGGlobalDataCenter.defaultCenter().roleLater=this.gameObject;
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
@@ -275,7 +277,11 @@ public class Jump : MonoBehaviour {
 			else
 				MGNotificationCenter.defaultCenter().postNotification("1jump", null);
 		}
-        
+        if (roleSpeed != 0)
+        {
+            float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
+            transform.Translate(Vector3.right * dis * roleSpeed * Time.deltaTime);
+        }
         if (!isGameOver)
         {
             gameOver();

@@ -151,13 +151,13 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (notification.objc.Equals("role"))
         {
-            //Debug.Log("roleDeadAnimController:" + notification.objc);
+            Debug.Log("roleDeadAnimController:" + notification.objc);
             setAllAnimStateToFalse();
             animStateToDead();
         }
         else if (notification.objc.Equals("role1"))
         {
-            //Debug.Log("roleDeadAnimController:" + notification.objc);
+            Debug.Log("roleDeadAnimController:" + notification.objc);
             setAllAnimStateToFalse();
             animStateToDead();
         }
@@ -236,8 +236,10 @@ public class RoleAnimController : MonoBehaviour {
 		//检测角色的动作
         if (isDead)//死亡导致结束
         {
+            Debug.Log("out of left moving");
             if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f && transform.position.y >MGGlobalDataCenter.defaultCenter().screenBottomY - 1f)
             {
+                Debug.Log("left moving");
                 transform.Translate(Vector3.left * 4 * Time.deltaTime);
             }   
             else

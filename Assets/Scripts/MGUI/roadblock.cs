@@ -3,9 +3,13 @@ using System.Collections;
 
 public class roadblock : UIBase
 {
+    private float roadblockGCDTimer;
+    private float holdLevel;
     // Use this for initialization
     void Start()
     {
+        holdLevel = MGSkillRoadblockInfo.skillHoldLevel;
+        roadblockGCDTimer = 0;
         direction = true;
         addOrDec = true;
         cdBackObject = GameObject.Find("roadblockBack");
@@ -17,12 +21,25 @@ public class roadblock : UIBase
     {
         if (isCD)
         {
+
+            if (holdLevel > 0)
+            {
+                roadblockGCDTimer += Time.deltaTime;
+                if (roadblockGCDTimer > MGSkillRoadblockInfo.skillGCD)
+                {
+                    roadblockGCDTimer = 0;
+                    --holdLevel;
+                    MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblock, null);
+                }
+            }
+
             cdBack.fillAmount += (addOrDec ? 1 : -1) * (1f / MGSkillRoadblockInfo.skillCD) * Time.deltaTime;
             if (addOrDec)
             {
                 if (cdBack.fillAmount >= 1f)
                 {
                     isCD = false;
+                    holdLevel = MGSkillRoadblockInfo.skillHoldLevel;
                     cdBack.fillAmount = 1f;
                 }
             }
@@ -31,10 +48,10 @@ public class roadblock : UIBase
                 if (cdBack.fillAmount <= 0f)
                 {
                     isCD = false;
+                    holdLevel = MGSkillRoadblockInfo.skillHoldLevel;
                     cdBack.fillAmount = 0f;
                 }
             }
-
         }
     }
     public void OnMouseDown()
@@ -45,9 +62,9 @@ public class roadblock : UIBase
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
+            roadblockGCDTimer = 0;
+            --holdLevel;
             MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblock, null);
         }
-       
-
     }
 }

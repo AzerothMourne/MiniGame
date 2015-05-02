@@ -9,6 +9,8 @@ public class MGMsgModel{
     public string gameobjectName { get; set; }
 	public long timestamp { get; set; }
     public string posJson;
+    public string tag;
+    public string name;
 }
 
 

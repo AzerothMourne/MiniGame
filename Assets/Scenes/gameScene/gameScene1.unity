@@ -1116,7 +1116,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
+  m_LocalScale: {x: .00362318847, y: .00362318847, z: .00362318847}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1139895024}
@@ -1560,6 +1560,7 @@ MonoBehaviour:
   beatback: {fileID: 0}
   log: {fileID: 0}
   mgNetWorking: {fileID: 0}
+  roleSpeed: 0
 --- !u!114 &1852946991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1802,6 +1803,7 @@ MonoBehaviour:
   beatback: {fileID: 11477352, guid: 3471221c0c24cf546a4aa7e84ca445a7, type: 2}
   log: {fileID: 0}
   mgNetWorking: {fileID: 0}
+  roleSpeed: 0
 --- !u!114 &1985725684
 MonoBehaviour:
   m_ObjectHideFlags: 0

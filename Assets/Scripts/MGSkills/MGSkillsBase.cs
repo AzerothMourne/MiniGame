@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-
+public static class SkillEnum
+{
+    public static string dart = "SkillEnum_dart";
+    public static string roadblock = "SkillEnum_roadblock";
+}
 public static class MGSkillDartInfo
 {
     public static string skillId = SkillEffectEnum.dart;
@@ -14,9 +18,9 @@ public static class MGSkillDartInfo
 public static class MGSkillRoadblockInfo
 {
     public static string skillId = SkillEffectEnum.roadblock;
-    public static int skillCD = 1;
-    public static int skillHoldLevel = 1;
-    public static int skillGCD = 0;
+    public static float skillCD = 2.5f;
+    public static int skillHoldLevel = 3;
+    public static float skillGCD = 0.5f;
     public static float SkillEffectSpeed = 1f/4f;
     public static float durationTime = 0.1f;
 }
@@ -61,6 +65,7 @@ public class MGSkillsBase : MonoBehaviour {
     public GameObject plane;
     public int bigSkillPlaneLayer=12;
     public string releaseSkillObjectName;
+    public MGNetWorking mgNetWorking;
     /// <summary>
     /// 虚函数 
     /// 在屏幕上创建技能精灵
