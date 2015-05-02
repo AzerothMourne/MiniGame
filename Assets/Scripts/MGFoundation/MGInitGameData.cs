@@ -37,7 +37,7 @@ public class MGInitGameData : MonoBehaviour {
         {
             syncIEP = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
             syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
-            InvokeRepeating("syncNetwork", 1f, 0.016f);
+            InvokeRepeating("syncNetwork", 0.1f, 0.017f);
         }
         else
         {
@@ -63,7 +63,13 @@ public class MGInitGameData : MonoBehaviour {
                             MGSyncMsgModel model = JsonMapper.ToObject<MGSyncMsgModel>(receiveString);
                             Debug.Log("model:" + model.roleLaterPosX+";"+model.gameTime);
                             */
-                            if (MGGlobalDataCenter.defaultCenter().roleLater != null)
+							/*
+							try{
+								UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
+								label.text += "receiveString";
+							}catch{
+							}*/
+							if (MGGlobalDataCenter.defaultCenter().roleLater != null)
                             {
                                 Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
                                 MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(float.Parse(receiveString), pos.y, pos.z);
