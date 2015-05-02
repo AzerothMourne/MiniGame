@@ -70,6 +70,16 @@ public class createRoleUI : MonoBehaviour {
         {
             gameTimerLabel.GetComponent<UILabel>().text = frontNum + ":" + laterNum;
         }
+        if (MGGlobalDataCenter.defaultCenter().totalGameTime <= 0f)
+        {
+            //游戏结束
+            MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+            Application.LoadLevel("overSence");
+            MGMsgModel gameoverModel = new MGMsgModel();
+            gameoverModel.eventId = EventEnum.gameoverEventId;
+            gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
+        }
         
     }
     public void continueNotification(MGNotification notification)

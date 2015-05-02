@@ -4,7 +4,13 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
+using LitJson;
 
+public class MGSyncMsgModel
+{
+    public string roleLaterPosX { get; set; }
+    public string gameTime { get; set; }
+}
 public class MGInitGameData : MonoBehaviour {
     private Socket syncSock;
     private IPEndPoint syncIEP;
@@ -29,39 +35,44 @@ public class MGInitGameData : MonoBehaviour {
         syncSock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
         if (MGGlobalDataCenter.defaultCenter().isHost)
         {
-            syncIEP = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
+            syncIEP = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
             syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
-            InvokeRepeating("syncNetwork", 0.05f, 0.016f);
+            InvokeRepeating("syncNetwork", 1f, 0.016f);
         }
         else
         {
-            syncIEP = new IPEndPoint(IPAddress.Any, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个侦听局域网内部所有IP和指定端口
+            syncIEP = new IPEndPoint(IPAddress.Any, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个侦听局域网内部所有IP和指定端口
             syncEP = (EndPoint)syncIEP;
             syncSock.Bind(syncIEP);//绑定这个实例
             //Run the action on a new thread
             loomThread = Loom.RunAsync(() =>
             {
-                byte[] buffer = new byte[1024];//设置缓冲数据流
                 string receiveString = null;
                 while (true)
                 {
+                    byte[] buffer = new byte[1024];//设置缓冲数据流
                     syncSock.ReceiveFrom(buffer, ref syncEP);//接收数据,并确把数据设置到缓冲流里面
-                    receiveString = Encoding.Unicode.GetString(buffer);
+                    receiveString = Encoding.ASCII.GetString(buffer);
                     if (receiveString.Length > 0)
                     {
                         //Run some code on the main thread
                         Loom.QueueOnMainThread(() =>
                         {
+                            /*
+                            Debug.Log(receiveString);
+                            MGSyncMsgModel model = JsonMapper.ToObject<MGSyncMsgModel>(receiveString);
+                            Debug.Log("model:" + model.roleLaterPosX+";"+model.gameTime);
+                            */
                             if (MGGlobalDataCenter.defaultCenter().roleLater != null)
                             {
                                 Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
                                 MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(float.Parse(receiveString), pos.y, pos.z);
+                                //MGGlobalDataCenter.defaultCenter().totalGameTime = float.Parse(model.gameTime);
                             }
                         });
                     }
                 }
             });
-//            loomThread.IsBackground = true;
         }
     }
     public void syncNetwork()//主机向客户端发送UDP包让客户端同步主机的数据
@@ -70,7 +81,13 @@ public class MGInitGameData : MonoBehaviour {
         {
             //Debug.Log("syncNetwork");
             Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            byte[] buffer = Encoding.Unicode.GetBytes(roleLaterPos.x.ToString());
+            /*
+            MGSyncMsgModel model = new MGSyncMsgModel();
+            model.roleLaterPosX = roleLaterPos.x.ToString();
+            model.gameTime = MGGlobalDataCenter.defaultCenter().totalGameTime.ToString();
+            byte[] buffer = Encoding.ASCII.GetBytes(JsonMapper.ToJson(model));
+            */
+            byte[] buffer = Encoding.ASCII.GetBytes(roleLaterPos.x.ToString());
             syncSock.SendTo(buffer, syncIEP);
         }
     }
@@ -90,7 +107,7 @@ public class MGInitGameData : MonoBehaviour {
                 Thread.Sleep(1000);
             }
         }
-        CancelInvoke();
+        CancelInvoke("syncNetwork");
         MGNetWorking.disconnect();
         MGGlobalDataCenter.defaultCenter().backToDefaultValues();
     }

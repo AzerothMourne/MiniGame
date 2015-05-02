@@ -280,7 +280,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6792b57255bb15d48a982ad291c0dfe9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connecttions: 10
+  connecttions: 1
   log: {fileID: 0}
   cube: {fileID: 0}
 --- !u!4 &325997150

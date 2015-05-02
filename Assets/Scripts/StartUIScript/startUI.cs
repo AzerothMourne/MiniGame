@@ -81,6 +81,7 @@ public class startUI : MonoBehaviour {
 
 	public void OnCloseButton(GameObject button) {
 		print ("3 click CloseButton");
+        this.GetComponent<MyNetworkTest>().cancelConnect();
 		resetParams();
 		Destroy(ChooseUIObj);
 		Destroy(FuzzyUIObj);

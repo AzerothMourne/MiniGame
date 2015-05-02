@@ -8,6 +8,7 @@ public static class EventEnum{
 	public static string jumpLatterEventId="1jump";
 	public static string downToLineFormerEventId="downToLine";
 	public static string dowmToLineLatterEventId="1downToLine";
+    public static string gameoverEventId = "gameoverEventId";
     //技能事件
     public static string dart = "EventEnum_dart";
     public static string blink = "EventEnum_blink";
@@ -114,7 +115,6 @@ public class Jump : MonoBehaviour {
             if (skillObjc)
             {
                 skillObjc.releaseSkillObjectName = this.gameObject.name;
-                skillObjc.transform.parent = this.transform;
             }
         }
     }
@@ -302,6 +302,10 @@ public class Jump : MonoBehaviour {
             Debug.Log("role1 out of screen");
             MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
             Application.LoadLevel("overSence");
+            MGMsgModel gameoverModel = new MGMsgModel();
+            gameoverModel.eventId = EventEnum.gameoverEventId;
+            gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
+            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
         }
     }
 	//判断角色是否在地面上
@@ -318,6 +322,11 @@ public class Jump : MonoBehaviour {
         if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
         {
             isCollisionOver = true;
+            GameObject sprint= GameObject.Find("sprint(Clone)");
+            if (sprint != null)
+            {
+                Destroy(sprint);
+            }
             if (collision.gameObject.name == "role")
             {
                 if (roleAnimaController.downOrUp)

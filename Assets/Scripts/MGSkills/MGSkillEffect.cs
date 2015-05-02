@@ -83,15 +83,6 @@ public class MGSkillEffect : MonoBehaviour {
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             if (objc)
             {
-                if (tempObjcet == null)
-                {
-                    tempObjcet = GameObject.Find("sprint(Clone)");
-                }
-                Vector3 pos = new Vector3(objc.transform.position.x + 3 * objc.renderer.bounds.size.x / 16,
-                    objc.transform.position.y + (objc.transform.localScale.y > 0 ? 1 : -1) * objc.renderer.bounds.size.y / 2,
-                    objc.transform.position.z);
-                tempObjcet.transform.position = pos;//同步sprint技能的gameobject位置和role1的位置
-                //Debug.Log("sprint.position=" + tempObjcet.transform.position);
                 float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
 				objc.transform.Translate( speedSwitch*Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillSprintInfo.durationTime);
             }
@@ -119,8 +110,11 @@ public class MGSkillEffect : MonoBehaviour {
                 label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x;
 				sprintTimer = 0;
 				sprintSwitch = null;
-				MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
-                Destroy(tempObjcet);
+                GameObject sprint = GameObject.Find("sprint(Clone)");
+                if (sprint != null)
+                {
+                    Destroy(sprint);
+                }
             }
         }
     }

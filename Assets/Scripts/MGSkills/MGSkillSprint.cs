@@ -36,6 +36,7 @@ public class MGSkillSprint : MGSkillsBase
         }
 
         this.releaseSkillObjectName = "role1";
+        transform.parent = releaseRole.transform;
         base.scaleAnimationFofBigSkill();
     }
     public override Object createSkillSprite(Vector3 pos)
@@ -111,6 +112,8 @@ public class MGSkillSprint : MGSkillsBase
                 Time.timeScale = 1f;
                 GameObject releaseRole = GameObject.Find("role1");
                 releaseRole.layer = 9;//gamelayer
+                this.gameObject.layer = 9;
+                MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
                 Destroy(this.m_cloneCamera);
             }
         }

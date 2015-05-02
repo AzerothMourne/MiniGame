@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using LitJson;
 public static class RoleButtonEvent
 {
     public static string upFormerEventId = "RoleButtonEvent_up";
@@ -251,6 +252,10 @@ public class RoleAnimController : MonoBehaviour {
                     MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
                 }
                 Application.LoadLevel("overSence");
+                MGMsgModel gameoverModel = new MGMsgModel();
+                gameoverModel.eventId = EventEnum.gameoverEventId;
+                gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
+                jumpSprict.mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
             }
             return;
         }

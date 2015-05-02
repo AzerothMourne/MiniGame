@@ -17,7 +17,7 @@ public class MGGlobalDataCenter  {
     public bool isNetworkViewEnable;
     public bool isHost,isBigSkilling,isStop;
     public int connecttions;
-    public int listenPort,mySocketPort,UPNPPort;
+    public int listenPort,mySocketPort,UPNPPort,SyncPort;
     private static MGGlobalDataCenter instance;
     public int rRoleBlood, lRoleBlood;
     public GameObject role, roleLater;
@@ -25,6 +25,7 @@ public class MGGlobalDataCenter  {
 	public float UIScale,roadOrignY;
     public float totalGameTime;
     public string overSenceUIName;
+
 	//@aragornwang
 	//play music 
 	public bool isDartHit;
@@ -59,8 +60,8 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
-        this.isHost = true;
-//        this.isHost = false;
+        //this.isHost = true;
+        this.isHost = false;
         this.overSenceUIName = null;
         backToDefaultValues();
 	}
@@ -74,7 +75,9 @@ public class MGGlobalDataCenter  {
         this.roleLater = null;
         this.connecttions = 1;
         this.listenPort = 8899;
+        this.SyncPort = 12000;
         this.mySocketPort = 10000;
+        this.serverIp = "127.0.0.0";
         this.isNetworkViewEnable = false;
         this.rRoleBlood = 1;
         this.lRoleBlood = 2;
