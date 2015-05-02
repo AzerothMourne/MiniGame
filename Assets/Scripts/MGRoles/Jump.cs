@@ -185,11 +185,11 @@ public class Jump : MonoBehaviour {
     }
     public void useSkillsRoadblock(MGNotification notification)
     {
-        print("useSkillsRoadblock");
         if (notification.objc == null && isGround)
         {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
-            int isDown = transform.localScale.y > 0 ? 0 : 1;
+			int isDown = transform.localScale.y > 0 ? 0 : 1;
+			Debug.Log(MGGlobalDataCenter.defaultCenter().roadOrignY);
+			Vector3 pos = new Vector3(transform.position.x,MGGlobalDataCenter.defaultCenter().roadOrignY-(isDown==1?0.175f:0f), transform.position.z);
             if (Network.peerType != NetworkPeerType.Disconnected)
             {
                 mgNetWorking.Instantiate(roadblock, pos, Quaternion.Euler(0, isDown*180, isDown*180), 0);
@@ -268,6 +268,13 @@ public class Jump : MonoBehaviour {
             else
                 MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
         }
+		if (Input.GetKeyDown(KeyCode.UpArrow))
+		{
+			if (MGGlobalDataCenter.defaultCenter().isHost == true)
+				MGNotificationCenter.defaultCenter().postNotification("jump", null);
+			else
+				MGNotificationCenter.defaultCenter().postNotification("1jump", null);
+		}
         
         if (!isGameOver)
         {
