@@ -27,7 +27,7 @@ public class MGGlobalDataCenter  {
 	public float UIScale,roadOrignY;
     public float totalGameTime;
     public string overSenceUIName;
-
+    public int dartIndex;
 	//@aragornwang
 	//play music 
 	public bool isDartHit;
@@ -69,6 +69,7 @@ public class MGGlobalDataCenter  {
 	}
     public void backToDefaultValues()
     {
+        this.dartIndex = 0;
         Time.timeScale = 1;
         this.totalGameTime = 60f;
         this.isStop = false;

@@ -12,25 +12,25 @@ public static class MGSkillDartInfo
     public static int skillCD = 1;
     public static int skillHoldLevel = 10;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f/6f;
+    public static float SkillEffectSpeed = 1f/8f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillRoadblockInfo
 {
     public static string skillId = SkillEffectEnum.roadblock;
-    public static float skillCD = 2.5f;
+    public static float skillCD = 5f;
     public static int skillHoldLevel = 3;
-    public static float skillGCD = 0.5f;
+    public static float skillGCD = 0.3f;
     public static float SkillEffectSpeed = 1f/4f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillBlinkInfo
 {
     public static string skillId = SkillEffectEnum.blink;
-    public static int skillCD = 3;
+    public static int skillCD = 5;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f/3f;
+    public static float SkillEffectSpeed = 1f/4f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillBonesInfo
@@ -40,12 +40,12 @@ public static class MGSkillBonesInfo
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
     public static float SkillEffectSpeed = 1f / 4f;
-    public static float durationTime = 2.0f;
+    public static float durationTime = 5.0f;
 }
 public static class MGSkillSprintInfo
 {
     public static string skillId = SkillEffectEnum.sprint;
-    public static int skillCD = 3;
+    public static int skillCD = 4;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
     public static float SkillEffectSpeed = 1f / 2f;
@@ -54,10 +54,10 @@ public static class MGSkillSprintInfo
 public static class MGSkillBeatbackInfo
 {
     public static string skillId = SkillEffectEnum.beatback;
-    public static int skillCD = 3;
+    public static float skillCD = 7.5f;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f / 2f;
+    public static float SkillEffectSpeed = 5f / 8f;
     public static float durationTime = 0.5f;
 }
 public class MGSkillsBase : MonoBehaviour {

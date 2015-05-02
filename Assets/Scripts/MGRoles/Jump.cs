@@ -187,7 +187,7 @@ public class Jump : MonoBehaviour {
     }
     public void useSkillsRoadblock(MGNotification notification)
     {
-        if (notification.objc == null && isGround)
+        if (notification.objc == null)
         {
 			int isDown = transform.localScale.y > 0 ? 0 : 1;
 			Debug.Log(MGGlobalDataCenter.defaultCenter().roadOrignY);

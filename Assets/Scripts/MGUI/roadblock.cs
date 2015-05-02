@@ -63,7 +63,7 @@ public class roadblock : UIBase
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
             roadblockGCDTimer = 0;
-            --holdLevel;
+            holdLevel=MGSkillRoadblockInfo.skillHoldLevel-1;
             MGNotificationCenter.defaultCenter().postNotification(EventEnum.roadblock, null);
         }
     }
