@@ -68,6 +68,8 @@ public class Jump : MonoBehaviour {
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, EventEnum.blink);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
+			//@test
+			//useSkillsBones(new MGNotification("123", null, null));
 		}
 	}
     public string objcToJson(string msg)

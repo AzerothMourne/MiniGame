@@ -14,6 +14,8 @@ public class bones : UIBase
     {
         direction = true;
         addOrDec = true;
+		//@test
+		//MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, null);
     }
     // Update is called once per frame
     void Update()
