@@ -68,6 +68,13 @@ public class MGSkillBones : MGSkillsBase
 			print("true");
 			MGGlobalDataCenter.defaultCenter().isDartDefence = true;
 		}
+		strtmp = "roadblock(Clone)";
+		istrlen = strtmp.Length;
+		if (other.name.Length>=istrlen && other.name.Substring(0,istrlen)== strtmp) {
+			print("true");
+			MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
+		}
+
 
     }
 }

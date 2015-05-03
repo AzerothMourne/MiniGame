@@ -66,8 +66,8 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
-//        this.isHost = true;
-        this.isHost = false;
+        this.isHost = true;
+//        this.isHost = false;
         this.overSenceUIName = null;
         backToDefaultValues();
 	}

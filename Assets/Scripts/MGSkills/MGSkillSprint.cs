@@ -38,7 +38,7 @@ public class MGSkillSprint : MGSkillsBase
         this.releaseSkillObjectName = "role1";
         transform.parent = releaseRole.transform;
         base.scaleAnimationFofBigSkill();
-		MGGlobalDataCenter.defaultCenter ().isFlash = true;
+		MGGlobalDataCenter.defaultCenter ().isSprint = true;
     }
     public override Object createSkillSprite(Vector3 pos)
     {

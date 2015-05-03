@@ -34,8 +34,8 @@ public class AudioPlay : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = false;
 		}
 		//以下未添加
-		if (MGGlobalDataCenter.defaultCenter().isDartRelease){
-			music.playoneshot("Sound/dart_relase");
+		if (MGGlobalDataCenter.defaultCenter ().isDartRelease){
+			music.playoneshot("Sound/dart_release");
 			MGGlobalDataCenter.defaultCenter ().isDartRelease = false;
 		}
 
@@ -55,6 +55,10 @@ public class AudioPlay : MonoBehaviour {
 		if (MGGlobalDataCenter.defaultCenter ().isFlash) {
 			music.playoneshot("Sound/flash");
 			MGGlobalDataCenter.defaultCenter().isFlash = false;
+		}
+		if (MGGlobalDataCenter.defaultCenter ().isSprint) {
+			music.playoneshot("Sound/sprint");
+			MGGlobalDataCenter.defaultCenter().isSprint = false;
 		}
 
 	}

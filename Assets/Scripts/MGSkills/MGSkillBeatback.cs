@@ -39,6 +39,7 @@ public class MGSkillBeatback : MGSkillsBase
 		transform.parent = MGGlobalDataCenter.defaultCenter ().role.transform;
         this.gameObject.layer = 9;
         base.scaleAnimationFofBigSkill();
+		MGGlobalDataCenter.defaultCenter ().isSprint = true;
     }
     public override Object createSkillSprite(Vector3 pos)
     {

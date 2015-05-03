@@ -69,7 +69,7 @@ public class Jump : MonoBehaviour {
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
 			//@test
-			//useSkillsBones(new MGNotification("123", null, null));
+			useSkillsBones(new MGNotification("123", null, null));
 		}
 	}
     public string objcToJson(string msg)
@@ -296,6 +296,7 @@ public class Jump : MonoBehaviour {
         Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
         if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
         {
+			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
             isGameOver = true;
             //强制roleLater出现在role的后面一点点。
             MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = MGGlobalDataCenter.defaultCenter().role.transform.localScale;
