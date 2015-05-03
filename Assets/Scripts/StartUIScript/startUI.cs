@@ -16,6 +16,17 @@ public class startUI : MonoBehaviour {
 	public bool isPressSlogan; //标语
 	public GameObject SloganObj;
 
+
+	//test
+	//public GameObject tianyaLoad;
+	public GameObject tianyaLoadObj;
+	public Sprite[] tianyaLoadList;
+	public bool istianyaLoad;
+	public float timer;
+	public GameObject tempObj;
+	public int count;
+
+
 	// Use this for initialization
 	void Start () {
 	
@@ -24,6 +35,18 @@ public class startUI : MonoBehaviour {
 		//加上背景音乐
 		AudioManager._instance.MusicBackground();
 		isPressSlogan = false;
+
+		istianyaLoad = false;
+		timer = 0f;
+		count = 0;
+		//初始化天涯load按钮
+		for (int i = 0;  i < 5; i++) {
+			tianyaLoadObj = GameObject.Instantiate (tianyaLoadList[i], new Vector3 (0, 0, 0), Quaternion.Euler (0, 0, 0)) as GameObject;
+			tianyaLoadObj.transform.parent = GameObject.Find("start").transform;
+			tianyaLoadObj.transform.localPosition = new Vector3 (0, 5, 0);
+			tianyaLoadObj.transform.localScale = new Vector3 (1, 1, 1);
+			tianyaLoadObj.GetComponent<UISprite>().depth = 9;
+		}
 	}
 	
 	// Update is called once per frame
@@ -41,6 +64,20 @@ public class startUI : MonoBehaviour {
 			isPressSlogan = false;
 			if(countPress == 1) {
 				countPress += 1;
+			}
+		}
+
+		//天涯load播放帧
+		if (istianyaLoad) {
+			print("112233");
+			timer += Time.deltaTime;
+			if(timer >= 0.1) {
+				tempObj = GameObject.Find("tianya");
+				tempObj.GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
+				timer = 0f;
+				if(count == 4)
+					count = 0;
+				count++;
 			}
 		}
 	}
@@ -71,7 +108,9 @@ public class startUI : MonoBehaviour {
 	
 	public void OnChoosePlayer_tianya(GameObject button) {
 		print ("1 click start tianya");
+		istianyaLoad = true;
         this.GetComponent<MyNetworkTest>().findHost();
+
 	}
 
 	public void OnChoosePlayer_mingyue(GameObject button) {
