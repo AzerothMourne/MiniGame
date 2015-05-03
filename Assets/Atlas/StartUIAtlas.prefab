@@ -41,6 +41,71 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: ae5862275993a7e488bd552de305acb8, type: 2}
   mSprites:
+  - name: 10
+    x: 323
+    y: 352
+    width: 231
+    height: 153
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 22
+    paddingTop: 19
+    paddingBottom: 0
+  - name: 6
+    x: 0
+    y: 18
+    width: 244
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 22
+    paddingTop: 18
+    paddingBottom: 0
+  - name: 7
+    x: 323
+    y: 506
+    width: 244
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 22
+    paddingTop: 18
+    paddingBottom: 0
+  - name: 8
+    x: 323
+    y: 198
+    width: 231
+    height: 153
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 22
+    paddingTop: 19
+    paddingBottom: 0
+  - name: 9
+    x: 568
+    y: 506
+    width: 244
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 22
+    paddingTop: 18
+    paddingBottom: 0
   - name: button
     x: 0
     y: 516

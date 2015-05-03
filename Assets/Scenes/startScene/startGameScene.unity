@@ -319,6 +319,17 @@ MonoBehaviour:
   mingyueObj: {fileID: 187396, guid: 676f5b8d0defd6842b2a35159268713c, type: 2}
   isPressSlogan: 0
   SloganObj: {fileID: 1510104751}
+  tianyaLoadObj: {fileID: 178078, guid: 925f5a7cac23617429e234dd34f9dab7, type: 2}
+  tianyaLoadList:
+  - {fileID: 21300000, guid: 2730cd6054077274bb621be4b458e409, type: 3}
+  - {fileID: 21300000, guid: 31809a75e1b8bd14a954e531211efbd0, type: 3}
+  - {fileID: 21300000, guid: 051b5ea2afbac934889593e7f5fa2048, type: 3}
+  - {fileID: 21300000, guid: 0ec75948f23a3124b8d521b2b426aef6, type: 3}
+  - {fileID: 21300000, guid: bebe45343f5eb8244ad578f6d742eb96, type: 3}
+  istianyaLoad: 0
+  timer: 0
+  tempObj: {fileID: 0}
+  count: 0
 --- !u!1 &336384769
 GameObject:
   m_ObjectHideFlags: 0
@@ -476,33 +487,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1254167064}
   m_RootOrder: 2
---- !u!1 &729507878
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 729507879}
-  m_Layer: 8
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &729507879
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 729507878}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1272350016}
-  m_RootOrder: 0
 --- !u!1 &937347956
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +592,6 @@ Transform:
   m_Children:
   - {fileID: 993013705}
   - {fileID: 1254167064}
-  - {fileID: 1272350016}
   m_Father: {fileID: 0}
   m_RootOrder: 1
 --- !u!1 &993013704
@@ -695,7 +678,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 1
+  orthographic size: 1.24452114
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -783,34 +766,6 @@ Transform:
   - {fileID: 1510104752}
   m_Father: {fileID: 937347960}
   m_RootOrder: 1
---- !u!1 &1272350015
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1272350016}
-  m_Layer: 8
-  m_Name: option
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1272350016
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1272350015}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 729507879}
-  m_Father: {fileID: 937347960}
-  m_RootOrder: 2
 --- !u!1 &1276858888
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,7 +828,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 1.23614693
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

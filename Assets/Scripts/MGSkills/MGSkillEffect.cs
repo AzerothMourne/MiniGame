@@ -14,8 +14,8 @@ public static class SkillEffectEnum
 public class MGSkillEffect : MonoBehaviour {
     private string shortBonesName;
     public bones blinkSkillBones;
-    private float sprintTimer,beatbackTimer, blinkSkillBonesTimer;
-    private MGNotification sprintSwitch,beatbackSwitch;
+    private float sprintTimer,beatbackTimer,roadblockTimer, blinkSkillBonesTimer;
+    private MGNotification sprintSwitch,beatbackSwitch,roadblockSwitch;
     private GameObject tempObjcet;
     public int speedSwitch;
 	// Use this for initialization
@@ -25,11 +25,13 @@ public class MGSkillEffect : MonoBehaviour {
 		blinkSkillBonesTimer = 1;
         sprintSwitch = null;
         tempObjcet = null;
+        roadblockSwitch = null;
         shortBonesName = "bones_short";
         MGNotificationCenter.defaultCenter().addObserver(this, dartEffect, SkillEffectEnum.dart);
         MGNotificationCenter.defaultCenter().addObserver(this, blinkEffect, SkillEffectEnum.blink);
         MGNotificationCenter.defaultCenter().addObserver(this, sprintEffect, SkillEffectEnum.sprint);
         MGNotificationCenter.defaultCenter().addObserver(this, beatbackEffect, SkillEffectEnum.beatback);
+        MGNotificationCenter.defaultCenter().addObserver(this, roadblockEffect, SkillEffectEnum.roadblock);
 	}
 	
 	// Update is called once per frame
@@ -38,6 +40,7 @@ public class MGSkillEffect : MonoBehaviour {
         //blinkEffect(blinkSwitch);只要一下就闪到前面 所以不需要再Update里慢慢移动
         sprintEffect(sprintSwitch);
         beatbackEffect(beatbackSwitch);
+        roadblockEffect(roadblockSwitch);
         if (blinkSkillBonesTimer < 0.2f)
         {
             blinkSkillBonesTimer += Time.deltaTime;
@@ -70,6 +73,26 @@ public class MGSkillEffect : MonoBehaviour {
 				beatbackSwitch = null;
                 MGSkillBeatback beatbackObject = GameObject.Find("beatback(Clone)").GetComponent<MGSkillBeatback>();
                 beatbackObject.DestroySelf();
+            }
+        }
+    }
+    void roadblockEffect(MGNotification notification)
+    {
+        if (notification != null)
+        {
+            roadblockSwitch = notification;
+            MGMsgModel skillModel = (MGMsgModel)notification.objc;
+            GameObject objc = GameObject.Find(skillModel.gameobjectName);
+            float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
+            if (objc)
+            {
+                objc.transform.Translate(Vector3.left * MGSkillRoadblockInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillRoadblockInfo.durationTime);
+            }
+            roadblockTimer += Time.deltaTime;
+            if (roadblockTimer > MGSkillRoadblockInfo.durationTime * Time.timeScale)
+            {
+                roadblockTimer = 0;
+                roadblockSwitch = null;
             }
         }
     }

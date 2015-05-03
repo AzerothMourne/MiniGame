@@ -10,6 +10,8 @@ public static class RoleButtonEvent
     public static string deadFormerEventId = "RoleButtonEvent_dead";
     public static string deadLatterEventId = "1RoleButtonEvent_dead";
     public static string killLatterEventId = "1RoleButtonEvent_kill";
+
+    public static string killAnimLatterEventId = "1RoleButtonEvent_killAnim";
 }
 //动画状态机需要注意的事
 /// <summary>
@@ -27,7 +29,7 @@ public class RoleAnimController : MonoBehaviour {
 	public bool isSecondJump,isFirstJump;//是否采用二段跳翻滚的动作
 	public bool isRoll,downOrUp,isChangeDownOrUp;//是否切换到上下翻滚的动画
     public bool isPressDown,isPressDownToGround;//在空中按了下
-    public bool isDead;
+    public bool isDead, isKillRoadblock, isCallChangeKillFlag;
 	float rollTimer,rollDuration;
     private float downSpeed;
     private MusicPlayer music;
@@ -40,6 +42,7 @@ public class RoleAnimController : MonoBehaviour {
 		isSecondJump = false;
         isRoll = false;
         isDead = false;
+        isCallChangeKillFlag = false;
 
         rollTimer = 0;
         rollDuration = 0.2f;
@@ -59,10 +62,12 @@ public class RoleAnimController : MonoBehaviour {
         //后面的角色动作
         else if (this.gameObject.name == "role1")
         {
+            isKillRoadblock = false;
             MGNotificationCenter.defaultCenter().addObserver(this, upButtonClick, RoleButtonEvent.upLatterEventId);
             MGNotificationCenter.defaultCenter().addObserver(this, downButtonClick, RoleButtonEvent.downLatterEventId);
             MGNotificationCenter.defaultCenter().addObserver(this, roleDeadAnimController, RoleButtonEvent.deadLatterEventId);
             MGNotificationCenter.defaultCenter().addObserver(this, roleKillAnimController, RoleButtonEvent.killLatterEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, roleKillRoadblockAnimController, RoleButtonEvent.killAnimLatterEventId);
         }
 
 	}
@@ -70,10 +75,25 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (this.gameObject.name == "role1")
         {
+            Debug.Log("changeKillFlag");
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
             toNomalRun();
             animStateToRun();
         }  
+    }
+    public void changeKillRoadblockFlag()
+    {
+        if (this.gameObject.name == "role1")
+        {
+            Debug.Log("changeKillRoadblockFlag");
+            toNomalRun();
+            animStateToRun();
+            isCallChangeKillFlag = true;
+        }
+    }
+    void animStateToKillRoadblock()
+    {
+        jumpAnim.SetBool("AnyStateToKillRoadblock", true);
     }
     void animStateToKill()
     {
@@ -88,7 +108,7 @@ public class RoleAnimController : MonoBehaviour {
         jumpAnim.SetBool("FallDownToRun", true);
         jumpAnim.SetBool("RollToRun", true);
         jumpAnim.SetBool("killToRun", true);
-
+        jumpAnim.SetBool("KillRoadblockToRun", true);
     }
     void animStateToFirstJump()
     {
@@ -121,6 +141,8 @@ public class RoleAnimController : MonoBehaviour {
             jumpAnim.SetBool("sprint", false);
             jumpAnim.SetBool("AnyStateToKill", false);
             jumpAnim.SetBool("killToRun", false);
+            jumpAnim.SetBool("AnyStateToKillRoadblock", false);
+            jumpAnim.SetBool("KillRoadblockToRun", false);
         }
     }
     void toNomalRun()
@@ -137,18 +159,31 @@ public class RoleAnimController : MonoBehaviour {
         jumpSprict.jumpCount = 0;
         setAllAnimStateToFalse();
     }
+    void roleKillRoadblockAnimController(MGNotification notification)
+    {
+        if (isKillRoadblock) return;
+        if (notification.objc.Equals("role1"))
+        {
+            Debug.Log("roleKillRoadblockAnimController");
+            setAllAnimStateToFalse();
+            animStateToKillRoadblock();
+        }
+        isKillRoadblock = true;
+    }
     void roleKillAnimController(MGNotification notification)
     {
         if (notification.objc.Equals("role1"))
         {
-            //Debug.Log("roleKillAnimController:" + notification.objc);
+            Debug.Log("roleKillRoadblockAnimController");
             setAllAnimStateToFalse();
             animStateToKill();
         }
+        isKillRoadblock = false;
         MGNotificationCenter.defaultCenter().postNotification(uiEvent.enableAllUIButton, false);
     }
     void roleDeadAnimController(MGNotification notification)
     {
+        if (GameObject.Find("role1").GetComponent<RoleAnimController>().isKillRoadblock) return;
         if (notification.objc.Equals("role"))
         {
             Debug.Log("roleDeadAnimController:" + notification.objc);
@@ -233,6 +268,11 @@ public class RoleAnimController : MonoBehaviour {
     }
 	// Update is called once per frame
 	void Update () {
+        if (isCallChangeKillFlag)
+        {
+            isKillRoadblock = false;
+            isCallChangeKillFlag = false;
+        }
 		//检测角色的动作
         if (isDead)//死亡导致结束
         {

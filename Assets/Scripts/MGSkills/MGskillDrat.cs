@@ -11,7 +11,7 @@ public class MGskillDrat : MGSkillsBase{
 	void Start()
 	{
         gameObject.name += MGGlobalDataCenter.defaultCenter().dartIndex.ToString();
-        MGGlobalDataCenter.defaultCenter().dartIndex=(MGGlobalDataCenter.defaultCenter().dartIndex+1)%MGSkillDartInfo.skillHoldLevel;
+        MGGlobalDataCenter.defaultCenter().dartIndex=(MGGlobalDataCenter.defaultCenter().dartIndex+1)%(MGSkillDartInfo.skillHoldLevel*MGSkillRoadblockInfo.skillHoldLevel);
         direction = Vector3.left;
 		timestamp = MGGlobalDataCenter.timestamp ();
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
@@ -92,7 +92,7 @@ public class MGskillDrat : MGSkillsBase{
             model.eventId = SkillEnum.dart + gameObject.name;
             model.tag = other.tag;
             model.name = other.name;
-            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.dart+gameObject.name, other);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.dart + gameObject.name, other);
             mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(model));
         }
 	}
