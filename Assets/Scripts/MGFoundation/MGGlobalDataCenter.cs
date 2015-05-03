@@ -67,8 +67,8 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
- //       this.isHost = true;
-        this.isHost = false;
+        this.isHost = true;
+//        this.isHost = false;
         this.overSenceUIName = null;
         backToDefaultValues();
 	}
@@ -95,7 +95,7 @@ public class MGGlobalDataCenter  {
         this.screenTopY = 5f;
         this.screenBottomY = -1 * this.screenBottomY;
         this.NGUI_ButtonWidth = 1.65f;
-        this.UIScale = 1.5f;
+        this.UIScale = 2f;
         this.roadOrignY = -1000;
         this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
         this.isDartHit = false;

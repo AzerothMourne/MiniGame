@@ -5,7 +5,7 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 3
+  serializedVersion: 4
   m_Component:
   - 4: {fileID: 400000}
   - 114: {fileID: 11400000}
@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1002 &100001
 EditorExtensionImpl:
   serializedVersion: 6
@@ -30,6 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
+  m_RootOrder: 0
 --- !u!1002 &400001
 EditorExtensionImpl:
   serializedVersion: 6
@@ -41,13 +42,196 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 1}
+  m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
   m_Name: 
+  m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: e7ef61ebb5c25394c8706a7ea658349f, type: 2}
   mSprites:
+  - name: 1
+    x: 736
+    y: 576
+    width: 183
+    height: 190
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 20
+    paddingRight: 9
+    paddingTop: 11
+    paddingBottom: 9
+  - name: 10
+    x: 183
+    y: 362
+    width: 182
+    height: 201
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 13
+    paddingTop: 0
+    paddingBottom: 9
+  - name: 11
+    x: 552
+    y: 576
+    width: 183
+    height: 190
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 20
+    paddingRight: 9
+    paddingTop: 11
+    paddingBottom: 9
+  - name: 12
+    x: 548
+    y: 399
+    width: 185
+    height: 176
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 10
+    paddingTop: 26
+    paddingBottom: 8
+  - name: 13
+    x: 183
+    y: 169
+    width: 182
+    height: 192
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 20
+    paddingRight: 10
+    paddingTop: 11
+    paddingBottom: 7
+  - name: 14
+    x: 0
+    y: 157
+    width: 182
+    height: 202
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 13
+    paddingTop: 0
+    paddingBottom: 8
+  - name: 2
+    x: 366
+    y: 395
+    width: 181
+    height: 180
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 21
+    paddingRight: 10
+    paddingTop: 23
+    paddingBottom: 7
+  - name: 3
+    x: 770
+    y: 821
+    width: 182
+    height: 203
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 20
+    paddingRight: 10
+    paddingTop: 0
+    paddingBottom: 7
+  - name: 4
+    x: 366
+    y: 576
+    width: 185
+    height: 190
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 10
+    paddingTop: 13
+    paddingBottom: 7
+  - name: 5
+    x: 0
+    y: 360
+    width: 182
+    height: 202
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 13
+    paddingTop: 0
+    paddingBottom: 8
+  - name: 6
+    x: 548
+    y: 222
+    width: 185
+    height: 176
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 10
+    paddingTop: 26
+    paddingBottom: 8
+  - name: 7
+    x: 734
+    y: 399
+    width: 185
+    height: 176
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 10
+    paddingTop: 26
+    paddingBottom: 8
+  - name: 8
+    x: 183
+    y: 564
+    width: 182
+    height: 202
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 17
+    paddingRight: 13
+    paddingTop: 0
+    paddingBottom: 8
+  - name: 9
+    x: 0
+    y: 563
+    width: 182
+    height: 203
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 20
+    paddingRight: 10
+    paddingTop: 0
+    paddingBottom: 7
   - name: Beveled Outline
-    x: 215
-    y: 323
+    x: 276
+    y: 794
     width: 17
     height: 17
     borderLeft: 5
@@ -59,8 +243,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Bright
-    x: 198
-    y: 323
+    x: 258
+    y: 794
     width: 17
     height: 17
     borderLeft: 5
@@ -72,8 +256,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Dark
-    x: 234
-    y: 323
+    x: 258
+    y: 776
     width: 17
     height: 17
     borderLeft: 5
@@ -85,8 +269,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Fantasy Font
-    x: 0
-    y: 0
+    x: 258
+    y: 812
     width: 256
     height: 212
     borderLeft: 0
@@ -98,8 +282,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 44
   - name: Flat Outline
-    x: 181
-    y: 323
+    x: 276
+    y: 776
     width: 17
     height: 17
     borderLeft: 5
@@ -111,8 +295,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Glow
-    x: 217
-    y: 189
+    x: 294
+    y: 778
     width: 17
     height: 15
     borderLeft: 4
@@ -124,8 +308,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: NGUI
-    x: 256
-    y: 178
+    x: 734
+    y: 322
     width: 255
     height: 76
     borderLeft: 0
@@ -137,8 +321,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Orc Armor - Boots
-    x: 256
-    y: 0
+    x: 920
+    y: 638
     width: 96
     height: 128
     borderLeft: 0
@@ -150,8 +334,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Orc Armor - Bracers
-    x: 130
-    y: 208
+    x: 183
+    y: 55
     width: 123
     height: 113
     borderLeft: 0
@@ -164,7 +348,7 @@ MonoBehaviour:
     paddingBottom: 8
   - name: Orc Armor - Shoulders
     x: 0
-    y: 212
+    y: 28
     width: 128
     height: 128
     borderLeft: 0
@@ -176,8 +360,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Paper Background
-    x: 255
-    y: 255
+    x: 0
+    y: 767
     width: 257
     height: 257
     borderLeft: 1
@@ -189,8 +373,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Smooth
-    x: 236
-    y: 189
+    x: 294
+    y: 794
     width: 17
     height: 17
     borderLeft: 4
@@ -202,8 +386,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Window
-    x: 0
-    y: 342
+    x: 515
+    y: 855
     width: 254
     height: 169
     borderLeft: 8

@@ -54,13 +54,14 @@ public class Jump : MonoBehaviour {
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dart);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblock);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBeatback, EventEnum.beatback);
+
 		} 
 		//后面的角色动作
 		else if(this.gameObject.name == "role1"){
 			//print ("yes role1");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleLater");
-            roleSpeed = 1f / 30f;
+            roleSpeed = 1f / 20f;
 			MGGlobalDataCenter.defaultCenter().roleLater=this.gameObject;
 			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
 			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
@@ -69,7 +70,7 @@ public class Jump : MonoBehaviour {
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
 			//@test
-			useSkillsBones(new MGNotification("123", null, null));
+			//useSkillsBones(new MGNotification("123", null, null));
 		}
 	}
     public string objcToJson(string msg)
