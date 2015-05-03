@@ -330,6 +330,7 @@ MonoBehaviour:
   timer: 0
   tempObj: {fileID: 0}
   count: 0
+  start: {fileID: 1254167063}
 --- !u!1 &336384769
 GameObject:
   m_ObjectHideFlags: 0
@@ -678,7 +679,7 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 1.24452114
+  orthographic size: 1
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -828,7 +829,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.23614693
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

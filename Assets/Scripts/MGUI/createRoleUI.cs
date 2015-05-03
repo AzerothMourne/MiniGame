@@ -85,6 +85,7 @@ public class createRoleUI : MonoBehaviour {
         }
         if (MGGlobalDataCenter.defaultCenter().totalGameTime <= 0f)
         {
+			Debug.Log("dasdasdasdas");
             //游戏结束
 			if(GameObject.Find("role").GetComponent<RoleAnimController>().isDead || GameObject.Find("role1").GetComponent<RoleAnimController>().isDead)
 				return;

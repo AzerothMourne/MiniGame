@@ -126,7 +126,10 @@ public class MGSkillSprint : MGSkillsBase
             print("技能名：冲刺。打在上面的是" + other.name + "，释放技能的是" + this.releaseSkillObjectName + ";gameobjc:" + other.gameObject);
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             label.text += "\r\n Skill："+other.name;
-            flyDuang(other, releaseRole);
+			string strtmp = "dart(Clone)";
+			int istrlen = strtmp.Length;
+			if(other.name.Substring(0,istrlen)== strtmp)
+            	flyDuang(other, releaseRole);
         }
     }
 }

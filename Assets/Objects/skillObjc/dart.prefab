@@ -143,9 +143,11 @@ MonoBehaviour:
   plane: {fileID: 0}
   bigSkillPlaneLayer: 12
   releaseSkillObjectName: 
+  mgNetWorking: {fileID: 0}
   speed: 10
   direction: {x: 0, y: 0, z: 0}
   isPlayDart: 0
+  danSprite: {fileID: 21300000, guid: 1583d328abb454c15a923051fc1f363d, type: 3}
 --- !u!212 &21288462
 SpriteRenderer:
   m_ObjectHideFlags: 1

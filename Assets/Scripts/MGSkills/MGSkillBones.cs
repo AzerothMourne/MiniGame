@@ -56,14 +56,14 @@ public class MGSkillBones : MGSkillsBase
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-
+		string strtmp = "dart(Clone)";
+		int istrlen = strtmp.Length;
         if (other.tag == "frontSkill" && other.name != "beatback(Clone)") 
         {
             print("技能名：金钟罩。打在上面的是" + other.name + "，释放技能的是" + releaseSkillObjcName + ";gameobjc:" + other.gameObject);
-            flyDuang(other, releaseObject);
+			if(other.name.Substring(0,istrlen)== strtmp)
+            	flyDuang(other, releaseObject);
         }
-		string strtmp = "dart(Clone)";
-		int istrlen = strtmp.Length;
 		if (other.name.Length>=istrlen && other.name.Substring(0,istrlen)== strtmp) {
 			print("true");
 			MGGlobalDataCenter.defaultCenter().isDartDefence = true;
