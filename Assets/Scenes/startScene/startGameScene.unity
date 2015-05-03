@@ -1084,6 +1084,7 @@ GameObject:
   - 4: {fileID: 1778567341}
   - 114: {fileID: 1778567340}
   - 82: {fileID: 1778567339}
+  - 131: {fileID: 1778567342}
   m_Layer: 0
   m_Name: Audio
   m_TagString: Untagged
@@ -1172,6 +1173,25 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!131 &1778567342
+GUITexture:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1778567338}
+  m_Enabled: 1
+  m_Texture: {fileID: 0}
+  m_Color: {r: .5, g: .5, b: .5, a: .5}
+  m_PixelInset:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 0
+    height: 0
+  m_LeftBorder: 0
+  m_RightBorder: 0
+  m_TopBorder: 0
+  m_BottomBorder: 0
 --- !u!1 &1869607283
 GameObject:
   m_ObjectHideFlags: 0

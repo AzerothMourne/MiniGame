@@ -11,6 +11,7 @@ public class MGSkillBlink : MGSkillsBase
     {
         isBlinked = false;
 		mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
+		MGGlobalDataCenter.defaultCenter ().isFlash = true;
     }
     public override Object createSkillSprite(Vector3 pos)
     {
