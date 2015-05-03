@@ -57,7 +57,7 @@ public static class MGSkillBeatbackInfo
     public static float skillCD = 5f;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 3f / 8f;
+    public static float SkillEffectSpeed = 5f / 8f;
     public static float durationTime = 0.5f;
 }
 public class MGSkillsBase : MonoBehaviour {

@@ -19,7 +19,7 @@ public class MGInitGameData : MonoBehaviour {
     private static MGInitGameData instance;
 	private bool isReceiveSync;
     private UILabel label;
-    private float receivePosX;
+    private float receivePosX,receivePosY;
     private Thread syncThread;
     void Awake()
     {
@@ -70,7 +70,9 @@ public class MGInitGameData : MonoBehaviour {
             if (receiveString.Length > 0)
             {
                 isReceiveSync = true;
-                receivePosX = float.Parse(receiveString);
+				string[] arr = receiveString.Split(new char[]{'#'});
+                receivePosX = float.Parse(arr[0]);
+				receivePosY = float.Parse(arr[1]);
             }
         }
     }
@@ -79,7 +81,7 @@ public class MGInitGameData : MonoBehaviour {
         if (MGGlobalDataCenter.defaultCenter().isHost && MGGlobalDataCenter.defaultCenter().roleLater!=null)
         {
             Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            byte[] buffer = Encoding.ASCII.GetBytes(roleLaterPos.x.ToString());
+			byte[] buffer = Encoding.ASCII.GetBytes(roleLaterPos.x.ToString()+"#"+roleLaterPos.y.ToString());
             syncSock.SendTo(buffer, syncIEP);
         }
     }
@@ -92,7 +94,7 @@ public class MGInitGameData : MonoBehaviour {
                 isReceiveSync = false;
                 //label.text += "receiveString ";
                 Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(receivePosX, pos.y, pos.z);
+                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(receivePosX, receivePosY, pos.z);
             }
         }
     }

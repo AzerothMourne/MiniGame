@@ -170,8 +170,8 @@ public class createRoleUI : MonoBehaviour {
     {
         print("createCommonUI");
         createOneUI(downButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + 1.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
-        createOneUI(upButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 1.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
-        GameObject objc = createOneUI(stopButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.4f, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.4f, 0f));
+        createOneUI(upButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 1f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        GameObject objc = createOneUI(stopButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.8f, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.8f, 0f));
         UIEventListener.Get(objc).onClick = clickStop;
         gameTimerLabel = createOneUI(gameTimerLabel, new Vector3(1.2f, MGGlobalDataCenter.defaultCenter().screenTopY, 0));
         gameTimerLabel.GetComponent<UILabel>().text = "60:00";
@@ -180,20 +180,20 @@ public class createRoleUI : MonoBehaviour {
     {
         print("createFrontRoleUI");
         //路障按钮UI
-        createOneUI(roadblockButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        createOneUI(roadblockButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 - 0.25f, 2.29f, 0f));
         //飞镖按钮UI
-        createOneUI(dartButton , new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        createOneUI(dartButton , new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 2.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
         //击退按钮
-        createOneUI(beatbackButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f)); 
+        createOneUI(beatbackButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.25f, 2.29f, 0f)); 
     }
     public void createLaterRoleUI()
     {
         print("createLaterRoleUI");
         //金钟罩按钮UI
-        createOneUI(bonesButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        createOneUI(bonesButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 - 0.25f, 2.29f, 0f));
         //冲刺
-        createOneUI(sprintButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2, 2.29f, 0f));
+        createOneUI(sprintButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.25f, 2.29f, 0f));
         //闪现按钮UI
-        createOneUI(blinkButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 3.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
+        createOneUI(blinkButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 2.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
     }
 }

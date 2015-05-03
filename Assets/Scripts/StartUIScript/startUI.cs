@@ -84,29 +84,35 @@ public class startUI : MonoBehaviour {
         }
 
         //天涯load播放帧
-        print("istianyaLoad : " + istianyaLoad);
+        //print("istianyaLoad : " + istianyaLoad);
         if (istianyaLoad)
         {
-            print("112233");
+            //print("112233");
             timer += Time.deltaTime;
             if (timer >= 0.1f)
             {
-                print("88");
-                GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
+                //print("88");
+				try{
+					GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
+				}
+				catch{}
                 timer = 0f;
                 count = (++count) % 5;
             }
         }
 
-        print("ismingyueLoad : " + ismingyueLoad);
+        //print("ismingyueLoad : " + ismingyueLoad);
         if (ismingyueLoad)
         {
-            print("445566");
+            //print("445566");
             timer += Time.deltaTime;
             if (timer >= 0.1f)
             {
-                print("77");
-                GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count].name;
+                //print("77");
+				try{
+					GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count].name;
+				}
+				catch{}
                 timer = 0f;
                 count = (++count) % 5;
             }
@@ -159,8 +165,8 @@ public class startUI : MonoBehaviour {
 		print ("1 click start tianya");
 		if(ismingyueLoad == false)
 			istianyaLoad = true;
-		//if(istianyaLoad)
-        	//this.GetComponent<MyNetworkTest>().findHost();
+		if(istianyaLoad)
+        	this.GetComponent<MyNetworkTest>().findHost();
 
 	}
 

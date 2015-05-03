@@ -313,7 +313,7 @@ public class Jump : MonoBehaviour {
             if (this.gameObject.name == "role1")
                 MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
         }
-        if (this.gameObject.name == "role1" && transform.position.x + 1.4 < MGGlobalDataCenter.defaultCenter().screenLiftX)//后者出屏幕结束，还有一个后者死掉结束在RoleAnimController里
+        if (this.gameObject.name == "role1" && transform.position.x + 1.4f < MGGlobalDataCenter.defaultCenter().screenLiftX)//后者出屏幕结束，还有一个后者死掉结束在RoleAnimController里
         {
             isGameOver = true;
             //切换场景

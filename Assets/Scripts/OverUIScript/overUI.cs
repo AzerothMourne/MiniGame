@@ -29,11 +29,15 @@ public class overUI : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter().isDefeat = true;
 		}
 		print ("win" + MGGlobalDataCenter.defaultCenter ().isVictory + "lose" +
-			MGGlobalDataCenter.defaultCenter ().isDefeat);
+		       MGGlobalDataCenter.defaultCenter ().isDefeat+";"+overUI.Length);
         for (int i = 0; i < overUI.Length; ++i)
         {
-            if (overUI[i].name == MGGlobalDataCenter.defaultCenter().overSenceUIName)
+			Debug.Log("overUI[i].name:"+overUI[i].name);
+			Debug.Log("MGGlobalDataCenter.defaultCenter().overSenceUIName:"+MGGlobalDataCenter.defaultCenter().overSenceUIName);
+            if (overUI[i].name == MGGlobalDataCenter.defaultCenter().overSenceUIName){
+				Debug.Log("12312321");
 				overUI[i].SetActive(true);
+			}
 			else
                 overUI[i].SetActive(false);
         }

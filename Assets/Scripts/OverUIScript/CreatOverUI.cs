@@ -15,10 +15,13 @@ public class CreatOverUI : MonoBehaviour {
 		overObj2 = GameObject.Find("failLaterGameUI");
 		overObj3 = GameObject.Find("victoryLaterGameUI");
 		overObj4 = GameObject.Find("failFrontGameUI");
-		overObj1.transform.localScale = new Vector3 (x_k,y_k,1);
-		overObj2.transform.localScale = new Vector3 (x_k,y_k,1);
-		overObj3.transform.localScale = new Vector3 (x_k,y_k,1);
-		overObj4.transform.localScale = new Vector3 (x_k,y_k,1);
+		try{
+			overObj1.transform.localScale = new Vector3 (x_k,y_k,1);
+			overObj2.transform.localScale = new Vector3 (x_k,y_k,1);
+			overObj3.transform.localScale = new Vector3 (x_k,y_k,1);
+			overObj4.transform.localScale = new Vector3 (x_k,y_k,1);
+		}catch{
+		}
 	}
 	
 	// Update is called once per frame
