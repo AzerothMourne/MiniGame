@@ -42,7 +42,7 @@ public class CreatStartUI : MonoBehaviour {
 		y_k = MGGlobalDataCenter.defaultCenter ().pixelHight / height;
 
 		startObj = GameObject.Find("start");
-		startObj.transform.localScale = new Vector3 (x_k,y_k,1);
+        startObj.transform.localScale = new Vector3(x_k * startObj.transform.localScale.x, y_k * startObj.transform.localScale.y, 1);
 		Debug.Log (startObj.transform.localScale);
 	}
 

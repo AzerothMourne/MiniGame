@@ -41,111 +41,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: ae5862275993a7e488bd552de305acb8, type: 2}
   mSprites:
-  - name: 10
-    x: 323
-    y: 352
-    width: 231
-    height: 153
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 29
-    paddingRight: 22
-    paddingTop: 19
-    paddingBottom: 0
-  - name: 6
-    x: 0
-    y: 18
-    width: 244
-    height: 154
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 16
-    paddingRight: 22
-    paddingTop: 18
-    paddingBottom: 0
-  - name: 7
-    x: 323
-    y: 506
-    width: 244
-    height: 154
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 16
-    paddingRight: 22
-    paddingTop: 18
-    paddingBottom: 0
-  - name: 8
-    x: 323
-    y: 198
-    width: 231
-    height: 153
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 29
-    paddingRight: 22
-    paddingTop: 19
-    paddingBottom: 0
-  - name: 9
-    x: 568
-    y: 506
-    width: 244
-    height: 154
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 16
-    paddingRight: 22
-    paddingTop: 18
-    paddingBottom: 0
-  - name: button
-    x: 0
-    y: 516
-    width: 322
-    height: 144
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: choosePlayer
-    x: 1025
-    y: 1700
-    width: 488
-    height: 348
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: close
-    x: 1400
-    y: 1545
-    width: 76
-    height: 76
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: mainBackground
+  - name: "0\u6548\u679C\u56FE"
     x: 0
     y: 1472
     width: 1024
@@ -158,9 +54,360 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: mingyue
+  - name: 1
+    x: 2050
+    y: 1105
+    width: 208
+    height: 173
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 9
+    paddingTop: 12
+    paddingBottom: 0
+  - name: 10
+    x: 2050
+    y: 255
+    width: 231
+    height: 153
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 22
+    paddingTop: 19
+    paddingBottom: 0
+  - name: 2
+    x: 2050
+    y: 583
+    width: 207
+    height: 173
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 9
+    paddingTop: 12
+    paddingBottom: 0
+  - name: 3
+    x: 2050
+    y: 931
+    width: 208
+    height: 173
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 9
+    paddingTop: 12
+    paddingBottom: 0
+  - name: 4
+    x: 2050
+    y: 409
+    width: 207
+    height: 173
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 2
+    paddingRight: 9
+    paddingTop: 12
+    paddingBottom: 0
+  - name: 5
+    x: 2050
+    y: 757
+    width: 208
+    height: 173
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 9
+    paddingTop: 12
+    paddingBottom: 0
+  - name: 6
+    x: 1025
+    y: 144
+    width: 244
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 22
+    paddingTop: 18
+    paddingBottom: 0
+  - name: 7
+    x: 2050
+    y: 1434
+    width: 244
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 22
+    paddingTop: 18
+    paddingBottom: 0
+  - name: 8
+    x: 2050
+    y: 101
+    width: 231
+    height: 153
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 29
+    paddingRight: 22
+    paddingTop: 19
+    paddingBottom: 0
+  - name: 9
+    x: 2050
+    y: 1279
+    width: 244
+    height: 154
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 22
+    paddingTop: 18
+    paddingBottom: 0
+  - name: button
+    x: 1025
+    y: 497
+    width: 322
+    height: 144
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: choosePlayer
     x: 1514
-    y: 1579
+    y: 1123
+    width: 488
+    height: 348
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: close
+    x: 870
+    y: 241
+    width: 76
+    height: 76
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: diaoniao1
+    x: 323
+    y: 42
+    width: 59
+    height: 29
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: diaoniao2
+    x: 947
+    y: 268
+    width: 71
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: diaoniao3
+    x: 870
+    y: 223
+    width: 71
+    height: 17
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: diaoniao4
+    x: 942
+    y: 228
+    width: 71
+    height: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: diaoniao5
+    x: 947
+    y: 250
+    width: 71
+    height: 17
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: diaoniao6
+    x: 947
+    y: 293
+    width: 71
+    height: 24
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: hood1 (1)
+    x: 1468
+    y: 809
+    width: 426
+    height: 149
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 32
+    paddingTop: 19
+    paddingBottom: 12
+  - name: hood1 (2)
+    x: 1025
+    y: 807
+    width: 442
+    height: 151
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 32
+    paddingTop: 17
+    paddingBottom: 12
+  - name: hood1 (3)
+    x: 443
+    y: 154
+    width: 426
+    height: 163
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 32
+    paddingTop: 5
+    paddingBottom: 12
+  - name: hood1 (4)
+    x: 0
+    y: 150
+    width: 442
+    height: 167
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 32
+    paddingTop: 1
+    paddingBottom: 12
+  - name: hood1 (5)
+    x: 1025
+    y: 959
+    width: 426
+    height: 163
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 32
+    paddingTop: 5
+    paddingBottom: 12
+  - name: hood1 (6)
+    x: 1452
+    y: 971
+    width: 442
+    height: 151
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 32
+    paddingTop: 17
+    paddingBottom: 12
+  - name: hood1 (7)
+    x: 443
+    y: 4
+    width: 426
+    height: 149
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 16
+    paddingRight: 32
+    paddingTop: 19
+    paddingBottom: 12
+  - name: mainBackground
+    x: 1025
+    y: 1472
+    width: 1024
+    height: 576
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: mingyue
+    x: 1400
+    y: 323
     width: 466
     height: 120
     borderLeft: 0
@@ -172,8 +419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: mingyuePress
-    x: 0
-    y: 774
+    x: 1400
+    y: 202
     width: 466
     height: 120
     borderLeft: 0
@@ -184,9 +431,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: new_tianya
+    x: 2050
+    y: 1702
+    width: 466
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: palyer
     x: 1025
-    y: 1535
+    y: 642
     width: 374
     height: 164
     borderLeft: 0
@@ -198,8 +458,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: player1
-    x: 1400
-    y: 1622
+    x: 323
+    y: 72
     width: 76
     height: 77
     borderLeft: 0
@@ -211,8 +471,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: popup
-    x: 1514
-    y: 1700
+    x: 1025
+    y: 1123
     width: 488
     height: 348
     borderLeft: 0
@@ -225,7 +485,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: pressButton
     x: 0
-    y: 371
+    y: 5
     width: 322
     height: 144
     borderLeft: 0
@@ -238,7 +498,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: startBackground
     x: 0
-    y: 895
+    y: 318
     width: 1024
     height: 576
     borderLeft: 0
@@ -250,8 +510,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tianya
-    x: 467
-    y: 782
+    x: 2518
+    y: 1815
     width: 467
     height: 112
     borderLeft: 0
@@ -262,10 +522,244 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: tianyaPress
-    x: 0
-    y: 661
+  - name: tianya_bg
+    x: 2984
+    y: 1593
+    width: 462
+    height: 108
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya1
+    x: 2050
+    y: 1815
     width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya2
+    x: 2986
+    y: 1815
+    width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya3
+    x: 3454
+    y: 1815
+    width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya4
+    x: 2517
+    y: 1936
+    width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya5
+    x: 2985
+    y: 1936
+    width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianya6
+    x: 400
+    y: 121
+    width: 36
+    height: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: tianyaPress
+    x: 3453
+    y: 1936
+    width: 467
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: xiaoniao1
+    x: 400
+    y: 134
+    width: 30
+    height: 15
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: xiaoniao2
+    x: 400
+    y: 95
+    width: 36
+    height: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: xiaoniao3
+    x: 400
+    y: 85
+    width: 36
+    height: 9
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: xiaoniao4
+    x: 323
+    y: 35
+    width: 36
+    height: 6
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: xiaoniao5
+    x: 400
+    y: 75
+    width: 36
+    height: 9
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: xiaoniao6
+    x: 400
+    y: 108
+    width: 36
+    height: 12
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5929\u6DAF\u5339\u914D\u4E2D1"
+    x: 2517
+    y: 1702
+    width: 466
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5929\u6DAF\u5339\u914D\u4E2D2"
+    x: 2984
+    y: 1702
+    width: 466
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5929\u6DAF\u5339\u914D\u4E2D3"
+    x: 3451
+    y: 1702
+    width: 466
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5929\u6DAF\u5339\u914D\u4E2D4"
+    x: 2050
+    y: 1589
+    width: 466
+    height: 112
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5929\u6DAF\u5339\u914D\u4E2D5"
+    x: 2517
+    y: 1589
+    width: 466
     height: 112
     borderLeft: 0
     borderRight: 0
@@ -276,10 +770,88 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u6309\u94AE\u51FB\u9000"
-    x: 0
-    y: 173
+    x: 1025
+    y: 299
     width: 214
     height: 197
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D1"
+    x: 1400
+    y: 444
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D2"
+    x: 1400
+    y: 565
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D3"
+    x: 1400
+    y: 686
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D4"
+    x: 2050
+    y: 1928
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D5"
+    x: 1400
+    y: 81
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u80CC\u666F\u56FE\u65E0\u9E1F"
+    x: 0
+    y: 895
+    width: 1024
+    height: 576
     borderLeft: 0
     borderRight: 0
     borderTop: 0

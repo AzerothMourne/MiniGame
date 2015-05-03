@@ -52,7 +52,7 @@ public class MGGlobalDataCenter  {
     }
     public Vector3 leftBottomPos, rightTopPos,roleFrontPos,roleLaterPos;
     /// <summary>
-    /// 屏幕上下左右边框的坐标值
+    /// 屏幕上下左右边框的坐标值(世界坐标)
     /// </summary>
     public float screenLiftX, screenRightX,screenTopY,screenBottomY;
     /// <summary>

@@ -88,7 +88,7 @@ GameObject:
   - 114: {fileID: 69806157}
   - 114: {fileID: 69806160}
   - 114: {fileID: 69806161}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: startButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,7 +262,7 @@ GameObject:
   - 4: {fileID: 325997150}
   - 114: {fileID: 325997151}
   - 114: {fileID: 325997149}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: StartScript
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -319,17 +319,31 @@ MonoBehaviour:
   mingyueObj: {fileID: 187396, guid: 676f5b8d0defd6842b2a35159268713c, type: 2}
   isPressSlogan: 0
   SloganObj: {fileID: 1510104751}
-  tianyaLoadObj: {fileID: 178078, guid: 925f5a7cac23617429e234dd34f9dab7, type: 2}
   tianyaLoadList:
-  - {fileID: 21300000, guid: 2730cd6054077274bb621be4b458e409, type: 3}
-  - {fileID: 21300000, guid: 31809a75e1b8bd14a954e531211efbd0, type: 3}
-  - {fileID: 21300000, guid: 051b5ea2afbac934889593e7f5fa2048, type: 3}
-  - {fileID: 21300000, guid: 0ec75948f23a3124b8d521b2b426aef6, type: 3}
-  - {fileID: 21300000, guid: bebe45343f5eb8244ad578f6d742eb96, type: 3}
+  - {fileID: 21300000, guid: 183aa66712ff5f6409895ab571fbc58b, type: 3}
+  - {fileID: 21300000, guid: c598439110bcede40847ff1f1756300b, type: 3}
+  - {fileID: 21300000, guid: 2f24d8181bccabf41bbd13b0f6943049, type: 3}
+  - {fileID: 21300000, guid: 501d6cca1555f154a9b13fab50820599, type: 3}
+  - {fileID: 21300000, guid: ece83de1fe746a34e93d4f8e3523cd75, type: 3}
   istianyaLoad: 0
   timer: 0
-  tempObj: {fileID: 0}
   count: 0
+  mingyueLoadList:
+  - {fileID: 21300000, guid: 4e23d2cf6bf1c174ba79b791435f99cd, type: 3}
+  - {fileID: 21300000, guid: 7a260240c0dcf28479b854d91db69d8f, type: 3}
+  - {fileID: 21300000, guid: b8fcb8ce372e5114ba7c81f717e83eee, type: 3}
+  - {fileID: 21300000, guid: 228368b917b823f47ad4ead09c212b69, type: 3}
+  - {fileID: 21300000, guid: 32a595d28640d0a41aed9595a167df46, type: 3}
+  ismingyueLoad: 0
+  isHood: 0
+  hoodList:
+  - {fileID: 21300000, guid: c2c2c90b325f8e34fa1b7e14b0faab45, type: 3}
+  - {fileID: 21300000, guid: e3ac18a544638e04d8063ac9b86ab86e, type: 3}
+  - {fileID: 21300000, guid: f4738e98f61865e45b2c1e64602ce62c, type: 3}
+  - {fileID: 21300000, guid: 82f58901143d36746861e0b84348ca44, type: 3}
+  - {fileID: 21300000, guid: 8384c3ac3a078d743bf489fd365e0106, type: 3}
+  - {fileID: 21300000, guid: 39271702141f9d946aa66f0a8fcc5b5e, type: 3}
+  - {fileID: 21300000, guid: dc85896f690d5034fabd8eb68db48acb, type: 3}
 --- !u!1 &336384769
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +353,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 336384770}
   - 114: {fileID: 336384771}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -407,8 +421,35 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11450846, guid: a4f995a1f446c8b458ad94fb63a7cf91, type: 2}
-  mSpriteName: mainBackground
+  mSpriteName: "\u80CC\u666F\u56FE\u65E0\u9E1F"
   mFillCenter: 1
+--- !u!1 &601420884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 601420885}
+  m_Layer: 0
+  m_Name: StartAnimation
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &601420885
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 601420884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0436180793, y: .158442587, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!1 &632054397
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,7 +459,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 632054399}
   - 114: {fileID: 632054398}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -455,13 +496,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 296
-  mHeight: 122
+  mWidth: 336
+  mHeight: 134
   mDepth: 3
-  autoResizeBoxCollider: 0
+  autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 2.42622948
+  aspectRatio: 2.50746274
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -482,7 +523,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 632054397}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -520, y: 52, z: 0}
+  m_LocalPosition: {x: -527, y: 49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -498,7 +539,7 @@ GameObject:
   - 114: {fileID: 937347959}
   - 114: {fileID: 937347958}
   - 54: {fileID: 937347957}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: UI Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -604,7 +645,7 @@ GameObject:
   - 4: {fileID: 993013705}
   - 20: {fileID: 993013707}
   - 114: {fileID: 993013706}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Camera
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -678,11 +719,11 @@ Camera:
   far clip plane: 10
   field of view: 60
   orthographic: 1
-  orthographic size: 1.24452114
+  orthographic size: 5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 3072
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -699,7 +740,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1092618719}
   - 114: {fileID: 1092618720}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CreatStartUI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -742,7 +783,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1254167064}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: start
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -757,7 +798,7 @@ Transform:
   m_GameObject: {fileID: 1254167063}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 5, z: 1}
   m_Children:
   - {fileID: 336384770}
   - {fileID: 69806156}
@@ -828,11 +869,11 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.23614693
+  orthographic size: 5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967039
+    m_Bits: 4294966271
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -922,6 +963,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   background: {fileID: 8300000, guid: 3d6a3e29485e17e478de5f81c857d29a, type: 3}
+--- !u!1 &1389376216
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1389376218}
+  - 114: {fileID: 1389376217}
+  m_Layer: 0
+  m_Name: BirdController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1389376217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389376216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 814bf62de769cde4ba0154b2f33485af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xiaoniao: {fileID: 111768, guid: f6e07ea4d39df29498dc05964be9306d, type: 2}
+  bird1: {fileID: 0}
+  timeSum: 0
+  i: 0
+  birds:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  topY: 0
+  bottomY: 0
+  rightX: 0
+  leftX: 0
+  height: 0
+  width: 0
+  count: 0
+  nguiCamera: {fileID: 993013707}
+--- !u!4 &1389376218
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1389376216}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .0436180793, y: .158442587, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
 --- !u!1 &1510104751
 GameObject:
   m_ObjectHideFlags: 0
@@ -934,7 +1035,7 @@ GameObject:
   - 114: {fileID: 1510104754}
   - 65: {fileID: 1510104756}
   - 114: {fileID: 1510104757}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: slogan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1181,7 +1282,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1869607284}
   - 114: {fileID: 1869607285}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: player1
   m_TagString: Untagged
   m_Icon: {fileID: 0}

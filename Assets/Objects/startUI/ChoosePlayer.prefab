@@ -104,7 +104,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 194, y: 48, z: 0}
+  m_Size: {x: 362, y: 78, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6587398
 BoxCollider:
@@ -116,7 +116,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 194, y: 48, z: 0}
+  m_Size: {x: 362, y: 78, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11417282
 MonoBehaviour:
@@ -252,7 +252,7 @@ MonoBehaviour:
   mPivot: 4
   mWidth: 362
   mHeight: 78
-  mDepth: 7
+  mDepth: 6
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11450846, guid: a4f995a1f446c8b458ad94fb63a7cf91, type: 2}
-  mSpriteName: tianya
+  mSpriteName: new_tianya
   mFillCenter: 1
 --- !u!114 &11487406
 MonoBehaviour:

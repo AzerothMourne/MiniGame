@@ -19,13 +19,17 @@ public class startUI : MonoBehaviour {
 
 	//test
 	//public GameObject tianyaLoad;
-	public GameObject tianyaLoadObj;
+	//public GameObject tianyaLoadObj;
 	public Sprite[] tianyaLoadList;
 	public bool istianyaLoad;
 	public float timer;
-	public GameObject tempObj;
 	public int count;
 
+	//public GameObject mingyueLoadObj;
+	public Sprite[] mingyueLoadList;
+	public bool ismingyueLoad;
+    public bool isHood;
+    public Sprite[] hoodList;
 
 	// Use this for initialization
 	void Start () {
@@ -35,52 +39,94 @@ public class startUI : MonoBehaviour {
 		//加上背景音乐
 		AudioManager._instance.MusicBackground();
 		isPressSlogan = false;
-
 		istianyaLoad = false;
+		ismingyueLoad = false;
 		timer = 0f;
 		count = 0;
-		//初始化天涯load按钮
-		for (int i = 0;  i < 5; i++) {
-			tianyaLoadObj = GameObject.Instantiate (tianyaLoadList[i], new Vector3 (0, 0, 0), Quaternion.Euler (0, 0, 0)) as GameObject;
-			tianyaLoadObj.transform.parent = GameObject.Find("start").transform;
-			tianyaLoadObj.transform.localPosition = new Vector3 (0, 5, 0);
-			tianyaLoadObj.transform.localScale = new Vector3 (1, 1, 1);
-			tianyaLoadObj.GetComponent<UISprite>().depth = 9;
-		}
+        isHood = true;
+        
 	}
+
+    //@Test@Annyqzhou
+    //void PlayObjecet(string spritename, Sprite[] spriteVec, int nCount = 4)
+    //{
+    //    timer += Time.deltaTime;
+    //    if (timer >= 0.1f)
+    //    {
+    //        spritename = spriteVec[count].name;
+    //        timer = 0f;
+    //        count = (++count) % nCount;
+    //        print(count);
+    //        print(spriteVec[count].name);
+    //    }
+    //}
 	
 	// Update is called once per frame
-	void Update () {
+    void Update()
+    {
 
-		if (isPressStartButton == true && countPress == 0) {
-			createChooseUI();
-			createFuzzyBG();
-			creatCloseButton();
-			countPress += 1;
-		}
+        if (isPressStartButton == true && countPress == 0)
+        {
+            createChooseUI();
+            createFuzzyBG();
+            creatCloseButton();
+            countPress += 1;
+        }
 
-		if(isPressSlogan || isPressStartButton && countPress == 1) {
-			SloganObj.GetComponent<TypewriterEffect>().charsPerSecond = 2000;
-			isPressSlogan = false;
-			if(countPress == 1) {
-				countPress += 1;
-			}
-		}
+        if (isPressSlogan || isPressStartButton && countPress == 1)
+        {
+            SloganObj.GetComponent<TypewriterEffect>().charsPerSecond = 2000;
+            isPressSlogan = false;
+            if (countPress == 1)
+            {
+                countPress += 1;
+            }
+        }
 
-		//天涯load播放帧
-		if (istianyaLoad) {
-			print("112233");
-			timer += Time.deltaTime;
-			if(timer >= 0.1) {
-				tempObj = GameObject.Find("tianya");
-				tempObj.GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
-				timer = 0f;
-				if(count == 4)
-					count = 0;
-				count++;
-			}
-		}
-	}
+        //天涯load播放帧
+        print("istianyaLoad : " + istianyaLoad);
+        if (istianyaLoad)
+        {
+            print("112233");
+            timer += Time.deltaTime;
+            if (timer >= 0.1f)
+            {
+                print("88");
+                GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
+                timer = 0f;
+                count = (++count) % 5;
+            }
+        }
+
+        print("ismingyueLoad : " + ismingyueLoad);
+        if (ismingyueLoad)
+        {
+            print("445566");
+            timer += Time.deltaTime;
+            if (timer >= 0.1f)
+            {
+                print("77");
+                GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count].name;
+                timer = 0f;
+                count = (++count) % 5;
+            }
+        }
+
+
+        if (isHood)
+        {
+            timer += Time.deltaTime;
+            if (timer >= 0.2f)
+            {
+                //print("77");
+                GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[count].name;
+                timer = 0f;
+                count = (++count) % 5;
+            }
+        }
+        
+    }
+
 
 	public void OnStartButtonClick() {
 		isPressStartButton = true;
@@ -103,19 +149,27 @@ public class startUI : MonoBehaviour {
 
 	public void clickCloseButton() {
 		print("click CloseButton ");
+		istianyaLoad = false;
+		ismingyueLoad = false;
+		timer = 0f;
 		UIEventListener.Get(CloseButtonObj).onClick = OnCloseButton;
 	}
 	
 	public void OnChoosePlayer_tianya(GameObject button) {
 		print ("1 click start tianya");
-		istianyaLoad = true;
-        this.GetComponent<MyNetworkTest>().findHost();
+		if(ismingyueLoad == false)
+			istianyaLoad = true;
+		//if(istianyaLoad)
+        	//this.GetComponent<MyNetworkTest>().findHost();
 
 	}
 
 	public void OnChoosePlayer_mingyue(GameObject button) {
 		print ("2 click start mingyue");
-        this.GetComponent<MyNetworkTest>().createHost();
+		if(istianyaLoad == false)
+			ismingyueLoad = true;
+		if(ismingyueLoad)
+        	this.GetComponent<MyNetworkTest>().createHost();
 	}
 
 	public void OnCloseButton(GameObject button) {
@@ -159,7 +213,7 @@ public class startUI : MonoBehaviour {
 		print("creatCloseButton");
 		CloseButtonObj = GameObject.Instantiate(closeButton, new Vector3(0,0,0),Quaternion.Euler(0,0,0)) as GameObject;
 		CloseButtonObj.transform.parent = GameObject.Find("start").transform;
-		CloseButtonObj.transform.localPosition = new Vector3(-187, 120, 0);
+		CloseButtonObj.transform.localPosition = new Vector3(185, 120, 0);
 		CloseButtonObj.transform.localScale = new Vector3(1, 1, 1);
 		CloseButtonObj.GetComponent<UISprite>().depth = 8;
 		clickCloseButton();
