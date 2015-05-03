@@ -284,7 +284,7 @@ public class Jump : MonoBehaviour {
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
             transform.Translate(Vector3.right * dis * roleSpeed * Time.deltaTime);
         }
-        if (!isGameOver)
+        if (!isGameOver || isCollisionOver)
         {
             gameOver();
         }

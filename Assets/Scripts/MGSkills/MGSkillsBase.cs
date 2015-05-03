@@ -21,7 +21,7 @@ public static class MGSkillRoadblockInfo
     public static float skillCD = 5f;
     public static int skillHoldLevel = 3;
     public static float skillGCD = 0.3f;
-    public static float SkillEffectSpeed = 1f/4f;
+    public static float SkillEffectSpeed = 1f/16f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillBlinkInfo

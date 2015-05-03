@@ -65,6 +65,7 @@ public class MyNetworkTest : MonoBehaviour {
 			ip = Encoding.Unicode.GetString(buffer);
 			if (ip.Length>0) break;
 		}
+        socket.Close();
 		return ip;
 	}
 	public void UDPStartToReceiveCallback(IAsyncResult data)
