@@ -34,9 +34,13 @@ public class MGGlobalDataCenter  {
 	public bool isDartDefence;
 	public bool isDartRelease;
 	public bool isKillMingyue;
+	public bool isRoadBlockHit;
+	public bool isRoadBlockDefence;
 
-	public bool isWin;
-	public bool isLose;
+	public bool isVictory;
+	public bool isDefeat;
+	public bool isFlash;
+	public bool isSprint;
 
     public string serverIp
     {
@@ -95,6 +99,12 @@ public class MGGlobalDataCenter  {
         this.leftBottomPos = this.rightTopPos = this.roleFrontPos = this.roleLaterPos = Vector3.zero;
         this.isDartHit = false;
         this.isDartDefence = false;
+		this.isRoadBlockHit = false;
+		this.isVictory = false;
+		this.isDefeat = false;
+		this.isRoadBlockDefence = false;
+		this.isFlash = false;
+		this.isSprint = false;
     }
     public static MGGlobalDataCenter defaultCenter()
     {

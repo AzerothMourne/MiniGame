@@ -7,6 +7,7 @@ public class MGskillDrat : MGSkillsBase{
     public Vector3 direction;
 	private long timestamp;
     public bool isPlayDart;
+	public Sprite danSprite;
 	// Use this for initialization
 	void Start()
 	{
@@ -17,6 +18,7 @@ public class MGskillDrat : MGSkillsBase{
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 		//获取播放器对象
 		isPlayDart = false;
+		MGGlobalDataCenter.defaultCenter ().isDartRelease = true;
         MGNotificationCenter.defaultCenter().addObserver(this, triggerFunc, SkillEnum.dart + gameObject.name);
 	}
     public override Object createSkillSprite(Vector3 pos)
@@ -42,9 +44,31 @@ public class MGskillDrat : MGSkillsBase{
 			Destroy(this.gameObject);
 		}
 	}
+	void danDart(){
+		MGGlobalDataCenter.defaultCenter().roleLater.GetComponent<SpriteRenderer> ().sprite = danSprite;
+		
+		this.GetComponent<Collider2D>().enabled = false;
+		GameObject releaseRole = MGGlobalDataCenter.defaultCenter().role;
+		
+		float otherObjectY = this.transform.position.y;
+		float releaseObjectY = releaseRole.transform.position.y + releaseRole.GetComponent<SpriteRenderer>().bounds.size.y / 2;
+		int angle = Random.Range(0, 25) + 135;//随机生成135到160度的角度
+		Vector3 direction = this.GetComponent<MGskillDrat>().direction;
+		if (otherObjectY >= releaseObjectY)
+		{
+			//向上飞
+			this.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
+		}
+		else
+		{
+			//向下飞
+			this.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, -1 * Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
+		}
+	}
     void triggerFunc(MGNotification notification)
     {
         Debug.Log("triggerFunc");
+
         if (notification.objc is Collider2D)//自己要做的
         {
             Collider2D other = notification.objc as Collider2D;
@@ -52,6 +76,7 @@ public class MGskillDrat : MGSkillsBase{
                 return;
             if (other.name != "role")
             {
+				danDart();
                 MGMsgModel skillModel = new MGMsgModel();
                 skillModel.eventId = SkillEffectEnum.dart;
                 skillModel.gameobjectName = other.name;
@@ -62,7 +87,7 @@ public class MGskillDrat : MGSkillsBase{
                 //Debug.Log("***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString());
                 UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
                 label.text += "\r\n***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString() + ";releaseSkillObjectName" + releaseSkillObjectName;
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
         }
         else if(notification.objc is MGMsgModel)//对面要做的
@@ -72,12 +97,13 @@ public class MGskillDrat : MGSkillsBase{
                 return;
             if (other.name != "role")
             {
+				danDart();
                 //print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjectName);
                 MGGlobalDataCenter.defaultCenter().isDartHit = true;
                 //Debug.Log("***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString());
                 UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
                 label.text += "\r\n***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString() + ";releaseSkillObjectName" + releaseSkillObjectName;
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
             }
         }
         

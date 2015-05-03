@@ -255,7 +255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 162676711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.21999979, y: 3.52999997, z: 0}
+  m_LocalPosition: {x: -5.21999979, y: 5.05999994, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1224975071}
@@ -1456,6 +1456,10 @@ MonoBehaviour:
   homeButton: {fileID: 163152, guid: fd74cbf9e83e823438506e2985bbd3cc, type: 2}
   continueButton: {fileID: 116402, guid: 5c39ed64218108d4aa14aee2d004d0eb, type: 2}
   uiCamera: {fileID: 361695386}
+  x_k: 0
+  y_k: 0
+  width: 0
+  height: 0
 --- !u!4 &1844225680
 Transform:
   m_ObjectHideFlags: 0

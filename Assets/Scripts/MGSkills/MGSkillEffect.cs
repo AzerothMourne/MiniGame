@@ -32,6 +32,7 @@ public class MGSkillEffect : MonoBehaviour {
         MGNotificationCenter.defaultCenter().addObserver(this, sprintEffect, SkillEffectEnum.sprint);
         MGNotificationCenter.defaultCenter().addObserver(this, beatbackEffect, SkillEffectEnum.beatback);
         MGNotificationCenter.defaultCenter().addObserver(this, roadblockEffect, SkillEffectEnum.roadblock);
+
 	}
 	
 	// Update is called once per frame
@@ -106,8 +107,15 @@ public class MGSkillEffect : MonoBehaviour {
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             if (objc)
             {
+				if(tempObjcet==null){
+					tempObjcet=GameObject.Find("sprint(Clone)");
+				}
                 float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
 				objc.transform.Translate( speedSwitch*Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillSprintInfo.durationTime);
+				if(tempObjcet){
+					int fx=objc.transform.localScale.y>0?1:-1;
+					tempObjcet.transform.position=new Vector3(objc.transform.position.x+0.25f,objc.transform.position.y+fx*objc.GetComponent<SpriteRenderer>().bounds.size.y/2f,objc.transform.position.z);
+				}
             }
 			sprintTimer += Time.deltaTime;
 			if (sprintTimer > MGSkillSprintInfo.durationTime)
@@ -133,6 +141,7 @@ public class MGSkillEffect : MonoBehaviour {
                 label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x;
 				sprintTimer = 0;
 				sprintSwitch = null;
+				tempObjcet=null;
                 GameObject sprint = GameObject.Find("sprint(Clone)");
                 if (sprint != null)
                 {
@@ -143,36 +152,36 @@ public class MGSkillEffect : MonoBehaviour {
     }
     void blinkEffect(MGNotification notification)
     {
-        if (notification != null)
-        {
-            blinkSkillBonesTimer = 0;
-            MGMsgModel skillModel = (MGMsgModel)notification.objc;
-            Debug.Log("skillModel:" + skillModel + ",eventId:" + skillModel.eventId + ",gameobjectName:" + skillModel.gameobjectName);
-            GameObject objc = GameObject.Find(skillModel.gameobjectName);
-			if (objc)
-            {
-                Debug.Log("blinkObjc:" + objc + "name:" + objc.name);
-				float dis=MGGlobalDataCenter.defaultCenter().roleFrontPos.x-MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-                Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-                Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
-                if (roleFrontPos.x - roleLaterPos.x < MGSkillBlinkInfo.SkillEffectSpeed * dis)
-                {
-                    objc.transform.Translate(Vector3.right * (roleFrontPos.x - roleLaterPos.x-1f));
-                }
-                else
-                {
-                    objc.transform.Translate(Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * dis);
-                }
-            }
+        if (notification != null) {
+			blinkSkillBonesTimer = 0;
+			if(notification.objc == null){
+				MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, shortBonesName);//发送bones技能的事件
+				return;
+			}
 
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, shortBonesName);//发送bones技能的事件
+			MGMsgModel skillModel = (MGMsgModel)notification.objc;
+			Debug.Log ("skillModel:" + skillModel + ",eventId:" + skillModel.eventId + ",gameobjectName:" + skillModel.gameobjectName);
+			GameObject objc = GameObject.Find (skillModel.gameobjectName);
+			if (objc) {
+				Debug.Log ("blinkObjc:" + objc + "name:" + objc.name);
+				float dis = MGGlobalDataCenter.defaultCenter ().roleFrontPos.x - MGGlobalDataCenter.defaultCenter ().roleLaterPos.x;
+				Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter ().roleLater.transform.position;
+				Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter ().role.transform.position;
+				if (roleFrontPos.x - roleLaterPos.x < MGSkillBlinkInfo.SkillEffectSpeed * dis) {
+					objc.transform.Translate (Vector3.right * (roleFrontPos.x - roleLaterPos.x - 1f));
+				} else {
+					objc.transform.Translate (Vector3.right * MGSkillBlinkInfo.SkillEffectSpeed * dis);
+				}
+			}
 
-            UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-            Vector3 pos1 = GameObject.Find("role1").transform.position;
-            Vector3 pos = GameObject.Find("role").transform.position;
-            label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x + ";shortBonesName:" + shortBonesName;
+			MGNotificationCenter.defaultCenter ().postNotification (EventEnum.bones, shortBonesName);//发送bones技能的事件
 
-        }
+			UILabel label = GameObject.Find ("log").GetComponent<UIInput> ().label;
+			Vector3 pos1 = GameObject.Find ("role1").transform.position;
+			Vector3 pos = GameObject.Find ("role").transform.position;
+			label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x + ";shortBonesName:" + shortBonesName;
+
+		} 
     }
     void dartEffect(MGNotification notification)
     {

@@ -69,7 +69,7 @@ public class Jump : MonoBehaviour {
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
             MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
 			//@test
-			//useSkillsBones(new MGNotification("123", null, null));
+			useSkillsBones(new MGNotification("123", null, null));
 		}
 	}
     public string objcToJson(string msg)
@@ -284,7 +284,7 @@ public class Jump : MonoBehaviour {
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
             transform.Translate(Vector3.right * dis * roleSpeed * Time.deltaTime);
         }
-        if (!isGameOver || isCollisionOver)
+        if (!isGameOver)
         {
             gameOver();
         }
@@ -296,6 +296,7 @@ public class Jump : MonoBehaviour {
         Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
         if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
         {
+			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
             isGameOver = true;
             //强制roleLater出现在role的后面一点点。
             MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = MGGlobalDataCenter.defaultCenter().role.transform.localScale;
@@ -307,6 +308,7 @@ public class Jump : MonoBehaviour {
             roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
             MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
             MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
+
             if (this.gameObject.name == "role1")
                 MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
         }
@@ -344,6 +346,7 @@ public class Jump : MonoBehaviour {
             }
             if (collision.gameObject.name == "role")
             {
+				Debug.Log("set role trigger");
                 if (roleAnimaController.downOrUp)
                     rigidbody2D.gravityScale = 0.5f;
                 else

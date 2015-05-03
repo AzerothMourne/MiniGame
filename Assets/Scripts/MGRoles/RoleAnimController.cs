@@ -76,6 +76,7 @@ public class RoleAnimController : MonoBehaviour {
         if (this.gameObject.name == "role1")
         {
             Debug.Log("changeKillFlag");
+			//GameObject.Find("log").GetComponent<UILabel>().text+="changeKillFlag";
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
             toNomalRun();
             animStateToRun();
@@ -174,8 +175,8 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (notification.objc.Equals("role1"))
         {
-            Debug.Log("roleKillRoadblockAnimController");
-            setAllAnimStateToFalse();
+			Debug.Log("roleKillAnimController");
+			setAllAnimStateToFalse();
             animStateToKill();
         }
         isKillRoadblock = false;
@@ -196,6 +197,7 @@ public class RoleAnimController : MonoBehaviour {
             setAllAnimStateToFalse();
             animStateToDead();
         }
+		Debug.Log("set role trigger");
         if(downOrUp)
             rigidbody2D.gravityScale = 0.5f;
         else
@@ -229,13 +231,15 @@ public class RoleAnimController : MonoBehaviour {
         {
             isFirstJump = true;
             setAllAnimStateToFalse();
-            animStateToFirstJump();
+			animStateToFirstJump();
+			music.play("Sound/updown_roll");
         }
         else if(isSecondJump == false)//二段跳
         {
             isSecondJump = true;
             setAllAnimStateToFalse();
-            animStateToRoll();
+			animStateToRoll();
+			music.play("Sound/updown_roll");
         }
     }
     public void downButtonClick(MGNotification notification)
@@ -275,24 +279,28 @@ public class RoleAnimController : MonoBehaviour {
         }
 		//检测角色的动作
         if (isDead)//死亡导致结束
-        {
-            Debug.Log("out of left moving");
+		{
+            Debug.Log("out of left moving:"+this.gameObject.name);
             if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f && transform.position.y >MGGlobalDataCenter.defaultCenter().screenBottomY - 1f)
             {
-                Debug.Log("left moving");
-                transform.Translate(Vector3.left * 4 * Time.deltaTime);
+				Debug.Log("left moving:"+this.gameObject.name);
+				transform.Translate(Vector3.left * 4 * Time.deltaTime);
             }   
             else
-            {
+			{
                 isDead = false;
                 if (this.gameObject.name == "role")
                 {
                     MGGlobalDataCenter.defaultCenter().overSenceUIName = "failFrontGameUI";
+					MGGlobalDataCenter.defaultCenter().isDefeat = true;
                 }
                 else if (this.gameObject.name == "role1")
                 {
                     MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+					MGGlobalDataCenter.defaultCenter().isVictory = true;
                 }
+				print("win="+MGGlobalDataCenter.defaultCenter().isVictory+
+				      "defeated=" +MGGlobalDataCenter.defaultCenter().isDefeat);
                 Application.LoadLevel("overSence");
                 MGMsgModel gameoverModel = new MGMsgModel();
                 gameoverModel.eventId = EventEnum.gameoverEventId;

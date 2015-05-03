@@ -10,6 +10,8 @@ public class MGSkillBlink : MGSkillsBase
     void Start()
     {
         isBlinked = false;
+		mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
+		MGGlobalDataCenter.defaultCenter ().isFlash = true;
     }
     public override Object createSkillSprite(Vector3 pos)
     {
@@ -27,9 +29,12 @@ public class MGSkillBlink : MGSkillsBase
             skillModel.eventId = SkillEffectEnum.blink;
             skillModel.gameobjectName = "role1";
             //发送给对面 产生技能效果
-            //mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
+			if(MGGlobalDataCenter.defaultCenter().isHost==false){
+				MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, null);
+            	mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
+			}
             //发送给自己
-            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
+            //MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
         }
     }
     public override void playSkillSound()

@@ -40,7 +40,7 @@ public static class MGSkillBonesInfo
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
     public static float SkillEffectSpeed = 1f / 4f;
-    public static float durationTime = 5.0f;
+    public static float durationTime = 3.0f;
 }
 public static class MGSkillSprintInfo
 {

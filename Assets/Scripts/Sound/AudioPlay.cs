@@ -25,22 +25,40 @@ public class AudioPlay : MonoBehaviour {
 			music.playoneshot ("Sound/dart_defence");
 			MGGlobalDataCenter.defaultCenter ().isDartDefence = false;
 		}
+		if (MGGlobalDataCenter.defaultCenter ().isRoadBlockHit) {
+			music.playoneshot("Sound/roadblock_hit");
+			MGGlobalDataCenter.defaultCenter().isRoadBlockHit = false;
+		}
+		if (MGGlobalDataCenter.defaultCenter ().isRoadBlockDefence) {
+			music.playoneshot("Sound/roadblock_defence");
+			MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = false;
+		}
 		//以下未添加
-		if (MGGlobalDataCenter.defaultCenter().isDartRelease){
-			music.playoneshot("Sound/dart_relase");
+		if (MGGlobalDataCenter.defaultCenter ().isDartRelease){
+			music.playoneshot("Sound/dart_release");
 			MGGlobalDataCenter.defaultCenter ().isDartRelease = false;
 		}
+
 		if (MGGlobalDataCenter.defaultCenter ().isKillMingyue) {
 			music.playoneshot("Sound/kill_mingyue");
 			MGGlobalDataCenter.defaultCenter().isKillMingyue = false;
 		}
-		if (MGGlobalDataCenter.defaultCenter ().isWin) {
-			music.play("Sound/win");
-			MGGlobalDataCenter.defaultCenter().isWin = false;
+		//是否胜利
+		if (MGGlobalDataCenter.defaultCenter ().isVictory) {
+			music.playoneshot ("Sound/victory");
+			MGGlobalDataCenter.defaultCenter ().isVictory = false;
+		} 
+		if(MGGlobalDataCenter.defaultCenter().isDefeat){
+			music.playoneshot("Sound/defeat");
+			MGGlobalDataCenter.defaultCenter().isDefeat = false;
 		}
-		if (MGGlobalDataCenter.defaultCenter ().isLose) {
-			music.play("Sound/lose");
-			MGGlobalDataCenter.defaultCenter().isLose = false;
+		if (MGGlobalDataCenter.defaultCenter ().isFlash) {
+			music.playoneshot("Sound/flash");
+			MGGlobalDataCenter.defaultCenter().isFlash = false;
+		}
+		if (MGGlobalDataCenter.defaultCenter ().isSprint) {
+			music.playoneshot("Sound/sprint");
+			MGGlobalDataCenter.defaultCenter().isSprint = false;
 		}
 
 	}

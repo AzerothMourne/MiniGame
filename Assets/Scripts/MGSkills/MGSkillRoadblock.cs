@@ -79,6 +79,14 @@ public class MGSkillRoadblock : MGSkillsBase{
                 //发送给自己
                 MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.roadblock, skillModel);
             }
+			string strrole = "role";
+			int irole = strrole.Length;
+			if( name.Length>=irole && name.Substring(0, irole) == strrole )
+				MGGlobalDataCenter.defaultCenter().isRoadBlockHit = true;
+			else
+				MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
+			print("RoadBlockHit="+MGGlobalDataCenter.defaultCenter().isRoadBlockHit+
+			      ",RoadBloackDefence="+MGGlobalDataCenter.defaultCenter().isRoadBlockDefence);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
