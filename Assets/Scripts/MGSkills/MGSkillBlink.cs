@@ -10,6 +10,7 @@ public class MGSkillBlink : MGSkillsBase
     void Start()
     {
         isBlinked = false;
+		MGGlobalDataCenter.defaultCenter ().isFlash = true;
     }
     public override Object createSkillSprite(Vector3 pos)
     {

@@ -12,19 +12,32 @@ public class overUI : MonoBehaviour {
             if (MGGlobalDataCenter.defaultCenter().overSenceUIName == "victoryFrontGameUI")
             {
                 MGGlobalDataCenter.defaultCenter().overSenceUIName = "failLaterGameUI";
+				MGGlobalDataCenter.defaultCenter().isDefeat = true;
             }
             else if (MGGlobalDataCenter.defaultCenter().overSenceUIName == "failFrontGameUI")
             {
                 MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryLaterGameUI";
+				MGGlobalDataCenter.defaultCenter().isVictory = true;
             }
         }
+		else if(MGGlobalDataCenter.defaultCenter().overSenceUIName == "victoryFrontGameUI" )
+		{
+			MGGlobalDataCenter.defaultCenter().isVictory = true;
+		}
+		else
+		{
+			MGGlobalDataCenter.defaultCenter().isDefeat = true;
+		}
+		print ("win" + MGGlobalDataCenter.defaultCenter ().isVictory + "lose" +
+			MGGlobalDataCenter.defaultCenter ().isDefeat);
         for (int i = 0; i < overUI.Length; ++i)
         {
             if (overUI[i].name == MGGlobalDataCenter.defaultCenter().overSenceUIName)
-                overUI[i].SetActive(true);
-            else
+				overUI[i].SetActive(true);
+			else
                 overUI[i].SetActive(false);
         }
+
 	}
 	
 	// Update is called once per frame

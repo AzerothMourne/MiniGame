@@ -65,7 +65,15 @@ public class MGSkillRoadblock : MGSkillsBase{
             return;
         if (name != releaseSkillObjectName)
         {
-            print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
+			print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
+			string strrole = "role";
+			int irole = strrole.Length;
+			if( name.Length>=irole && name.Substring(0, irole) == strrole )
+				MGGlobalDataCenter.defaultCenter().isRoadBlockHit = true;
+			else
+				MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
+			print("RoadBlockHit="+MGGlobalDataCenter.defaultCenter().isRoadBlockHit+
+			      ",RoadBloackDefence="+MGGlobalDataCenter.defaultCenter().isRoadBlockDefence);
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadLatterEventId, name);
         }
     }

@@ -248,11 +248,15 @@ public class RoleAnimController : MonoBehaviour {
                 if (this.gameObject.name == "role")
                 {
                     MGGlobalDataCenter.defaultCenter().overSenceUIName = "failFrontGameUI";
+					MGGlobalDataCenter.defaultCenter().isDefeat = true;
                 }
                 else if (this.gameObject.name == "role1")
                 {
                     MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+					MGGlobalDataCenter.defaultCenter().isVictory = true;
                 }
+				print("win="+MGGlobalDataCenter.defaultCenter().isVictory+
+				      "defeated=" +MGGlobalDataCenter.defaultCenter().isDefeat);
                 Application.LoadLevel("overSence");
                 MGMsgModel gameoverModel = new MGMsgModel();
                 gameoverModel.eventId = EventEnum.gameoverEventId;

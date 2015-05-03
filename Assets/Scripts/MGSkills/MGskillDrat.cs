@@ -18,6 +18,7 @@ public class MGskillDrat : MGSkillsBase{
 		//获取播放器对象
 		isPlayDart = false;
         MGNotificationCenter.defaultCenter().addObserver(this, triggerFunc, SkillEnum.dart + gameObject.name);
+		MGGlobalDataCenter.defaultCenter ().isDartRelease = true;
 	}
     public override Object createSkillSprite(Vector3 pos)
 	{
