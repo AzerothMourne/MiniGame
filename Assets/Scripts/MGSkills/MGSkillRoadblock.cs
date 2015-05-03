@@ -9,7 +9,9 @@ public class MGSkillRoadblock : MGSkillsBase{
         releaseSkillObjectName = "role";
         isBreak = false;
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
-        MGNotificationCenter.defaultCenter().addObserver(this, triggerFunc, SkillEnum.roadblock);
+        gameObject.name += MGGlobalDataCenter.defaultCenter().dartIndex.ToString();
+        MGGlobalDataCenter.defaultCenter().dartIndex = (MGGlobalDataCenter.defaultCenter().dartIndex + 1) % (MGSkillDartInfo.skillHoldLevel * MGSkillRoadblockInfo.skillHoldLevel);
+        MGNotificationCenter.defaultCenter().addObserver(this, triggerFunc, SkillEnum.roadblock + gameObject.name);
     }
     // Use this for initialization
     public override Object createSkillSprite(Vector3 pos)
@@ -53,11 +55,11 @@ public class MGSkillRoadblock : MGSkillsBase{
             tag = (notification.objc as MGMsgModel).tag;
             name = (notification.objc as MGMsgModel).name;
         }
-        Debug.Log(tag + ";" + name);
+        //Debug.Log(tag + ";" + name);
         if (isBreak) return;
         if (name == "bones(Clone)" || name == "sprint(Clone)")
         {
-            Debug.Log("roadblock break");
+            //Debug.Log("roadblock break");
             isBreak = true;
             this.GetComponent<Animator>().SetBool("isBreak", true);
         }
@@ -65,8 +67,18 @@ public class MGSkillRoadblock : MGSkillsBase{
             return;
         if (name != releaseSkillObjectName)
         {
-            print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
-            MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadLatterEventId, name);
+            //print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
+            isBreak = true;
+            this.GetComponent<Animator>().SetBool("isBreak", true);
+            MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killAnimLatterEventId, name);
+            if (notification.objc is Collider2D)
+            {
+                MGMsgModel skillModel = new MGMsgModel();
+                skillModel.eventId = SkillEffectEnum.roadblock;
+                skillModel.gameobjectName = name;
+                //发送给自己
+                MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.roadblock, skillModel);
+            }
         }
     }
     void OnTriggerEnter2D(Collider2D other)
@@ -74,10 +86,10 @@ public class MGSkillRoadblock : MGSkillsBase{
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
         {
             MGMsgModel model = new MGMsgModel();
-            model.eventId = SkillEnum.roadblock;
+            model.eventId = SkillEnum.roadblock + gameObject.name;
             model.tag = other.tag;
             model.name = other.name;
-            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.roadblock, other);
+            MGNotificationCenter.defaultCenter().postNotification(SkillEnum.roadblock + gameObject.name, other);
             mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(model));
         }
         

@@ -5,7 +5,8 @@ using System.Net.Sockets;
 using System.Text;
 using System.Threading;
 using LitJson;
-
+using System.Net.NetworkInformation;
+using System;
 public class MGSyncMsgModel
 {
     public string roleLaterPosX { get; set; }
@@ -16,15 +17,23 @@ public class MGInitGameData : MonoBehaviour {
     private IPEndPoint syncIEP;
     private EndPoint syncEP;
     private static MGInitGameData instance;
-    private Thread loomThread;
-	public bool isSync;
+	private bool isReceiveSync;
+    private UILabel label;
+    private float receivePosX;
+    private Thread syncThread;
     void Awake()
     {
         initGameData();
     }
+    void Start()
+    {
+        isReceiveSync = false;
+        receivePosX = 0f;
+        label = GameObject.Find("log").GetComponent<UIInput>().label;
+    }
 	public void initGameData(){
         //MGGlobalDataCenter.defaultCenter().backToDefaultValues();
-        if (NetworkPeerType.Disconnected != Network.peerType && isSync)
+        if (NetworkPeerType.Disconnected != Network.peerType)
         {
 			Debug.Log("startThreadForSync");
             startThreadForSync();
@@ -44,57 +53,47 @@ public class MGInitGameData : MonoBehaviour {
             syncIEP = new IPEndPoint(IPAddress.Any, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个侦听局域网内部所有IP和指定端口
             syncEP = (EndPoint)syncIEP;
             syncSock.Bind(syncIEP);//绑定这个实例
-            //Run the action on a new thread
-            loomThread = Loom.RunAsync(() =>
+            syncThread = new Thread(syncToReceive);
+            syncThread.Start();
+            syncThread.IsBackground = true;
+        }
+    }
+    //线程函数
+    public void syncToReceive()
+    {
+        string receiveString = null;
+        while (true)
+        {
+            byte[] buffer = new byte[1024];//设置缓冲数据流
+            syncSock.ReceiveFrom(buffer, ref syncEP);//接收数据,并确把数据设置到缓冲流里面
+            receiveString = Encoding.ASCII.GetString(buffer);
+            if (receiveString.Length > 0)
             {
-                string receiveString = null;
-                while (true)
-                {
-                    byte[] buffer = new byte[1024];//设置缓冲数据流
-                    syncSock.ReceiveFrom(buffer, ref syncEP);//接收数据,并确把数据设置到缓冲流里面
-                    receiveString = Encoding.ASCII.GetString(buffer);
-                    if (receiveString.Length > 0)
-                    {
-                        //Run some code on the main thread
-                        Loom.QueueOnMainThread(() =>
-                        {
-                            /*
-                            Debug.Log(receiveString);
-                            MGSyncMsgModel model = JsonMapper.ToObject<MGSyncMsgModel>(receiveString);
-                            Debug.Log("model:" + model.roleLaterPosX+";"+model.gameTime);
-                            */
-							/*
-							try{
-								UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-								label.text += "receiveString";
-							}catch{
-							}*/
-							if (MGGlobalDataCenter.defaultCenter().roleLater != null)
-                            {
-                                Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-                                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(float.Parse(receiveString), pos.y, pos.z);
-                                //MGGlobalDataCenter.defaultCenter().totalGameTime = float.Parse(model.gameTime);
-                            }
-                        });
-                    }
-                }
-            });
+                isReceiveSync = true;
+                receivePosX = float.Parse(receiveString);
+            }
         }
     }
     public void syncNetwork()//主机向客户端发送UDP包让客户端同步主机的数据
     {
         if (MGGlobalDataCenter.defaultCenter().isHost && MGGlobalDataCenter.defaultCenter().roleLater!=null)
         {
-            //Debug.Log("syncNetwork");
             Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            /*
-            MGSyncMsgModel model = new MGSyncMsgModel();
-            model.roleLaterPosX = roleLaterPos.x.ToString();
-            model.gameTime = MGGlobalDataCenter.defaultCenter().totalGameTime.ToString();
-            byte[] buffer = Encoding.ASCII.GetBytes(JsonMapper.ToJson(model));
-            */
             byte[] buffer = Encoding.ASCII.GetBytes(roleLaterPos.x.ToString());
             syncSock.SendTo(buffer, syncIEP);
+        }
+    }
+    void Update()
+    {
+        if (isReceiveSync)
+        {
+            if (MGGlobalDataCenter.defaultCenter().roleLater != null)
+            {
+                isReceiveSync = false;
+                //label.text += "receiveString ";
+                Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(receivePosX, pos.y, pos.z);
+            }
         }
     }
     public void destroyGameData()
@@ -105,13 +104,9 @@ public class MGInitGameData : MonoBehaviour {
         {
             syncSock.Close();
         }
-        if (loomThread!=null)
+        if (syncThread != null)
         {
-            loomThread.Abort();
-            while (loomThread.ThreadState != System.Threading.ThreadState.Stopped)//必须等线程完全停止了，否则会出现冲突。  
-            {
-                Thread.Sleep(1000);
-            }
+            syncThread.Abort();
         }
         CancelInvoke("syncNetwork");
         MGNetWorking.disconnect();
