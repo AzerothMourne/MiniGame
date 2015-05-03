@@ -1495,7 +1495,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 028d3af0561e6fd4f98d86abf476a263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isSync: 1
 --- !u!1 &1852946983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1671,6 +1670,8 @@ MonoBehaviour:
   isPressDown: 0
   isPressDownToGround: 0
   isDead: 0
+  isKillRoadblock: 0
+  isCallChangeKillFlag: 0
 --- !u!82 &1852946993
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1855,6 +1856,8 @@ MonoBehaviour:
   isPressDown: 0
   isPressDownToGround: 0
   isDead: 0
+  isKillRoadblock: 0
+  isCallChangeKillFlag: 0
 --- !u!114 &1985725683
 MonoBehaviour:
   m_ObjectHideFlags: 0
