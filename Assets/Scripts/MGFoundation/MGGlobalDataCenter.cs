@@ -41,6 +41,7 @@ public class MGGlobalDataCenter  {
 	public bool isDefeat;
 	public bool isFlash;
 	public bool isSprint;
+	public bool isRun;
 
     public string serverIp
     {
@@ -66,8 +67,8 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
-        this.isHost = true;
-//        this.isHost = false;
+ //       this.isHost = true;
+        this.isHost = false;
         this.overSenceUIName = null;
         backToDefaultValues();
 	}
@@ -105,6 +106,7 @@ public class MGGlobalDataCenter  {
 		this.isRoadBlockDefence = false;
 		this.isFlash = false;
 		this.isSprint = false;
+		this.isRun = false;
     }
     public static MGGlobalDataCenter defaultCenter()
     {

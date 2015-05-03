@@ -89,7 +89,8 @@ public class MGSkillSprint : MGSkillsBase
                 roleLater.GetComponent<RoleAnimController>().isSprint = true;
                 roleLater.GetComponent<Animator>().SetBool("sprint", true);
                 roleLater.GetComponent<SpriteRenderer>().material = new Material(Shader.Find("long/sprint"));
-                GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");
+				GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");
+				MGGlobalDataCenter.defaultCenter().isRun = true;
                 for (int i = 0; i < backgroundList.Length; ++i)
                 {
                     backgroundList[i].GetComponent<bgnear>().speed += 20;
@@ -129,7 +130,10 @@ public class MGSkillSprint : MGSkillsBase
 			string strtmp = "dart(Clone)";
 			int istrlen = strtmp.Length;
 			if(other.name.Substring(0,istrlen)== strtmp)
-            	flyDuang(other, releaseRole);
+			{
+				MGGlobalDataCenter.defaultCenter().isDartDefence = true;
+				flyDuang(other, releaseRole);
+			}
         }
     }
 }

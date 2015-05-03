@@ -92,6 +92,9 @@ public class RoleAnimController : MonoBehaviour {
             isCallChangeKillFlag = true;
         }
     }
+	void animStateToDan(){
+		jumpAnim.SetBool("AnyStateToDan", true);
+	}
     void animStateToKillRoadblock()
     {
         jumpAnim.SetBool("AnyStateToKillRoadblock", true);
@@ -110,21 +113,25 @@ public class RoleAnimController : MonoBehaviour {
         jumpAnim.SetBool("RollToRun", true);
         jumpAnim.SetBool("killToRun", true);
         jumpAnim.SetBool("KillRoadblockToRun", true);
+		jumpAnim.SetBool("DanToRun", true);
     }
     void animStateToFirstJump()
     {
         jumpAnim.SetBool("RunToFirstJump", true);
+		jumpAnim.SetBool("DanToFirstJump", true);
     }
     void animStateToFallDown()
     {
         jumpAnim.SetBool("FirstJumpToFallDown", true);
         jumpAnim.SetBool("RollToFallDown", true);
+		jumpAnim.SetBool("DanToFallDown", true);
     }
     void animStateToRoll()
     {
         jumpAnim.SetBool("FirstJumpToSecondJump", true);
         jumpAnim.SetBool("RunToRoll", true);
         jumpAnim.SetBool("FallDownToRoll", true);
+		jumpAnim.SetBool("DanToRoll", true);
     }
     void setAllAnimStateToFalse()
     {
@@ -144,6 +151,12 @@ public class RoleAnimController : MonoBehaviour {
             jumpAnim.SetBool("killToRun", false);
             jumpAnim.SetBool("AnyStateToKillRoadblock", false);
             jumpAnim.SetBool("KillRoadblockToRun", false);
+
+			jumpAnim.SetBool("AnyStateToDan", false);
+			jumpAnim.SetBool("DanToFirstJump", false);
+			jumpAnim.SetBool("DanToRun", false);
+			jumpAnim.SetBool("DanToFallDown", false);
+			jumpAnim.SetBool("DanToRoll", false);
         }
     }
     void toNomalRun()

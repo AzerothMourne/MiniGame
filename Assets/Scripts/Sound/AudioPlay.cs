@@ -60,6 +60,11 @@ public class AudioPlay : MonoBehaviour {
 			music.playoneshot("Sound/sprint");
 			MGGlobalDataCenter.defaultCenter().isSprint = false;
 		}
+		if (MGGlobalDataCenter.defaultCenter().isRun ){
+			music.playoneshot("Sound/run");
+			MGGlobalDataCenter.defaultCenter().isRun = false;
+		}
+
 
 	}
 }
