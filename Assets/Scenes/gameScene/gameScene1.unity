@@ -240,7 +240,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 162676712}
-  - 114: {fileID: 162676714}
   - 212: {fileID: 162676713}
   m_Layer: 9
   m_Name: moon
@@ -256,7 +255,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 162676711}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.21999979, y: 5, z: 0}
+  m_LocalPosition: {x: -5.21999979, y: 3.52999997, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1224975071}
@@ -264,7 +263,8 @@ Transform:
 --- !u!212 &162676713
 SpriteRenderer:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
+  m_PrefabParentObject: {fileID: 21286662, guid: a0b3091a143e9194a88bae17420be147,
+    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 162676711}
   m_Enabled: 1
@@ -279,22 +279,10 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayerID: 3882736565
+  m_SortingLayerID: 2413484571
   m_SortingOrder: 5
   m_Sprite: {fileID: 21300000, guid: 3a53953548d51f74db143eb88b378c2e, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &162676714
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11435348, guid: a0b3091a143e9194a88bae17420be147,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 162676711}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b4c01b5529bc429e95cf499352f7f35, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Color: {r: 1, g: 1, b: 1, a: .607843161}
 --- !u!1 &361695383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1175,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00337268133, y: .00337268133, z: .00337268133}
+  m_LocalScale: {x: .00591715984, y: .00591715984, z: .00591715984}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1139895024}
@@ -1400,7 +1388,7 @@ Camera:
     height: 1
   near clip plane: .300000012
   far clip plane: 1000
-  field of view: 65.1999969
+  field of view: 60
   orthographic: 1
   orthographic size: 5
   m_Depth: -1
@@ -1675,8 +1663,6 @@ MonoBehaviour:
 --- !u!82 &1852946993
 AudioSource:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8235348, guid: a0b3091a143e9194a88bae17420be147,
-    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1852946983}
   m_Enabled: 1
@@ -1911,8 +1897,6 @@ MonoBehaviour:
 --- !u!82 &1985725686
 AudioSource:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 8235350, guid: a0b3091a143e9194a88bae17420be147,
-    type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1985725676}
   m_Enabled: 1

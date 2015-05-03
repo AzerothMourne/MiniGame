@@ -32,6 +32,7 @@ public class MGSkillEffect : MonoBehaviour {
         MGNotificationCenter.defaultCenter().addObserver(this, sprintEffect, SkillEffectEnum.sprint);
         MGNotificationCenter.defaultCenter().addObserver(this, beatbackEffect, SkillEffectEnum.beatback);
         MGNotificationCenter.defaultCenter().addObserver(this, roadblockEffect, SkillEffectEnum.roadblock);
+
 	}
 	
 	// Update is called once per frame

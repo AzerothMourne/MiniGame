@@ -231,13 +231,15 @@ public class RoleAnimController : MonoBehaviour {
         {
             isFirstJump = true;
             setAllAnimStateToFalse();
-            animStateToFirstJump();
+			animStateToFirstJump();
+			music.play("Sound/updown_roll");
         }
         else if(isSecondJump == false)//二段跳
         {
             isSecondJump = true;
             setAllAnimStateToFalse();
-            animStateToRoll();
+			animStateToRoll();
+			music.play("Sound/updown_roll");
         }
     }
     public void downButtonClick(MGNotification notification)
@@ -285,7 +287,7 @@ public class RoleAnimController : MonoBehaviour {
 				transform.Translate(Vector3.left * 4 * Time.deltaTime);
             }   
             else
-            {
+			{
                 isDead = false;
                 if (this.gameObject.name == "role")
                 {
