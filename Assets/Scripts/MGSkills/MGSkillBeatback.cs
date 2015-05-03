@@ -113,6 +113,8 @@ public class MGSkillBeatback : MGSkillsBase
         {
             print("技能名：击退。被击中的是" + other.name + "，释放技能的是" + this.releaseSkillObjectName + ";gameobjc:" + other.gameObject);
             //MGGlobalDataCenter.defaultCenter().isBigSkilling = false;
+			//被大招击中的声音和 金钟罩撞路障声音一致
+			MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
             UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
             label.text += "\r\n Skill：" + other.name;
             //发送给自己

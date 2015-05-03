@@ -129,7 +129,10 @@ public class MGSkillSprint : MGSkillsBase
 			string strtmp = "dart(Clone)";
 			int istrlen = strtmp.Length;
 			if(other.name.Substring(0,istrlen)== strtmp)
-            	flyDuang(other, releaseRole);
+			{
+				MGGlobalDataCenter.defaultCenter().isDartDefence = true;
+				flyDuang(other, releaseRole);
+			}
         }
     }
 }
