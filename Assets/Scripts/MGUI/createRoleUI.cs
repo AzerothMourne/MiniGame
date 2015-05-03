@@ -18,6 +18,8 @@ public class createRoleUI : MonoBehaviour {
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
     private int UILayerMask = 7;
     private MGNetWorking mgNetWorking;
+	public float x_k,y_k;
+	public float width, height;
     void OnDestroy()
     {
         MGNotificationCenter.defaultCenter().removeObserver(this);
@@ -39,6 +41,17 @@ public class createRoleUI : MonoBehaviour {
         {
             createLaterRoleUI();
         }
+
+		//x_k = MGGlobalDataCenter.defaultCenter ().pixelWidth / width;
+		//y_k = MGGlobalDataCenter.defaultCenter ().pixelHight / height;
+		
+		//GameObject gameLayer = GameObject.Find("GameLayer");
+		//gameLayer.transform.localScale = new Vector3 (x_k,y_k,1);
+		//x_k = width / MGGlobalDataCenter.defaultCenter ().pixelWidth;
+		//y_k = height / MGGlobalDataCenter.defaultCenter ().pixelHight;
+		//Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
+		//camera.orthographicSize *= x_k;
+		//Debug.Log ("size="+camera.orthographicSize);
     }
     GameObject createOneUI(GameObject gameObject, Vector3 pos)
     {
@@ -73,6 +86,8 @@ public class createRoleUI : MonoBehaviour {
         if (MGGlobalDataCenter.defaultCenter().totalGameTime <= 0f)
         {
             //游戏结束
+			if(GameObject.Find("role").GetComponent<RoleAnimController>().isDead || GameObject.Find("role1").GetComponent<RoleAnimController>().isDead)
+				return;
             MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
             Application.LoadLevel("overSence");
             MGMsgModel gameoverModel = new MGMsgModel();

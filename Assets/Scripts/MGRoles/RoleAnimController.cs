@@ -76,6 +76,7 @@ public class RoleAnimController : MonoBehaviour {
         if (this.gameObject.name == "role1")
         {
             Debug.Log("changeKillFlag");
+			//GameObject.Find("log").GetComponent<UILabel>().text+="changeKillFlag";
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
             toNomalRun();
             animStateToRun();
@@ -174,8 +175,8 @@ public class RoleAnimController : MonoBehaviour {
     {
         if (notification.objc.Equals("role1"))
         {
-            Debug.Log("roleKillRoadblockAnimController");
-            setAllAnimStateToFalse();
+			Debug.Log("roleKillAnimController");
+			setAllAnimStateToFalse();
             animStateToKill();
         }
         isKillRoadblock = false;
@@ -196,6 +197,7 @@ public class RoleAnimController : MonoBehaviour {
             setAllAnimStateToFalse();
             animStateToDead();
         }
+		Debug.Log("set role trigger");
         if(downOrUp)
             rigidbody2D.gravityScale = 0.5f;
         else
@@ -275,12 +277,12 @@ public class RoleAnimController : MonoBehaviour {
         }
 		//检测角色的动作
         if (isDead)//死亡导致结束
-        {
-            Debug.Log("out of left moving");
+		{
+            Debug.Log("out of left moving:"+this.gameObject.name);
             if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f && transform.position.y >MGGlobalDataCenter.defaultCenter().screenBottomY - 1f)
             {
-                Debug.Log("left moving");
-                transform.Translate(Vector3.left * 4 * Time.deltaTime);
+				Debug.Log("left moving:"+this.gameObject.name);
+				transform.Translate(Vector3.left * 4 * Time.deltaTime);
             }   
             else
             {

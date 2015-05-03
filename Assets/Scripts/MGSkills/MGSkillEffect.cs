@@ -106,8 +106,14 @@ public class MGSkillEffect : MonoBehaviour {
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             if (objc)
             {
+				if(tempObjcet==null){
+					tempObjcet=GameObject.Find("sprint(Clone)");
+				}
                 float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
 				objc.transform.Translate( speedSwitch*Vector3.right * MGSkillSprintInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillSprintInfo.durationTime);
+				if(tempObjcet){
+					tempObjcet.transform.position=new Vector3(objc.transform.position.x+0.5f,objc.transform.position.y+objc.GetComponent<SpriteRenderer>().bounds.size.y/2f,objc.transform.position.z);
+				}
             }
 			sprintTimer += Time.deltaTime;
 			if (sprintTimer > MGSkillSprintInfo.durationTime)
@@ -133,6 +139,7 @@ public class MGSkillEffect : MonoBehaviour {
                 label.text += "\r\nrole.x=" + pos.x + ";role1.x=" + pos1.x;
 				sprintTimer = 0;
 				sprintSwitch = null;
+				tempObjcet=null;
                 GameObject sprint = GameObject.Find("sprint(Clone)");
                 if (sprint != null)
                 {
