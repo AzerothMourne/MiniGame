@@ -197,7 +197,7 @@ public class RoleAnimController : MonoBehaviour {
     }
     void roleDeadAnimController(MGNotification notification)
     {
-        if (GameObject.Find("role1").GetComponent<RoleAnimController>().isKillRoadblock) return;
+        //if (GameObject.Find("role1").GetComponent<RoleAnimController>().isKillRoadblock) return;
         if (notification.objc.Equals("role"))
         {
             Debug.Log("roleDeadAnimController:" + notification.objc);

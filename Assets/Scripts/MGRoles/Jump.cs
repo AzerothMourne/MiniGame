@@ -346,11 +346,12 @@ public class Jump : MonoBehaviour {
         if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
         {
             isCollisionOver = true;
+            /*
             GameObject sprint= GameObject.Find("sprint(Clone)");
             if (sprint != null)
             {
                 Destroy(sprint);
-            }
+            }*/
             if (collision.gameObject.name == "role")
             {
 				Debug.Log("set role trigger");
