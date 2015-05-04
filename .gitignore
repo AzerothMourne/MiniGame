@@ -21,6 +21,7 @@ Thumbs.db
 Library/
 Temp/
 *.sln
+*.apk
 *.csproj
 *.sln
 *.userprefs
