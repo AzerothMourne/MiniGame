@@ -17,6 +17,10 @@ public static class EventEnum{
     public static string sprint = "EventEnum_sprint";
     public static string beatback = "EventEnum_beatback";
 }
+public static class roleState{
+	public static int bone = 1 << 0;
+	public static int sprint = 1 << 1;
+}
 public class Jump : MonoBehaviour {
 
 	public bool isGround;
@@ -28,11 +32,13 @@ public class Jump : MonoBehaviour {
     private bool isGameOver, isCollisionOver;
     public MGNetWorking mgNetWorking;
     public float roleSpeed;
+	public int stateMask;
 	
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
 	void Start () {
+		stateMask = 0;
         isCollisionOver = false;
         isGameOver = false;
         jumpCount = 0;

@@ -22,6 +22,7 @@ public class MGSkillSprint : MGSkillsBase
     {
         MGGlobalDataCenter.defaultCenter().isBigSkilling = true;
         releaseRole = GameObject.Find("role1");
+		releaseRole.GetComponent<Jump> ().stateMask |= roleState.bone;
         UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
         label.text += "\r\nsprint start";
         timer = 0f;

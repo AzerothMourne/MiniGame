@@ -45,6 +45,7 @@ public class MGskillDrat : MGSkillsBase{
 		}
 	}
 	void danDart(){
+		MGGlobalDataCenter.defaultCenter().isDartHit = true;
 		MGGlobalDataCenter.defaultCenter().roleLater.GetComponent<SpriteRenderer> ().sprite = danSprite;
 		
 		this.GetComponent<Collider2D>().enabled = false;
@@ -77,17 +78,19 @@ public class MGskillDrat : MGSkillsBase{
             if (other.name != "role")
             {
 				danDart();
+
+				GameObject objc=GameObject.Find(other.name);
+				if(objc){
+					int boneMask=objc.GetComponent<Jump>().stateMask & roleState.bone;
+					int sprintMask=objc.GetComponent<Jump>().stateMask & roleState.sprint;
+					if(boneMask!=0 || sprintMask!=0) return;
+				}
+
                 MGMsgModel skillModel = new MGMsgModel();
                 skillModel.eventId = SkillEffectEnum.dart;
                 skillModel.gameobjectName = other.name;
                 //发送给自己
                 MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
-                //print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjectName);
-                MGGlobalDataCenter.defaultCenter().isDartHit = true;
-                //Debug.Log("***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString());
-                UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-                label.text += "\r\n***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString() + ";releaseSkillObjectName" + releaseSkillObjectName;
-                //Destroy(this.gameObject);
             }
         }
         else if(notification.objc is MGMsgModel)//对面要做的
@@ -98,12 +101,6 @@ public class MGskillDrat : MGSkillsBase{
             if (other.name != "role")
             {
 				danDart();
-                //print("技能名：飞镖。被打中的是" + other.name + "，释放技能的是" + releaseSkillObjectName);
-                MGGlobalDataCenter.defaultCenter().isDartHit = true;
-                //Debug.Log("***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString());
-                UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
-                label.text += "\r\n***dart fly time:" + (MGGlobalDataCenter.timestamp() - timestamp).ToString() + ";releaseSkillObjectName" + releaseSkillObjectName;
-                //Destroy(this.gameObject);
             }
         }
         

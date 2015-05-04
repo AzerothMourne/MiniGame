@@ -67,10 +67,24 @@ public class MGSkillRoadblock : MGSkillsBase{
             return;
         if (name != releaseSkillObjectName)
         {
+			string strrole = "role";
+			int irole = strrole.Length;
+			if( name.Length>=irole && name.Substring(0, irole) == strrole )
+				MGGlobalDataCenter.defaultCenter().isRoadBlockHit = true;
+			else
+				MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
             //print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
             isBreak = true;
             this.GetComponent<Animator>().SetBool("isBreak", true);
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killAnimLatterEventId, name);
+
+			GameObject objc=GameObject.Find(name);
+			if(objc){
+				int boneMask=objc.GetComponent<Jump>().stateMask & roleState.bone;
+				int sprintMask=objc.GetComponent<Jump>().stateMask & roleState.sprint;
+				if(boneMask!=0 || sprintMask!=0) return;
+			}
+
             if (notification.objc is Collider2D)
             {
                 MGMsgModel skillModel = new MGMsgModel();
@@ -79,14 +93,7 @@ public class MGSkillRoadblock : MGSkillsBase{
                 //发送给自己
                 MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.roadblock, skillModel);
             }
-			string strrole = "role";
-			int irole = strrole.Length;
-			if( name.Length>=irole && name.Substring(0, irole) == strrole )
-				MGGlobalDataCenter.defaultCenter().isRoadBlockHit = true;
-			else
-				MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
-			print("RoadBlockHit="+MGGlobalDataCenter.defaultCenter().isRoadBlockHit+
-			      ",RoadBloackDefence="+MGGlobalDataCenter.defaultCenter().isRoadBlockDefence);
+
         }
     }
     void OnTriggerEnter2D(Collider2D other)

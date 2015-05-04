@@ -19,6 +19,7 @@ public class MGSkillBones : MGSkillsBase
         releaseObject = GameObject.Find(releaseSkillObjcName);
         if (!releaseObject) releaseObject = GameObject.Find("role1");
         transform.parent = releaseObject.transform;
+		releaseObject.GetComponent<Jump> ().stateMask |= roleState.bone;
     }
     public override Object createSkillSprite(Vector3 pos)
     {
@@ -41,6 +42,7 @@ public class MGSkillBones : MGSkillsBase
             {
                 isEnded = true;
                 holdTimer = 0;
+				releaseObject.GetComponent<Jump>().stateMask &= ~roleState.bone;
                 Destroy(this.gameObject);
             }
         }

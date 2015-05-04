@@ -49,8 +49,10 @@ public class MGSkillEffect : MonoBehaviour {
             {
                 UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
                 label.text += "\r\nDestroy:" + shortBonesName;
+				GameObject.Find("role1").GetComponent<Jump>().stateMask &= ~roleState.bone;
                 DestroyImmediate(GameObject.Find(shortBonesName),true);
                 //Destroy(GameObject.Find(shortBonesName));
+
             }
         }
 	}
@@ -147,6 +149,7 @@ public class MGSkillEffect : MonoBehaviour {
                 {
                     Destroy(sprint);
                 }
+				objc.GetComponent<Jump>().stateMask &= ~roleState.sprint;
             }
         }
     }
