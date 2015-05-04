@@ -42,7 +42,9 @@ public class MGSkillBones : MGSkillsBase
             {
                 isEnded = true;
                 holdTimer = 0;
+                Debug.Log("releaseObject.stateMask:" + releaseObject.GetComponent<Jump>().stateMask);
 				releaseObject.GetComponent<Jump>().stateMask &= ~roleState.bone;
+                Debug.Log("releaseObject.stateMask:" + releaseObject.GetComponent<Jump>().stateMask);
                 Destroy(this.gameObject);
             }
         }
