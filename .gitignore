@@ -22,6 +22,7 @@ Library/
 Temp/
 *.sln
 *.apk
+*.ipa
 *.csproj
 *.sln
 *.userprefs
