@@ -154,8 +154,8 @@ public class startUI : MonoBehaviour {
 		print ("1 click start tianya");
 		if(ismingyueLoad == false)
 			istianyaLoad = true;
-		//if(istianyaLoad)
-        //	this.GetComponent<MyNetworkTest>().findHost();
+		if(istianyaLoad)
+        	this.GetComponent<MyNetworkTest>().findHost();
 
 	}
 
@@ -189,6 +189,7 @@ public class startUI : MonoBehaviour {
 		//实例化选择角色的界面
 		ChooseUIObj = GameObject.Instantiate (chooseButton, new Vector3 (0, 0, 0), Quaternion.Euler (0, 0, 0)) as GameObject;
 		ChooseUIObj.transform.parent = GameObject.Find("start").transform;
+        ChooseUIObj.layer = 10;
 		ChooseUIObj.transform.localPosition = new Vector3 (0, 0, 0);
 		ChooseUIObj.transform.localScale = new Vector3 (1, 1, 1);
 		ChooseUIObj.GetComponent<UISprite>().depth = 7;
@@ -202,6 +203,7 @@ public class startUI : MonoBehaviour {
 		FuzzyUIObj.transform.parent = GameObject.Find("start").transform;
 		FuzzyUIObj.transform.localPosition = new Vector3(0, 0, 0);
 		FuzzyUIObj.transform.localScale = new Vector3(1, 1, 1);
+        FuzzyUIObj.layer = 10;
 	}
 
 	public void creatCloseButton() {
@@ -211,6 +213,7 @@ public class startUI : MonoBehaviour {
 		CloseButtonObj.transform.localPosition = new Vector3(185, 120, 0);
 		CloseButtonObj.transform.localScale = new Vector3(1, 1, 1);
 		CloseButtonObj.GetComponent<UISprite>().depth = 8;
+        CloseButtonObj.layer = 10;
 		clickCloseButton();
 	}
 

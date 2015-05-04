@@ -12,7 +12,7 @@ GameObject:
   - 114: {fileID: 11488352}
   - 65: {fileID: 6588356}
   - 114: {fileID: 11488356}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: blinkButton
   m_TagString: UIButton
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 488356}
   - 114: {fileID: 11488354}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: blinkBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -16,7 +16,7 @@ public class createRoleUI : MonoBehaviour {
 	public Camera uiCamera;
     private GameObject NGUIRoot;
     private GameObject stopLayerObj, homeButtonObj, continueButtonObj;
-    private int UILayerMask = 7;
+    private int UILayerMask = 10;
     private MGNetWorking mgNetWorking;
 	public float x_k,y_k;
 	public float width, height;
@@ -42,16 +42,7 @@ public class createRoleUI : MonoBehaviour {
             createLaterRoleUI();
         }
 
-		//x_k = MGGlobalDataCenter.defaultCenter ().pixelWidth / width;
-		//y_k = MGGlobalDataCenter.defaultCenter ().pixelHight / height;
 		
-		//GameObject gameLayer = GameObject.Find("GameLayer");
-		//gameLayer.transform.localScale = new Vector3 (x_k,y_k,1);
-		//x_k = width / MGGlobalDataCenter.defaultCenter ().pixelWidth;
-		//y_k = height / MGGlobalDataCenter.defaultCenter ().pixelHight;
-		//Camera camera = GameObject.Find("Main Camera").GetComponent<Camera>();
-		//camera.orthographicSize *= x_k;
-		//Debug.Log ("size="+camera.orthographicSize);
     }
     GameObject createOneUI(GameObject gameObject, Vector3 pos)
     {
