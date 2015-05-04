@@ -16,20 +16,17 @@ public class startUI : MonoBehaviour {
 	public bool isPressSlogan; //标语
 	public GameObject SloganObj;
 
-
-	//test
-	//public GameObject tianyaLoad;
-	//public GameObject tianyaLoadObj;
 	public Sprite[] tianyaLoadList;
 	public bool istianyaLoad;
 	public float timer;
 	public int count;
 
-	//public GameObject mingyueLoadObj;
 	public Sprite[] mingyueLoadList;
 	public bool ismingyueLoad;
     public bool isHood;
     public Sprite[] hoodList;
+    public float timerHood;
+    public int countHood;
 
 	// Use this for initialization
 	void Start () {
@@ -44,6 +41,8 @@ public class startUI : MonoBehaviour {
 		timer = 0f;
 		count = 0;
         isHood = true;
+        timerHood = 0f;
+        countHood = 0;
         
 	}
 
@@ -84,14 +83,11 @@ public class startUI : MonoBehaviour {
         }
 
         //天涯load播放帧
-        //print("istianyaLoad : " + istianyaLoad);
         if (istianyaLoad)
         {
-            //print("112233");
             timer += Time.deltaTime;
             if (timer >= 0.1f)
-            {
-                //print("88");
+            {                
 				try{
 					GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
 				}
@@ -100,15 +96,12 @@ public class startUI : MonoBehaviour {
                 count = (++count) % 5;
             }
         }
-
-        //print("ismingyueLoad : " + ismingyueLoad);
+      
         if (ismingyueLoad)
-        {
-            //print("445566");
+        {            
             timer += Time.deltaTime;
             if (timer >= 0.1f)
-            {
-                //print("77");
+            {                
 				try{
 					GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count].name;
 				}
@@ -118,21 +111,17 @@ public class startUI : MonoBehaviour {
             }
         }
 
-
         if (isHood)
         {
-            timer += Time.deltaTime;
-            if (timer >= 0.2f)
+            timerHood += Time.deltaTime;            
+            if (timerHood >= 0.2f)
             {
-                //print("77");
-                GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[count].name;
-                timer = 0f;
-                count = (++count) % 5;
+                GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood].name;
+                timerHood = 0f;
+                countHood = (++countHood) % 5;
             }
-        }
-        
+        }        
     }
-
 
 	public void OnStartButtonClick() {
 		isPressStartButton = true;
@@ -165,8 +154,8 @@ public class startUI : MonoBehaviour {
 		print ("1 click start tianya");
 		if(ismingyueLoad == false)
 			istianyaLoad = true;
-		if(istianyaLoad)
-        	this.GetComponent<MyNetworkTest>().findHost();
+		//if(istianyaLoad)
+        //	this.GetComponent<MyNetworkTest>().findHost();
 
 	}
 
