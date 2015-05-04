@@ -48,7 +48,7 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: e7ef61ebb5c25394c8706a7ea658349f, type: 2}
   mSprites:
   - name: 1
-    x: 736
+    x: 552
     y: 576
     width: 183
     height: 190
@@ -74,7 +74,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 9
   - name: 11
-    x: 552
+    x: 736
     y: 576
     width: 183
     height: 190
@@ -114,7 +114,7 @@ MonoBehaviour:
     paddingBottom: 7
   - name: 14
     x: 0
-    y: 157
+    y: 360
     width: 182
     height: 202
     borderLeft: 0
@@ -166,7 +166,7 @@ MonoBehaviour:
     paddingBottom: 7
   - name: 5
     x: 0
-    y: 360
+    y: 157
     width: 182
     height: 202
     borderLeft: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 8
   - name: 6
-    x: 548
-    y: 222
+    x: 734
+    y: 399
     width: 185
     height: 176
     borderLeft: 0
@@ -191,8 +191,8 @@ MonoBehaviour:
     paddingTop: 26
     paddingBottom: 8
   - name: 7
-    x: 734
-    y: 399
+    x: 548
+    y: 222
     width: 185
     height: 176
     borderLeft: 0
@@ -230,7 +230,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 7
   - name: Beveled Outline
-    x: 276
+    x: 258
     y: 794
     width: 17
     height: 17
@@ -244,7 +244,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: Bright
     x: 258
-    y: 794
+    y: 776
     width: 17
     height: 17
     borderLeft: 5
@@ -256,8 +256,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Dark
-    x: 258
-    y: 776
+    x: 276
+    y: 794
     width: 17
     height: 17
     borderLeft: 5

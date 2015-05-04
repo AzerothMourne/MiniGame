@@ -162,7 +162,24 @@ public class createRoleUI : MonoBehaviour {
         print("createCommonUI");
         createOneUI(downButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenLiftX + 1.5f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
         createOneUI(upButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - 1f * MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth, -4f, 0f));
-        GameObject objc = createOneUI(stopButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.8f, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + 0.8f, 0f));
+        float padding = 0f;
+        if (Application.platform == RuntimePlatform.IPhonePlayer)
+        {
+            padding = 0.8f;
+        }
+        else if(Application.platform == RuntimePlatform.Android)
+        {
+            padding = 0f;
+            try
+            {
+                GameObject.Find("log").GetComponent<UILabel>().text += "\r\n" + MGGlobalDataCenter.defaultCenter().screenLiftX + ";" + MGGlobalDataCenter.defaultCenter().screenTopY;
+                GameObject.Find("log").GetComponent<UILabel>().text += "\r\n" + MGGlobalDataCenter.defaultCenter().pixelWidth + ";" + MGGlobalDataCenter.defaultCenter().pixelHight;
+                GameObject.Find("log").GetComponent<UILabel>().text += "\r\n" + Camera.current.orthographicSize.ToString();
+                GameObject.Find("log").GetComponent<UILabel>().text += "\r\n" + uiCamera.orthographicSize.ToString();
+            }
+            catch { }
+        }
+        GameObject objc = createOneUI(stopButton, new Vector3(MGGlobalDataCenter.defaultCenter().screenRightX - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + padding, MGGlobalDataCenter.defaultCenter().screenTopY - MGGlobalDataCenter.defaultCenter().NGUI_ButtonWidth / 2 + padding, 0f));
         UIEventListener.Get(objc).onClick = clickStop;
         gameTimerLabel = createOneUI(gameTimerLabel, new Vector3(1.2f, MGGlobalDataCenter.defaultCenter().screenTopY, 0));
         gameTimerLabel.GetComponent<UILabel>().text = "60:00";

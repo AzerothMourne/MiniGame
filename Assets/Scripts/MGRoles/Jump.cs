@@ -365,7 +365,7 @@ public class Jump : MonoBehaviour {
                     rigidbody2D.gravityScale = 0.5f;
                 else
                     rigidbody2D.gravityScale = 0f;
-                rigidbody2D.velocity = Vector3.zero;
+                rigidbody2D.velocity = Vector3.left;
                 collider2D.isTrigger = true;
             }
             else if (collision.gameObject.name == "role1")

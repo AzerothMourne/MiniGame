@@ -93,16 +93,25 @@ PlayerSettings:
   uIStatusBarHidden: 1
   uIExitOnSuspend: 0
   uIStatusBarStyle: 0
-  iPhoneSplashScreen: {fileID: 0}
-  iPhoneHighResSplashScreen: {fileID: 0}
-  iPhoneTallHighResSplashScreen: {fileID: 0}
-  iPhone47inSplashScreen: {fileID: 0}
-  iPhone55inPortraitSplashScreen: {fileID: 0}
-  iPhone55inLandscapeSplashScreen: {fileID: 0}
-  iPadPortraitSplashScreen: {fileID: 0}
-  iPadHighResPortraitSplashScreen: {fileID: 0}
-  iPadLandscapeSplashScreen: {fileID: 0}
-  iPadHighResLandscapeSplashScreen: {fileID: 0}
+  iPhoneSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114, type: 3}
+  iPhoneHighResSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPhoneTallHighResSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPhone47inSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPhone55inPortraitSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPhone55inLandscapeSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPadPortraitSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPadHighResPortraitSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPadLandscapeSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
+  iPadHighResLandscapeSplashScreen: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
+    type: 3}
   iOSLaunchScreenType: 0
   iOSLaunchScreenPortrait: {fileID: 0}
   iOSLaunchScreenLandscape: {fileID: 0}
@@ -116,7 +125,7 @@ PlayerSettings:
   AndroidSplashScreenScale: 0
   AndroidKeystoreName: 
   AndroidKeyaliasName: 
-  resolutionDialogBanner: {fileID: 2800000, guid: a0d3501db8041eb40aa85d39058cd8f8,
+  resolutionDialogBanner: {fileID: 2800000, guid: 4caa3350a961c9a4eb8bf13bc71bf114,
     type: 3}
   m_BuildTargetIcons:
   - m_BuildTarget: 
