@@ -195,7 +195,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11450846, guid: a4f995a1f446c8b458ad94fb63a7cf91, type: 2}
+  mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
   mSpriteName: button
   mFillCenter: 1
 --- !u!114 &69806160
@@ -344,6 +344,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8384c3ac3a078d743bf489fd365e0106, type: 3}
   - {fileID: 21300000, guid: 39271702141f9d946aa66f0a8fcc5b5e, type: 3}
   - {fileID: 21300000, guid: dc85896f690d5034fabd8eb68db48acb, type: 3}
+  timerHood: 0
+  countHood: 0
 --- !u!1 &336384769
 GameObject:
   m_ObjectHideFlags: 0
@@ -420,7 +422,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11450846, guid: a4f995a1f446c8b458ad94fb63a7cf91, type: 2}
+  mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
   mSpriteName: "\u80CC\u666F\u56FE\u65E0\u9E1F"
   mFillCenter: 1
 --- !u!1 &601420884
@@ -513,7 +515,7 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11450846, guid: a4f995a1f446c8b458ad94fb63a7cf91, type: 2}
+  mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
   mSpriteName: palyer
   mFillCenter: 1
 --- !u!4 &632054399
@@ -991,26 +993,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xiaoniao: {fileID: 111768, guid: f6e07ea4d39df29498dc05964be9306d, type: 2}
-  bird1: {fileID: 0}
   timeSum: 0
-  i: 0
-  birds:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  topY: 0
-  bottomY: 0
-  rightX: 0
-  leftX: 0
+  bird: {fileID: 0}
   height: 0
   width: 0
   count: 0
-  nguiCamera: {fileID: 993013707}
 --- !u!4 &1389376218
 Transform:
   m_ObjectHideFlags: 0
@@ -1348,6 +1335,6 @@ MonoBehaviour:
   rightType: 1
   bottomType: 1
   topType: 1
-  mAtlas: {fileID: 11450846, guid: a4f995a1f446c8b458ad94fb63a7cf91, type: 2}
+  mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
   mSpriteName: player1
   mFillCenter: 1

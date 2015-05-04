@@ -1,47 +1,47 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &150846
+--- !u!1 &158620
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 450846}
-  - 114: {fileID: 11450846}
+  - 4: {fileID: 458620}
+  - 114: {fileID: 11458620}
   m_Layer: 0
-  m_Name: StartUIAtlas
+  m_Name: reduce_UI_Atlas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &450846
+--- !u!4 &458620
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150846}
+  m_GameObject: {fileID: 158620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11450846
+--- !u!114 &11458620
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 150846}
+  m_GameObject: {fileID: 158620}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4d0c51bb0b6e93049af5e88f93826e3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  material: {fileID: 2100000, guid: ae5862275993a7e488bd552de305acb8, type: 2}
+  material: {fileID: 2100000, guid: d0ca37d82e507414eae72bfcd3541970, type: 2}
   mSprites:
-  - name: "0\u6548\u679C\u56FE"
+  - name: bg
     x: 0
     y: 1472
     width: 1024
@@ -54,139 +54,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: 1
-    x: 2050
-    y: 1105
-    width: 208
-    height: 173
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 9
-    paddingTop: 12
-    paddingBottom: 0
-  - name: 10
-    x: 2050
-    y: 255
-    width: 231
-    height: 153
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 29
-    paddingRight: 22
-    paddingTop: 19
-    paddingBottom: 0
-  - name: 2
-    x: 2050
-    y: 583
-    width: 207
-    height: 173
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 2
-    paddingRight: 9
-    paddingTop: 12
-    paddingBottom: 0
-  - name: 3
-    x: 2050
-    y: 931
-    width: 208
-    height: 173
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 9
-    paddingTop: 12
-    paddingBottom: 0
-  - name: 4
-    x: 2050
-    y: 409
-    width: 207
-    height: 173
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 2
-    paddingRight: 9
-    paddingTop: 12
-    paddingBottom: 0
-  - name: 5
-    x: 2050
-    y: 757
-    width: 208
-    height: 173
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 1
-    paddingRight: 9
-    paddingTop: 12
-    paddingBottom: 0
-  - name: 6
-    x: 1025
-    y: 144
-    width: 244
-    height: 154
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 16
-    paddingRight: 22
-    paddingTop: 18
-    paddingBottom: 0
-  - name: 7
-    x: 2050
-    y: 1434
-    width: 244
-    height: 154
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 16
-    paddingRight: 22
-    paddingTop: 18
-    paddingBottom: 0
-  - name: 8
-    x: 2050
-    y: 101
-    width: 231
-    height: 153
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 29
-    paddingRight: 22
-    paddingTop: 19
-    paddingBottom: 0
-  - name: 9
-    x: 2050
-    y: 1279
-    width: 244
-    height: 154
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 16
-    paddingRight: 22
-    paddingTop: 18
-    paddingBottom: 0
   - name: button
-    x: 1025
-    y: 497
+    x: 392
+    y: 5
     width: 322
     height: 144
     borderLeft: 0
@@ -198,8 +68,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: choosePlayer
-    x: 1514
-    y: 1123
+    x: 2446
+    y: 1700
     width: 488
     height: 348
     borderLeft: 0
@@ -211,8 +81,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: close
-    x: 870
-    y: 241
+    x: 0
+    y: 1
     width: 76
     height: 76
     borderLeft: 0
@@ -223,76 +93,24 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: diaoniao1
-    x: 323
-    y: 42
-    width: 59
-    height: 29
+  - name: down
+    x: 2012
+    y: 559
+    width: 148
+    height: 141
     borderLeft: 0
     borderRight: 0
     borderTop: 0
     borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: diaoniao2
-    x: 947
-    y: 268
-    width: 71
-    height: 24
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: diaoniao3
-    x: 870
-    y: 223
-    width: 71
-    height: 17
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: diaoniao4
-    x: 942
-    y: 228
-    width: 71
-    height: 12
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: diaoniao5
-    x: 947
-    y: 250
-    width: 71
-    height: 17
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: diaoniao6
-    x: 947
-    y: 293
-    width: 71
-    height: 24
+    paddingLeft: 8
+    paddingRight: 8
+    paddingTop: 13
+    paddingBottom: 10
+  - name: home
+    x: 3805
+    y: 1693
+    width: 150
+    height: 157
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -302,8 +120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: hood1 (1)
-    x: 1468
-    y: 809
+    x: 1797
+    y: 1387
     width: 426
     height: 149
     borderLeft: 0
@@ -315,8 +133,8 @@ MonoBehaviour:
     paddingTop: 19
     paddingBottom: 12
   - name: hood1 (2)
-    x: 1025
-    y: 807
+    x: 3362
+    y: 1745
     width: 442
     height: 151
     borderLeft: 0
@@ -328,8 +146,8 @@ MonoBehaviour:
     paddingTop: 17
     paddingBottom: 12
   - name: hood1 (3)
-    x: 443
-    y: 154
+    x: 2935
+    y: 1885
     width: 426
     height: 163
     borderLeft: 0
@@ -341,7 +159,7 @@ MonoBehaviour:
     paddingTop: 5
     paddingBottom: 12
   - name: hood1 (4)
-    x: 0
+    x: 392
     y: 150
     width: 442
     height: 167
@@ -354,8 +172,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 12
   - name: hood1 (5)
-    x: 1025
-    y: 959
+    x: 2935
+    y: 1721
     width: 426
     height: 163
     borderLeft: 0
@@ -367,8 +185,8 @@ MonoBehaviour:
     paddingTop: 5
     paddingBottom: 12
   - name: hood1 (6)
-    x: 1452
-    y: 971
+    x: 3362
+    y: 1897
     width: 442
     height: 151
     borderLeft: 0
@@ -380,8 +198,8 @@ MonoBehaviour:
     paddingTop: 17
     paddingBottom: 12
   - name: hood1 (7)
-    x: 443
-    y: 4
+    x: 1797
+    y: 1537
     width: 426
     height: 149
     borderLeft: 0
@@ -392,11 +210,24 @@ MonoBehaviour:
     paddingRight: 32
     paddingTop: 19
     paddingBottom: 12
-  - name: mainBackground
+  - name: icon
     x: 1025
-    y: 1472
-    width: 1024
-    height: 576
+    y: 31
+    width: 512
+    height: 512
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: jump
+    x: 1538
+    y: 6
+    width: 148
+    height: 141
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -406,21 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: mingyue
-    x: 1400
-    y: 323
-    width: 466
-    height: 120
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: mingyuePress
-    x: 1400
-    y: 202
+    x: 2224
+    y: 1566
     width: 466
     height: 120
     borderLeft: 0
@@ -432,8 +250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: new_tianya
-    x: 2050
-    y: 1702
+    x: 2224
+    y: 767
     width: 466
     height: 112
     borderLeft: 0
@@ -445,8 +263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: palyer
-    x: 1025
-    y: 642
+    x: 1797
+    y: 1044
     width: 374
     height: 164
     borderLeft: 0
@@ -458,7 +276,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: player1
-    x: 323
+    x: 715
     y: 72
     width: 76
     height: 77
@@ -470,22 +288,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: popup
-    x: 1025
-    y: 1123
-    width: 488
-    height: 348
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: pressButton
-    x: 0
-    y: 5
+    x: 1797
+    y: 899
     width: 322
     height: 144
     borderLeft: 0
@@ -496,9 +301,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: startBackground
+  - name: stop
+    x: 77
+    y: 26
+    width: 44
+    height: 51
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 64
+    paddingRight: 56
+    paddingTop: 59
+    paddingBottom: 54
+  - name: stopBg
     x: 0
-    y: 318
+    y: 895
     width: 1024
     height: 576
     borderLeft: 0
@@ -509,9 +327,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: stopToStart
+    x: 835
+    y: 140
+    width: 169
+    height: 177
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: tianya
-    x: 2518
-    y: 1815
+    x: 3158
+    y: 1453
     width: 467
     height: 112
     borderLeft: 0
@@ -523,8 +354,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tianya_bg
-    x: 2984
-    y: 1593
+    x: 2224
+    y: 658
     width: 462
     height: 108
     borderLeft: 0
@@ -535,87 +366,9 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: tianya1
-    x: 2050
-    y: 1815
-    width: 467
-    height: 112
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: tianya2
-    x: 2986
-    y: 1815
-    width: 467
-    height: 112
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: tianya3
-    x: 3454
-    y: 1815
-    width: 467
-    height: 112
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: tianya4
-    x: 2517
-    y: 1936
-    width: 467
-    height: 112
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: tianya5
-    x: 2985
-    y: 1936
-    width: 467
-    height: 112
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: tianya6
-    x: 400
-    y: 121
-    width: 36
-    height: 12
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: tianyaPress
-    x: 3453
-    y: 1936
+    x: 3626
+    y: 1453
     width: 467
     height: 112
     borderLeft: 0
@@ -626,9 +379,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: up
+    x: 2012
+    y: 361
+    width: 148
+    height: 141
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 13
+    paddingRight: 3
+    paddingTop: 15
+    paddingBottom: 8
   - name: xiaoniao1
-    x: 400
-    y: 134
+    x: 77
+    y: 10
     width: 30
     height: 15
     borderLeft: 0
@@ -640,8 +406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xiaoniao2
-    x: 400
-    y: 95
+    x: 122
+    y: 65
     width: 36
     height: 12
     borderLeft: 0
@@ -653,8 +419,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xiaoniao3
-    x: 400
-    y: 85
+    x: 122
+    y: 42
     width: 36
     height: 9
     borderLeft: 0
@@ -666,8 +432,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xiaoniao4
-    x: 323
-    y: 35
+    x: 122
+    y: 25
     width: 36
     height: 6
     borderLeft: 0
@@ -679,8 +445,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xiaoniao5
-    x: 400
-    y: 75
+    x: 122
+    y: 32
     width: 36
     height: 9
     borderLeft: 0
@@ -692,8 +458,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: xiaoniao6
-    x: 400
-    y: 108
+    x: 122
+    y: 52
     width: 36
     height: 12
     borderLeft: 0
@@ -704,9 +470,48 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u518D\u6765\u4E00\u6B21"
+    x: 835
+    y: 51
+    width: 186
+    height: 88
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u51B2\u523A\u6309\u94AE"
+    x: 1797
+    y: 503
+    width: 214
+    height: 197
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u51B7\u5374\u6001_\u767D"
+    x: 2012
+    y: 733
+    width: 165
+    height: 165
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D1"
-    x: 2517
-    y: 1702
+    x: 2224
+    y: 1106
     width: 466
     height: 112
     borderLeft: 0
@@ -718,8 +523,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D2"
-    x: 2984
-    y: 1702
+    x: 2224
+    y: 1332
     width: 466
     height: 112
     borderLeft: 0
@@ -731,8 +536,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D3"
-    x: 3451
-    y: 1702
+    x: 2224
+    y: 993
     width: 466
     height: 112
     borderLeft: 0
@@ -744,8 +549,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D4"
-    x: 2050
-    y: 1589
+    x: 2224
+    y: 880
     width: 466
     height: 112
     borderLeft: 0
@@ -757,8 +562,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D5"
-    x: 2517
-    y: 1589
+    x: 2224
+    y: 1219
     width: 466
     height: 112
     borderLeft: 0
@@ -770,8 +575,34 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u6309\u94AE\u51FB\u9000"
-    x: 1025
-    y: 299
+    x: 1538
+    y: 148
+    width: 214
+    height: 197
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u6309\u94AE\u5C16\u5200"
+    x: 3805
+    y: 1851
+    width: 214
+    height: 197
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u6309\u94AE\u98DE\u9556"
+    x: 1797
+    y: 701
     width: 214
     height: 197
     borderLeft: 0
@@ -783,8 +614,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D1"
-    x: 1400
-    y: 444
+    x: 3158
+    y: 1566
     width: 466
     height: 120
     borderLeft: 0
@@ -796,8 +627,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D2"
-    x: 1400
-    y: 565
+    x: 3625
+    y: 1566
     width: 466
     height: 120
     borderLeft: 0
@@ -809,8 +640,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D3"
-    x: 1400
-    y: 686
+    x: 2224
+    y: 1445
     width: 466
     height: 120
     borderLeft: 0
@@ -822,8 +653,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D4"
-    x: 2050
-    y: 1928
+    x: 2691
+    y: 1445
     width: 466
     height: 120
     borderLeft: 0
@@ -835,8 +666,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D5"
-    x: 1400
-    y: 81
+    x: 2691
+    y: 1566
     width: 466
     height: 120
     borderLeft: 0
@@ -849,9 +680,113 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u80CC\u666F\u56FE\u65E0\u9E1F"
     x: 0
-    y: 895
+    y: 318
     width: 1024
     height: 576
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u80DC\u5229"
+    x: 1797
+    y: 1209
+    width: 351
+    height: 177
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u88AB\u8FFD\u5931\u8D25"
+    x: 1797
+    y: 1687
+    width: 648
+    height: 361
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u88AB\u8FFD\u80DC\u5229"
+    x: 1025
+    y: 916
+    width: 648
+    height: 468
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u8D25"
+    x: 0
+    y: 78
+    width: 391
+    height: 239
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u8FFD\u5931\u8D25"
+    x: 1025
+    y: 544
+    width: 714
+    height: 371
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u8FFD\u80DC\u5229"
+    x: 1025
+    y: 1385
+    width: 771
+    height: 663
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u91D1\u949F\u7F69\u6309\u94AE"
+    x: 1538
+    y: 346
+    width: 214
+    height: 197
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u95EA\u70C1\u6309\u94AE"
+    x: 1797
+    y: 305
+    width: 214
+    height: 197
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -873,6 +808,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 150846}
+  m_RootGameObject: {fileID: 158620}
   m_IsPrefabParent: 1
   m_IsExploded: 1
