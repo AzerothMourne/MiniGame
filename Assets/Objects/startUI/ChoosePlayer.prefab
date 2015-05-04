@@ -13,7 +13,7 @@ GameObject:
   - 114: {fileID: 11487396}
   - 114: {fileID: 11454890}
   - 114: {fileID: 11417282}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: mingyue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ GameObject:
   - 114: {fileID: 11487398}
   - 114: {fileID: 11483884}
   - 114: {fileID: 11433626}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: tianya
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -293,10 +293,10 @@ public class RoleAnimController : MonoBehaviour {
 		//检测角色的动作
         if (isDead)//死亡导致结束
 		{
-            Debug.Log("out of left moving:"+this.gameObject.name);
+            //Debug.Log("out of left moving:"+this.gameObject.name);
             if (transform.position.x > MGGlobalDataCenter.defaultCenter().screenLiftX - 1f && transform.position.y >MGGlobalDataCenter.defaultCenter().screenBottomY - 1f)
             {
-				Debug.Log("left moving:"+this.gameObject.name);
+				//Debug.Log("left moving:"+this.gameObject.name);
 				transform.Translate(Vector3.left * 4 * Time.deltaTime);
             }   
             else

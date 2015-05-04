@@ -292,9 +292,15 @@ public class Jump : MonoBehaviour {
 	}
     public void gameOver()
     {
+        Vector3 roleLaterPos = Vector3.zero;
+        Vector3 roleFrontPos = Vector3.zero;
+        try
+        {
+            roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+            roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+        }
+        catch { }
         
-        Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-        Vector3 roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
         if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
         {
 			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;

@@ -1,17 +1,17 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &104888
+--- !u!1 &179638
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 404888}
-  - 114: {fileID: 11404888}
-  - 114: {fileID: 11441320}
-  - 82: {fileID: 8224584}
-  - 82: {fileID: 8224582}
+  - 4: {fileID: 479638}
+  - 114: {fileID: 11479640}
+  - 114: {fileID: 11479638}
+  - 82: {fileID: 8279640}
+  - 82: {fileID: 8279638}
   m_Layer: 0
   m_Name: AudioPlayer
   m_TagString: Untagged
@@ -19,24 +19,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &404888
+--- !u!4 &479638
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104888}
+  m_GameObject: {fileID: 179638}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!82 &8224582
+--- !u!82 &8279638
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104888}
+  m_GameObject: {fileID: 179638}
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 8300000, guid: 8060a0a034ce9ac42a603a5119183f2e, type: 3}
@@ -89,12 +89,12 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!82 &8224584
+--- !u!82 &8279640
 AudioSource:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104888}
+  m_GameObject: {fileID: 179638}
   m_Enabled: 1
   serializedVersion: 3
   m_audioClip: {fileID: 0}
@@ -147,29 +147,29 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
---- !u!114 &11404888
+--- !u!114 &11479638
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104888}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdea1cfdee0190145b42eacc12e88bfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  music: {fileID: 8224584}
---- !u!114 &11441320
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 104888}
+  m_GameObject: {fileID: 179638}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c41e1a4425311bd4f844a075216a7eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11479640
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 179638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdea1cfdee0190145b42eacc12e88bfb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: {fileID: 8279640}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -179,6 +179,6 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 104888}
+  m_RootGameObject: {fileID: 179638}
   m_IsPrefabParent: 1
   m_IsExploded: 1
