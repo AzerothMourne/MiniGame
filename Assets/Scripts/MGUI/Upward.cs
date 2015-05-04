@@ -25,12 +25,12 @@ public class Upward : UIBase
 		if (isClick) {
             if (timer <= duration )
             {
-                transform.localScale = new Vector3((transform.localScale.x - 0.01f * Time.timeScale), (transform.localScale.y - 0.01f * Time.timeScale), (transform.localScale.z - 0.01f * Time.timeScale));
+                transform.localScale = new Vector3((transform.localScale.x - 0.03f * Time.timeScale), (transform.localScale.y - 0.03f * Time.timeScale), (transform.localScale.z - 0.03f * Time.timeScale));
 				timer+=Time.deltaTime;
 			}
             else if (timer <= 2 * duration )
             {
-                transform.localScale = new Vector3((transform.localScale.x + 0.01f * Time.timeScale), (transform.localScale.y + 0.01f * Time.timeScale), (transform.localScale.z + 0.01f * Time.timeScale));
+                transform.localScale = new Vector3((transform.localScale.x + 0.03f * Time.timeScale), (transform.localScale.y + 0.03f * Time.timeScale), (transform.localScale.z + 0.03f * Time.timeScale));
                 timer += Time.deltaTime;
 			}
             else if (timer > 2 * duration )

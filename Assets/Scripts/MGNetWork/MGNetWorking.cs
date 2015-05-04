@@ -8,31 +8,17 @@ using System.Runtime.InteropServices;
 /// 还需要建立一个误差校正机制，保证客户机以服务器端的数据为主（重要）
 /// </summary>
 public class MGNetWorking : MonoBehaviour {
-	[DllImport("__Internal")]
-	private static extern void _findHost();
-	[DllImport("__Internal")]
-	private static extern void _createHost();
-	[DllImport( "__Internal" )]
-	private static extern void _sendMessageToPeer ( string msg);
+	
 	public static void findHost()
 	{
         MGGlobalDataCenter.defaultCenter().isHost = false;
-        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
-        {
-            Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
-        }
-		else if(Application.platform==RuntimePlatform.IPhonePlayer)
-			_findHost();
+        Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
+		
 	}
 	public static void createHost()
 	{
         MGGlobalDataCenter.defaultCenter().isHost = true;
-        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
-        {
-            Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
-        }
-        else if (Application.platform == RuntimePlatform.IPhonePlayer)
-			_createHost();
+        Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
 	}
     public static void disconnect()
     {
@@ -44,36 +30,18 @@ public class MGNetWorking : MonoBehaviour {
     /// <param name="msg"></param>
     /// <param name="networkView"></param>
 	public void sendMessageToPeer (string msg){
-        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        if (NetworkPeerType.Disconnected != Network.peerType)
         {
-            if (NetworkPeerType.Disconnected != Network.peerType)
-            {
-                print("sendMessageToPeer:" + msg);
-                networkView.RPC("RPCReceiverMessageFromPeer", RPCMode.Others, msg);
-            }
-                
+            //print("sendMessageToPeer:" + msg);
+            networkView.RPC("RPCReceiverMessageFromPeer", RPCMode.Others, msg);
         }
-        else
-        {
-            if (Application.platform == RuntimePlatform.IPhonePlayer)
-                MGNetWorking._sendMessageToPeer(msg);
-        }	
 	}
     public void sendMessageToPeer(string name,string msg)
     {
-        if (MGGlobalDataCenter.defaultCenter().isNetworkViewEnable == true)
+        if (NetworkPeerType.Disconnected != Network.peerType)
         {
-            if (NetworkPeerType.Disconnected != Network.peerType)
-            {
-                print("sendMessageToPeer:" + msg);
-                networkView.RPC(name, RPCMode.Others, msg);
-            }
-
-        }
-        else
-        {
-            if (Application.platform == RuntimePlatform.IPhonePlayer)
-                MGNetWorking._sendMessageToPeer(msg);
+            //print("sendMessageToPeer:" + msg);
+            networkView.RPC(name, RPCMode.Others, msg);
         }
     }
     [RPC]
@@ -91,7 +59,7 @@ public class MGNetWorking : MonoBehaviour {
     
 	public void receiverMessageFromPeer ( string msg)
 	{
-		Debug.Log ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
+		//Debug.Log ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
 		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
         if (msgModel.eventId == EventEnum.gameoverEventId)
         {

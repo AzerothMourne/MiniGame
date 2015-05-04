@@ -34,12 +34,12 @@ public class Down : UIBase
 		if (isClick) {
             if (timer <= 0.10f )
             {
-                transform.localScale = new Vector3((transform.localScale.x - 0.01f * Time.timeScale), (transform.localScale.y - 0.01f * Time.timeScale), (transform.localScale.z - 0.01f * Time.timeScale));
+                transform.localScale = new Vector3((transform.localScale.x - 0.03f * Time.timeScale), (transform.localScale.y - 0.03f * Time.timeScale), (transform.localScale.z - 0.03f * Time.timeScale));
 				timer+=Time.deltaTime;
 			}
             else if (timer <= 0.2f )
             {
-                transform.localScale = new Vector3((transform.localScale.x + 0.01f * Time.timeScale), (transform.localScale.y + 0.01f * Time.timeScale), (transform.localScale.z + 0.01f * Time.timeScale));
+                transform.localScale = new Vector3((transform.localScale.x + 0.03f * Time.timeScale), (transform.localScale.y + 0.03f * Time.timeScale), (transform.localScale.z + 0.03f * Time.timeScale));
 				timer+=Time.deltaTime;
 			}
             else if (timer > 0.2f )
