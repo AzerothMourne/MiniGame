@@ -1036,7 +1036,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1510104751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 312, y: -59, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -1069,17 +1069,16 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: .0220588446, g: .000648790156, b: .000648790156, a: 1}
   mPivot: 4
   mWidth: 646
-  mHeight: 208
+  mHeight: 258
   mDepth: 4
   autoResizeBoxCollider: 1
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 3.10576916
+  aspectRatio: 2.50387597
   keepCrispWhenShrunk: 1
-  mTrueTypeFont: {fileID: 12800000, guid: ab656f522f2ddc74cb36f46fbea1f729, type: 3}
+  mTrueTypeFont: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
   mFont: {fileID: 0}
   mText: "\u53CC\u4EBA\u5B9E\u65F6\u5BF9\u6218\u7C7B\u6E38\u620F\uFF0C\u9700\u4E24\u4EBA\u540C\u65F6\u5BF9\u6218\r\n\u8FDE\u63A5\u65B9\u5F0F\uFF1AA\u624B\u673A\u7ED9B\u624B\u673A\u5F00\u70ED\u70B9\uFF0CB\u624B\u673A\u8FDE\u63A5A\u624B\u673AWIFI\r\n\u8FDB\u5165\u6E38\u620F\u540E\uFF0CB\u624B\u673A\u9009\u62E9\u201C\u660E\u6708\u201D\uFF0CA\u9009\u62E9\u201C\u5929\u6DAF\u201D\r\n\u7A0D\u5F85\u7247\u523B\uFF0C\u5373\u53EF\u5F00\u6218\uFF0C\u65F6\u95F4\u77ED\u6CA1\u6709\u8D70\u670D\u52A1\u5668\uFF0C\u8FDE\u63A5\u65B9\u5F0F\u8FD8\u8BF7\u8C05\u89E3"
   mFontSize: 40
@@ -1131,7 +1130,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 646, y: 208, z: 0}
+  m_Size: {x: 646, y: 258, z: 0}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &1510104757
 MonoBehaviour:
