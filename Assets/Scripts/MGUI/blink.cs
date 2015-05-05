@@ -50,7 +50,7 @@ public class blink : UIBase
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.blink, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.blink, null);
         }
     }
 }

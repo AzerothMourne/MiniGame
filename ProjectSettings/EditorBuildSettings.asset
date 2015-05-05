@@ -15,3 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/NetworkViewTest.unity
   - enabled: 1
     path: Assets/Scenes/overScene/overSence.unity
+  - enabled: 1
+    path: Assets/Scenes/gameScene/guideScene.unity

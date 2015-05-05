@@ -84,7 +84,7 @@ public class beatback : UIBase
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             holdCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.beatback, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.beatback, null);
         }
     }
 }

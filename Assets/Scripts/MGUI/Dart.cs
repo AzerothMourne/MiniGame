@@ -95,7 +95,7 @@ public class Dart : UIBase
             dartNum.text = num.ToString();
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.dart, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.dart, null);
         }
     }
 }

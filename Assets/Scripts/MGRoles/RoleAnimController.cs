@@ -316,7 +316,7 @@ public class RoleAnimController : MonoBehaviour {
 				      "defeated=" +MGGlobalDataCenter.defaultCenter().isDefeat);
                 Application.LoadLevel("overSence");
                 MGMsgModel gameoverModel = new MGMsgModel();
-                gameoverModel.eventId = EventEnum.gameoverEventId;
+                gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
                 gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
                 jumpSprict.mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
             }

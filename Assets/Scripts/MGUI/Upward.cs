@@ -62,9 +62,9 @@ public class Upward : UIBase
 		this.GetComponent<UISprite>().spriteName = "jump";
         this.GetComponent<UIButton>().normalSprite = "jump";
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
-            MGNotificationCenter.defaultCenter().postNotification("jump", null);
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
         else
-            MGNotificationCenter.defaultCenter().postNotification("1jump", null);
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpLatterEventId, null);
 	}
 }
 	

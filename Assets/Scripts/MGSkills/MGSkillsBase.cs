@@ -60,6 +60,17 @@ public static class MGSkillBeatbackInfo
     public static float SkillEffectSpeed = 1f / 4f;
     public static float durationTime = 0.5f;
 }
+
+public static class SkillActEventEnum
+{
+    //技能事件
+    public static string dart = "SkillActEventEnum_dart";
+    public static string blink = "SkillActEventEnum_blink";
+    public static string roadblock = "SkillActEventEnum_roadblock";
+    public static string bones = "SkillActEventEnum_bones";
+    public static string sprint = "SkillActEventEnum_sprint";
+    public static string beatback = "SkillActEventEnum_beatback";
+}
 public class MGSkillsBase : MonoBehaviour {
     protected GameObject m_cloneCamera;
     public GameObject plane;

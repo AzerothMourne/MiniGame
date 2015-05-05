@@ -54,9 +54,9 @@ public class Down : UIBase
         if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
 		isClick = true;
         if(MGGlobalDataCenter.defaultCenter().isHost==true)
-            MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.downToLineFormerEventId, null);
         else
-            MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.dowmToLineLatterEventId, null);
         //按向下后调出向上按钮
         GameObject upButton = GameObject.Find("upButton(Clone)");
         //播放音效

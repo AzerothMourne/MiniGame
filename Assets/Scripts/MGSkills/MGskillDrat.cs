@@ -18,6 +18,7 @@ public class MGskillDrat : MGSkillsBase{
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 		//获取播放器对象
 		isPlayDart = false;
+        releaseSkillObjectName = "role";
 		MGGlobalDataCenter.defaultCenter ().isDartRelease = true;
         MGNotificationCenter.defaultCenter().addObserver(this, triggerFunc, SkillEnum.dart + gameObject.name);
 	}
@@ -73,40 +74,32 @@ public class MGskillDrat : MGSkillsBase{
         if (notification.objc is Collider2D)//自己要做的
         {
             Collider2D other = notification.objc as Collider2D;
-            if (other.tag != "Player")
-                return;
-            if (other.name != "role")
+            danDart();
+            GameObject objc = GameObject.Find(other.name);
+            if (objc)
             {
-				danDart();
-
-				GameObject objc=GameObject.Find(other.name);
-				if(objc){
-					int boneMask=objc.GetComponent<Jump>().stateMask & roleState.bone;
-					int sprintMask=objc.GetComponent<Jump>().stateMask & roleState.sprint;
-					if(boneMask!=0 || sprintMask!=0) return;
-				}
-
-                MGMsgModel skillModel = new MGMsgModel();
-                skillModel.eventId = SkillEffectEnum.dart;
-                skillModel.gameobjectName = other.name;
-                //发送给自己
-                MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
+                int boneMask = objc.GetComponent<Jump>().stateMask & roleState.bone;
+                int sprintMask = objc.GetComponent<Jump>().stateMask & roleState.sprint;
+                if (boneMask != 0 || sprintMask != 0) return;
             }
+
+            MGMsgModel skillModel = new MGMsgModel();
+            skillModel.eventId = SkillEffectEnum.dart;
+            skillModel.gameobjectName = other.name;
+            //发送给自己
+            MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.dart, skillModel);
         }
         else if(notification.objc is MGMsgModel)//对面要做的
         {
             MGMsgModel other = notification.objc as MGMsgModel;
-            if (other.tag != "Player")
-                return;
-            if (other.name != "role")
-            {
-				danDart();
-            }
+			danDart();
         }
         
     }
 	void OnTriggerEnter2D(Collider2D other)
 	{
+        if (other.tag != "Player" || other.name == releaseSkillObjectName)
+            return;
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
         {
             Debug.Log("OnTriggerEnter2D dart");

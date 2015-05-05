@@ -61,7 +61,7 @@ public class MGNetWorking : MonoBehaviour {
 	{
 		//Debug.Log ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
 		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
-        if (msgModel.eventId == EventEnum.gameoverEventId)
+        if (msgModel.eventId == RoleActEventEnum.gameoverEventId)
         {
             MGGlobalDataCenter.defaultCenter().overSenceUIName = msgModel.gameobjectName;
             if (Application.loadedLevelName != "overSence")

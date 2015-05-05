@@ -83,7 +83,7 @@ public class sprint : UIBase
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             holdCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.sprint, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.sprint, null);
         }
     }
 }

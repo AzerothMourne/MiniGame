@@ -3,19 +3,13 @@ using System.Collections;
 using LitJson;
 using System.Collections.Generic;
 using System;
-public static class EventEnum{
+public static class RoleActEventEnum{
 	public static string jumpFormerEventId="jump";
 	public static string jumpLatterEventId="1jump";
 	public static string downToLineFormerEventId="downToLine";
 	public static string dowmToLineLatterEventId="1downToLine";
     public static string gameoverEventId = "gameoverEventId";
-    //技能事件
-    public static string dart = "EventEnum_dart";
-    public static string blink = "EventEnum_blink";
-    public static string roadblock = "EventEnum_roadblock";
-    public static string bones = "EventEnum_bones";
-    public static string sprint = "EventEnum_sprint";
-    public static string beatback = "EventEnum_beatback";
+
 }
 public static class roleState{
 	public static int bone = 1 << 0;
@@ -37,6 +31,43 @@ public class Jump : MonoBehaviour {
 	//记录控制的当前角色动画，由于用的次数多，直接提取出来
     private RoleAnimController roleAnimaController;
 	// Use this for initialization
+    void Awake()
+    {
+        //获取角色的名字，role则是前面的角色，role1则是后面的角色
+        //前面角色的动作
+        if (this.gameObject.name == "role")
+        {
+            //print ("yes role");
+            //注册动作事件
+            //rolePlayer = GameObject.Find("roleFront");
+            roleSpeed = 0;
+            MGGlobalDataCenter.defaultCenter().role = this.gameObject;
+            MGNotificationCenter.defaultCenter().addObserver(this, jump, RoleActEventEnum.jumpFormerEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, downToLine, RoleActEventEnum.downToLineFormerEventId);
+            //注册技能事件
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, SkillActEventEnum.dart);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, SkillActEventEnum.roadblock);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBeatback, SkillActEventEnum.beatback);
+
+        }
+        //后面的角色动作
+        else if (this.gameObject.name == "role1")
+        {
+            //print ("yes role1");
+            //注册动作事件
+            //rolePlayer = GameObject.Find("roleLater");
+            roleSpeed = 1f / 20f;
+            MGGlobalDataCenter.defaultCenter().roleLater = this.gameObject;
+            MGNotificationCenter.defaultCenter().addObserver(this, jump, RoleActEventEnum.jumpLatterEventId);
+            MGNotificationCenter.defaultCenter().addObserver(this, downToLine, RoleActEventEnum.dowmToLineLatterEventId);
+            //注册技能事件
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, SkillActEventEnum.blink);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, SkillActEventEnum.bones);
+            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, SkillActEventEnum.sprint);
+            //@test
+            //useSkillsBones(new MGNotification("123", null, null));
+        }
+    }
 	void Start () {
 		stateMask = 0;
         isCollisionOver = false;
@@ -45,39 +76,6 @@ public class Jump : MonoBehaviour {
         isGround = false;
         roleAnimaController = this.GetComponent<RoleAnimController>();
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
-
-		//获取角色的名字，role则是前面的角色，role1则是后面的角色
-		//前面角色的动作
-		if (this.gameObject.name == "role") {
-			//print ("yes role");
-            //注册动作事件
-            //rolePlayer = GameObject.Find("roleFront");
-            roleSpeed = 0;
-			MGGlobalDataCenter.defaultCenter().role=this.gameObject;
-			MGNotificationCenter.defaultCenter ().addObserver (this, jump, EventEnum.jumpFormerEventId);
-			MGNotificationCenter.defaultCenter ().addObserver (this, downToLine, EventEnum.downToLineFormerEventId);
-            //注册技能事件
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsDart, EventEnum.dart);
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsRoadblock, EventEnum.roadblock);
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBeatback, EventEnum.beatback);
-
-		} 
-		//后面的角色动作
-		else if(this.gameObject.name == "role1"){
-			//print ("yes role1");
-            //注册动作事件
-            //rolePlayer = GameObject.Find("roleLater");
-            roleSpeed = 1f / 20f;
-			MGGlobalDataCenter.defaultCenter().roleLater=this.gameObject;
-			MGNotificationCenter.defaultCenter().addObserver(this, jump, EventEnum.jumpLatterEventId);
-			MGNotificationCenter.defaultCenter().addObserver(this, downToLine, EventEnum.dowmToLineLatterEventId);
-            //注册技能事件
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBlink, EventEnum.blink);
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsBones, EventEnum.bones);
-            MGNotificationCenter.defaultCenter().addObserver(this, useSkillsSprint, EventEnum.sprint);
-			//@test
-			//useSkillsBones(new MGNotification("123", null, null));
-		}
 	}
     public string objcToJson(string msg)
     {
@@ -88,65 +86,80 @@ public class Jump : MonoBehaviour {
         else msgModel.eventId = "1"+msg;
         return JsonMapper.ToJson(msgModel);
     }
+    public MGSkillsBase skillsBeatback()
+    {
+        Vector3 pos = new Vector3(11f, 0, 0);
+        MGSkillBeatback skillObjc = null;
+        if (Network.peerType != NetworkPeerType.Disconnected)
+        {
+            skillObjc = mgNetWorking.Instantiate(beatback, pos, new Quaternion(), 0) as MGSkillBeatback;
+        }
+        else
+        {
+            skillObjc = beatback.createSkillSprite(pos) as MGSkillBeatback;
+        }
+        if (skillObjc)
+        {
+            skillObjc.releaseSkillObjectName = this.gameObject.name;
+            skillObjc.transform.parent = this.transform;
+        }
+        return skillObjc;
+    }
     public void useSkillsBeatback(MGNotification notification)
     {
         if (notification.objc == null)
         {
-            Vector3 pos = new Vector3(11f, 0, 0);
-            MGSkillBeatback skillObjc = null;
-            if (Network.peerType != NetworkPeerType.Disconnected)
-            {
-                skillObjc = mgNetWorking.Instantiate(beatback, pos, new Quaternion(), 0) as MGSkillBeatback;
-            }
-            else
-            {
-                skillObjc = beatback.createSkillSprite(pos) as MGSkillBeatback;
-            }
-            if (skillObjc)
-            {
-                skillObjc.releaseSkillObjectName = this.gameObject.name;
-                skillObjc.transform.parent = this.transform;
-            }
+            skillsBeatback();
         }
+    }
+    public MGSkillsBase skillsSprint()
+    {
+        Vector3 pos = new Vector3(transform.position.x + 3 * renderer.bounds.size.x / 16, transform.position.y + (transform.localScale.y > 0 ? 1 : -1) * renderer.bounds.size.y / 2, transform.position.z);
+        MGSkillSprint skillObjc = null;
+        if (Network.peerType != NetworkPeerType.Disconnected)
+        {
+            skillObjc = mgNetWorking.Instantiate(sprint, pos, new Quaternion(), 0) as MGSkillSprint;
+        }
+        else
+        {
+            skillObjc = sprint.createSkillSprite(pos) as MGSkillSprint;
+        }
+        if (skillObjc)
+        {
+            skillObjc.releaseSkillObjectName = this.gameObject.name;
+        }
+        return skillObjc;
     }
     public void useSkillsSprint(MGNotification notification)
     {
         if (notification.objc == null)
         {
-            Vector3 pos = new Vector3(transform.position.x + 3 * renderer.bounds.size.x / 16, transform.position.y + (transform.localScale.y > 0  ? 1 : -1) * renderer.bounds.size.y / 2, transform.position.z);
-            MGSkillSprint skillObjc = null;
-            if (Network.peerType != NetworkPeerType.Disconnected)
-            {
-                skillObjc = mgNetWorking.Instantiate(sprint, pos, new Quaternion(), 0) as MGSkillSprint;
-            }
-            else
-            {
-                skillObjc = sprint.createSkillSprite(pos) as MGSkillSprint;
-            }
-            if (skillObjc)
-            {
-                skillObjc.releaseSkillObjectName = this.gameObject.name;
-            }
+            skillsSprint();
         }
+    }
+    public MGSkillsBase skillsBlink()
+    {
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        MGSkillBlink skillObjc = null;
+        if (Network.peerType != NetworkPeerType.Disconnected)
+        {
+            skillObjc = mgNetWorking.Instantiate(blink, pos, new Quaternion(), 0) as MGSkillBlink;
+        }
+        else
+        {
+            skillObjc = blink.createSkillSprite(pos) as MGSkillBlink;
+        }
+        if (skillObjc)
+        {
+            skillObjc.releaseSkillObjectName = this.gameObject.name;
+        }
+        return skillObjc;
     }
     public void useSkillsBlink(MGNotification notification)
     {
         if (notification.objc == null)
         {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y , transform.position.z);
-            MGSkillBlink skillObjc = null;
-            if (Network.peerType != NetworkPeerType.Disconnected)
-            {
-                skillObjc = mgNetWorking.Instantiate(blink, pos, new Quaternion(), 0) as MGSkillBlink;
-            }
-            else
-            {
-                skillObjc = blink.createSkillSprite(pos) as MGSkillBlink;
-            }
-            if (skillObjc)
-            {
-                skillObjc.releaseSkillObjectName = this.gameObject.name;
-            }
+            skillsBlink();
         }
     }
     public void useSkillsBones(MGNotification notification)
@@ -175,42 +188,58 @@ public class Jump : MonoBehaviour {
             skillObjc.transform.parent = this.transform;
         }
     }
+    public MGSkillsBase skillsDart()
+    {
+        Vector3 pos = new Vector3(transform.position.x, transform.position.y + (transform.localScale.y > 0 ? 1 : -1) * renderer.bounds.size.y / 2, transform.position.z);
+        MGskillDrat skillObjc = bones as MGskillDrat;
+        if (Network.peerType != NetworkPeerType.Disconnected)
+        {
+            skillObjc = mgNetWorking.Instantiate(drat, pos, new Quaternion(), 0) as MGskillDrat;
+        }
+        else
+        {
+            skillObjc = drat.createSkillSprite(pos) as MGskillDrat;
+        }
+        if (skillObjc)
+        {
+            skillObjc.releaseSkillObjectName = this.gameObject.name;
+        }
+        return skillObjc;
+    }
     public void useSkillsDart(MGNotification notification)
     {
 		if (notification.objc == null) {
-            Vector3 pos = new Vector3(transform.position.x, transform.position.y + (transform.localScale.y > 0 ? 1 : -1) * renderer.bounds.size.y / 2, transform.position.z);
-            MGskillDrat skillObjc = bones as MGskillDrat;
-            if (Network.peerType != NetworkPeerType.Disconnected)
-            {
-                mgNetWorking.Instantiate(drat, pos, new Quaternion(), 0);
-            }
-            else
-            {
-                skillObjc = drat.createSkillSprite(pos) as MGskillDrat;
-            }
-            if (skillObjc)
-            {
-                skillObjc.releaseSkillObjectName = this.gameObject.name;
-            }
+            skillsDart();
 		}
+    }
+    public MGSkillsBase skillsRoadblock()
+    {
+        int isDown = transform.localScale.y > 0 ? 0 : 1;
+        Debug.Log(MGGlobalDataCenter.defaultCenter().roadOrignY);
+        Vector3 pos = new Vector3(transform.position.x, MGGlobalDataCenter.defaultCenter().roadOrignY - (isDown == 1 ? 0.175f : 0f), transform.position.z);
+        MGSkillRoadblock skillObjc = roadblock as MGSkillRoadblock;
+        if (Network.peerType != NetworkPeerType.Disconnected)
+        {
+            skillObjc = mgNetWorking.Instantiate(roadblock, pos, Quaternion.Euler(0, isDown * 180, isDown * 180), 0) as MGSkillRoadblock;
+        }
+        else
+        {
+            skillObjc = roadblock.createSkillSprite(pos, Quaternion.Euler(0, isDown * 180, isDown * 180)) as MGSkillRoadblock;
+        }
+        if (skillObjc)
+        {
+            skillObjc.releaseSkillObjectName = this.gameObject.name;
+        }
+        return skillObjc;
     }
     public void useSkillsRoadblock(MGNotification notification)
     {
         if (notification.objc == null)
         {
-			int isDown = transform.localScale.y > 0 ? 0 : 1;
-			Debug.Log(MGGlobalDataCenter.defaultCenter().roadOrignY);
-			Vector3 pos = new Vector3(transform.position.x,MGGlobalDataCenter.defaultCenter().roadOrignY-(isDown==1?0.175f:0f), transform.position.z);
-            if (Network.peerType != NetworkPeerType.Disconnected)
-            {
-                mgNetWorking.Instantiate(roadblock, pos, Quaternion.Euler(0, isDown*180, isDown*180), 0);
-            }
-            else
-            {
-                roadblock.createSkillSprite(pos, Quaternion.Euler(0, isDown * 180, isDown * 180));
-            }
+            skillsRoadblock();
         }
     }
+
     public string buttonEventId(string eventId)
     {
         string ans = eventId;
@@ -229,7 +258,7 @@ public class Jump : MonoBehaviour {
 			Debug.Log("jump");
             if (notification.objc == null)
             {
-                mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+                mgNetWorking.sendMessageToPeer(objcToJson(RoleActEventEnum.jumpFormerEventId));
             }
             return;
         }
@@ -243,7 +272,7 @@ public class Jump : MonoBehaviour {
 			jumpCount = 1;
 			//如果没有发送给对方，则发送消息
 			if (notification.objc == null) {
-				mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.jumpFormerEventId));
+                mgNetWorking.sendMessageToPeer(objcToJson(RoleActEventEnum.jumpFormerEventId));
 			}
 		}
 		//如果不在地面上，且一段跳了，则二段跳
@@ -257,7 +286,7 @@ public class Jump : MonoBehaviour {
 			jumpCount = 2;
             if (notification.objc == null)
             {
-                mgNetWorking.sendMessageToPeer(objcToJson(EventEnum.jumpFormerEventId));
+                mgNetWorking.sendMessageToPeer(objcToJson(RoleActEventEnum.jumpFormerEventId));
             }
 		}
 	}
@@ -267,7 +296,7 @@ public class Jump : MonoBehaviour {
         //角色会根据下按钮，翻转到线下
         MGNotificationCenter.defaultCenter().postNotification(buttonEventId(RoleButtonEvent.downFormerEventId), null);
 		if(notification.objc==null){
-			mgNetWorking.sendMessageToPeer (objcToJson(EventEnum.downToLineFormerEventId));
+            mgNetWorking.sendMessageToPeer(objcToJson(RoleActEventEnum.downToLineFormerEventId));
 		}
     }
 	// Update is called once per frame
@@ -333,7 +362,7 @@ public class Jump : MonoBehaviour {
             MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
             Application.LoadLevel("overSence");
             MGMsgModel gameoverModel = new MGMsgModel();
-            gameoverModel.eventId = EventEnum.gameoverEventId;
+            gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
             gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
             mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
         }

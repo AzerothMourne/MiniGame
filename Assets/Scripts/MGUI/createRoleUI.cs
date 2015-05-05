@@ -41,8 +41,6 @@ public class createRoleUI : MonoBehaviour {
         {
             createLaterRoleUI();
         }
-
-		
     }
     GameObject createOneUI(GameObject gameObject, Vector3 pos)
     {
@@ -83,7 +81,7 @@ public class createRoleUI : MonoBehaviour {
             MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
             Application.LoadLevel("overSence");
             MGMsgModel gameoverModel = new MGMsgModel();
-            gameoverModel.eventId = EventEnum.gameoverEventId;
+            gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
             gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
             mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
         }
