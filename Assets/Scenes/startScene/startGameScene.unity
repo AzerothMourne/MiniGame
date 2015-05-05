@@ -1069,6 +1069,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
+  mColor: {r: .0551724434, g: 0, b: 1, a: 1}
   mPivot: 4
   mWidth: 646
   mHeight: 258
