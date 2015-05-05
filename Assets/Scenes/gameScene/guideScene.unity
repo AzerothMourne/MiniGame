@@ -1059,7 +1059,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00336700329, y: .00336700329, z: .00336700329}
+  m_LocalScale: {x: .00351493852, y: .00351493852, z: .00351493852}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1139895024}
@@ -2024,6 +2024,7 @@ GameObject:
   - 148: {fileID: 2074290062}
   - 114: {fileID: 2074290061}
   - 114: {fileID: 2074290064}
+  - 114: {fileID: 2074290065}
   m_Layer: 0
   m_Name: NetWork
   m_TagString: Untagged
@@ -2077,3 +2078,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288d447da3fa5774dbd1c6e9c2e9d851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  uiCamera: {fileID: 361695386}
+--- !u!114 &2074290065
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2074290060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbd8c8eb44550e47b4534d14d671729, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dark_mid: {fileID: 108432, guid: 5d7c75d69914bf94eac79e18fd871c28, type: 2}
+  dark_other: {fileID: 115716, guid: 6cd918fbe2d24c64483a4c2d73f7b100, type: 2}

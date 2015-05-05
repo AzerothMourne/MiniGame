@@ -127,6 +127,12 @@ public class startUI : MonoBehaviour {
 		isPressStartButton = true;
 		print ("click start button");
 	}
+
+    public void OnGuideButtonClick()
+    {
+        MGGlobalDataCenter.defaultCenter().isSingle = true;
+        Application.LoadLevel("guideScene");
+    }
 	
 	public void clicktianya() {
 		print ("click tianya");

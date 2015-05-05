@@ -100,7 +100,7 @@ public class MGskillDrat : MGSkillsBase{
 	{
         if (other.tag != "Player" || other.name == releaseSkillObjectName)
             return;
-        if (MGGlobalDataCenter.defaultCenter().isHost == true)
+        if (MGGlobalDataCenter.defaultCenter().isHost == true || MGGlobalDataCenter.defaultCenter().isSingle)
         {
             Debug.Log("OnTriggerEnter2D dart");
             MGMsgModel model = new MGMsgModel();

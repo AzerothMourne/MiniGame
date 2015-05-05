@@ -17,7 +17,7 @@ public class MGMsgModel{
 public class MGGlobalDataCenter  {
     public float NGUI_ButtonWidth;
     public bool isNetworkViewEnable;
-    public bool isHost,isBigSkilling,isStop;
+    public bool isHost,isBigSkilling,isStop,isSingle;
     public int connecttions;
     public int listenPort,mySocketPort,UPNPPort,SyncPort;
     private static MGGlobalDataCenter instance;
@@ -67,13 +67,14 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
-        this.isHost = true;
-//        this.isHost = false;
+        //this.isHost = true;
+        this.isHost = false;
         this.overSenceUIName = null;
         backToDefaultValues();
 	}
     public void backToDefaultValues()
     {
+        this.isSingle = true;
         this.dartIndex = 0;
         Time.timeScale = 1;
         this.totalGameTime = 60f;
@@ -93,7 +94,7 @@ public class MGGlobalDataCenter  {
         this.screenRightX = -1 * this.screenLiftX;
 
         this.screenTopY = 5f;
-        this.screenBottomY = -1 * this.screenBottomY;
+        this.screenBottomY = -1 * this.screenTopY;
         this.NGUI_ButtonWidth = 1.65f;
         this.UIScale = 2f;
         this.roadOrignY = -1000;

@@ -30,6 +30,13 @@ public static class MGFoundtion  {
         }
         return ip;
     }
+    public static Vector3 NGUIPointToWorldPoint(Vector3 NGuiPos, Camera uiCamera)
+    {
+        Vector3 pos = uiCamera.WorldToScreenPoint(NGuiPos);
+        Vector3 returnPos = Camera.main.ScreenToWorldPoint(pos);
+        returnPos.z = 0f;
+        return returnPos;
+    }
 	public static Vector3 WorldPointToNGUIPoint(Vector3 worldPos,Camera uiCamera){
 		Vector3 pos = Camera.main.WorldToScreenPoint(worldPos);
 		pos.z = 0f;   //z一定要为0.
@@ -42,10 +49,6 @@ public static class MGFoundtion  {
         pos.z=0f;
         return pos;
     }
-	public static Vector3 NGUIPointToWroldPoint(Vector3 NGUIPos){
-		Vector3 pos = UICamera.currentCamera.ScreenToWorldPoint (NGUIPos);
-		return Camera.main.WorldToScreenPoint(pos);
-	}
     /// <summary>
     /// 尝试将键和值添加到字典中：如果不存在，才添加；存在，不添加也不抛导常
     /// </summary>
