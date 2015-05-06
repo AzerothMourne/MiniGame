@@ -8,6 +8,7 @@ using System;
 using System.Net.NetworkInformation;
 public static class MGFoundtion  {
     public static string getInternIP(){
+        /*
         string ip=null;
         NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
         foreach (NetworkInterface adapter in adapters)
@@ -29,6 +30,19 @@ public static class MGFoundtion  {
             }
         }
         return ip;
+        */
+        IPHostEntry host;
+        string localIP = "?";
+        host = Dns.GetHostEntry(Dns.GetHostName());
+        foreach (IPAddress ip in host.AddressList)
+        {
+            if (ip.AddressFamily.ToString() == "InterNetwork")
+            {
+                localIP = ip.ToString();
+                break;
+            }
+        }
+        return localIP;
     }
 	public static Vector3 WorldPointToNGUIPoint(Vector3 worldPos,Camera uiCamera){
 		Vector3 pos = Camera.main.WorldToScreenPoint(worldPos);
