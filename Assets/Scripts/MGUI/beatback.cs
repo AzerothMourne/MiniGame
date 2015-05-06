@@ -65,7 +65,7 @@ public class beatback : UIBase
 			if(fireTimer>0.15f){
 				fireTimer=0;
 				fireSprite.GetComponent<UISprite>().spriteName=(index+1).ToString();
-				index=(index+1)%14;
+				index=(index+1)%12;
 			}
 		}
     }
