@@ -18,7 +18,9 @@ public static class MGFoundtion  {
         {
             File.CreateText("firstLaunchFile");
         }
-        catch { }
+        catch {
+			Debug.Log("createText faild");
+		}
     }
     public static string getInternIP(){
 		string localIP = "";

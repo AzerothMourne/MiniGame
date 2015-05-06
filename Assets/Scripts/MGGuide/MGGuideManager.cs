@@ -174,6 +174,7 @@ public class MGGuideManager : MonoBehaviour {
         {
             Time.timeScale = 1;
             isGuideEnd = false;
+			MGGlobalDataCenter.defaultCenter().totalGameTime=60;
             this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
             Debug.Log("show all buttons");
             foreach (GameObject uiButton in UIButtons)
@@ -181,14 +182,8 @@ public class MGGuideManager : MonoBehaviour {
                 uiButton.SetActive(true);
                 uiButton.GetComponent<UIButton>().enabled = true;
             }
-            try
-            {
-                gameTimer = GameObject.Find("gameTimer(Clone)");
-                stopButton = GameObject.Find("stopButton(Clone)");
-                gameTimer.SetActive(true);
-                stopButton.SetActive(true);
-            }
-            catch { }
+            gameTimer.SetActive(true);
+            stopButton.SetActive(true);
         }
         guideLabel.SetActive(false);
         skillObjc = null;
@@ -239,7 +234,7 @@ public class MGGuideManager : MonoBehaviour {
 
                 this.GetComponent<MGGuideDarkLayer>().createAllDarkLayerInPos();
 
-                guideLabel.GetComponent<UILabel>().text = "现在你来试试吧~";
+				guideLabel.GetComponent<UILabel>().text = "现在你来试试吧~请在60秒内追上明月~";
                 guideLabel.SetActive(true);
                 Time.timeScale = 0;
             }

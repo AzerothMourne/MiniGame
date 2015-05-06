@@ -76,8 +76,8 @@ public class createRoleUI : MonoBehaviour {
         {
 			Debug.Log("dasdasdasdas");
             //游戏结束
-			if(GameObject.Find("role").GetComponent<RoleAnimController>().isDead || GameObject.Find("role1").GetComponent<RoleAnimController>().isDead)
-				return;
+			//if(GameObject.Find("role").GetComponent<RoleAnimController>().isDead || GameObject.Find("role1").GetComponent<RoleAnimController>().isDead)
+				//return;
             MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
             Application.LoadLevel("overSence");
             MGMsgModel gameoverModel = new MGMsgModel();
