@@ -182,6 +182,7 @@ public class MGGuideManager : MonoBehaviour {
         {
             if (roleFrontJumpScript.isGround)
             {
+                GameObject.Find("log").GetComponent<UIInput>().label.text= MGFoundtion.getInternIP();
                 guideMask |= MGGuideManagerState.jump;
                 skillObjc = roleFrontJumpScript.skillsDart();
             }
