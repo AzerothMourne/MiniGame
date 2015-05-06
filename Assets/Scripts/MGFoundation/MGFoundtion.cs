@@ -21,40 +21,40 @@ public static class MGFoundtion  {
         catch { }
     }
     public static string getInternIP(){
-        /*
-        string ip=null;
-        NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
-        foreach (NetworkInterface adapter in adapters)
-        {
-            if (adapter.Supports(NetworkInterfaceComponent.IPv4))
-            {
-                UnicastIPAddressInformationCollection uniCast = adapter.GetIPProperties().UnicastAddresses;
-                if (uniCast.Count > 0)
-                {
-                    foreach (UnicastIPAddressInformation uni in uniCast)
-                    {
-                        //得到IPv4的地址。 AddressFamily.InterNetwork指的是IPv4
-                        if (uni.Address.AddressFamily == AddressFamily.InterNetwork)
-                        {
-                            ip = uni.Address.ToString();
-                        }
-                    }
-                }
-            }
-        }
-        return ip;
-        */
-        IPHostEntry host;
-        string localIP = "?";
-        host = Dns.GetHostEntry(Dns.GetHostName());
-        foreach (IPAddress ip in host.AddressList)
-        {
-            if (ip.AddressFamily.ToString() == "InterNetwork")
-            {
-                localIP = ip.ToString();
-                break;
-            }
-        }
+		string localIP = "";
+		if (Application.platform == RuntimePlatform.IPhonePlayer) {
+			NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+			foreach (NetworkInterface adapter in adapters)
+			{
+				if (adapter.Supports(NetworkInterfaceComponent.IPv4))
+				{
+					UnicastIPAddressInformationCollection uniCast = adapter.GetIPProperties().UnicastAddresses;
+					if (uniCast.Count > 0)
+					{
+						foreach (UnicastIPAddressInformation uni in uniCast)
+						{
+							//得到IPv4的地址。 AddressFamily.InterNetwork指的是IPv4
+							if (uni.Address.AddressFamily == AddressFamily.InterNetwork)
+							{
+								localIP = uni.Address.ToString();
+							}
+						}
+					}
+				}
+			}
+		} 
+		else{
+			IPHostEntry host;
+			host = Dns.GetHostEntry(Dns.GetHostName());
+			foreach (IPAddress ip in host.AddressList)
+			{
+				if (ip.AddressFamily.ToString() == "InterNetwork")
+				{
+					localIP = ip.ToString();
+					break;
+				}
+			}
+		}
         return localIP;
     }
     public static Vector3 NGUIPointToWorldPoint(Vector3 NGuiPos, Camera uiCamera)
