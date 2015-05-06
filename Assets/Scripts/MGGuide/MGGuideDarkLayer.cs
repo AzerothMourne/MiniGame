@@ -9,7 +9,7 @@ public class MGGuideDarkLayer : MonoBehaviour {
 	public void createDarkLayerInPos(Vector3 pos)
     {
         dark_midClone = GameObject.Instantiate(dark_mid, pos, Quaternion.Euler(0, 0, 0)) as GameObject;
-        dark_midClone.transform.localScale = new Vector3(2,2,1);
+        dark_midClone.transform.localScale = new Vector3(1.5f,1.5f,1);
         Vector3 dark_midCloneSize = dark_midClone.GetComponent<SpriteRenderer>().bounds.size;
         float up = pos.y + dark_midCloneSize.y / 2, down = pos.y - dark_midCloneSize.y / 2, left = pos.x - dark_midCloneSize.x / 2, right = pos.x + dark_midCloneSize.x / 2;
 

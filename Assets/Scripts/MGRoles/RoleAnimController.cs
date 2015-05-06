@@ -257,7 +257,7 @@ public class RoleAnimController : MonoBehaviour {
     }
     public void downButtonClick(MGNotification notification)
     {
-        if (!isRoll && !isPressDown && transform.lossyScale.y < 0) return;
+        if (!isRoll && !isPressDown && transform.localScale.y < 0) return;
         //Debug.Log(this.gameObject.name + " downButtonClick");
         collider2D.isTrigger = true;
         if (isFirstJump)//在空中

@@ -157,7 +157,7 @@ public class MGSkillEffect : MonoBehaviour {
     {
         if (notification != null) {
 			blinkSkillBonesTimer = 0;
-			if(notification.objc == null){
+			if(MGGlobalDataCenter.defaultCenter().isHost == false &&  MGGlobalDataCenter.defaultCenter().isSingle == false){
                 MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.bones, shortBonesName);//发送bones技能的事件
 				return;
 			}

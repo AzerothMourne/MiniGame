@@ -6,6 +6,10 @@ public static class MGGuideManagerState
     public static int jump = 1 << 0;
     public static int secondJump = 1 << 1;
     public static int downToLine = 1 << 2;
+    public static int bones = 1 << 3;
+    public static int blink = 1 << 4;
+    public static int beatback = 1 << 5;
+    public static int sprint = 1 << 6;
 }
 public class MGGuideManager : MonoBehaviour {
     public Camera uiCamera;
@@ -76,6 +80,7 @@ public class MGGuideManager : MonoBehaviour {
         {
             Time.timeScale = 1;
             MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.dowmToLineLatterEventId, null);
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.downToLineFormerEventId, null);
             GameObject.Find("NetWork").GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
             foreach (GameObject uiButton in UIButtons)
             {
@@ -86,6 +91,54 @@ public class MGGuideManager : MonoBehaviour {
                 }
             }
             guideEndMask |= MGGuideManagerState.downToLine;
+        }
+        else if ((guideEndMask & MGGuideManagerState.bones) == 0)
+        {
+            Time.timeScale = 1;
+            roadblockGCDTimer = 0f;
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.bones, null);
+            GameObject.Find("NetWork").GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "bonesButton(Clone)")
+                {
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            guideEndMask |= MGGuideManagerState.bones;
+        }
+        else if ((guideEndMask & MGGuideManagerState.blink) == 0)
+        {
+            Time.timeScale = 1;
+            roleLaterJumpScript.skillsBlink();
+            GameObject.Find("NetWork").GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "blinkButton(Clone)")
+                {
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            guideEndMask |= MGGuideManagerState.blink;
+        }
+        else if ((guideEndMask & MGGuideManagerState.sprint) == 0)
+        {
+            Time.timeScale = 1;
+            roleLaterJumpScript.skillsSprint();
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpLatterEventId, null);
+            GameObject.Find("NetWork").GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "sprintButton(Clone)")
+                {
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            guideEndMask |= MGGuideManagerState.sprint;
         }
         skillObjc = null;
     }
@@ -278,22 +331,116 @@ public class MGGuideManager : MonoBehaviour {
     }
     void guideUp()
     {
-
+        
     }
     void guideBones()
     {
-
+        if ((guideEndMask & MGGuideManagerState.downToLine) != 0 && (guideMask & MGGuideManagerState.bones) == 0)
+        {
+            Debug.Log("123123");
+            if (roleFront.transform.localScale.y < 0)
+            {
+                guideMask |= MGGuideManagerState.bones;
+                skillObjc = roleFrontJumpScript.skillsDart();
+                roadblockGCDTimer = 0;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.bones) == 0 && (guideMask & MGGuideManagerState.bones) != 0)
+        {
+            if (skillObjc != null && skillObjc.transform.position.x - roleLater.transform.position.x <= 3f)
+            {
+                skillObjc = null;
+                foreach (GameObject uiButton in UIButtons)
+                {
+                    if (uiButton.name == "bonesButton(Clone)")
+                    {
+                        uiButton.SetActive(true);
+                        uiButton.GetComponent<UIButton>().enabled = false;
+                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
+                        break;
+                    }
+                }
+                Time.timeScale = 0;
+            }
+            if (skillObjc != null)
+            {
+                roadblockGCDTimer += Time.deltaTime;
+                if (roadblockGCDTimer > 0.25f)
+                {
+                    roadblockGCDTimer = 0;
+                    roleFrontJumpScript.skillsDart();
+                }
+            }
+        }
     }
     void guideBlink()
     {
-
+        if ((guideEndMask & MGGuideManagerState.bones) != 0 && (guideMask & MGGuideManagerState.blink) == 0)
+        {
+            roadblockGCDTimer += Time.deltaTime;
+            if (roadblockGCDTimer+0.25f > MGSkillBonesInfo.durationTime)
+            {
+                guideMask |= MGGuideManagerState.blink;
+                skillObjc = roleFrontJumpScript.skillsDart();
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.blink) == 0 && (guideMask & MGGuideManagerState.blink) != 0)
+        {
+            roadblockGCDTimer += Time.deltaTime;
+            if (roadblockGCDTimer >= MGSkillBonesInfo.durationTime+0.1f && flag)
+            {
+                flag = false;
+                foreach (GameObject uiButton in UIButtons)
+                {
+                    if (uiButton.name == "blinkButton(Clone)")
+                    {
+                        uiButton.SetActive(true);
+                        uiButton.GetComponent<UIButton>().enabled = false;
+                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
+                        break;
+                    }
+                }
+                Time.timeScale = 0;
+            }
+        }
     }
     void guideBeatback()
     {
+        if ((guideEndMask & MGGuideManagerState.blink) != 0 && (guideMask & MGGuideManagerState.beatback) == 0)
+        {
+            guideMask |= MGGuideManagerState.beatback;
+            roleFrontJumpScript.skillsBeatback();
+            roadblockGCDTimer = 0;
+        }
+        if ((guideEndMask & MGGuideManagerState.beatback) == 0 && (guideMask & MGGuideManagerState.beatback) != 0)
+        {
 
+            roadblockGCDTimer += Time.deltaTime;
+            if (roadblockGCDTimer >= MGSkillBeatbackInfo.durationTime+0.5f)
+            {
+                guideEndMask |= MGGuideManagerState.beatback;
+            }
+        }
     }
     void guideSprint()
     {
-
+        if ((guideEndMask & MGGuideManagerState.beatback) != 0 && (guideMask & MGGuideManagerState.sprint) == 0)
+        {
+            Time.timeScale = 0;
+            guideMask |= MGGuideManagerState.sprint;
+            
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "sprintButton(Clone)")
+                {
+                    uiButton.SetActive(true);
+                    uiButton.GetComponent<UIButton>().enabled = false;
+                    this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
+                    break;
+                }
+            }
+            
+        }
     }
 }

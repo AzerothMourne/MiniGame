@@ -29,12 +29,11 @@ public class MGSkillBlink : MGSkillsBase
             skillModel.eventId = SkillEffectEnum.blink;
             skillModel.gameobjectName = "role1";
             //发送给对面 产生技能效果
-			if(MGGlobalDataCenter.defaultCenter().isHost==false){
-				MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, null);
+            if (MGGlobalDataCenter.defaultCenter().isHost == false || MGGlobalDataCenter.defaultCenter().isSingle)
+            {
+                MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
             	mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
 			}
-            //发送给自己
-            //MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
         }
     }
     public override void playSkillSound()
