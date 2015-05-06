@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class MGGuideDarkMidListenr : MonoBehaviour {
-
+    public bool isEnable;
 	// Use this for initialization
 	void Start () {
 	
@@ -14,6 +14,7 @@ public class MGGuideDarkMidListenr : MonoBehaviour {
 	}
     void OnMouseDown()
     {
+        if (!isEnable) return;
         GameObject.Find("NetWork").GetComponent<MGGuideManager>().darkMidClick();
     }
 }

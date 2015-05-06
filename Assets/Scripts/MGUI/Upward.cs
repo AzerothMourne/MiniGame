@@ -39,6 +39,7 @@ public class Upward : UIBase
                 transform.localScale = originVec3;
 			}
 		}
+        /*
         if (isMoveCamera)
         {
             Vector3 pos = Camera.main.transform.position;
@@ -50,7 +51,7 @@ public class Upward : UIBase
                 Camera.main.transform.position = pos;
                 isMoveCamera = false;
             }
-        }
+        }*/
 	}
 	
 	// Update is called once per frame
@@ -59,8 +60,11 @@ public class Upward : UIBase
 		isClick = true;
 		//将向上的按钮变为跳的按钮
         isMoveCamera = true;
-		this.GetComponent<UISprite>().spriteName = "jump";
-        this.GetComponent<UIButton>().normalSprite = "jump";
+		//this.GetComponent<UISprite>().spriteName = "jump";
+        //this.GetComponent<UIButton>().normalSprite = "jump";
+        GameObject upButton = GameObject.Find("downButton(Clone)");
+        upButton.GetComponent<UISprite>().spriteName = "down";
+        upButton.GetComponent<UIButton>().normalSprite = "down";
         if (MGGlobalDataCenter.defaultCenter().isHost == true)
             MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
         else

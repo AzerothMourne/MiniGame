@@ -107,13 +107,14 @@ public class RoleAnimController : MonoBehaviour {
     {
         jumpAnim.SetBool("AnyStateToDead", true);
     }
-    void animStateToRun()
+    public void animStateToRun()
     {
         jumpAnim.SetBool("FallDownToRun", true);
         jumpAnim.SetBool("RollToRun", true);
         jumpAnim.SetBool("killToRun", true);
         jumpAnim.SetBool("KillRoadblockToRun", true);
 		jumpAnim.SetBool("DanToRun", true);
+        jumpAnim.SetBool("AnyStateToRun", true);
     }
     void animStateToFirstJump()
     {
@@ -144,6 +145,7 @@ public class RoleAnimController : MonoBehaviour {
         jumpAnim.SetBool("FallDownToRoll", false);
         jumpAnim.SetBool("RollToRun", false);
         jumpAnim.SetBool("AnyStateToDead", false);
+        jumpAnim.SetBool("AnyStateToRun", false);
         if (this.gameObject.name == "role1")
         {
             jumpAnim.SetBool("sprint", false);
@@ -159,7 +161,7 @@ public class RoleAnimController : MonoBehaviour {
 			jumpAnim.SetBool("DanToRoll", false);
         }
     }
-    void toNomalRun()
+    public void toNomalRun()
     {
         rigidbody2D.gravityScale = transform.localScale.y > 0 ? 5 : 0;
         rigidbody2D.velocity = Vector3.zero;
