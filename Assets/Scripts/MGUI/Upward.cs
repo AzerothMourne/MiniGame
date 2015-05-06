@@ -65,9 +65,9 @@ public class Upward : UIBase
         GameObject upButton = GameObject.Find("downButton(Clone)");
         upButton.GetComponent<UISprite>().spriteName = "down";
         upButton.GetComponent<UIButton>().normalSprite = "down";
-        if (MGGlobalDataCenter.defaultCenter().isHost == true)
+        if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true)
             MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
-        else
+        if (MGGlobalDataCenter.defaultCenter().isLaterRoler == true)
             MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpLatterEventId, null);
 	}
 }

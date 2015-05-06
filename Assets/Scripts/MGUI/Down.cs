@@ -50,24 +50,18 @@ public class Down : UIBase
 			}
 		}
 	}
-
 	public void OnMouseDown () {
         if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
 		isClick = true;
         
-        //按向下后调出向上按钮
-        //GameObject upButton = GameObject.Find("upButton(Clone)");
-        //播放音效
-        //if(upButton.GetComponent<UISprite>().spriteName != "up")
-        //    music.play("Sound/updown_roll");
         if (this.GetComponent<UISprite>().spriteName == selfSpriteName)
         {
             fx = 1;
             this.GetComponent<UISprite>().spriteName = "up";
             this.GetComponent<UIButton>().normalSprite = "up";
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
+            if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
                 MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.downToLineFormerEventId, null);
-            else
+            if (MGGlobalDataCenter.defaultCenter().isLaterRoler)
                 MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.dowmToLineLatterEventId, null);
         }
         else if (this.GetComponent<UISprite>().spriteName == "up")
@@ -75,9 +69,9 @@ public class Down : UIBase
             fx = -1;
             this.GetComponent<UISprite>().spriteName = selfSpriteName;
             this.GetComponent<UIButton>().normalSprite = selfSpriteName;
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
+            if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
                 MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
-            else
+            if (MGGlobalDataCenter.defaultCenter().isLaterRoler)
                 MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpLatterEventId, null);
         }
         isMoveCamera = true;

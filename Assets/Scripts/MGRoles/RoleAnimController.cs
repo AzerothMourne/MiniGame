@@ -134,7 +134,7 @@ public class RoleAnimController : MonoBehaviour {
         jumpAnim.SetBool("FallDownToRoll", true);
 		jumpAnim.SetBool("DanToRoll", true);
     }
-    void setAllAnimStateToFalse()
+    public void setAllAnimStateToFalse()
     {
         jumpAnim.SetBool("RunToFirstJump", false);
         jumpAnim.SetBool("FirstJumpToSecondJump", false);

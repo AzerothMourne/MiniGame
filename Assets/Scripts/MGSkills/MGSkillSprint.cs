@@ -88,6 +88,7 @@ public class MGSkillSprint : MGSkillsBase
 
                 GameObject roleLater = GameObject.Find("role1");
                 roleLater.GetComponent<RoleAnimController>().isSprint = true;
+                roleLater.GetComponent<RoleAnimController>().setAllAnimStateToFalse();
                 roleLater.GetComponent<Animator>().SetBool("sprint", true);
                 roleLater.GetComponent<SpriteRenderer>().material = new Material(Shader.Find("long/sprint"));
 				GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");

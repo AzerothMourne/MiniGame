@@ -5,8 +5,21 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System;
+using System.IO;
 using System.Net.NetworkInformation;
 public static class MGFoundtion  {
+    public static bool isFirstLaunch()
+    {
+        return !File.Exists("firstLaunchFile");
+    }
+    public static void setFirstLaunchFlag()
+    {
+        try
+        {
+            File.CreateText("firstLaunchFile");
+        }
+        catch { }
+    }
     public static string getInternIP(){
         /*
         string ip=null;

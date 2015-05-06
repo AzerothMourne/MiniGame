@@ -13,6 +13,7 @@ public static class MGGuideManagerState
 }
 public class MGGuideManager : MonoBehaviour {
     public Camera uiCamera;
+    public GameObject NGUIRoot;
     public GameObject guideLabel;
     private GameObject roleLater, roleFront;
     private Jump roleLaterJumpScript, roleFrontJumpScript;
@@ -28,6 +29,13 @@ public class MGGuideManager : MonoBehaviour {
         roleLaterStartPos = roleLater.transform.position;
         roleFront = MGGlobalDataCenter.defaultCenter().role;
         roleFrontStartPos = roleFront.transform.position;
+
+        //先删除AI脚本 
+        Object Script = roleFront.GetComponent<MGRoleActAIController>(); 
+        Destroy(Script);
+        Script = roleFront.GetComponent<MGRoleFrontSkillAIController>();  
+        Destroy(Script);
+
         roleLaterJumpScript = roleLater.GetComponent<Jump>();
         roleFrontJumpScript = roleFront.GetComponent<Jump>();
         guideMask = 0;
@@ -36,7 +44,10 @@ public class MGGuideManager : MonoBehaviour {
         UIButtons = null;
         flag = false;
         isGuideEnd = false;
-        guideLabel = GameObject.Instantiate(guideLabel, Vector3.zero, Quaternion.Euler(0, 0, 0)) as GameObject;
+        guideLabel = GameObject.Instantiate(guideLabel, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0)) as GameObject;
+        guideLabel.transform.parent = NGUIRoot.transform;
+        guideLabel.transform.position = MGFoundtion.WorldPointToNGUIPoint(new Vector3(0, 2.11f, 0), uiCamera);
+        guideLabel.transform.localScale = new Vector3(1, 1, 1);
         guideLabel.layer = 10;
         guideLabel.GetComponent<UILabel>().text = "";
         guideLabel.SetActive(false);
@@ -209,7 +220,6 @@ public class MGGuideManager : MonoBehaviour {
         {
             
             roadblockGCDTimer += Time.deltaTime;
-            Debug.Log(roadblockGCDTimer);
             if (roadblockGCDTimer > 2f && guideMask!=0xFFFF)
             {
                 guideMask = guideEndMask = 0xFFFF;
@@ -223,6 +233,10 @@ public class MGGuideManager : MonoBehaviour {
                 roleFront.GetComponent<RoleAnimController>().isDead = false;
                 GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 1;
                 roleFront.rigidbody2D.velocity = Vector3.zero;
+                //添加AI脚本
+                roleFront.AddComponent<MGRoleActAIController>();
+                roleFront.AddComponent<MGRoleFrontSkillAIController>();
+
                 this.GetComponent<MGGuideDarkLayer>().createAllDarkLayerInPos();
 
                 guideLabel.GetComponent<UILabel>().text = "现在你来试试吧~";
@@ -269,7 +283,9 @@ public class MGGuideManager : MonoBehaviour {
                     }
                 }
                 guideLabel.GetComponent<UILabel>().text = "点击“跳跃”可躲避飞镖";
+
                 guideLabel.SetActive(true);
+                
                 Time.timeScale = 0;
             }
         }
@@ -410,7 +426,6 @@ public class MGGuideManager : MonoBehaviour {
     {
         if ((guideEndMask & MGGuideManagerState.downToLine) != 0 && (guideMask & MGGuideManagerState.bones) == 0)
         {
-            Debug.Log("123123");
             if (roleFront.transform.localScale.y < 0)
             {
                 guideMask |= MGGuideManagerState.bones;

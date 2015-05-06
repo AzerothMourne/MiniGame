@@ -11,13 +11,15 @@ public class MGNetWorking : MonoBehaviour {
 	
 	public static void findHost()
 	{
-        MGGlobalDataCenter.defaultCenter().isHost = false;
+        MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
+        MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
         Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
 		
 	}
 	public static void createHost()
 	{
-        MGGlobalDataCenter.defaultCenter().isHost = true;
+        MGGlobalDataCenter.defaultCenter().isFrontRoler = true;
+        MGGlobalDataCenter.defaultCenter().isLaterRoler = false;
         Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
 	}
     public static void disconnect()

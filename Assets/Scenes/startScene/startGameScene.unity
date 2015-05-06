@@ -742,6 +742,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1092618719}
   - 114: {fileID: 1092618720}
+  - 114: {fileID: 1092618721}
   m_Layer: 9
   m_Name: CreatStartUI
   m_TagString: Untagged
@@ -777,6 +778,17 @@ MonoBehaviour:
   height: 750
   x_k: 0
   y_k: 0
+--- !u!114 &1092618721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1092618718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b48ab9afaa30eae46b39f64c816d7a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1112956886
 GameObject:
   m_ObjectHideFlags: 0
@@ -881,7 +893,7 @@ MonoBehaviour:
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 
-  pressedSprite: pressButton
+  pressedSprite: "\u5355\u4EBA\u6A21\u5F0Fpress"
   disabledSprite: 
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
@@ -952,7 +964,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
-  mSpriteName: button
+  mSpriteName: "\u5355\u4EBA\u6A21\u5F0F"
   mFillCenter: 1
 --- !u!1 &1254167063
 GameObject:

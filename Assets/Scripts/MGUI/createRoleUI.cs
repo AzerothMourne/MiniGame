@@ -33,11 +33,11 @@ public class createRoleUI : MonoBehaviour {
         MGNotificationCenter.defaultCenter().addObserver(this, continueNotification, uiEvent.continueGame);
         MGNotificationCenter.defaultCenter().addObserver(this, enableAllUIButton, uiEvent.enableAllUIButton);
         createCommonUI();
-        if (MGGlobalDataCenter.defaultCenter().isHost == true)
+        if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true)
         {
             createFrontRoleUI();
         }
-        else
+        else if (MGGlobalDataCenter.defaultCenter().isLaterRoler == true)
         {
             createLaterRoleUI();
         }

@@ -129,6 +129,7 @@ public class MyNetworkTest : MonoBehaviour {
         }*/
         //连接成功 需要切换场景
         //MGNotificationCenter.defaultCenter().postNotification(LoadSenceEnum.LoadLevel, "gameScene1");
+        MGGlobalDataCenter.defaultCenter().isSingle = false;
         Application.LoadLevel("gameScene1");
     }
 }

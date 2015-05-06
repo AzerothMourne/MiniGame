@@ -98,7 +98,7 @@ public class MGSkillRoadblock : MGSkillsBase{
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (MGGlobalDataCenter.defaultCenter().isHost == true || MGGlobalDataCenter.defaultCenter().isSingle)
+        if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true || MGGlobalDataCenter.defaultCenter().isSingle)
         {
             MGMsgModel model = new MGMsgModel();
             model.eventId = SkillEnum.roadblock + gameObject.name;

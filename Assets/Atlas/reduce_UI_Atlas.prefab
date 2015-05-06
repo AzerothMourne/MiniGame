@@ -55,8 +55,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: button
-    x: 392
-    y: 5
+    x: 1797
+    y: 899
     width: 322
     height: 144
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: down
-    x: 2012
-    y: 559
+    x: 1797
+    y: 21
     width: 148
     height: 141
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 13
     paddingBottom: 10
   - name: home
-    x: 3805
-    y: 1693
+    x: 2012
+    y: 543
     width: 150
     height: 157
     borderLeft: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: hood1 (1)
     x: 1797
-    y: 1537
+    y: 1387
     width: 426
     height: 149
     borderLeft: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     paddingBottom: 12
   - name: hood1 (7)
     x: 1797
-    y: 1387
+    y: 1537
     width: 426
     height: 149
     borderLeft: 0
@@ -224,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: jump
-    x: 1538
-    y: 6
+    x: 1797
+    y: 163
     width: 148
     height: 141
     borderLeft: 0
@@ -237,8 +237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: mingyue
-    x: 2224
-    y: 1445
+    x: 2691
+    y: 1566
     width: 466
     height: 120
     borderLeft: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: new_tianya
     x: 2224
-    y: 767
+    y: 1219
     width: 466
     height: 112
     borderLeft: 0
@@ -289,8 +289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: pressButton
-    x: 1797
-    y: 899
+    x: 392
+    y: 5
     width: 322
     height: 144
     borderLeft: 0
@@ -316,7 +316,7 @@ MonoBehaviour:
     paddingBottom: 54
   - name: stopBg
     x: 0
-    y: 895
+    y: 318
     width: 1024
     height: 576
     borderLeft: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tianya
-    x: 3158
+    x: 3626
     y: 1453
     width: 467
     height: 112
@@ -367,7 +367,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: tianyaPress
-    x: 3626
+    x: 3158
     y: 1453
     width: 467
     height: 112
@@ -484,8 +484,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u51B2\u523A\u6309\u94AE"
-    x: 3805
-    y: 1851
+    x: 1538
+    y: 346
     width: 214
     height: 197
     borderLeft: 0
@@ -509,9 +509,35 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u5355\u4EBA\u6A21\u5F0F"
+    x: 3805
+    y: 1735
+    width: 253
+    height: 115
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u5355\u4EBA\u6A21\u5F0Fpress"
+    x: 1538
+    y: 32
+    width: 253
+    height: 115
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D1"
     x: 2224
-    y: 1219
+    y: 1332
     width: 466
     height: 112
     borderLeft: 0
@@ -524,7 +550,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D2"
     x: 2224
-    y: 880
+    y: 1106
     width: 466
     height: 112
     borderLeft: 0
@@ -550,7 +576,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D4"
     x: 2224
-    y: 1106
+    y: 880
     width: 466
     height: 112
     borderLeft: 0
@@ -563,7 +589,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D5"
     x: 2224
-    y: 1332
+    y: 767
     width: 466
     height: 112
     borderLeft: 0
@@ -589,7 +615,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u6309\u94AE\u5C16\u5200"
     x: 1538
-    y: 346
+    y: 148
     width: 214
     height: 197
     borderLeft: 0
@@ -601,8 +627,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u6309\u94AE\u98DE\u9556"
-    x: 1538
-    y: 148
+    x: 3805
+    y: 1851
     width: 214
     height: 197
     borderLeft: 0
@@ -627,6 +653,19 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D2"
+    x: 2224
+    y: 1445
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D3"
     x: 3158
     y: 1566
     width: 466
@@ -639,33 +678,7 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: "\u660E\u6708\u5339\u914D\u4E2D3"
-    x: 2691
-    y: 1566
-    width: 466
-    height: 120
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D4"
-    x: 2224
-    y: 1566
-    width: 466
-    height: 120
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "\u660E\u6708\u5339\u914D\u4E2D5"
     x: 2691
     y: 1445
     width: 466
@@ -678,9 +691,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u660E\u6708\u5339\u914D\u4E2D5"
+    x: 2224
+    y: 1566
+    width: 466
+    height: 120
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: "\u80CC\u666F\u56FE\u65E0\u9E1F"
     x: 0
-    y: 318
+    y: 895
     width: 1024
     height: 576
     borderLeft: 0

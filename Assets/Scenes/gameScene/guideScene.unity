@@ -2079,6 +2079,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   uiCamera: {fileID: 361695386}
+  NGUIRoot: {fileID: 1533371668}
   guideLabel: {fileID: 149050, guid: 7575b5d1e04e4434fbb95fe6bf15e32d, type: 2}
 --- !u!114 &2074290065
 MonoBehaviour:

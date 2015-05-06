@@ -40,6 +40,12 @@ public class Jump : MonoBehaviour {
             //print ("yes role");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleFront");
+            if (MGGlobalDataCenter.defaultCenter().isSingle && MGGlobalDataCenter.defaultCenter().isLaterRoler)
+            {
+                this.gameObject.AddComponent<MGRoleActAIController>();
+                this.gameObject.AddComponent<MGRoleFrontSkillAIController>();
+            }
+                
             roleSpeed = 0;
             MGGlobalDataCenter.defaultCenter().role = this.gameObject;
             MGNotificationCenter.defaultCenter().addObserver(this, jump, RoleActEventEnum.jumpFormerEventId);
@@ -56,6 +62,11 @@ public class Jump : MonoBehaviour {
             //print ("yes role1");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleLater");
+            if (MGGlobalDataCenter.defaultCenter().isSingle && MGGlobalDataCenter.defaultCenter().isFrontRoler)
+            {
+                this.gameObject.AddComponent<MGRoleActAIController>();
+                this.gameObject.AddComponent<MGRoleLaterSkillAIController>();
+            }
             roleSpeed = 1f / 20f;
             MGGlobalDataCenter.defaultCenter().roleLater = this.gameObject;
             MGNotificationCenter.defaultCenter().addObserver(this, jump, RoleActEventEnum.jumpLatterEventId);
@@ -81,7 +92,7 @@ public class Jump : MonoBehaviour {
     {
         //log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
         MGMsgModel msgModel = new MGMsgModel();
-        if (MGGlobalDataCenter.defaultCenter().isHost == true)
+        if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true)
             msgModel.eventId = msg;
         else msgModel.eventId = "1"+msg;
         return JsonMapper.ToJson(msgModel);
@@ -92,7 +103,7 @@ public class Jump : MonoBehaviour {
         MGSkillBeatback skillObjc = null;
         if (Network.peerType != NetworkPeerType.Disconnected)
         {
-            skillObjc = mgNetWorking.Instantiate(beatback, pos, new Quaternion(), 0) as MGSkillBeatback;
+            skillObjc = mgNetWorking.Instantiate(beatback, pos, new Quaternion(0,0,0,0), 0) as MGSkillBeatback;
         }
         else
         {
@@ -101,7 +112,6 @@ public class Jump : MonoBehaviour {
         if (skillObjc)
         {
             skillObjc.releaseSkillObjectName = this.gameObject.name;
-            skillObjc.transform.parent = this.transform;
         }
         return skillObjc;
     }
@@ -139,15 +149,16 @@ public class Jump : MonoBehaviour {
     }
     public MGSkillsBase skillsBlink()
     {
-        Vector3 pos = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        int isDown = transform.localScale.y > 0 ? 0 : 1;
+        Vector3 pos = new Vector3(transform.position.x, MGGlobalDataCenter.defaultCenter().roadOrignY - (isDown == 1 ? 0.175f : 0f), transform.position.z);
         MGSkillBlink skillObjc = null;
         if (Network.peerType != NetworkPeerType.Disconnected)
         {
-            skillObjc = mgNetWorking.Instantiate(blink, pos, new Quaternion(), 0) as MGSkillBlink;
+            skillObjc = mgNetWorking.Instantiate(blink, pos, Quaternion.Euler(0, isDown * 180, isDown * 180), 0) as MGSkillBlink;
         }
         else
         {
-            skillObjc = blink.createSkillSprite(pos) as MGSkillBlink;
+            skillObjc = blink.createSkillSprite(pos, Quaternion.Euler(0, isDown * 180, isDown * 180)) as MGSkillBlink;
         }
         if (skillObjc)
         {
@@ -215,7 +226,6 @@ public class Jump : MonoBehaviour {
     public MGSkillsBase skillsRoadblock()
     {
         int isDown = transform.localScale.y > 0 ? 0 : 1;
-        Debug.Log(MGGlobalDataCenter.defaultCenter().roadOrignY);
         Vector3 pos = new Vector3(transform.position.x, MGGlobalDataCenter.defaultCenter().roadOrignY - (isDown == 1 ? 0.175f : 0f), transform.position.z);
         MGSkillRoadblock skillObjc = roadblock as MGSkillRoadblock;
         if (Network.peerType != NetworkPeerType.Disconnected)
@@ -303,14 +313,14 @@ public class Jump : MonoBehaviour {
 	void Update () {
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (MGGlobalDataCenter.defaultCenter().isHost == true)
+            if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true)
                 MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
             else
                 MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
         }
 		if (Input.GetKeyDown(KeyCode.UpArrow))
 		{
-			if (MGGlobalDataCenter.defaultCenter().isHost == true)
+			if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true)
 				MGNotificationCenter.defaultCenter().postNotification("jump", null);
 			else
 				MGNotificationCenter.defaultCenter().postNotification("1jump", null);
@@ -323,6 +333,22 @@ public class Jump : MonoBehaviour {
         if (!isGameOver)
         {
             gameOver();
+        }
+        if (isGameOver)
+        {
+            if (this.gameObject.name == "role")
+            {
+                if (collider2D.isTrigger && transform.position.x < MGGlobalDataCenter.defaultCenter().roleLater.transform.position.x - 2f )
+                {
+                    if (transform.position.y >= MGGlobalDataCenter.defaultCenter().roadOrignY)
+                    {
+                        transform.localScale = new Vector3(1, 1, 1);
+                        transform.rotation = Quaternion.Euler(0, 0, 0);
+                        rigidbody2D.gravityScale = 5;
+                        collider2D.isTrigger = false;
+                    }
+                }
+            }
         }
 	}
     public void gameOver()
@@ -351,7 +377,11 @@ public class Jump : MonoBehaviour {
             roleLaterPos.x = roleFrontPos.x - 1f;
             roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
             MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
+            MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = new Vector3(1, 1, 1);
+            MGGlobalDataCenter.defaultCenter().roleLater.transform.rotation = Quaternion.Euler(0, 0, 0);
             MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
+            MGGlobalDataCenter.defaultCenter().role.transform.localScale = new Vector3(1, 1, 1);
+            MGGlobalDataCenter.defaultCenter().role.transform.rotation = Quaternion.Euler(0, 0, 0);
 
             if (this.gameObject.name == "role1")
                 MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);

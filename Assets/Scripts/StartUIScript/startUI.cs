@@ -131,7 +131,12 @@ public class startUI : MonoBehaviour {
     public void OnGuideButtonClick()
     {
         MGGlobalDataCenter.defaultCenter().isSingle = true;
-        Application.LoadLevel("guideScene");
+        MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
+        MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
+        //if (MGGlobalDataCenter.defaultCenter().isFirstLaunch)
+            Application.LoadLevel("guideScene");
+        //else
+            //Application.LoadLevel("gameScene1");
     }
 	
 	public void clicktianya() {
