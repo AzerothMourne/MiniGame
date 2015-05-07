@@ -10,6 +10,9 @@ public static class MGGuideManagerState
     public static int blink = 1 << 4;
     public static int beatback = 1 << 5;
     public static int sprint = 1 << 6;
+    public static int up = 1 << 7;
+    public static int dart = 1 << 8;
+    public static int roadblock = 1 << 9;
 }
 public class MGGuideManager : MonoBehaviour {
     public Camera uiCamera;
@@ -21,27 +24,44 @@ public class MGGuideManager : MonoBehaviour {
     private MGSkillsBase skillObjc;
     private GameObject[] UIButtons;
     private GameObject gameTimer, stopButton;
-    private bool isHiddenButtons,flag,isGuideEnd;
-    private float roadblockHoldLevel, roadblockGCDTimer;
+    private bool isHiddenButtons,flag,isGuideEnd,isReStart;
+    private float roadblockHoldLevel, roadblockGCDTimer, guideDelayTimer, guideLastStepTimer, guideStepTimer;
     private Vector3 roleLaterStartPos,roleFrontStartPos;
+    private int guideDartStep;
 	void Start () {
         roleLater = MGGlobalDataCenter.defaultCenter().roleLater;
         roleLaterStartPos = roleLater.transform.position;
         roleFront = MGGlobalDataCenter.defaultCenter().role;
         roleFrontStartPos = roleFront.transform.position;
 
-        //先删除AI脚本 
-        Object Script = roleFront.GetComponent<MGRoleActAIController>(); 
-        Destroy(Script);
-        Script = roleFront.GetComponent<MGRoleFrontSkillAIController>();  
-        Destroy(Script);
+        if (MGGlobalDataCenter.defaultCenter().isLaterRoler)
+        {
+            //先删除AI脚本 
+            Object Script = roleFront.GetComponent<MGRoleActAIController>();
+            Destroy(Script);
+            Script = roleFront.GetComponent<MGRoleFrontSkillAIController>();
+            Destroy(Script);
+        }
+        else
+        {
+            //先删除AI脚本 
+            Object Script = roleLater.GetComponent<MGRoleActAIController>();
+            Destroy(Script);
+            Script = roleLater.GetComponent<MGRoleFrontSkillAIController>();
+            Destroy(Script);
+        }
 
         roleLaterJumpScript = roleLater.GetComponent<Jump>();
         roleFrontJumpScript = roleFront.GetComponent<Jump>();
         guideMask = 0;
         guideEndMask = 0;
+        guideDelayTimer = 0;
+        guideLastStepTimer = 0;
+        guideDartStep = 1;
+        guideStepTimer = 0;
         isHiddenButtons = false;
         UIButtons = null;
+        isReStart = false;
         flag = false;
         isGuideEnd = false;
         guideLabel = GameObject.Instantiate(guideLabel, new Vector3(0,0,0), Quaternion.Euler(0, 0, 0)) as GameObject;
@@ -52,7 +72,195 @@ public class MGGuideManager : MonoBehaviour {
         guideLabel.GetComponent<UILabel>().text = "";
         guideLabel.SetActive(false);
 	}
-    public void darkMidClick()
+
+    void delaySetGameOver()
+    {
+        Debug.Log("delaySetGameOver");
+        MGGlobalDataCenter.defaultCenter().isGameOver = false;
+    }
+    void showButtonAndLabel(string buttonName, string labelString)
+    {
+        foreach (GameObject uiButton in UIButtons)
+        {
+            if (uiButton.name == buttonName)
+            {
+                uiButton.SetActive(true);
+                uiButton.GetComponent<UIButton>().enabled = false;
+                this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
+                break;
+            }
+        }
+        guideLabel.GetComponent<UILabel>().text = labelString;
+        guideLabel.SetActive(true);
+        Time.timeScale = 0;
+    }
+    public void roleFrontGuideClick()
+    {
+        if ((guideEndMask & MGGuideManagerState.jump) == 0)
+        {
+            Time.timeScale = 1;
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "upButton(Clone)")
+                {
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            guideEndMask |= MGGuideManagerState.jump;
+        }
+        else if ((guideEndMask & MGGuideManagerState.secondJump) == 0)
+        {
+            Time.timeScale = 1;
+            MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "upButton(Clone)")
+                {
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            guideEndMask |= MGGuideManagerState.secondJump;
+        }
+        else if ((guideEndMask & MGGuideManagerState.downToLine) == 0)
+        {
+            Time.timeScale = 1;
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "downButton(Clone)")
+                {
+                    uiButton.GetComponent<Down>().OnMouseDown();
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            guideEndMask |= MGGuideManagerState.downToLine;
+        }
+        else if ((guideEndMask & MGGuideManagerState.up) == 0)
+        {
+            Time.timeScale = 1;
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "downButton(Clone)")
+                {
+                    uiButton.GetComponent<Down>().OnMouseDown();
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            guideEndMask |= MGGuideManagerState.up;
+        }
+        else if ((guideEndMask & MGGuideManagerState.dart) == 0)
+        {
+            Time.timeScale = 1;
+            string buttonName = null;
+            switch (guideDartStep)
+            {
+                case 2:
+                    buttonName = "dartButton(Clone)";
+                    break;
+                case 3:
+                    buttonName = "downButton(Clone)";
+                    break;
+                case 4:
+                    buttonName = "dartButton(Clone)";
+                    break;
+                case 5:
+                    buttonName = "downButton(Clone)";
+                    break;
+                case 6:
+                    buttonName = "dartButton(Clone)";
+                    break;
+                default:
+                    break;
+            }
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == buttonName)
+                {
+                    if((guideDartStep&1) == 1)
+                        uiButton.GetComponent<Down>().OnMouseDown();
+                    else
+                        uiButton.GetComponent<Dart>().OnMouseDown();
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            if (guideDartStep >= 6)
+            {
+                guideEndMask |= MGGuideManagerState.dart;
+                guideDartStep = 1;
+            }
+            roadblockGCDTimer = 0;
+        }
+        else if ((guideEndMask & MGGuideManagerState.roadblock) == 0)
+        {
+            
+            Time.timeScale = 1;
+            string buttonName = null;
+            switch (guideDartStep)
+            {
+                case 2:
+                    buttonName = "roadblockButton(Clone)";
+                    break;
+                case 3:
+                    buttonName = "downButton(Clone)";
+                    break;
+                case 4:
+                    buttonName = "downButton(Clone)";
+                    break;
+                default:
+                    break;
+            }
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == buttonName)
+                {
+                    if (guideDartStep == 2)
+                    {
+                        roadblockHoldLevel = MGSkillRoadblockInfo.skillHoldLevel - 1;
+                        roadblockGCDTimer = 0;
+                        roleFrontJumpScript.skillsRoadblock();
+                    }
+                    else
+                        uiButton.GetComponent<Down>().OnMouseDown();
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+        }
+        else if ((guideEndMask & MGGuideManagerState.beatback) == 0)
+        {
+            Time.timeScale = 1;
+            foreach (GameObject uiButton in UIButtons)
+            {
+                if (uiButton.name == "beatbackButton(Clone)")
+                {
+                    MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.beatback, null);
+                    uiButton.SetActive(false);
+                    break;
+                }
+            }
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            guideEndMask |= MGGuideManagerState.beatback;
+        }
+        else if (isGuideEnd)
+        {
+            
+        }
+        guideLabel.SetActive(false);
+        skillObjc = null;
+        guideLastStepTimer = guideDelayTimer;
+    }
+    public void roleLaterGuideClick()
     {
         if ((guideEndMask & MGGuideManagerState.jump) == 0)
         {
@@ -184,6 +392,9 @@ public class MGGuideManager : MonoBehaviour {
             }
             gameTimer.SetActive(true);
             stopButton.SetActive(true);
+            roadblockGCDTimer = 0;
+            isReStart = true;
+            
         }
         guideLabel.SetActive(false);
         skillObjc = null;
@@ -211,14 +422,25 @@ public class MGGuideManager : MonoBehaviour {
                 catch { }
             }
         }
+        if (isReStart)
+        {
+            isReStart = false;
+            Invoke("delaySetGameOver", 0.02f);
+        }
         if (isGuideEnd)
         {
-            
             roadblockGCDTimer += Time.deltaTime;
+
             if (roadblockGCDTimer > 2f && guideMask!=0xFFFF)
             {
+                roadblockGCDTimer = 0;
                 guideMask = guideEndMask = 0xFFFF;
                 //重置位置
+                roleFrontJumpScript.initRoleJumpScript();
+                roleFront.GetComponent<RoleAnimController>().initRoleAnimController();
+                roleLaterJumpScript.initRoleJumpScript();
+                roleLater.GetComponent<RoleAnimController>().initRoleAnimController();
+
                 roleLater.transform.position = new Vector3(roleLaterStartPos.x, MGGlobalDataCenter.defaultCenter().roadOrignY, roleLaterStartPos.z);
                 roleFront.transform.position = new Vector3(roleFrontStartPos.x, MGGlobalDataCenter.defaultCenter().roadOrignY, roleFrontStartPos.z);
                 roleFront.GetComponent<RoleAnimController>().toNomalRun();
@@ -226,6 +448,9 @@ public class MGGuideManager : MonoBehaviour {
                 roleLater.GetComponent<RoleAnimController>().toNomalRun();
                 roleLater.GetComponent<RoleAnimController>().animStateToRun();
                 roleFront.GetComponent<RoleAnimController>().isDead = false;
+
+                
+
                 GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 1;
                 roleFront.rigidbody2D.velocity = Vector3.zero;
                 //添加AI脚本
@@ -236,26 +461,246 @@ public class MGGuideManager : MonoBehaviour {
 
 				guideLabel.GetComponent<UILabel>().text = "现在你来试试吧~请在60秒内追上明月~";
                 guideLabel.SetActive(true);
+                Debug.Log("定格准备重新开始");
                 Time.timeScale = 0;
             }
         }
-        guideJump();
-        guideSecondJump();
-        guideDownToLine();
-        guideUp();
-        guideBones();
-        guideBlink();
-        guideBeatback();
-        guideSprint();
+        if (MGGlobalDataCenter.defaultCenter().isSingle && MGGlobalDataCenter.defaultCenter().isLaterRoler)
+        {
+            roleLaterGuideJump();
+            roleLaterGuideSecondJump();
+            roleLaterGuideDownToLine();
+            roleLaterGuideUp();
+            roleLaterGuideBones();
+            roleLaterGuideBlink();
+            roleLaterGuideBeatback();
+            roleLaterGuideSprint();
+        }
+        else if (MGGlobalDataCenter.defaultCenter().isSingle && MGGlobalDataCenter.defaultCenter().isFrontRoler)
+        {
+            guideDelayTimer += Time.deltaTime;
+            if(guideDelayTimer>guideLastStepTimer + 0.1f)
+                roleFrontGuideJump();
+            roleFrontGuideSecondJump();
+            if (guideDelayTimer > guideLastStepTimer + 0.8f)
+                roleFrontGuideDownToLine();
+            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+                roleFrontGuideUp();
+            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+                roleFrontGuideDart();
+            roleFrontGuideRoadblock();
+            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+                roleFrontGuideBeatback();
+            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+                roleFrontGuideEnd();
+        }
+        
 	}
-    void guideJump()
+    void roleFrontGuideJump()
     {
         //一段跳引导
         if ((guideMask & MGGuideManagerState.jump) == 0)
         {
             if (roleFrontJumpScript.isGround)
             {
-                GameObject.Find("log").GetComponent<UIInput>().label.text= MGFoundtion.getInternIP();
+                //GameObject.Find("log").GetComponent<UIInput>().label.text= MGFoundtion.getInternIP();
+                guideMask |= MGGuideManagerState.jump;
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.jump) == 0)
+        {
+            //Debug.Log("guideJump已经开始");
+            if (flag && roleFrontJumpScript.isGround)
+            {
+                flag = false;
+                showButtonAndLabel("upButton(Clone)", "点击“跳跃”可躲避飞镖");
+            }
+        }
+    }
+    void roleFrontGuideSecondJump()
+    {
+        //二段跳引导
+        if ((guideEndMask & MGGuideManagerState.jump) != 0 && (guideMask & MGGuideManagerState.secondJump) == 0)
+        {
+            if (roleFrontJumpScript.isGround == false && roleFront.rigidbody2D.velocity.y < 0f)
+            {
+                guideMask |= MGGuideManagerState.secondJump;
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.secondJump) == 0 && (guideMask & MGGuideManagerState.secondJump) != 0)
+        {
+            if (flag && roleFrontJumpScript.isGround == false && roleFront.rigidbody2D.velocity.y < 0f)
+            {
+                //Time.timeScale = 0;
+                flag = false;
+                showButtonAndLabel("upButton(Clone)","试试二段跳吧，点击“跳跃”来躲避第一个路障");
+            }
+        }
+    }
+    void roleFrontGuideDownToLine()
+    {
+        if ((guideEndMask & MGGuideManagerState.secondJump) != 0 && (guideMask & MGGuideManagerState.downToLine) == 0)
+        {
+            if (roleFrontJumpScript.isGround)
+            {
+                guideMask |= MGGuideManagerState.downToLine;
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.downToLine) == 0 && (guideMask & MGGuideManagerState.downToLine) != 0)
+        {
+            if (flag && roleFrontJumpScript.isGround)
+            {
+                flag = false;
+                showButtonAndLabel("downButton(Clone)", "明月放了好多技能，点击“下翻”来躲避障碍");
+            }
+        }
+    }
+    void roleFrontGuideUp()
+    {
+        if ((guideEndMask & MGGuideManagerState.downToLine) != 0 && (guideMask & MGGuideManagerState.up) == 0)
+        {
+            if (roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            {
+                guideMask |= MGGuideManagerState.up;
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.up) == 0 && (guideMask & MGGuideManagerState.up) != 0)
+        {
+            if (flag && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            {
+                flag = false;
+                showButtonAndLabel("downButton(Clone)", "明月放了好多技能，点击“下翻”来躲避障碍");
+            }
+        }
+    }
+    void roleFrontGuideDart()
+    {
+        if ((guideEndMask & MGGuideManagerState.up) != 0 && (guideMask & MGGuideManagerState.dart) == 0)
+        {
+            if (roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            {
+                guideMask |= MGGuideManagerState.dart;
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.dart) == 0 && (guideMask & MGGuideManagerState.dart) != 0)
+        {
+            roadblockGCDTimer += Time.deltaTime;
+            if (guideDartStep==1 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("dartButton(Clone)",guideDartStep.ToString());
+                roadblockGCDTimer = 0;
+            }
+            else if (roadblockGCDTimer > 0.5f && guideDartStep == 2 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("downButton(Clone)", guideDartStep.ToString());
+                roadblockGCDTimer = 0;
+            }
+            else if (roadblockGCDTimer > 0.5f && guideDartStep == 3 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("dartButton(Clone)", guideDartStep.ToString());
+                roadblockGCDTimer = 0;
+            }
+            else if (roadblockGCDTimer > 0.5f && guideDartStep == 4 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("downButton(Clone)", guideDartStep.ToString());
+                roadblockGCDTimer = 0;
+            }
+            else if (roadblockGCDTimer > 0.5f && guideDartStep == 5 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("dartButton(Clone)", guideDartStep.ToString());
+                roadblockGCDTimer = 0;
+            }
+        }
+    }
+    void roleFrontGuideRoadblock()
+    {
+        if ((guideEndMask & MGGuideManagerState.dart) != 0 && (guideMask & MGGuideManagerState.roadblock) == 0)
+        {
+            if (roleFrontJumpScript.isGround && guideDelayTimer > guideLastStepTimer + 0.5f)
+            {
+                guideMask |= MGGuideManagerState.roadblock;
+                guideDartStep = 1;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.roadblock) == 0 && (guideMask & MGGuideManagerState.roadblock) != 0)
+        {
+            if (roadblockHoldLevel > 0)
+            {
+                roadblockGCDTimer += Time.deltaTime;
+                if (roadblockGCDTimer > MGSkillRoadblockInfo.skillGCD)
+                {
+                    roadblockGCDTimer = 0;
+                    --roadblockHoldLevel;
+                    roleFrontJumpScript.skillsRoadblock();
+                    guideDartStep = 0;
+                    if(roadblockHoldLevel==0)
+                        guideEndMask |= MGGuideManagerState.roadblock;
+                }
+            }
+            guideStepTimer += Time.deltaTime;
+            if (guideDartStep == 1 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("roadblockButton(Clone)", "点击“闪烁”可躲避障碍哦");
+            }
+            else if (guideStepTimer > 0.1f && guideDartStep == 2 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("downButton(Clone)", "点击“闪烁”可躲避障碍哦");
+            }
+            else if (guideStepTimer > 0.1f && guideDartStep == 3 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            {
+                ++guideDartStep;
+                showButtonAndLabel("downButton(Clone)", "点击“闪烁”可躲避障碍哦");
+            }
+        }
+    }
+    void roleFrontGuideBeatback()
+    {
+        if ((guideEndMask & MGGuideManagerState.roadblock) != 0 && (guideMask & MGGuideManagerState.beatback) == 0)
+        {
+            if (roleFront.transform.localScale.y > 0 && roleFrontJumpScript.isGround)
+            {
+                guideMask |= MGGuideManagerState.beatback;
+                flag = true;
+            }
+        }
+        if ((guideEndMask & MGGuideManagerState.beatback) == 0 && (guideMask & MGGuideManagerState.beatback) != 0)
+        {
+            if (flag && roleFront.transform.localScale.y > 0 && roleFrontJumpScript.isGround)
+            {
+                flag = false;
+                showButtonAndLabel("beatbackButton(Clone)", "击退");
+            }
+        }
+    }
+    void roleFrontGuideEnd()
+    {
+        if (!isGuideEnd && (guideEndMask & MGGuideManagerState.beatback) != 0)
+        {
+            isGuideEnd = true;
+            roadblockGCDTimer = 0;
+        }
+    }
+
+    void roleLaterGuideJump()
+    {
+        //一段跳引导
+        if ((guideMask & MGGuideManagerState.jump) == 0)
+        {
+            if (roleFrontJumpScript.isGround)
+            {
+                //GameObject.Find("log").GetComponent<UIInput>().label.text= MGFoundtion.getInternIP();
                 guideMask |= MGGuideManagerState.jump;
                 skillObjc = roleFrontJumpScript.skillsDart();
             }
@@ -267,25 +712,11 @@ public class MGGuideManager : MonoBehaviour {
             {
                 //Time.timeScale = 0;
                 skillObjc = null;
-                foreach (GameObject uiButton in UIButtons)
-                {
-                    if (uiButton.name == "upButton(Clone)")
-                    {
-                        uiButton.SetActive(true);
-                        uiButton.GetComponent<UIButton>().enabled = false;
-                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                        break;
-                    }
-                }
-                guideLabel.GetComponent<UILabel>().text = "点击“跳跃”可躲避飞镖";
-
-                guideLabel.SetActive(true);
-                
-                Time.timeScale = 0;
+                showButtonAndLabel("upButton(Clone)", "点击“跳跃”可躲避飞镖");
             }
         }
     }
-    void guideSecondJump()
+    void roleLaterGuideSecondJump()
     {
         //二段跳引导
         if ((guideEndMask & MGGuideManagerState.jump) != 0 && (guideMask & MGGuideManagerState.secondJump) == 0)
@@ -315,38 +746,16 @@ public class MGGuideManager : MonoBehaviour {
             {
                 //Time.timeScale = 0;
                 skillObjc = null;
-                foreach (GameObject uiButton in UIButtons)
-                {
-                    if (uiButton.name == "upButton(Clone)")
-                    {
-                        uiButton.SetActive(true);
-                        uiButton.GetComponent<UIButton>().enabled = false;
-                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                        break;
-                    }
-                }
-                guideLabel.GetComponent<UILabel>().text = "试试二段跳吧，点击“跳跃”来躲避第一个路障";
-                guideLabel.SetActive(true);
-                Time.timeScale = 0;
+                showButtonAndLabel("upButton(Clone)", "试试二段跳吧，点击“跳跃”来躲避第一个路障");
             }
             if (flag == true && roleLater.rigidbody2D.velocity.y < -2f && Time.timeScale != 0)
             {
                 Debug.Log("second jump");
-                foreach (GameObject uiButton in UIButtons)
-                {
-                    if (uiButton.name == "upButton(Clone)")
-                    {
-                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                        break;
-                    }
-                }
-                guideLabel.GetComponent<UILabel>().text = "点击“跳跃”进行二段跳";
-                guideLabel.SetActive(true);
-                Time.timeScale = 0;
+                showButtonAndLabel("upButton(Clone)", "点击“跳跃”进行二段跳");
             }
         }
     }
-    void guideDownToLine()
+    void roleLaterGuideDownToLine()
     {
         if ((guideEndMask & MGGuideManagerState.secondJump) != 0 && (guideMask & MGGuideManagerState.downToLine) == 0)
         {
@@ -397,27 +806,15 @@ public class MGGuideManager : MonoBehaviour {
             if (skillObjc != null && skillObjc.transform.position.x - roleLater.transform.position.x <= 3f)
             {
                 skillObjc = null;
-                foreach (GameObject uiButton in UIButtons)
-                {
-                    if (uiButton.name == "downButton(Clone)")
-                    {
-                        uiButton.SetActive(true);
-                        uiButton.GetComponent<UIButton>().enabled = false;
-                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                        break;
-                    }
-                }
-                guideLabel.GetComponent<UILabel>().text = "明月放了好多技能，点击“下翻”来躲避障碍";
-                guideLabel.SetActive(true);
-                Time.timeScale = 0;
+                showButtonAndLabel("downButton(Clone)", "明月放了好多技能，点击“下翻”来躲避障碍");
             }
         }
     }
-    void guideUp()
+    void roleLaterGuideUp()
     {
         
     }
-    void guideBones()
+    void roleLaterGuideBones()
     {
         if ((guideEndMask & MGGuideManagerState.downToLine) != 0 && (guideMask & MGGuideManagerState.bones) == 0)
         {
@@ -433,19 +830,7 @@ public class MGGuideManager : MonoBehaviour {
             if (skillObjc != null && skillObjc.transform.position.x - roleLater.transform.position.x <= 3f)
             {
                 skillObjc = null;
-                foreach (GameObject uiButton in UIButtons)
-                {
-                    if (uiButton.name == "bonesButton(Clone)")
-                    {
-                        uiButton.SetActive(true);
-                        uiButton.GetComponent<UIButton>().enabled = false;
-                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                        break;
-                    }
-                }
-                guideLabel.GetComponent<UILabel>().text = "基础操作已经学会啦~我们来试试技能吧！点击“金钟罩”可弹开障碍";
-                guideLabel.SetActive(true);
-                Time.timeScale = 0;
+                showButtonAndLabel("bonesButton(Clone)", "基础操作已经学会啦~我们来试试技能吧！点击“金钟罩”可弹开障碍");
             }
             if (skillObjc != null)
             {
@@ -458,7 +843,7 @@ public class MGGuideManager : MonoBehaviour {
             }
         }
     }
-    void guideBlink()
+    void roleLaterGuideBlink()
     {
         if ((guideEndMask & MGGuideManagerState.bones) != 0 && (guideMask & MGGuideManagerState.blink) == 0)
         {
@@ -476,23 +861,11 @@ public class MGGuideManager : MonoBehaviour {
             if (roadblockGCDTimer >= MGSkillBonesInfo.durationTime+0.1f && flag)
             {
                 flag = false;
-                foreach (GameObject uiButton in UIButtons)
-                {
-                    if (uiButton.name == "blinkButton(Clone)")
-                    {
-                        uiButton.SetActive(true);
-                        uiButton.GetComponent<UIButton>().enabled = false;
-                        this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                        break;
-                    }
-                }
-                guideLabel.GetComponent<UILabel>().text = "点击“闪烁”可躲避障碍哦";
-                guideLabel.SetActive(true);
-                Time.timeScale = 0;
+                showButtonAndLabel("blinkButton(Clone)", "点击“闪烁”可躲避障碍哦");
             }
         }
     }
-    void guideBeatback()
+    void roleLaterGuideBeatback()
     {
         if ((guideEndMask & MGGuideManagerState.blink) != 0 && (guideMask & MGGuideManagerState.beatback) == 0)
         {
@@ -517,25 +890,12 @@ public class MGGuideManager : MonoBehaviour {
             }
         }
     }
-    void guideSprint()
+    void roleLaterGuideSprint()
     {
         if ((guideEndMask & MGGuideManagerState.beatback) != 0 && (guideMask & MGGuideManagerState.sprint) == 0)
         {
-            Time.timeScale = 0;
             guideMask |= MGGuideManagerState.sprint;
-            
-            foreach (GameObject uiButton in UIButtons)
-            {
-                if (uiButton.name == "sprintButton(Clone)")
-                {
-                    uiButton.SetActive(true);
-                    uiButton.GetComponent<UIButton>().enabled = false;
-                    this.GetComponent<MGGuideDarkLayer>().createDarkLayerInPos(MGFoundtion.NGUIPointToWorldPoint(uiButton.transform.position, uiCamera));
-                    break;
-                }
-            }
-            guideLabel.GetComponent<UILabel>().text = "我们也来试试天涯的大招吧~";
-            guideLabel.SetActive(true);
+            showButtonAndLabel("sprintButton(Clone)", "我们也来试试天涯的大招吧~");
         }
         if ((guideEndMask & MGGuideManagerState.sprint) == 0 && (guideMask & MGGuideManagerState.sprint) != 0)
         {

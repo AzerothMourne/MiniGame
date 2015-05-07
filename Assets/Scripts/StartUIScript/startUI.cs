@@ -129,18 +129,14 @@ public class startUI : MonoBehaviour {
 
 	public void OnStartButtonClick() {
 		isPressStartButton = true;
+        MGGlobalDataCenter.defaultCenter().isSingle = false;
 		print ("click start button");
 	}
 
     public void OnGuideButtonClick()
     {
+        isPressStartButton = true;
         MGGlobalDataCenter.defaultCenter().isSingle = true;
-        MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
-        MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
-        if (MGGlobalDataCenter.defaultCenter().isFirstLaunch)
-            Application.LoadLevel("guideScene");
-        else
-            Application.LoadLevel("gameScene1");
     }
 	
 	public void clicktianya() {
@@ -169,8 +165,25 @@ public class startUI : MonoBehaviour {
 		print ("1 click start tianya");
 		if(ismingyueLoad == false)
 			istianyaLoad = true;
-		if(istianyaLoad)
-        	this.GetComponent<MyNetworkTest>().findHost();
+        if (istianyaLoad)
+        {
+            if (MGGlobalDataCenter.defaultCenter().isSingle == true)
+            {
+                MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
+                MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
+                if (!MGGlobalDataCenter.defaultCenter().isTianYaGuide){
+                    MGFoundtion.setTianYaGuideFlag();
+                    MGGlobalDataCenter.defaultCenter().isTianYaGuide = true;
+                    Application.LoadLevel("guideScene");
+                } 
+                else
+                    Application.LoadLevel("gameScene1");
+            }
+            else
+            {
+                this.GetComponent<MyNetworkTest>().findHost();
+            }
+        }
 
 	}
 
@@ -178,8 +191,27 @@ public class startUI : MonoBehaviour {
 		print ("2 click start mingyue");
 		if(istianyaLoad == false)
 			ismingyueLoad = true;
-		if(ismingyueLoad)
-        	this.GetComponent<MyNetworkTest>().createHost();
+        if (ismingyueLoad)
+        {
+            if (MGGlobalDataCenter.defaultCenter().isSingle == true)
+            {
+                MGGlobalDataCenter.defaultCenter().isLaterRoler = false;
+                MGGlobalDataCenter.defaultCenter().isFrontRoler = true;
+                if (!MGGlobalDataCenter.defaultCenter().isMingYueGuide)
+                {
+                    MGFoundtion.setMingYueGuideFlag();
+                    MGGlobalDataCenter.defaultCenter().isMingYueGuide = true;
+                    Application.LoadLevel("guideScene");
+                    
+                }
+                else
+                    Application.LoadLevel("gameScene1");
+            }
+            else
+            {
+                this.GetComponent<MyNetworkTest>().createHost();
+            }
+        }	
 	}
 
 	public void OnCloseButton(GameObject button) {

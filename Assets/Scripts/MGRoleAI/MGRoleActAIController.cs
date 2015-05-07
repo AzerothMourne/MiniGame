@@ -18,6 +18,7 @@ public class MGRoleActAIController : MGRoleAIBase
 	void Update () {
         
         roleAITimer += Time.deltaTime;
+        if (MGGlobalDataCenter.defaultCenter().isGameOver) return;
         if (roleAITimer >= 0.5f)
         {
             roleAITimer = 0;
@@ -40,7 +41,7 @@ public class MGRoleActAIController : MGRoleAIBase
     }
     void roleAIOnceAct()
     {
-        if (roleAnimController == null || roleAnimController.isDead) return;
+        
         if (roleJumpScript.jumpCount==2 && roleJumpScript.isGround == false)
         {
             Debug.Log("二段跳下翻");

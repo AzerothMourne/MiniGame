@@ -11,10 +11,10 @@ public class MGFirstLaunch : MonoBehaviour {
             MGGlobalDataCenter.defaultCenter().isFirstLaunch = true;
             MGFoundtion.setFirstLaunchFlag();
         }
-        else
-        {
-            Debug.Log("isFirstLaunch=false");
-        }
+        MGGlobalDataCenter.defaultCenter().isMingYueGuide = MGFoundtion.isMingYueGuide();
+        MGGlobalDataCenter.defaultCenter().isTianYaGuide = MGFoundtion.isTianYaGuide();
+        Debug.Log("MGGlobalDataCenter.defaultCenter().isMingYueGuide=" + MGGlobalDataCenter.defaultCenter().isMingYueGuide);
+        Debug.Log("MGGlobalDataCenter.defaultCenter().isTianYaGuide=" + MGGlobalDataCenter.defaultCenter().isTianYaGuide);
 	}
 	
 }

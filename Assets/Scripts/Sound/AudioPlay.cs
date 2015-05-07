@@ -40,7 +40,11 @@ public class AudioPlay : MonoBehaviour {
 		}
 
 		if (MGGlobalDataCenter.defaultCenter ().isKillMingyue) {
-			music.playoneshot("Sound/kill_mingyue");
+            try
+            {
+                music.playoneshot("Sound/kill_mingyue");
+            }
+            catch { }
 			MGGlobalDataCenter.defaultCenter().isKillMingyue = false;
 		}
 		//是否胜利

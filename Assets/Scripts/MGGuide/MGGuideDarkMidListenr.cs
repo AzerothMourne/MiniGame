@@ -15,6 +15,9 @@ public class MGGuideDarkMidListenr : MonoBehaviour {
     void OnMouseDown()
     {
         if (!isEnable) return;
-        GameObject.Find("NetWork").GetComponent<MGGuideManager>().darkMidClick();
+        if(MGGlobalDataCenter.defaultCenter().isLaterRoler)
+            GameObject.Find("NetWork").GetComponent<MGGuideManager>().roleLaterGuideClick();
+        else if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
+            GameObject.Find("NetWork").GetComponent<MGGuideManager>().roleFrontGuideClick();
     }
 }

@@ -28,7 +28,7 @@ public class MGGlobalDataCenter  {
     public float totalGameTime;
     public string overSenceUIName;
     public int dartIndex;
-    public bool isFirstLaunch;
+    public bool isFirstLaunch,isMingYueGuide,isTianYaGuide,isGameOver;
 	//@aragornwang
 	//play music 
 	public bool isDartHit;
@@ -68,15 +68,18 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
-        this.isFrontRoler = false;
+        this.isFrontRoler = true;
         this.isLaterRoler = !this.isFrontRoler;
         this.overSenceUIName = null;
         backToDefaultValues();
 	}
     public void backToDefaultValues()
     {
+        this.isGameOver = false;
+        this.isMingYueGuide = false;
+        this.isTianYaGuide = false;
         this.isFirstLaunch = false;
-        this.isSingle = false;
+        this.isSingle = true;
         this.dartIndex = 0;
         Time.timeScale = 1;
         this.totalGameTime = 60f;

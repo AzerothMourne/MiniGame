@@ -16,10 +16,11 @@ public class MGRoleFrontSkillAIController : MGRoleAIBase
 	
 	// Update is called once per frame
 	void Update () {
-        if (roleAnimController == null || roleAnimController.isDead) return;
+        
         dartTimer += Time.deltaTime;
         roadblockTimer += Time.deltaTime;
         beatbackTimer += Time.deltaTime;
+        if (MGGlobalDataCenter.defaultCenter().isGameOver) return;
         if (dartTimer > 1f)
         {
             dartTimer = 0f;

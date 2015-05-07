@@ -36,6 +36,64 @@ public static class MGFoundtion  {
             Debug.Log("FileInfo create faild");
         }
     }
+    public static bool isTianYaGuide()
+    {
+        FileInfo t = null;
+        try
+        {
+            t = new FileInfo(Application.persistentDataPath + "//" + "isTianYaGuide");
+            Debug.Log(t + ";" + t.Exists);
+            return t.Exists;
+        }
+        catch
+        {
+            Debug.Log("FileInfo open faild");
+        }
+        return false;
+    }
+    public static void setTianYaGuideFlag()
+    {
+        FileInfo t = null;
+        try
+        {
+            t = new FileInfo(Application.persistentDataPath + "//" + "isTianYaGuide");
+            Debug.Log(t + ";" + t.Exists);
+            t.CreateText();
+        }
+        catch
+        {
+            Debug.Log("FileInfo create faild");
+        }
+    }
+    public static bool isMingYueGuide()
+    {
+        FileInfo t = null;
+        try
+        {
+            t = new FileInfo(Application.persistentDataPath + "//" + "isMingYueGuide");
+            Debug.Log(t + ";" + t.Exists);
+            return t.Exists;
+        }
+        catch
+        {
+            Debug.Log("FileInfo open faild");
+        }
+        return false;
+    }
+    public static void setMingYueGuideFlag()
+    {
+        FileInfo t = null;
+        try
+        {
+            t = new FileInfo(Application.persistentDataPath + "//" + "isMingYueGuide");
+            Debug.Log(t + ";" + t.Exists);
+            t.CreateText();
+        }
+        catch
+        {
+            Debug.Log("FileInfo create faild");
+        }
+    }
     public static string getInternIP(){
 		string localIP = "";
 		if (Application.platform == RuntimePlatform.IPhonePlayer) {

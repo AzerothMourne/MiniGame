@@ -61,7 +61,11 @@ public class MGSkillRoadblock : MGSkillsBase{
         {
             //Debug.Log("roadblock break");
             isBreak = true;
-            this.GetComponent<Animator>().SetBool("isBreak", true);
+            try
+            {
+                this.GetComponent<Animator>().SetBool("isBreak", true);
+            }
+            catch { }
         }
         if (tag != "Player")
             return;

@@ -33,19 +33,23 @@ public class RoleAnimController : MonoBehaviour {
 	float rollTimer,rollDuration;
     private float downSpeed;
     private MusicPlayer music;
-	// Use this for initialization
-	void Start () {
+    public void initRoleAnimController()
+    {
         isFirstJump = false;
         isPressDown = false;
-		isFallDown = true;
+        isFallDown = true;
         isPressDownToGround = false;
-		isSecondJump = false;
+        isSecondJump = false;
         isRoll = false;
         isDead = false;
         isCallChangeKillFlag = false;
 
         rollTimer = 0;
         rollDuration = 0.2f;
+    }
+	// Use this for initialization
+	void Start () {
+        initRoleAnimController();
 
         //获取播放器对象
         music = (GetComponent("MusicPlayer") as MusicPlayer);
@@ -111,28 +115,43 @@ public class RoleAnimController : MonoBehaviour {
     {
         jumpAnim.SetBool("FallDownToRun", true);
         jumpAnim.SetBool("RollToRun", true);
-        jumpAnim.SetBool("killToRun", true);
-        jumpAnim.SetBool("KillRoadblockToRun", true);
-		jumpAnim.SetBool("DanToRun", true);
+        
         jumpAnim.SetBool("AnyStateToRun", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToRun", true);
+            jumpAnim.SetBool("killToRun", true);
+            jumpAnim.SetBool("KillRoadblockToRun", true);
+        }
     }
     void animStateToFirstJump()
     {
         jumpAnim.SetBool("RunToFirstJump", true);
-		jumpAnim.SetBool("DanToFirstJump", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToFirstJump", true);
+        }
     }
     void animStateToFallDown()
     {
         jumpAnim.SetBool("FirstJumpToFallDown", true);
         jumpAnim.SetBool("RollToFallDown", true);
-		jumpAnim.SetBool("DanToFallDown", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToFallDown", true);
+        }
+		
     }
     void animStateToRoll()
     {
         jumpAnim.SetBool("FirstJumpToSecondJump", true);
         jumpAnim.SetBool("RunToRoll", true);
         jumpAnim.SetBool("FallDownToRoll", true);
-		jumpAnim.SetBool("DanToRoll", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToRoll", true);
+        }
+		
     }
     public void setAllAnimStateToFalse()
     {

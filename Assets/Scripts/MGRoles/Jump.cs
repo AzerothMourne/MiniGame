@@ -23,7 +23,7 @@ public class Jump : MonoBehaviour {
 	public float jumpCount ;
     public MGSkillsBase drat,roadblock,blink,bones,sprint,beatback;
 	public UIInput log;
-    private bool isGameOver, isCollisionOver;
+    public bool isCollisionOver;
     public MGNetWorking mgNetWorking;
     public float roleSpeed;
 	public int stateMask;
@@ -80,14 +80,16 @@ public class Jump : MonoBehaviour {
         }
     }
 	void Start () {
-		stateMask = 0;
-        isCollisionOver = false;
-        isGameOver = false;
-        jumpCount = 0;
-        isGround = false;
         roleAnimaController = this.GetComponent<RoleAnimController>();
         mgNetWorking = GameObject.Find("NetWork").GetComponent<MGNetWorking>();
 	}
+    public void initRoleJumpScript()
+    {
+        stateMask = 0;
+        isCollisionOver = false;
+        jumpCount = 0;
+        isGround = false;
+    }
     public string objcToJson(string msg)
     {
         //log.label.text+="jump send:" + MGGlobalDataCenter.timestamp ()+"\r\n";
@@ -330,11 +332,11 @@ public class Jump : MonoBehaviour {
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
             transform.Translate(Vector3.right * dis * roleSpeed * Time.deltaTime);
         }
-        if (!isGameOver)
+        if (!MGGlobalDataCenter.defaultCenter().isGameOver)
         {
             gameOver();
         }
-        if (isGameOver)
+        if (MGGlobalDataCenter.defaultCenter().isGameOver)
         {
             if (this.gameObject.name == "role")
             {
@@ -360,13 +362,16 @@ public class Jump : MonoBehaviour {
             roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
             roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
         }
-        catch { }
+        catch 
+        {
+            return;
+        }
         
         if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
         {
 			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
-            isGameOver = true;
-            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity=Vector3.zero;
+            MGGlobalDataCenter.defaultCenter().isGameOver = true;
+            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = Vector3.zero;
             MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.left;
             //强制roleLater出现在role的后面一点点。
             MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = MGGlobalDataCenter.defaultCenter().role.transform.localScale;
@@ -388,7 +393,7 @@ public class Jump : MonoBehaviour {
         }
         if (this.gameObject.name == "role1" && transform.position.x + 1.4f < MGGlobalDataCenter.defaultCenter().screenLiftX)//后者出屏幕结束，还有一个后者死掉结束在RoleAnimController里
         {
-            isGameOver = true;
+            MGGlobalDataCenter.defaultCenter().isGameOver = true;
             //切换场景
             Debug.Log("role1 out of screen");
             MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
