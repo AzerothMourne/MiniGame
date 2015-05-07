@@ -320,30 +320,30 @@ MonoBehaviour:
   isPressSlogan: 0
   SloganObj: {fileID: 1510104751}
   tianyaLoadList:
-  - {fileID: 21300000, guid: 183aa66712ff5f6409895ab571fbc58b, type: 3}
-  - {fileID: 21300000, guid: c598439110bcede40847ff1f1756300b, type: 3}
-  - {fileID: 21300000, guid: 2f24d8181bccabf41bbd13b0f6943049, type: 3}
-  - {fileID: 21300000, guid: 501d6cca1555f154a9b13fab50820599, type: 3}
-  - {fileID: 21300000, guid: ece83de1fe746a34e93d4f8e3523cd75, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   istianyaLoad: 0
   timer: 0
   count: 0
   mingyueLoadList:
-  - {fileID: 21300000, guid: 4e23d2cf6bf1c174ba79b791435f99cd, type: 3}
-  - {fileID: 21300000, guid: 7a260240c0dcf28479b854d91db69d8f, type: 3}
-  - {fileID: 21300000, guid: b8fcb8ce372e5114ba7c81f717e83eee, type: 3}
-  - {fileID: 21300000, guid: 228368b917b823f47ad4ead09c212b69, type: 3}
-  - {fileID: 21300000, guid: 32a595d28640d0a41aed9595a167df46, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   ismingyueLoad: 0
   isHood: 0
   hoodList:
-  - {fileID: 21300000, guid: c2c2c90b325f8e34fa1b7e14b0faab45, type: 3}
-  - {fileID: 21300000, guid: e3ac18a544638e04d8063ac9b86ab86e, type: 3}
-  - {fileID: 21300000, guid: f4738e98f61865e45b2c1e64602ce62c, type: 3}
-  - {fileID: 21300000, guid: 82f58901143d36746861e0b84348ca44, type: 3}
-  - {fileID: 21300000, guid: 8384c3ac3a078d743bf489fd365e0106, type: 3}
-  - {fileID: 21300000, guid: 39271702141f9d946aa66f0a8fcc5b5e, type: 3}
-  - {fileID: 21300000, guid: dc85896f690d5034fabd8eb68db48acb, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   timerHood: 0
   countHood: 0
 --- !u!1 &336384769

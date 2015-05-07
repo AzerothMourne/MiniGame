@@ -116,7 +116,14 @@ public class startUI : MonoBehaviour {
             timerHood += Time.deltaTime;            
             if (timerHood >= 0.2f)
             {
-                GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood].name;
+                try
+                {
+                    GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood].name;
+                }
+                catch
+                {
+
+                }
                 timerHood = 0f;
                 countHood = (++countHood) % 5;
             }

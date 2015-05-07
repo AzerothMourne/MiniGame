@@ -10,17 +10,31 @@ using System.Net.NetworkInformation;
 public static class MGFoundtion  {
     public static bool isFirstLaunch()
     {
-        return !File.Exists("firstLaunchFile");
+        FileInfo t = null;
+        try
+        {
+            t = new FileInfo(Application.persistentDataPath + "//" + "MGFirstLaunchFlag");
+            Debug.Log(t+";"+t.Exists);
+            return !t.Exists;
+        }catch
+        {
+            Debug.Log("FileInfo open faild");
+        }
+        return false;
     }
     public static void setFirstLaunchFlag()
     {
+        FileInfo t = null;
         try
         {
-            File.CreateText("firstLaunchFile");
+            t = new FileInfo(Application.persistentDataPath + "//" + "MGFirstLaunchFlag");
+            Debug.Log(t + ";" + t.Exists);
+            t.CreateText();
         }
-        catch {
-			Debug.Log("createText faild");
-		}
+        catch
+        {
+            Debug.Log("FileInfo create faild");
+        }
     }
     public static string getInternIP(){
 		string localIP = "";
