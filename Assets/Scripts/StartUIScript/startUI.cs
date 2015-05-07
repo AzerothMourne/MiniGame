@@ -16,15 +16,15 @@ public class startUI : MonoBehaviour {
 	public bool isPressSlogan; //标语
 	public GameObject SloganObj;
 
-	public Sprite[] tianyaLoadList;
+	public string[] tianyaLoadList;
 	public bool istianyaLoad;
 	public float timer;
 	public int count;
 
-	public Sprite[] mingyueLoadList;
+	public string[] mingyueLoadList;
 	public bool ismingyueLoad;
     public bool isHood;
-    public Sprite[] hoodList;
+    public string[] hoodList;
     public float timerHood;
     public int countHood;
 
@@ -89,7 +89,7 @@ public class startUI : MonoBehaviour {
             if (timer >= 0.1f)
             {                
 				try{
-					GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
+					GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count];
 				}
 				catch{}
                 timer = 0f;
@@ -103,7 +103,7 @@ public class startUI : MonoBehaviour {
             if (timer >= 0.1f)
             {                
 				try{
-					GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count].name;
+					GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count];
 				}
 				catch{}
                 timer = 0f;
@@ -118,12 +118,9 @@ public class startUI : MonoBehaviour {
             {
                 try
                 {
-                    GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood].name;
+                    GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood];
                 }
-                catch
-                {
-
-                }
+                catch{ }
                 timerHood = 0f;
                 countHood = (++countHood) % 5;
             }

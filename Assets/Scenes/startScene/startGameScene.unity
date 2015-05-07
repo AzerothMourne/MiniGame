@@ -125,7 +125,7 @@ MonoBehaviour:
   duration: .200000003
   dragHighlight: 0
   hoverSprite: 
-  pressedSprite: pressButton
+  pressedSprite: "\u5339\u914D\u6A21\u5F0Fpress"
   disabledSprite: 
   hoverSprite2D: {fileID: 0}
   pressedSprite2D: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
-  mSpriteName: button
+  mSpriteName: "\u5339\u914D\u6A21\u5F0F"
   mFillCenter: 1
 --- !u!114 &69806160
 MonoBehaviour:
@@ -320,30 +320,30 @@ MonoBehaviour:
   isPressSlogan: 0
   SloganObj: {fileID: 1510104751}
   tianyaLoadList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - "\u5929\u6DAF\u5339\u914D\u4E2D1"
+  - "\u5929\u6DAF\u5339\u914D\u4E2D2"
+  - "\u5929\u6DAF\u5339\u914D\u4E2D3"
+  - "\u5929\u6DAF\u5339\u914D\u4E2D4"
+  - "\u5929\u6DAF\u5339\u914D\u4E2D5"
   istianyaLoad: 0
   timer: 0
   count: 0
   mingyueLoadList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - "\u660E\u6708\u5339\u914D\u4E2D1"
+  - "\u660E\u6708\u5339\u914D\u4E2D2"
+  - "\u660E\u6708\u5339\u914D\u4E2D3"
+  - "\u660E\u6708\u5339\u914D\u4E2D4"
+  - "\u660E\u6708\u5339\u914D\u4E2D5"
   ismingyueLoad: 0
   isHood: 0
   hoodList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - hood1 (1)
+  - hood1 (2)
+  - hood1 (3)
+  - hood1 (4)
+  - hood1 (5)
+  - hood1 (6)
+  - hood1 (7)
   timerHood: 0
   countHood: 0
 --- !u!1 &336384769
