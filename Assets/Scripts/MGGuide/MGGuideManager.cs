@@ -449,13 +449,21 @@ public class MGGuideManager : MonoBehaviour {
                 roleLater.GetComponent<RoleAnimController>().animStateToRun();
                 roleFront.GetComponent<RoleAnimController>().isDead = false;
 
-                
-
                 GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 1;
                 roleFront.rigidbody2D.velocity = Vector3.zero;
-                //添加AI脚本
-                roleFront.AddComponent<MGRoleActAIController>();
-                roleFront.AddComponent<MGRoleFrontSkillAIController>();
+                if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
+                {
+                    //添加AI脚本
+                    roleFront.AddComponent<MGRoleActAIController>();
+                    roleFront.AddComponent<MGRoleFrontSkillAIController>();
+                }
+                else
+                {
+                    //添加AI脚本
+                    roleLater.AddComponent<MGRoleActAIController>();
+                    roleLater.AddComponent<MGRoleFrontSkillAIController>();
+                }
+                
 
                 this.GetComponent<MGGuideDarkLayer>().createAllDarkLayerInPos();
 
