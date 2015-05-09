@@ -3,12 +3,43 @@ using System.Collections;
 using LitJson;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Net.NetworkInformation;
+using System.Threading;
 /// <summary>
 /// 还需要建立一个误差校正机制，保证客户机以服务器端的数据为主（重要）
 /// </summary>
 public class MGNetWorking : MonoBehaviour {
-	
+    private Socket mainSocket,syncSocket;
+    private IPEndPoint mainSocketIPE;
+    private EndPoint mainSocketEP;
+    public static void sendMsgToPeer(string ip, int port)
+    {
+
+    }
+    public void connectToServer(string ip,int port)
+    {
+
+    }
+    //线程函数
+    public void mainSocketListen()
+    {
+        string receiveString = null;
+        while (true)
+        {
+            byte[] buffer = new byte[1024];//设置缓冲数据流
+            mainSocket.ReceiveFrom(buffer, ref mainSocketEP);//接收数据,并确把数据设置到缓冲流里面
+            receiveString = Encoding.ASCII.GetString(buffer);
+            if (receiveString.Length > 0)
+            {
+               
+                string[] arr = receiveString.Split(new char[] { '#' });
+
+            }
+        }
+    }
 	public static void findHost()
 	{
         MGGlobalDataCenter.defaultCenter().isFrontRoler = false;

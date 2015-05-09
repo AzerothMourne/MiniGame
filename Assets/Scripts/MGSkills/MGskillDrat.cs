@@ -91,7 +91,7 @@ public class MGskillDrat : MGSkillsBase{
         }
         else if(notification.objc is MGMsgModel)//对面要做的
         {
-            MGMsgModel other = notification.objc as MGMsgModel;
+            //MGMsgModel other = notification.objc as MGMsgModel;
 			danDart();
         }
         

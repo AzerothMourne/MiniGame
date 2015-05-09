@@ -47,7 +47,7 @@ public class MGGuideManager : MonoBehaviour {
             //先删除AI脚本 
             Object Script = roleLater.GetComponent<MGRoleActAIController>();
             Destroy(Script);
-            Script = roleLater.GetComponent<MGRoleFrontSkillAIController>();
+            Script = roleLater.GetComponent<MGRoleLaterSkillAIController>();
             Destroy(Script);
         }
 
@@ -110,6 +110,7 @@ public class MGGuideManager : MonoBehaviour {
                 }
             }
             guideEndMask |= MGGuideManagerState.jump;
+            guideLastStepTimer = guideDelayTimer;
         }
         else if ((guideEndMask & MGGuideManagerState.secondJump) == 0)
         {
@@ -125,6 +126,7 @@ public class MGGuideManager : MonoBehaviour {
                 }
             }
             guideEndMask |= MGGuideManagerState.secondJump;
+            guideLastStepTimer = guideDelayTimer;
         }
         else if ((guideEndMask & MGGuideManagerState.downToLine) == 0)
         {
@@ -140,6 +142,7 @@ public class MGGuideManager : MonoBehaviour {
             }
             this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
             guideEndMask |= MGGuideManagerState.downToLine;
+            guideLastStepTimer = guideDelayTimer;
         }
         else if ((guideEndMask & MGGuideManagerState.up) == 0)
         {
@@ -155,6 +158,7 @@ public class MGGuideManager : MonoBehaviour {
             }
             this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
             guideEndMask |= MGGuideManagerState.up;
+            guideLastStepTimer = guideDelayTimer;
         }
         else if ((guideEndMask & MGGuideManagerState.dart) == 0)
         {
@@ -197,6 +201,7 @@ public class MGGuideManager : MonoBehaviour {
             {
                 guideEndMask |= MGGuideManagerState.dart;
                 guideDartStep = 1;
+                guideLastStepTimer = guideDelayTimer;
             }
             roadblockGCDTimer = 0;
         }
@@ -236,6 +241,7 @@ public class MGGuideManager : MonoBehaviour {
                 }
             }
             this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            
         }
         else if ((guideEndMask & MGGuideManagerState.beatback) == 0)
         {
@@ -251,6 +257,7 @@ public class MGGuideManager : MonoBehaviour {
             }
             this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
             guideEndMask |= MGGuideManagerState.beatback;
+            guideLastStepTimer = guideDelayTimer;
         }
         else if (isGuideEnd)
         {
@@ -258,7 +265,7 @@ public class MGGuideManager : MonoBehaviour {
         }
         guideLabel.SetActive(false);
         skillObjc = null;
-        guideLastStepTimer = guideDelayTimer;
+        
     }
     public void roleLaterGuideClick()
     {
@@ -487,19 +494,19 @@ public class MGGuideManager : MonoBehaviour {
         else if (MGGlobalDataCenter.defaultCenter().isSingle && MGGlobalDataCenter.defaultCenter().isFrontRoler)
         {
             guideDelayTimer += Time.deltaTime;
-            if(guideDelayTimer>guideLastStepTimer + 0.1f)
+            if(guideDelayTimer>guideLastStepTimer + 0.5f)
                 roleFrontGuideJump();
             roleFrontGuideSecondJump();
-            if (guideDelayTimer > guideLastStepTimer + 0.8f)
+            if (guideDelayTimer > guideLastStepTimer + 1.2f)
                 roleFrontGuideDownToLine();
-            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+            if (guideDelayTimer > guideLastStepTimer + 0.6f)
                 roleFrontGuideUp();
-            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+            if (guideDelayTimer > guideLastStepTimer + 0.6f)
                 roleFrontGuideDart();
             roleFrontGuideRoadblock();
-            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+            if (guideDelayTimer > guideLastStepTimer + 1f)
                 roleFrontGuideBeatback();
-            if (guideDelayTimer > guideLastStepTimer + 0.5f)
+            if (guideDelayTimer > guideLastStepTimer + 0.2f)
                 roleFrontGuideEnd();
         }
         
@@ -522,7 +529,7 @@ public class MGGuideManager : MonoBehaviour {
             if (flag && roleFrontJumpScript.isGround)
             {
                 flag = false;
-                showButtonAndLabel("upButton(Clone)", "点击“跳跃”可躲避飞镖");
+                showButtonAndLabel("upButton(Clone)", "让我们来学习一下明月的基本操作，点击“跳跃”可向上跳跃");
             }
         }
     }
@@ -543,7 +550,7 @@ public class MGGuideManager : MonoBehaviour {
             {
                 //Time.timeScale = 0;
                 flag = false;
-                showButtonAndLabel("upButton(Clone)","试试二段跳吧，点击“跳跃”来躲避第一个路障");
+                showButtonAndLabel("upButton(Clone)","继续点击“跳跃”可二段跳");
             }
         }
     }
@@ -562,7 +569,7 @@ public class MGGuideManager : MonoBehaviour {
             if (flag && roleFrontJumpScript.isGround)
             {
                 flag = false;
-                showButtonAndLabel("downButton(Clone)", "明月放了好多技能，点击“下翻”来躲避障碍");
+                showButtonAndLabel("downButton(Clone)", "点击“下翻”可向下翻滚");
             }
         }
     }
@@ -581,7 +588,7 @@ public class MGGuideManager : MonoBehaviour {
             if (flag && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
             {
                 flag = false;
-                showButtonAndLabel("downButton(Clone)", "明月放了好多技能，点击“下翻”来躲避障碍");
+                showButtonAndLabel("downButton(Clone)", "处于下翻状态时，按钮会变成“上翻”，此时点击可向上翻滚");
             }
         }
     }
@@ -601,31 +608,31 @@ public class MGGuideManager : MonoBehaviour {
             if (guideDartStep==1 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("dartButton(Clone)",guideDartStep.ToString());
+                showButtonAndLabel("dartButton(Clone)", "让我们试试技能吧，点击“飞镖”可向后发射飞镖");
                 roadblockGCDTimer = 0;
             }
-            else if (roadblockGCDTimer > 0.5f && guideDartStep == 2 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            else if (roadblockGCDTimer > 0.02f && guideDartStep == 2 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("downButton(Clone)", guideDartStep.ToString());
+                showButtonAndLabel("downButton(Clone)", "教您一个小技巧，此时点击“下翻”可向下翻滚");
                 roadblockGCDTimer = 0;
             }
-            else if (roadblockGCDTimer > 0.5f && guideDartStep == 3 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            else if (roadblockGCDTimer > 0.22f && guideDartStep == 3 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("dartButton(Clone)", guideDartStep.ToString());
+                showButtonAndLabel("dartButton(Clone)", "处于下方时再发送一个飞镖吧~");
                 roadblockGCDTimer = 0;
             }
-            else if (roadblockGCDTimer > 0.5f && guideDartStep == 4 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            else if (roadblockGCDTimer > 0.02f && guideDartStep == 4 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("downButton(Clone)", guideDartStep.ToString());
+                showButtonAndLabel("downButton(Clone)", "让我们再翻上来发射一个飞镖吧");
                 roadblockGCDTimer = 0;
             }
-            else if (roadblockGCDTimer > 0.5f && guideDartStep == 5 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
+            else if (roadblockGCDTimer > 0.22f && guideDartStep == 5 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("dartButton(Clone)", guideDartStep.ToString());
+                showButtonAndLabel("dartButton(Clone)", "通过控制明月的位置，可以释放不同的飞镖组合");
                 roadblockGCDTimer = 0;
             }
         }
@@ -634,7 +641,7 @@ public class MGGuideManager : MonoBehaviour {
     {
         if ((guideEndMask & MGGuideManagerState.dart) != 0 && (guideMask & MGGuideManagerState.roadblock) == 0)
         {
-            if (roleFrontJumpScript.isGround && guideDelayTimer > guideLastStepTimer + 0.5f)
+            if (roleFrontJumpScript.isGround && guideDelayTimer > guideLastStepTimer + 1.0f)
             {
                 guideMask |= MGGuideManagerState.roadblock;
                 guideDartStep = 1;
@@ -650,26 +657,31 @@ public class MGGuideManager : MonoBehaviour {
                     roadblockGCDTimer = 0;
                     --roadblockHoldLevel;
                     roleFrontJumpScript.skillsRoadblock();
-                    guideDartStep = 0;
-                    if(roadblockHoldLevel==0)
+                    if (roadblockHoldLevel == 0)
+                    {
                         guideEndMask |= MGGuideManagerState.roadblock;
+                        guideLastStepTimer = guideDelayTimer;
+                    }
                 }
             }
             guideStepTimer += Time.deltaTime;
             if (guideDartStep == 1 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("roadblockButton(Clone)", "点击“闪烁”可躲避障碍哦");
+                showButtonAndLabel("roadblockButton(Clone)", "来试试第二个技能“地刺”吧~");
+                guideStepTimer = 0;
             }
             else if (guideStepTimer > 0.1f && guideDartStep == 2 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y > 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("downButton(Clone)", "点击“闪烁”可躲避障碍哦");
+                showButtonAndLabel("downButton(Clone)", "此时点击“下翻”可以改变地刺出现的方向");
+                guideStepTimer = 0;
             }
-            else if (guideStepTimer > 0.1f && guideDartStep == 3 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
+            else if (guideStepTimer > 0.35f && guideDartStep == 3 && roleFrontJumpScript.isGround && roleFront.transform.localScale.y < 0)
             {
                 ++guideDartStep;
-                showButtonAndLabel("downButton(Clone)", "点击“闪烁”可躲避障碍哦");
+                showButtonAndLabel("downButton(Clone)", "让我们再翻上来试试~");
+                guideStepTimer = 0;
             }
         }
     }
@@ -688,7 +700,7 @@ public class MGGuideManager : MonoBehaviour {
             if (flag && roleFront.transform.localScale.y > 0 && roleFrontJumpScript.isGround)
             {
                 flag = false;
-                showButtonAndLabel("beatbackButton(Clone)", "击退");
+                showButtonAndLabel("beatbackButton(Clone)", "您已经学会了基本操作\r\n让我们释放大招\r\n“沧海月明”\r\n给与对方致命一击吧~");
             }
         }
     }
@@ -838,7 +850,7 @@ public class MGGuideManager : MonoBehaviour {
             if (skillObjc != null && skillObjc.transform.position.x - roleLater.transform.position.x <= 3f)
             {
                 skillObjc = null;
-                showButtonAndLabel("bonesButton(Clone)", "基础操作已经学会啦~我们来试试技能吧！点击“金钟罩”可弹开障碍");
+                showButtonAndLabel("bonesButton(Clone)", "基础操作已经学会啦~\r\n我们来试试技能吧！\r\n点击“金钟罩”可弹开障碍");
             }
             if (skillObjc != null)
             {
@@ -903,7 +915,7 @@ public class MGGuideManager : MonoBehaviour {
         if ((guideEndMask & MGGuideManagerState.beatback) != 0 && (guideMask & MGGuideManagerState.sprint) == 0)
         {
             guideMask |= MGGuideManagerState.sprint;
-            showButtonAndLabel("sprintButton(Clone)", "我们也来试试天涯的大招吧~");
+            showButtonAndLabel("sprintButton(Clone)", "我们也来试试\r\n天涯的大招吧~");
         }
         if ((guideEndMask & MGGuideManagerState.sprint) == 0 && (guideMask & MGGuideManagerState.sprint) != 0)
         {

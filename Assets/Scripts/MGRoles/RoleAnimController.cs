@@ -45,7 +45,7 @@ public class RoleAnimController : MonoBehaviour {
         isCallChangeKillFlag = false;
 
         rollTimer = 0;
-        rollDuration = 0.2f;
+        rollDuration = 0.15f;
     }
 	// Use this for initialization
 	void Start () {

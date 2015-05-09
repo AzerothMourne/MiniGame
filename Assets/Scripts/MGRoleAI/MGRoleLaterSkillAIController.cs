@@ -12,8 +12,19 @@ public class MGRoleLaterSkillAIController : MGRoleAIBase
         initRoleAIData();
         canUseRoadblock = false;
         blinkTimer = bonesTimer = sprintTimer = 0;
+        Invoke("firstSkill", 0.5f);
+        Invoke("secondSkill", 0.5f);
 	}
-
+    
+    void firstSkill()
+    {
+        MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.blink, null);
+    }
+    void secondSkill()
+    {
+        MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.bones, null);
+        blinkTimer = bonesTimer = sprintTimer = 0;
+    }
     void Update()
     {
         blinkTimer += Time.deltaTime;
