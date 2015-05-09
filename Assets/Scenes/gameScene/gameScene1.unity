@@ -1059,7 +1059,7 @@ Transform:
   m_GameObject: {fileID: 1533371668}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00336700329, y: .00336700329, z: .00336700329}
+  m_LocalScale: {x: .00312989042, y: .00312989042, z: .00312989042}
   m_Children:
   - {fileID: 361695384}
   - {fileID: 1139895024}
@@ -1691,6 +1691,7 @@ MonoBehaviour:
   sprint: {fileID: 11469946, guid: 7416dca293cb56b43ab72d89402acead, type: 2}
   beatback: {fileID: 0}
   log: {fileID: 0}
+  isCollisionOver: 0
   mgNetWorking: {fileID: 0}
   roleSpeed: 0
   stateMask: 0
@@ -1939,6 +1940,7 @@ MonoBehaviour:
   sprint: {fileID: 0}
   beatback: {fileID: 11477352, guid: 3471221c0c24cf546a4aa7e84ca445a7, type: 2}
   log: {fileID: 0}
+  isCollisionOver: 0
   mgNetWorking: {fileID: 0}
   roleSpeed: 0
   stateMask: 0

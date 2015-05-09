@@ -11,7 +11,7 @@ public class MGRoleActAIController : MGRoleAIBase
     float randAFloat()
     {
         float randNum = Random.Range(0f,1f);
-        Debug.Log("-------------------------------randNum= " + randNum);
+        //Debug.Log("-------------------------------randNum= " + randNum);
         return randNum;
     }
 	// Update is called once per frame

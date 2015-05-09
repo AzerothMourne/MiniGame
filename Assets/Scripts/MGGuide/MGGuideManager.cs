@@ -468,7 +468,7 @@ public class MGGuideManager : MonoBehaviour {
 
                 GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 1;
                 roleFront.rigidbody2D.velocity = Vector3.zero;
-                if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
+                if (MGGlobalDataCenter.defaultCenter().isLaterRoler)
                 {
                     //添加AI脚本
                     roleFront.AddComponent<MGRoleActAIController>();

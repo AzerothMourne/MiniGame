@@ -12,9 +12,11 @@ public class MGRoleLaterSkillAIController : MGRoleAIBase
         initRoleAIData();
         isUseFirstSkill = false;
         blinkTimer = bonesTimer = sprintTimer = 0;
+        Debug.Log("-------------------------------------------------");
 	}
     void firstSkill()
     {
+        MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.blink, null);
         MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.bones, null);
         isUseFirstSkill = true;
         blinkTimer = bonesTimer = sprintTimer = 0;
@@ -23,6 +25,7 @@ public class MGRoleLaterSkillAIController : MGRoleAIBase
     {
         if (!isUseFirstSkill && blinkTimer > 0.5f)
         {
+            Debug.Log("*************************************************");
             firstSkill();
         }
         blinkTimer += Time.deltaTime;
