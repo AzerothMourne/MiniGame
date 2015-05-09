@@ -43,7 +43,7 @@ MonoBehaviour:
   mSprites:
   - name: bg
     x: 0
-    y: 1472
+    y: 895
     width: 1024
     height: 576
     borderLeft: 0
@@ -94,8 +94,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: down
-    x: 2224
-    y: 516
+    x: 1948
+    y: 327
     width: 148
     height: 141
     borderLeft: 0
@@ -107,8 +107,8 @@ MonoBehaviour:
     paddingTop: 13
     paddingBottom: 10
   - name: home
-    x: 2012
-    y: 543
+    x: 1797
+    y: 311
     width: 150
     height: 157
     borderLeft: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: hood1 (1)
     x: 1797
-    y: 1387
+    y: 1537
     width: 426
     height: 149
     borderLeft: 0
@@ -199,7 +199,7 @@ MonoBehaviour:
     paddingBottom: 12
   - name: hood1 (7)
     x: 1797
-    y: 1537
+    y: 1387
     width: 426
     height: 149
     borderLeft: 0
@@ -224,8 +224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: jump
-    x: 2051
-    y: 47
+    x: 1797
+    y: 169
     width: 148
     height: 141
     borderLeft: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: mingyue
-    x: 2691
+    x: 2224
     y: 1566
     width: 466
     height: 120
@@ -251,7 +251,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: new_tianya
     x: 2224
-    y: 880
+    y: 1332
     width: 466
     height: 112
     borderLeft: 0
@@ -380,8 +380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: up
-    x: 2012
-    y: 361
+    x: 1797
+    y: 27
     width: 148
     height: 141
     borderLeft: 0
@@ -471,8 +471,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u518D\u6765\u4E00\u6B21"
-    x: 835
-    y: 51
+    x: 1946
+    y: 90
     width: 186
     height: 88
     borderLeft: 0
@@ -484,8 +484,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u51B2\u523A\u6309\u94AE"
-    x: 1538
-    y: 346
+    x: 1797
+    y: 701
     width: 214
     height: 197
     borderLeft: 0
@@ -511,7 +511,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5339\u914D\u6A21\u5F0F"
     x: 1797
-    y: 189
+    y: 469
     width: 253
     height: 115
     borderLeft: 0
@@ -523,19 +523,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u5339\u914D\u6A21\u5F0Fpress"
-    x: 3805
-    y: 1735
-    width: 253
-    height: 115
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "\u5355\u4EBA\u6A21\u5F0F"
     x: 1538
     y: 32
     width: 253
@@ -548,9 +535,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u5355\u4EBA\u6A21\u5F0F"
+    x: 3805
+    y: 1735
+    width: 253
+    height: 115
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: "\u5355\u4EBA\u6A21\u5F0Fpress"
     x: 1797
-    y: 73
+    y: 585
     width: 253
     height: 115
     borderLeft: 0
@@ -563,7 +563,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D1"
     x: 2224
-    y: 1219
+    y: 767
     width: 466
     height: 112
     borderLeft: 0
@@ -576,7 +576,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D2"
     x: 2224
-    y: 1332
+    y: 880
     width: 466
     height: 112
     borderLeft: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D3"
     x: 2224
-    y: 1106
+    y: 993
     width: 466
     height: 112
     borderLeft: 0
@@ -602,7 +602,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D4"
     x: 2224
-    y: 993
+    y: 1106
     width: 466
     height: 112
     borderLeft: 0
@@ -615,7 +615,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u5929\u6DAF\u5339\u914D\u4E2D5"
     x: 2224
-    y: 767
+    y: 1219
     width: 466
     height: 112
     borderLeft: 0
@@ -627,10 +627,10 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u6309\u94AE\u51FB\u9000"
-    x: 1538
-    y: 148
-    width: 214
-    height: 197
+    x: 1946
+    y: 179
+    width: 142
+    height: 131
     borderLeft: 0
     borderRight: 0
     borderTop: 0
@@ -640,19 +640,6 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u6309\u94AE\u5C16\u5200"
-    x: 1797
-    y: 701
-    width: 214
-    height: 197
-    borderLeft: 0
-    borderRight: 0
-    borderTop: 0
-    borderBottom: 0
-    paddingLeft: 0
-    paddingRight: 0
-    paddingTop: 0
-    paddingBottom: 0
-  - name: "\u6309\u94AE\u98DE\u9556"
     x: 3805
     y: 1851
     width: 214
@@ -665,9 +652,22 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: "\u6309\u94AE\u98DE\u9556"
+    x: 1538
+    y: 148
+    width: 214
+    height: 197
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D1"
-    x: 3625
-    y: 1566
+    x: 2691
+    y: 1445
     width: 466
     height: 120
     borderLeft: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D3"
-    x: 3158
+    x: 3625
     y: 1566
     width: 466
     height: 120
@@ -705,8 +705,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D4"
-    x: 2691
-    y: 1445
+    x: 3158
+    y: 1566
     width: 466
     height: 120
     borderLeft: 0
@@ -718,7 +718,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u660E\u6708\u5339\u914D\u4E2D5"
-    x: 2224
+    x: 2691
     y: 1566
     width: 466
     height: 120
@@ -732,7 +732,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: "\u80CC\u666F\u56FE\u65E0\u9E1F"
     x: 0
-    y: 895
+    y: 1472
     width: 1024
     height: 576
     borderLeft: 0
@@ -822,8 +822,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: "\u91D1\u949F\u7F69\u6309\u94AE"
-    x: 1797
-    y: 503
+    x: 1538
+    y: 346
     width: 214
     height: 197
     borderLeft: 0
@@ -834,11 +834,11 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
-  - name: "\u95EA\u70C1\u6309\u94AE"
-    x: 1797
-    y: 305
-    width: 214
-    height: 197
+  - name: "\u95EA\u73B0\u6309\u94AE"
+    x: 835
+    y: 8
+    width: 142
+    height: 131
     borderLeft: 0
     borderRight: 0
     borderTop: 0

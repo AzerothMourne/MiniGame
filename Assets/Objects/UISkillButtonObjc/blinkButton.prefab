@@ -120,7 +120,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
-  mSpriteName: "\u95EA\u70C1\u6309\u94AE"
+  mSpriteName: "\u95EA\u73B0\u6309\u94AE"
   mFillCenter: 1
 --- !u!114 &11488352
 MonoBehaviour:
