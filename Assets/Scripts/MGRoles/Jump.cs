@@ -374,7 +374,7 @@ public class Jump : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
             //MGGlobalDataCenter.defaultCenter().isGameOver = true;
             MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = Vector3.zero;
-            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.left;
+            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.zero;
             //强制roleLater出现在role的后面一点点。
 
             roleLaterPos.x = roleFrontPos.x - 0.95f;
