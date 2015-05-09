@@ -42,7 +42,7 @@ public class MGSkillRoadblock : MGSkillsBase{
             DestroySelf();
         }
     }
-    void triggerFunc(MGNotification notification)
+    public void triggerFunc(MGNotification notification)
     {
         string tag = null, name = null;
         if (notification.objc is Collider2D)//自己要做的

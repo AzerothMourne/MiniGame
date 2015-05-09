@@ -65,7 +65,7 @@ public class MGSkillEffect : MonoBehaviour {
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-            if (objc)
+            if (objc && (objc.GetComponent<Jump>().stateMask & roleState.wudi) == 0)
             {
                 objc.transform.Translate(Vector3.left * MGSkillBeatbackInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillBeatbackInfo.durationTime);
             }
@@ -87,7 +87,7 @@ public class MGSkillEffect : MonoBehaviour {
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-            if (objc)
+            if (objc && (objc.GetComponent<Jump>().stateMask & roleState.wudi) == 0)
             {
                 objc.transform.Translate(Vector3.left * MGSkillRoadblockInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillRoadblockInfo.durationTime);
             }
@@ -193,7 +193,7 @@ public class MGSkillEffect : MonoBehaviour {
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-            if (objc)
+            if (objc && (objc.GetComponent<Jump>().stateMask & roleState.wudi) == 0)
             {
                 objc.transform.Translate(Vector3.left * MGSkillDartInfo.SkillEffectSpeed * dis );
             }

@@ -243,6 +243,13 @@ public class MGGuideManager : MonoBehaviour {
             this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
             
         }
+        else if ((guideEndMask & MGGuideManagerState.sprint) == 0)
+        {
+            Time.timeScale = 1;
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.sprint, null);
+            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+            roadblockGCDTimer = 0;
+        }
         else if ((guideEndMask & MGGuideManagerState.beatback) == 0)
         {
             Time.timeScale = 1;
@@ -261,7 +268,7 @@ public class MGGuideManager : MonoBehaviour {
         }
         else if (isGuideEnd)
         {
-            
+            guideEndClickOper();
         }
         guideLabel.SetActive(false);
         skillObjc = null;
@@ -387,24 +394,27 @@ public class MGGuideManager : MonoBehaviour {
         }
         else if (isGuideEnd)
         {
-            Time.timeScale = 1;
-            isGuideEnd = false;
-			MGGlobalDataCenter.defaultCenter().totalGameTime=60;
-            this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
-            Debug.Log("show all buttons");
-            foreach (GameObject uiButton in UIButtons)
-            {
-                uiButton.SetActive(true);
-                uiButton.GetComponent<UIButton>().enabled = true;
-            }
-            gameTimer.SetActive(true);
-            stopButton.SetActive(true);
-            roadblockGCDTimer = 0;
-            isReStart = true;
-            
+            guideEndClickOper(); 
         }
         guideLabel.SetActive(false);
         skillObjc = null;
+    }
+    void guideEndClickOper()
+    {
+        Time.timeScale = 1;
+        isGuideEnd = false;
+        MGGlobalDataCenter.defaultCenter().totalGameTime = 60;
+        this.GetComponent<MGGuideDarkLayer>().destoryDarkLayer();
+        Debug.Log("show all buttons");
+        foreach (GameObject uiButton in UIButtons)
+        {
+            uiButton.SetActive(true);
+            uiButton.GetComponent<UIButton>().enabled = true;
+        }
+        gameTimer.SetActive(true);
+        stopButton.SetActive(true);
+        roadblockGCDTimer = 0;
+        isReStart = true;
     }
 	// Update is called once per frame
 	void Update () {
@@ -468,13 +478,16 @@ public class MGGuideManager : MonoBehaviour {
                 {
                     //添加AI脚本
                     roleLater.AddComponent<MGRoleActAIController>();
-                    roleLater.AddComponent<MGRoleFrontSkillAIController>();
+                    roleLater.AddComponent<MGRoleLaterSkillAIController>();
                 }
                 
 
                 this.GetComponent<MGGuideDarkLayer>().createAllDarkLayerInPos();
 
-				guideLabel.GetComponent<UILabel>().text = "现在你来试试吧~请在60秒内追上明月~";
+                if(MGGlobalDataCenter.defaultCenter().isFrontRoler)
+                    guideLabel.GetComponent<UILabel>().text = "现在来试试吧~请在60秒内不被追上";
+                else
+				    guideLabel.GetComponent<UILabel>().text = "现在你来试试吧~请在60秒内追上明月~";
                 guideLabel.SetActive(true);
                 Debug.Log("定格准备重新开始");
                 Time.timeScale = 0;
@@ -504,6 +517,8 @@ public class MGGuideManager : MonoBehaviour {
             if (guideDelayTimer > guideLastStepTimer + 0.6f)
                 roleFrontGuideDart();
             roleFrontGuideRoadblock();
+            if (guideDelayTimer > guideLastStepTimer + 0.6f)
+                roleLaterSprint();
             if (guideDelayTimer > guideLastStepTimer + 1f)
                 roleFrontGuideBeatback();
             if (guideDelayTimer > guideLastStepTimer + 0.2f)
@@ -685,9 +700,31 @@ public class MGGuideManager : MonoBehaviour {
             }
         }
     }
+
+    void roleLaterSprint()
+    {
+        if ((guideEndMask & MGGuideManagerState.roadblock) != 0 && (guideMask & MGGuideManagerState.sprint) == 0)
+        {
+            guideMask |= MGGuideManagerState.sprint;
+            guideLabel.GetComponent<UILabel>().text = "天涯要放大招啦！！！";
+            guideLabel.SetActive(true);
+            this.GetComponent<MGGuideDarkLayer>().createAllDarkLayerInPos();
+            Time.timeScale = 0;
+        }
+        if ((guideEndMask & MGGuideManagerState.sprint) == 0 && (guideMask & MGGuideManagerState.sprint) != 0)
+        {
+            roadblockGCDTimer += Time.deltaTime;
+            if (roadblockGCDTimer >= MGSkillSprintInfo.durationTime + 0.5f)
+            {
+                guideEndMask |= MGGuideManagerState.sprint;
+                guideLastStepTimer = guideDelayTimer;
+            }
+        }
+    }
+
     void roleFrontGuideBeatback()
     {
-        if ((guideEndMask & MGGuideManagerState.roadblock) != 0 && (guideMask & MGGuideManagerState.beatback) == 0)
+        if ((guideEndMask & MGGuideManagerState.sprint) != 0 && (guideMask & MGGuideManagerState.beatback) == 0)
         {
             if (roleFront.transform.localScale.y > 0 && roleFrontJumpScript.isGround)
             {

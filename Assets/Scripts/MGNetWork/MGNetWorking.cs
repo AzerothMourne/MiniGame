@@ -35,7 +35,7 @@ public class MGNetWorking : MonoBehaviour {
             if (receiveString.Length > 0)
             {
                
-                string[] arr = receiveString.Split(new char[] { '#' });
+                
 
             }
         }

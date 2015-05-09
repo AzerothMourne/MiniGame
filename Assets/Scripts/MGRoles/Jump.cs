@@ -14,6 +14,7 @@ public static class RoleActEventEnum{
 public static class roleState{
 	public static int bone = 1 << 0;
 	public static int sprint = 1 << 1;
+    public static int wudi = 1 << 30;
 }
 public class Jump : MonoBehaviour {
 
@@ -369,17 +370,14 @@ public class Jump : MonoBehaviour {
         
         if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
         {
+            MGGlobalDataCenter.defaultCenter().roleLater.GetComponent<Jump>().stateMask |= roleState.wudi;
 			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
-            MGGlobalDataCenter.defaultCenter().isGameOver = true;
+            //MGGlobalDataCenter.defaultCenter().isGameOver = true;
             MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = Vector3.zero;
             MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.left;
             //强制roleLater出现在role的后面一点点。
-            MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = MGGlobalDataCenter.defaultCenter().role.transform.localScale;
-            if (MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale.y < 0)
-            {
-                MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.gravityScale = 0f;
-            }
-            roleLaterPos.x = roleFrontPos.x - 1f;
+
+            roleLaterPos.x = roleFrontPos.x - 0.95f;
             roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
             MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
             MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = new Vector3(1, 1, 1);

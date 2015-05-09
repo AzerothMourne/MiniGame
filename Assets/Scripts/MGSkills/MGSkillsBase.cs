@@ -27,10 +27,10 @@ public static class MGSkillRoadblockInfo
 public static class MGSkillBlinkInfo
 {
     public static string skillId = SkillEffectEnum.blink;
-    public static int skillCD = 6;
+    public static int skillCD = 7;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f/4f;
+    public static float SkillEffectSpeed = 9f / 40f;
     public static float durationTime = 0.1f;
 }
 public static class MGSkillBonesInfo
@@ -48,7 +48,7 @@ public static class MGSkillSprintInfo
     public static int skillCD = 8;
     public static int skillHoldLevel = 1;
     public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 3f / 8f;
+    public static float SkillEffectSpeed = 7f / 20f;
     public static float durationTime = 2.0f;
 }
 public static class MGSkillBeatbackInfo
@@ -159,5 +159,4 @@ public class MGSkillsBase : MonoBehaviour {
             otherObject.GetComponent<MGskillDrat>().direction = new Vector3(direction.x, -1 * Mathf.Abs(direction.x) * Mathf.Tan(Mathf.PI * (angle - 90) / 180f), direction.z);
         }
     }
-    
 }
