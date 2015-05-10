@@ -69,7 +69,7 @@ public class MGGlobalDataCenter  {
     private MGGlobalDataCenter()
     {
         Debug.Log("Init GlobalData");
-        this.isFrontRoler = true;
+        this.isFrontRoler = false;
         this.isLaterRoler = !this.isFrontRoler;
         this.overSenceUIName = null;
         backToDefaultValues();

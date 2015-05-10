@@ -69,13 +69,13 @@ public class MGSkillBones : MGSkillsBase
             	flyDuang(other, releaseObject);
         }
 		if (other.name.Length>=istrlen && other.name.Substring(0,istrlen)== strtmp) {
-			print("true");
+            print("isDartDefence");
 			MGGlobalDataCenter.defaultCenter().isDartDefence = true;
 		}
-		//strtmp = "roadblock(Clone)";
-		//istrlen = strtmp.Length;
+		strtmp = "roadblock(Clone)";
+		istrlen = strtmp.Length;
 		if (other.name.Length>=istrlen && other.name.Substring(0,istrlen)== strtmp) {
-			print("true");
+            print("isRoadBlockDefence");
 			MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
 		}
 
