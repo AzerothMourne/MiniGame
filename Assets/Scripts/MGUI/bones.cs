@@ -14,6 +14,7 @@ public class bones : UIBase
     {
         direction = true;
         addOrDec = true;
+        cdBack.fillAmount = 1f;
 		//@test
 		//MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, null);
     }

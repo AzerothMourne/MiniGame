@@ -13,6 +13,7 @@ public class blink : UIBase
     {
         direction = true;
         addOrDec = true;
+        cdBack.fillAmount = 1f;
     }
 
     // Update is called once per frame

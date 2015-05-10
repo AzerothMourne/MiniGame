@@ -4,12 +4,10 @@ using System.Collections;
 public class AudioPlay : MonoBehaviour {
 
 	private MusicPlayer music;
-
 	// Use this for initialization
 	void Start () {
 		music = (GetComponent ("MusicPlayer") as MusicPlayer);
 	}
-	
 	// Update is called once per frame
 	void Update () {
 		if (MGGlobalDataCenter.defaultCenter ().isDartHit) {
@@ -39,10 +37,13 @@ public class AudioPlay : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter ().isDartRelease = false;
 		}
 
-		if (MGGlobalDataCenter.defaultCenter ().isKillMingyue) {
+        if (MGGlobalDataCenter.defaultCenter().isKillMingyue && !MGGlobalDataCenter.defaultCenter().isPlayKill)
+        {
             try
             {
                 music.playoneshot("Sound/kill_mingyue");
+                Debug.Log("kill_mingyue");
+                MGGlobalDataCenter.defaultCenter().isPlayKill = true;
             }
             catch { }
 			MGGlobalDataCenter.defaultCenter().isKillMingyue = false;

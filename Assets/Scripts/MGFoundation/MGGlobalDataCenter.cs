@@ -35,6 +35,7 @@ public class MGGlobalDataCenter  {
 	public bool isDartDefence;
 	public bool isDartRelease;
 	public bool isKillMingyue;
+    public bool isPlayKill;
 	public bool isRoadBlockHit;
 	public bool isRoadBlockDefence;
 
@@ -75,6 +76,7 @@ public class MGGlobalDataCenter  {
 	}
     public void backToDefaultValues()
     {
+        this.isPlayKill = false;
         this.isGameOver = false;
         this.isMingYueGuide = false;
         this.isTianYaGuide = false;

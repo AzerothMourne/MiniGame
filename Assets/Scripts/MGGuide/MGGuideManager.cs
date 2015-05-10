@@ -77,6 +77,7 @@ public class MGGuideManager : MonoBehaviour {
     {
         Debug.Log("delaySetGameOver");
         MGGlobalDataCenter.defaultCenter().isGameOver = false;
+        MGGlobalDataCenter.defaultCenter().isPlayKill = false;
     }
     void showButtonAndLabel(string buttonName, string labelString)
     {

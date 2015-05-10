@@ -83,6 +83,7 @@ public class RoleAnimController : MonoBehaviour {
 			//GameObject.Find("log").GetComponent<UILabel>().text+="changeKillFlag";
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
             MGGlobalDataCenter.defaultCenter().isGameOver = true;
+            MGGlobalDataCenter.defaultCenter().isKillMingyue = true;
             toNomalRun();
             animStateToRun();
         }  
@@ -334,8 +335,7 @@ public class RoleAnimController : MonoBehaviour {
                     MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
 					MGGlobalDataCenter.defaultCenter().isVictory = true;
                 }
-				print("win="+MGGlobalDataCenter.defaultCenter().isVictory+
-				      "defeated=" +MGGlobalDataCenter.defaultCenter().isDefeat);
+				
                 Application.LoadLevel("overSence");
                 MGMsgModel gameoverModel = new MGMsgModel();
                 gameoverModel.eventId = RoleActEventEnum.gameoverEventId;

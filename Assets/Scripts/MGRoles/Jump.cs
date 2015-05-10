@@ -370,8 +370,9 @@ public class Jump : MonoBehaviour {
         
         if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
         {
+            GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 0;
             MGGlobalDataCenter.defaultCenter().roleLater.GetComponent<Jump>().stateMask |= roleState.wudi;
-			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
+			
             //MGGlobalDataCenter.defaultCenter().isGameOver = true;
             MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = Vector3.zero;
             MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.zero;
@@ -431,10 +432,6 @@ public class Jump : MonoBehaviour {
                     rigidbody2D.gravityScale = 0f;
                 rigidbody2D.velocity = Vector3.zero;
                 collider2D.isTrigger = true;
-            }
-            else if (collision.gameObject.name == "role1")
-            {
-                GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 0;
             }
             gameOver();
         }
