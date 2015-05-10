@@ -14,7 +14,9 @@ public class bones : UIBase
     {
         direction = true;
         addOrDec = true;
-        cdBack.fillAmount = 1f;
+        cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
+        cdBack.fillAmount = 0f;
+        isCD = true;
 		//@test
 		//MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, null);
     }
