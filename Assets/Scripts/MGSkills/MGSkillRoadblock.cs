@@ -79,7 +79,10 @@ public class MGSkillRoadblock : MGSkillsBase{
 				MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
             //print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
             isBreak = true;
-            this.GetComponent<Animator>().SetBool("isBreak", true);
+			try{
+				this.GetComponent<Animator>().SetBool("isBreak", true);
+			}catch{}
+            
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killAnimLatterEventId, name);
 
 			GameObject objc=GameObject.Find(name);
