@@ -62,7 +62,7 @@ public class MyNetworkTest : MonoBehaviour {
 			if(isCancelListen) break;
 			ip = Encoding.Unicode.GetString(buffer);
 			IPAddress myAddress = null;
-			if (System.Text.RegularExpressions.Regex.IsMatch(ip, "[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}") && IPAddress.TryParse(ip,out myAddress))
+			if (IPAddress.TryParse(ip,out myAddress))
 			{
 				break;
 			}
@@ -75,13 +75,15 @@ public class MyNetworkTest : MonoBehaviour {
 		//异步执行完成
 		string resultstr = udpReceive.EndInvoke(data);
 		IPAddress myAddress = null;
-		if (System.Text.RegularExpressions.Regex.IsMatch(resultstr, "[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}") && IPAddress.TryParse(resultstr,out myAddress))
+		Debug.Log("resultstr:"+resultstr);
+		if (IPAddress.TryParse(resultstr,out myAddress))
 		{
 			MGGlobalDataCenter.defaultCenter().serverIp = resultstr;
 			isReceiveIP=true;
 		}
 		else
 		{
+			Debug.Log("ip不合法");
 			if(!isCancelListen)
 				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
 		}
