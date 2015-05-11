@@ -93,7 +93,7 @@ public class MGGlobalDataCenter  {
         this.connecttions = 1;
         this.listenPort = 8899;
         this.SyncPort = 12000;
-        this.mySocketPort = 10000;
+        this.mySocketPort = 15438;
         this.serverIp = "127.0.0.0";
         this.isNetworkViewEnable = false;
         this.rRoleBlood = 1;

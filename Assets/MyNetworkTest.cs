@@ -7,6 +7,7 @@ using System;
 using System.Net.NetworkInformation;
 using System.Threading;
 using LitJson;
+
 public class MGConnectModel
 {
     public string ip { get; set; }
@@ -19,9 +20,10 @@ public class MyNetworkTest : MonoBehaviour {
     private Vector3 acceleration;
     public GameObject cube;
 	private listenForServerDelegate udpReceive;
-	private bool isCancelListen;
+	private bool isCancelListen,isReceiveIP;
     void Start()
     {
+		isReceiveIP = false;
         isCancelListen = false;
 		udpReceive = new listenForServerDelegate(UDPStartToReceive);
         MGGlobalDataCenter.defaultCenter().serverIp = MGFoundtion.getInternIP();
@@ -39,17 +41,12 @@ public class MyNetworkTest : MonoBehaviour {
         if (NetworkPeerType.Disconnected == Network.peerType)
         {
             Debug.Log("find host");
-            //InvokeRepeating("tryToConnect", 0.1f, 0.1f);
-            isCancelListen = false;
+			isCancelListen = false;
+			isReceiveIP = false;
 			udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
         }
     }
-    void tryToConnect()
-    {
-        Debug.Log("tryToConnect");
-//        if(isCancelListen == false)
-        MGNetWorking.findHost();
-    }
+
 	//线程函数
 	public string UDPStartToReceive(int port)
 	{
@@ -62,8 +59,13 @@ public class MyNetworkTest : MonoBehaviour {
 		while (true)
 		{
 			socket.ReceiveFrom(buffer, ref ep);//接收数据,并确把数据设置到缓冲流里面
+			if(isCancelListen) break;
 			ip = Encoding.Unicode.GetString(buffer);
-			if (ip.Length>0) break;
+			IPAddress myAddress = null;
+			if (System.Text.RegularExpressions.Regex.IsMatch(ip, "[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}") && IPAddress.TryParse(ip,out myAddress))
+			{
+				break;
+			}
 		}
         socket.Close();
 		return ip;
@@ -72,22 +74,34 @@ public class MyNetworkTest : MonoBehaviour {
 	{
 		//异步执行完成
 		string resultstr = udpReceive.EndInvoke(data);
-		if (resultstr.Length == 0)
+		IPAddress myAddress = null;
+		if (System.Text.RegularExpressions.Regex.IsMatch(resultstr, "[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}//.[0-9]{1,3}") && IPAddress.TryParse(resultstr,out myAddress))
 		{
-			udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
+			MGGlobalDataCenter.defaultCenter().serverIp = resultstr;
+			isReceiveIP=true;
 		}
 		else
 		{
-			MGGlobalDataCenter.defaultCenter().serverIp = resultstr;
-			MGNetWorking.findHost();
+			if(!isCancelListen)
+				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
 		}
 	}
 	public void cancelConnect()
 	{
-
+		isCancelListen = true;
+		UDPSendBroadcast ();
+		CancelInvoke("UDPSendBroadcast");
     }
     void Update()
     {
+		if (isReceiveIP) {
+			Debug.Log("isReceiveIP=true");
+			isReceiveIP = false;
+			NetworkConnectionError connectError = MGNetWorking.findHost();
+			if(connectError != NetworkConnectionError.NoError && !isCancelListen){
+				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
+			}
+		}
         if (Network.peerType == NetworkPeerType.Server)
         {
             if (Network.connections.Length == 1)
@@ -100,7 +114,6 @@ public class MyNetworkTest : MonoBehaviour {
         }
         else if (Network.peerType == NetworkPeerType.Client)
         {
-			CancelInvoke("tryToConnect");
 			OnConnect();
         }
     }
@@ -133,4 +146,9 @@ public class MyNetworkTest : MonoBehaviour {
         MGGlobalDataCenter.defaultCenter().isSingle = false;
         Application.LoadLevel("gameScene1");
     }
+	void OnApplicationQuit(){
+		Debug.Log ("OnApplicationQuit");
+		isCancelListen = true;
+		UDPSendBroadcast ();
+	}
 }

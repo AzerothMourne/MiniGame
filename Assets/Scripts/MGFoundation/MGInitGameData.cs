@@ -44,8 +44,8 @@ public class MGInitGameData : MonoBehaviour {
         syncSock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
         if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
         {
-            syncIEP = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
-            syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
+			syncIEP = new IPEndPoint(IPAddress.Parse(MGGlobalDataCenter.defaultCenter().clientIP), MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
+            //syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
             InvokeRepeating("syncNetwork", 0.1f, 0.010f);
         }
         else
@@ -54,8 +54,9 @@ public class MGInitGameData : MonoBehaviour {
             syncEP = (EndPoint)syncIEP;
             syncSock.Bind(syncIEP);//绑定这个实例
             syncThread = new Thread(syncToReceive);
+			syncThread.IsBackground = true;
             syncThread.Start();
-            syncThread.IsBackground = true;
+            
         }
     }
     //线程函数
@@ -80,6 +81,7 @@ public class MGInitGameData : MonoBehaviour {
     {
         if (MGGlobalDataCenter.defaultCenter().isFrontRoler && MGGlobalDataCenter.defaultCenter().roleLater!=null)
         {
+			Debug.Log("syncNetwork;"+MGGlobalDataCenter.defaultCenter().clientIP);
             Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
 			byte[] buffer = Encoding.ASCII.GetBytes(roleLaterPos.x.ToString()+"#"+roleLaterPos.y.ToString());
             syncSock.SendTo(buffer, syncIEP);
@@ -118,4 +120,5 @@ public class MGInitGameData : MonoBehaviour {
     {
         destroyGameData();
     }
+
 }

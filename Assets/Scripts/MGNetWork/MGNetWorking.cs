@@ -44,12 +44,11 @@ public class MGNetWorking : MonoBehaviour {
             }
         }
     }
-	public static void findHost()
+	public static NetworkConnectionError findHost()
 	{
         MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
         MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
-        Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
-		
+        return Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
 	}
 	public static void createHost()
 	{
