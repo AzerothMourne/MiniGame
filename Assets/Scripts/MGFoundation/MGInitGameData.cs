@@ -44,8 +44,8 @@ public class MGInitGameData : MonoBehaviour {
         syncSock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
         if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
         {
-            syncIEP = new IPEndPoint(IPAddress.Parse(MGGlobalDataCenter.defaultCenter().clientIP), MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
-            //syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
+            syncIEP = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
+            syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
             InvokeRepeating("syncNetwork", 0.1f, 0.010f);
         }
         else
