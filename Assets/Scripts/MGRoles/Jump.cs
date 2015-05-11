@@ -9,7 +9,6 @@ public static class RoleActEventEnum{
 	public static string downToLineFormerEventId="downToLine";
 	public static string dowmToLineLatterEventId="1downToLine";
     public static string gameoverEventId = "gameoverEventId";
-
 }
 public static class roleState{
 	public static int bone = 1 << 0;
@@ -34,6 +33,7 @@ public class Jump : MonoBehaviour {
 	// Use this for initialization
     void Awake()
     {
+        
         //获取角色的名字，role则是前面的角色，role1则是后面的角色
         //前面角色的动作
         if (this.gameObject.name == "role")
@@ -63,6 +63,7 @@ public class Jump : MonoBehaviour {
             //print ("yes role1");
             //注册动作事件
             //rolePlayer = GameObject.Find("roleLater");
+
             if (MGGlobalDataCenter.defaultCenter().isSingle && MGGlobalDataCenter.defaultCenter().isFrontRoler)
             {
                 this.gameObject.AddComponent<MGRoleActAIController>();

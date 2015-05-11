@@ -93,9 +93,10 @@ public class MyNetworkTest : MonoBehaviour {
             if (Network.connections.Length == 1)
             {
 				CancelInvoke("UDPSendBroadcast");
+                MGGlobalDataCenter.defaultCenter().clientIP = Network.connections[0].ipAddress;
+                Debug.Log("clientIP=" + MGGlobalDataCenter.defaultCenter().clientIP);
 				OnConnect();
             }
-                
         }
         else if (Network.peerType == NetworkPeerType.Client)
         {

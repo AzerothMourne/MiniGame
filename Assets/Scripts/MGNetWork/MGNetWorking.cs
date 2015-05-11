@@ -11,6 +11,10 @@ using System.Threading;
 /// <summary>
 /// 还需要建立一个误差校正机制，保证客户机以服务器端的数据为主（重要）
 /// </summary>
+public static class NetWorkEnum
+{
+    public static string clientIPEvent = "clientIPEvent";
+}
 public class MGNetWorking : MonoBehaviour {
     private Socket mainSocket,syncSocket;
     private IPEndPoint mainSocketIPE;

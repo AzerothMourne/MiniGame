@@ -26,7 +26,7 @@ public class MGGlobalDataCenter  {
     private string _serverIp;
 	public float UIScale,roadOrignY;
     public float totalGameTime;
-    public string overSenceUIName;
+    public string overSenceUIName,clientIP;
     public int dartIndex;
     public bool isFirstLaunch,isMingYueGuide,isTianYaGuide,isGameOver;
 	//@aragornwang
@@ -76,6 +76,7 @@ public class MGGlobalDataCenter  {
 	}
     public void backToDefaultValues()
     {
+        this.clientIP = null;
         this.isPlayKill = false;
         this.isGameOver = false;
         this.isMingYueGuide = false;
