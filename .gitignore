@@ -23,6 +23,7 @@ Temp/
 *.sln
 *.apk
 *.ipa
+*.app
 *.csproj
 *.sln
 *.userprefs

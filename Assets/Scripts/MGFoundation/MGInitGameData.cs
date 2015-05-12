@@ -115,7 +115,7 @@ public class MGInitGameData : MonoBehaviour {
                 isReceiveSync = false;
                 //label.text += receivePosX.ToString();
                 Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-                MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(-1, pos.y, pos.z);
+				MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(receivePosX, pos.y, pos.z);
             }
         }
     }
