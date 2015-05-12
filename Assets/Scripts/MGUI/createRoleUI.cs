@@ -64,6 +64,20 @@ public class createRoleUI : MonoBehaviour {
         MGGlobalDataCenter.defaultCenter().totalGameTime -= 0.01f;
         int frontNum = (int)Math.Floor(MGGlobalDataCenter.defaultCenter().totalGameTime);
         int laterNum = (int)((MGGlobalDataCenter.defaultCenter().totalGameTime - frontNum) * 100);
+		if (MGGlobalDataCenter.defaultCenter().totalGameTime <= 0f)
+		{
+			CancelInvoke("gameTimer");
+			//游戏结束
+			if(GameObject.Find("role").GetComponent<RoleAnimController>().isDead || GameObject.Find("role1").GetComponent<RoleAnimController>().isDead)
+				return;
+			MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+			Application.LoadLevel("overSence");
+			MGMsgModel gameoverModel = new MGMsgModel();
+			gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
+			gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
+			mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
+			return;
+		}
         if (laterNum < 10)
         {
             gameTimerLabel.GetComponent<UILabel>().text = frontNum + ":0" + laterNum;
@@ -72,20 +86,6 @@ public class createRoleUI : MonoBehaviour {
         {
             gameTimerLabel.GetComponent<UILabel>().text = frontNum + ":" + laterNum;
         }
-        if (MGGlobalDataCenter.defaultCenter().totalGameTime <= 0f)
-        {
-			Debug.Log("dasdasdasdas");
-            //游戏结束
-			//if(GameObject.Find("role").GetComponent<RoleAnimController>().isDead || GameObject.Find("role1").GetComponent<RoleAnimController>().isDead)
-				//return;
-            MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
-            Application.LoadLevel("overSence");
-            MGMsgModel gameoverModel = new MGMsgModel();
-            gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
-            gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
-            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
-        }
-        
     }
     public void continueNotification(MGNotification notification)
     {
