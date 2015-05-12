@@ -24,8 +24,11 @@ public class MGInitGameData : MonoBehaviour {
     private string serverIp;
     private string Rstr;
     private string[] RstrArr;
+    private UdpClient udpClient;
+    
     void Start()
     {
+        udpClient = null;
         isR = false;
         isReceiveSync = false;
         receivePosX = 0f;
@@ -48,20 +51,22 @@ public class MGInitGameData : MonoBehaviour {
         
         if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
         {
-            label.text += "\r\n self " + MGFoundtion.getInternIP() + ";serverip " + MGGlobalDataCenter.defaultCenter().serverIp;
+            //label.text += "\r\n self " + MGFoundtion.getInternIP() + ";serverip " + MGGlobalDataCenter.defaultCenter().serverIp;
             IPAddress clientAddress = IPAddress.Broadcast;
             syncIEP = new IPEndPoint(clientAddress, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个发送广播和指定端口的网络端口实例
+            syncEP = (EndPoint)syncIEP;
+            //syncSock.Bind(syncEP);//绑定这个实例
             syncSock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
             InvokeRepeating("syncNetwork", 0.1f, 0.010f);
         }
         else
         {
-            label.text += "\r\n self " + MGFoundtion.getInternIP() + ";serverip " + MGGlobalDataCenter.defaultCenter().serverIp;
-            Debug.Log("serverIp="+MGGlobalDataCenter.defaultCenter().serverIp);
+            //label.text += "\r\n self " + MGFoundtion.getInternIP() + ";serverip " + MGGlobalDataCenter.defaultCenter().serverIp;
+            //Debug.Log("serverIp="+MGGlobalDataCenter.defaultCenter().serverIp);
             IPAddress serverAddress = IPAddress.Any;
             syncIEP = new IPEndPoint(serverAddress, MGGlobalDataCenter.defaultCenter().SyncPort);//初始化一个侦听局域网内部所有IP和指定端口
             syncEP = (EndPoint)syncIEP;
-            syncSock.Bind(syncIEP);//绑定这个实例
+            syncSock.Bind(syncEP);//绑定这个实例
             syncThread = new Thread(syncToReceive);
 			syncThread.IsBackground = true;
             syncThread.Start();
@@ -71,56 +76,45 @@ public class MGInitGameData : MonoBehaviour {
     //线程函数
     public void syncToReceive()
     {
-        string receiveString = null,serverIp=MGGlobalDataCenter.defaultCenter().serverIp;
+        string receiveString = null, serverIp1 = Encoding.ASCII.GetString(Encoding.ASCII.GetBytes(MGGlobalDataCenter.defaultCenter().serverIp));
         while (true)
         {
-            byte[] buffer = new byte[1024*1024];//设置缓冲数据流
+            byte[] buffer = new byte[1024];//设置缓冲数据流
             syncSock.ReceiveFrom(buffer, ref syncEP);//接收数据,并确把数据设置到缓冲流里面
-            receiveString = Encoding.Unicode.GetString(buffer);
-            isR = true;
-            //Rstr = receiveString;
-            //Rstr = receiveString;
-            RstrArr = receiveString.Split(new char[]{'#'});
-            //Rstr = RstrArr[0];
-            if ((RstrArr[0] as string).CompareTo("192.168.123.1")==0)
-            {
-                Rstr = "123";
-            }
-            /*
-            if (receiveString.Length > 0)
+            receiveString = Encoding.ASCII.GetString(buffer);
+            string[] strArray=new string[2];
+            strArray = receiveString.Split(new char[] { '#' });
+            //Debug.Log(strArray.Length);
+            //Debug.Log(strArray[0] + ";" + serverIp1 + ";" + strArray.Length.ToString());
+            //Debug.Log(strArray[0].Length + ";" + serverIp1.Length);
+            if (strArray.Length > 1 && serverIp1.Substring(0,strArray[0].Length)==strArray[0])
             {
                 isReceiveSync = true;
-                receivePosX = float.Parse(receiveString);
-                
-            }*/
+                receivePosX = float.Parse(strArray[1]);
+                //Debug.Log(receivePosX);
+            }
         }
     }
     public void syncNetwork()//主机向客户端发送UDP包让客户端同步主机的数据
     {
         if (MGGlobalDataCenter.defaultCenter().isFrontRoler && MGGlobalDataCenter.defaultCenter().roleLater!=null)
         {
-			Debug.Log("syncNetwork;"+MGGlobalDataCenter.defaultCenter().clientIP);
+			//Debug.Log("syncNetwork;"+MGGlobalDataCenter.defaultCenter().clientIP);
             //label.text = MGGlobalDataCenter.defaultCenter().clientIP + ";" + MGGlobalDataCenter.defaultCenter().serverIp;
             Vector3 roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            byte[] buffer = Encoding.Unicode.GetBytes(MGGlobalDataCenter.defaultCenter().serverIp + "#" + roleLaterPos.x.ToString());
-            syncSock.SendTo(buffer, syncIEP);
+            byte[] buffer = Encoding.ASCII.GetBytes(MGGlobalDataCenter.defaultCenter().serverIp + "#" + roleLaterPos.x.ToString());
+            syncSock.SendTo(buffer, syncEP);
         }
     }
     void Update()
     {
-        if (isR)
-        {
-            isR = false;
-            Debug.Log(Rstr);
-            label.text += Rstr+"   ";
-        }
         if (isReceiveSync)
         {
             if (MGGlobalDataCenter.defaultCenter().roleLater != null)
             {
 				//Debug.Log("收到同步数据");
                 isReceiveSync = false;
-                label.text += "receiveString ";
+                //label.text += receivePosX.ToString();
                 Vector3 pos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
                 MGGlobalDataCenter.defaultCenter().roleLater.transform.position = new Vector3(receivePosX, pos.y, pos.z);
             }
@@ -133,6 +127,10 @@ public class MGInitGameData : MonoBehaviour {
         if (syncSock != null)
         {
             syncSock.Close();
+        }
+        if (udpClient != null)
+        {
+            udpClient.Close();
         }
         if (syncThread != null)
         {
