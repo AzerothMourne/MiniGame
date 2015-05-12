@@ -13,6 +13,9 @@ public class blink : UIBase
     {
         direction = true;
         addOrDec = true;
+        cdBack.fillAmount = 0f;
+        isCD = true;
+        cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
     }
 
     // Update is called once per frame

@@ -21,6 +21,7 @@ public class Dart : UIBase
         cdBackObject = GameObject.Find("dartBack");
 		cdBack = cdBackObject.GetComponent<UISprite>();
         dartNum.text = MGSkillDartInfo.skillHoldLevel.ToString();
+		cdBack.fillAmount = 1f;
 	}
 	
 	// Update is called once per frame

@@ -14,6 +14,7 @@ public class roadblock : UIBase
         addOrDec = true;
         cdBackObject = GameObject.Find("roadblockBack");
         cdBack = cdBackObject.GetComponent<UISprite>();
+		cdBack.fillAmount = 1f;
     }
 
     // Update is called once per frame

@@ -82,7 +82,8 @@ public class RoleAnimController : MonoBehaviour {
             Debug.Log("changeKillFlag");
 			//GameObject.Find("log").GetComponent<UILabel>().text+="changeKillFlag";
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
-            MGGlobalDataCenter.defaultCenter().isGameOver = true;
+			MGGlobalDataCenter.defaultCenter().isGameOver = true;
+			MGGlobalDataCenter.defaultCenter().isKillMingyue = true;
             toNomalRun();
             animStateToRun();
         }  

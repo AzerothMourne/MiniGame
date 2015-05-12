@@ -18,6 +18,7 @@ public class roleWatchController : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
+		if (MGGlobalDataCenter.defaultCenter().isGameOver) return;
         if (transform.position.y < MGGlobalDataCenter.defaultCenter().roadOrignY - this.GetComponent<SpriteRenderer>().bounds.size.y - 0.5f)
         {
             transform.position = new Vector3(transform.position.x, MGGlobalDataCenter.defaultCenter().roadOrignY - this.GetComponent<SpriteRenderer>().bounds.size.y, transform.position.z);

@@ -354,90 +354,87 @@ public class Jump : MonoBehaviour {
             }
         }
 	}
-    public void gameOver()
-    {
-        Vector3 roleLaterPos = Vector3.zero;
-        Vector3 roleFrontPos = Vector3.zero;
-        try
-        {
-            roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
-            roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
-        }
-        catch 
-        {
-            return;
-        }
-        
-        if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
-        {
-            MGGlobalDataCenter.defaultCenter().roleLater.GetComponent<Jump>().stateMask |= roleState.wudi;
-			MGGlobalDataCenter.defaultCenter ().isKillMingyue = true;
-            //MGGlobalDataCenter.defaultCenter().isGameOver = true;
-            MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = Vector3.zero;
-            MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.zero;
-            //强制roleLater出现在role的后面一点点。
-
-            roleLaterPos.x = roleFrontPos.x - 0.95f;
-            roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
-            MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
-            MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = new Vector3(1, 1, 1);
-            MGGlobalDataCenter.defaultCenter().roleLater.transform.rotation = Quaternion.Euler(0, 0, 0);
-            MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
-            MGGlobalDataCenter.defaultCenter().role.transform.localScale = new Vector3(1, 1, 1);
-            MGGlobalDataCenter.defaultCenter().role.transform.rotation = Quaternion.Euler(0, 0, 0);
-
-            if (this.gameObject.name == "role1")
-                MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
-        }
-        if (this.gameObject.name == "role1" && transform.position.x + 1.4f < MGGlobalDataCenter.defaultCenter().screenLiftX)//后者出屏幕结束，还有一个后者死掉结束在RoleAnimController里
-        {
-            MGGlobalDataCenter.defaultCenter().isGameOver = true;
-            //切换场景
-            Debug.Log("role1 out of screen");
-            MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
-            Application.LoadLevel("overSence");
-            MGMsgModel gameoverModel = new MGMsgModel();
-            gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
-            gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
-            mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
-        }
-    }
+	public void gameOver()
+	{
+		Vector3 roleLaterPos = Vector3.zero;
+		Vector3 roleFrontPos = Vector3.zero;
+		try
+		{
+			roleLaterPos = MGGlobalDataCenter.defaultCenter().roleLater.transform.position;
+			roleFrontPos = MGGlobalDataCenter.defaultCenter().role.transform.position;
+		}
+		catch 
+		{
+			return;
+		}
+		
+		if (roleFrontPos.x - roleLaterPos.x < 1.0f || isCollisionOver)//后者追上前者结束
+		{
+			GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 0;
+			MGGlobalDataCenter.defaultCenter().roleLater.GetComponent<Jump>().stateMask |= roleState.wudi;
+			
+			//MGGlobalDataCenter.defaultCenter().isGameOver = true;
+			MGGlobalDataCenter.defaultCenter().roleLater.rigidbody2D.velocity = Vector3.zero;
+			MGGlobalDataCenter.defaultCenter().role.rigidbody2D.velocity = Vector3.zero;
+			//强制roleLater出现在role的后面一点点。
+			
+			roleLaterPos.x = roleFrontPos.x - 0.95f;
+			roleLaterPos.y = roleFrontPos.y = MGGlobalDataCenter.defaultCenter().roadOrignY;
+			MGGlobalDataCenter.defaultCenter().roleLater.transform.position = roleLaterPos;
+			MGGlobalDataCenter.defaultCenter().roleLater.transform.localScale = new Vector3(1, 1, 1);
+			MGGlobalDataCenter.defaultCenter().roleLater.transform.rotation = Quaternion.Euler(0, 0, 0);
+			MGGlobalDataCenter.defaultCenter().role.transform.position = roleFrontPos;
+			MGGlobalDataCenter.defaultCenter().role.transform.localScale = new Vector3(1, 1, 1);
+			MGGlobalDataCenter.defaultCenter().role.transform.rotation = Quaternion.Euler(0, 0, 0);
+			
+			if (this.gameObject.name == "role1")
+				MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killLatterEventId, this.gameObject.name);
+		}
+		if (this.gameObject.name == "role1" && transform.position.x + 1.4f < MGGlobalDataCenter.defaultCenter().screenLiftX)//后者出屏幕结束，还有一个后者死掉结束在RoleAnimController里
+		{
+			MGGlobalDataCenter.defaultCenter().isGameOver = true;
+			//切换场景
+			Debug.Log("role1 out of screen");
+			MGGlobalDataCenter.defaultCenter().overSenceUIName = "victoryFrontGameUI";
+			Application.LoadLevel("overSence");
+			MGMsgModel gameoverModel = new MGMsgModel();
+			gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
+			gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
+			mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
+		}
+	}
 	//判断角色是否在地面上
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        
-        if (collision.gameObject.name == "road" || collision.gameObject.name == "roadSecond")
-        {
-            if (MGGlobalDataCenter.defaultCenter().roadOrignY == -1000)
-                MGGlobalDataCenter.defaultCenter().roadOrignY = transform.position.y;
-            isGround = true;
-            jumpCount = 0;
-        }
-        if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
-        {
-            isCollisionOver = true;
-            /*
+	public void OnCollisionEnter2D(Collision2D collision)
+	{
+		
+		if (collision.gameObject.name == "road" || collision.gameObject.name == "roadSecond")
+		{
+			if (MGGlobalDataCenter.defaultCenter().roadOrignY == -1000)
+				MGGlobalDataCenter.defaultCenter().roadOrignY = transform.position.y;
+			isGround = true;
+			jumpCount = 0;
+		}
+		if (collision.gameObject.name == "role" || collision.gameObject.name == "role1")
+		{
+			isCollisionOver = true;
+			/*
             GameObject sprint= GameObject.Find("sprint(Clone)");
             if (sprint != null)
             {
                 Destroy(sprint);
             }*/
-            if (collision.gameObject.name == "role")
-            {
+			if (collision.gameObject.name == "role")
+			{
 				Debug.Log("set role trigger");
-                if (roleAnimaController.downOrUp)
-                    rigidbody2D.gravityScale = 0.5f;
-                else
-                    rigidbody2D.gravityScale = 0f;
-                rigidbody2D.velocity = Vector3.zero;
-                collider2D.isTrigger = true;
-            }
-            else if (collision.gameObject.name == "role1")
-            {
-                GameObject.Find("MGSkillEffect").GetComponent<MGSkillEffect>().speedSwitch = 0;
-            }
-            gameOver();
-        }
+				if (roleAnimaController.downOrUp)
+					rigidbody2D.gravityScale = 0.5f;
+				else
+					rigidbody2D.gravityScale = 0f;
+				rigidbody2D.velocity = Vector3.zero;
+				collider2D.isTrigger = true;
+			}
+			gameOver();
+		}
 	}
     void OnDestroy()
     {

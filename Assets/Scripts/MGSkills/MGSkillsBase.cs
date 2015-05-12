@@ -8,57 +8,57 @@ public static class SkillEnum
 }
 public static class MGSkillDartInfo
 {
-    public static string skillId = SkillEffectEnum.dart;
-    public static int skillCD = 1;
-    public static int skillHoldLevel = 10;
-    public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f/8f;
-    public static float durationTime = 0.1f;
+	public static string skillId = SkillEffectEnum.dart;
+	public static int skillCD = 1;
+	public static int skillHoldLevel = 10;
+	public static int skillGCD = 0;
+	public static float SkillEffectSpeed = 1f/8f;
+	public static float durationTime = 0.1f;
 }
 public static class MGSkillRoadblockInfo
 {
-    public static string skillId = SkillEffectEnum.roadblock;
-    public static float skillCD = 5f;
-    public static int skillHoldLevel = 3;
-    public static float skillGCD = 0.4f;
-    public static float SkillEffectSpeed = 3f/16f;
-    public static float durationTime = 0.1f;
+	public static string skillId = SkillEffectEnum.roadblock;
+	public static float skillCD = 5f;
+	public static int skillHoldLevel = 3;
+	public static float skillGCD = 0.4f;
+	public static float SkillEffectSpeed = 3f/16f;
+	public static float durationTime = 0.1f;
 }
 public static class MGSkillBlinkInfo
 {
-    public static string skillId = SkillEffectEnum.blink;
-    public static int skillCD = 7;
-    public static int skillHoldLevel = 1;
-    public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 9f / 40f;
-    public static float durationTime = 0.1f;
+	public static string skillId = SkillEffectEnum.blink;
+	public static int skillCD = 8;
+	public static int skillHoldLevel = 1;
+	public static int skillGCD = 0;
+	public static float SkillEffectSpeed = 1f / 4f;
+	public static float durationTime = 0.1f;
 }
 public static class MGSkillBonesInfo
 {
-    public static string skillId = SkillEffectEnum.bones;
-    public static int skillCD = 6;
-    public static int skillHoldLevel = 1;
-    public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 1f / 4f;
-    public static float durationTime = 2.0f;
+	public static string skillId = SkillEffectEnum.bones;
+	public static float skillCD = 7.5f;
+	public static int skillHoldLevel = 1;
+	public static int skillGCD = 0;
+	public static float SkillEffectSpeed = 1f / 4f;
+	public static float durationTime = 1.5f;
 }
 public static class MGSkillSprintInfo
 {
-    public static string skillId = SkillEffectEnum.sprint;
-    public static int skillCD = 8;
-    public static int skillHoldLevel = 1;
-    public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 7f / 20f;
-    public static float durationTime = 2.0f;
+	public static string skillId = SkillEffectEnum.sprint;
+	public static int skillCD = 10;
+	public static int skillHoldLevel = 1;
+	public static int skillGCD = 0;
+	public static float SkillEffectSpeed = 3f / 8f;
+	public static float durationTime = 2.0f;
 }
 public static class MGSkillBeatbackInfo
 {
-    public static string skillId = SkillEffectEnum.beatback;
-    public static float skillCD = 6f;
-    public static int skillHoldLevel = 1;
-    public static int skillGCD = 0;
-    public static float SkillEffectSpeed = 3f / 8f;
-    public static float durationTime = 0.5f;
+	public static string skillId = SkillEffectEnum.beatback;
+	public static float skillCD = 6f;
+	public static int skillHoldLevel = 1;
+	public static int skillGCD = 0;
+	public static float SkillEffectSpeed = 3f / 8f;
+	public static float durationTime = 0.5f;
 }
 
 public static class SkillActEventEnum
