@@ -103,14 +103,25 @@ public class MyNetworkTest : MonoBehaviour {
 		if (isReceiveIP) {
 			Debug.Log("isReceiveIP=true");
 			isReceiveIP = false;
-			NetworkConnectionError connectError = MGNetWorking.findHost();
-			log.text += "\r\nconnect";
-			if(connectError != NetworkConnectionError.NoError && !isCancelListen){
-				log.text += "\r\nconnect faild";
+			try{
+				NetworkConnectionError connectError = MGNetWorking.findHost();
+				log.text += "\r\nconnect";
+				Debug.Log("connect");
+				if(connectError != NetworkConnectionError.NoError && !isCancelListen){
+					log.text += "\r\nconnect faild";
+					Debug.Log("connect faild");
+					isCancelListen = false;
+					isReceiveIP = false;
+					udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
+				}
+			}catch{
+				log.text += "\r\nconnect execption";
+				Debug.Log("connect execpti");
 				isCancelListen = false;
 				isReceiveIP = false;
 				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
 			}
+
 		}
 		if (Network.peerType == NetworkPeerType.Server)
 		{
