@@ -102,7 +102,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 69806155}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -200, y: -280, z: 0}
+  m_LocalPosition: {x: -473, y: -111, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -337,13 +337,13 @@ MonoBehaviour:
   ismingyueLoad: 0
   isHood: 0
   hoodList:
-  - hood1 (1)
-  - hood1 (2)
-  - hood1 (3)
-  - hood1 (4)
-  - hood1 (5)
-  - hood1 (6)
-  - hood1 (7)
+  - toujin1
+  - toujin2
+  - toujin3
+  - toujin4
+  - toujin5
+  - toujin6
+  - toujin7
   timerHood: 0
   countHood: 0
 --- !u!1 &336384769
@@ -424,7 +424,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
-  mSpriteName: "\u80CC\u666F\u56FE\u65E0\u9E1F"
+  mSpriteName: "\u4E3B\u754C\u97622"
   mFillCenter: 1
 --- !u!1 &601420884
 GameObject:
@@ -517,7 +517,7 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
-  mSpriteName: palyer
+  mSpriteName: toujin1
   mFillCenter: 1
 --- !u!4 &632054399
 Transform:
@@ -526,7 +526,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 632054397}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -527, y: 49, z: 0}
+  m_LocalPosition: {x: 626, y: -122, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -632,7 +632,7 @@ Transform:
   m_GameObject: {fileID: 937347956}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .00333333341, y: .00333333341, z: .00333333341}
+  m_LocalScale: {x: .00312989042, y: .00312989042, z: .00312989042}
   m_Children:
   - {fileID: 993013705}
   - {fileID: 1254167064}
@@ -805,7 +805,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1112956886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 200, y: -280, z: 0}
+  m_LocalPosition: {x: -473, y: -266, z: 0}
   m_LocalScale: {x: 1.00001991, y: 1.00001991, z: .999899983}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -978,7 +978,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1218137658}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -135.938477, z: 0}
+  m_LocalPosition: {x: -239, y: -17, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 336384770}
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   bottomAnchor:
     target: {fileID: 69806156}
     relative: 1
-    absolute: 64
+    absolute: 14
   topAnchor:
     target: {fileID: 0}
     relative: 1
@@ -1321,7 +1321,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1510104752
 Transform:
   m_ObjectHideFlags: 0
@@ -1329,7 +1329,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1510104751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 28, z: 0}
+  m_LocalPosition: {x: 22, y: -168, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -1576,7 +1576,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1869607283}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 555, y: -320.000031, z: 0}
+  m_LocalPosition: {x: 522, y: -136, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1254167064}
@@ -1611,13 +1611,13 @@ MonoBehaviour:
   updateAnchors: 1
   mColor: {r: 1, g: 1, b: 1, a: 1}
   mPivot: 4
-  mWidth: 76
-  mHeight: 76
+  mWidth: 56
+  mHeight: 94
   mDepth: 4
   autoResizeBoxCollider: 0
   hideIfOffScreen: 0
   keepAspectRatio: 0
-  aspectRatio: 1
+  aspectRatio: .595744669
   mType: 0
   mFillDirection: 4
   mFillAmount: 1
@@ -1629,5 +1629,5 @@ MonoBehaviour:
   bottomType: 1
   topType: 1
   mAtlas: {fileID: 11458620, guid: 4e040e877c02c6d49bea6f4b2947b482, type: 2}
-  mSpriteName: player1
+  mSpriteName: "\u88AB\u8FFD"
   mFillCenter: 1
