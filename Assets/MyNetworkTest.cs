@@ -15,6 +15,7 @@ public class MGConnectModel
 }
 public delegate string listenForServerDelegate(int port);
 public class MyNetworkTest : MonoBehaviour {
+
 	public int connecttions = 1;
 	public UILabel log;
 	private Vector3 acceleration;
@@ -30,21 +31,19 @@ public class MyNetworkTest : MonoBehaviour {
 	}
 	public void createHost()
 	{
-		if (NetworkPeerType.Disconnected == Network.peerType)
-		{
-			MGNetWorking.createHost();
-			InvokeRepeating("UDPSendBroadcast", 0f, 0.1f);
+		if (NetworkPeerType.Disconnected == Network.peerType || NetworkPeerType.Server == Network.peerType) {
+			MGNetWorking.createHost ();
+			InvokeRepeating ("UDPSendBroadcast", 0f, 0.1f);
 		}
 	}
 	public void findHost()
 	{
-		if (NetworkPeerType.Disconnected == Network.peerType)
-		{
-			Debug.Log("find host");
+		if (NetworkPeerType.Disconnected == Network.peerType) {
+			Debug.Log ("find host");
 			isCancelListen = false;
 			isReceiveIP = false;
-			udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
-		}
+			udpReceive.BeginInvoke (MGGlobalDataCenter.defaultCenter ().mySocketPort, UDPStartToReceiveCallback, null);
+		} 
 	}
 	
 	//线程函数
@@ -84,8 +83,11 @@ public class MyNetworkTest : MonoBehaviour {
 		else
 		{
 			Debug.Log("ip不合法");
-			if(!isCancelListen)
+			if(!isCancelListen){
+				isCancelListen = false;
+				isReceiveIP = false;
 				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
+			}
 		}
 	}
 	public void cancelConnect()
@@ -93,6 +95,8 @@ public class MyNetworkTest : MonoBehaviour {
 		isCancelListen = true;
 		UDPSendBroadcast ();
 		CancelInvoke("UDPSendBroadcast");
+		Network.Disconnect ();
+		Debug.Log (Network.peerType);
 	}
 	void Update()
 	{
@@ -103,6 +107,8 @@ public class MyNetworkTest : MonoBehaviour {
 			log.text += "\r\nconnect";
 			if(connectError != NetworkConnectionError.NoError && !isCancelListen){
 				log.text += "\r\nconnect faild";
+				isCancelListen = false;
+				isReceiveIP = false;
 				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
 			}
 		}
@@ -123,20 +129,17 @@ public class MyNetworkTest : MonoBehaviour {
 	}
 	public void UDPSendBroadcast()
 	{
+		Socket sock = new Socket (AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
+		IPEndPoint iep = new IPEndPoint (IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter ().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
+		sock.SetSocketOption (SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
 		Debug.Log("UDPSendBroadcast"+MGGlobalDataCenter.defaultCenter().serverIp);
 		log.text += "\r\n" + MGGlobalDataCenter.defaultCenter().serverIp;
-		//        if (isCancelListen) return;
-		Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
-		IPEndPoint iep = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
-		sock.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.Broadcast, 1);//设置该scoket实例的发送形式
-		/*
-        MGConnectModel model = new MGConnectModel();
-        model.ip = MGGlobalDataCenter.defaultCenter().serverIp;
-        model.timestamp = MGGlobalDataCenter.timestamp();
-        */
 		byte[] buffer = Encoding.Unicode.GetBytes(MGGlobalDataCenter.defaultCenter().serverIp);
-		sock.SendTo(buffer, iep);
-		sock.Close();
+		try{
+			sock.SendTo(buffer, iep);
+			sock.Close ();
+		}catch{
+		}
 	}
 	void OnConnect()
 	{

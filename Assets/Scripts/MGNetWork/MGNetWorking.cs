@@ -52,6 +52,7 @@ public class MGNetWorking : MonoBehaviour {
         MGGlobalDataCenter.defaultCenter().isFrontRoler = true;
         MGGlobalDataCenter.defaultCenter().isLaterRoler = false;
         Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
+
 	}
     public static void disconnect()
     {
