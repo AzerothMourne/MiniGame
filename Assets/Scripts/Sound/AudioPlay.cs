@@ -26,7 +26,8 @@ public class AudioPlay : MonoBehaviour {
 			MGGlobalDataCenter.defaultCenter ().isDartDefence = false;
 		}
 		if (MGGlobalDataCenter.defaultCenter ().isRoadBlockHit) {
-			music.playoneshot("Sound/roadblock_hit");
+//			music.playoneshot("Sound/roadblock_hit");
+			music.playoneshot("Sound/dart_hit");
 			MGGlobalDataCenter.defaultCenter().isRoadBlockHit = false;
 		}
 		if (MGGlobalDataCenter.defaultCenter ().isRoadBlockDefence) {

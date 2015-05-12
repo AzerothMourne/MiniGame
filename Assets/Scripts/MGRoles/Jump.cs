@@ -68,7 +68,7 @@ public class Jump : MonoBehaviour {
                 this.gameObject.AddComponent<MGRoleActAIController>();
                 this.gameObject.AddComponent<MGRoleLaterSkillAIController>();
             }
-            roleSpeed = 1f / 20f;
+            roleSpeed = 1f / 25f;
             MGGlobalDataCenter.defaultCenter().roleLater = this.gameObject;
             MGNotificationCenter.defaultCenter().addObserver(this, jump, RoleActEventEnum.jumpLatterEventId);
             MGNotificationCenter.defaultCenter().addObserver(this, downToLine, RoleActEventEnum.dowmToLineLatterEventId);
