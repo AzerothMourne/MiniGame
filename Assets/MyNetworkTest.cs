@@ -100,7 +100,9 @@ public class MyNetworkTest : MonoBehaviour {
 			Debug.Log("isReceiveIP=true");
 			isReceiveIP = false;
 			NetworkConnectionError connectError = MGNetWorking.findHost();
+            log.text += "\r\nconnect";
 			if(connectError != NetworkConnectionError.NoError && !isCancelListen){
+                log.text += "\r\nconnect faild";
 				udpReceive.BeginInvoke(MGGlobalDataCenter.defaultCenter().mySocketPort, UDPStartToReceiveCallback, null);
 			}
 		}
@@ -122,6 +124,7 @@ public class MyNetworkTest : MonoBehaviour {
     public void UDPSendBroadcast()
     {
 		Debug.Log("UDPSendBroadcast"+MGGlobalDataCenter.defaultCenter().serverIp);
+        log.text += "\r\n" + MGGlobalDataCenter.defaultCenter().serverIp;
 //        if (isCancelListen) return;
         Socket sock = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);//初始化一个Scoket实习,采用UDP传输
         IPEndPoint iep = new IPEndPoint(IPAddress.Broadcast, MGGlobalDataCenter.defaultCenter().mySocketPort);//初始化一个发送广播和指定端口的网络端口实例
@@ -152,5 +155,6 @@ public class MyNetworkTest : MonoBehaviour {
 		Debug.Log ("OnApplicationQuit");
 		isCancelListen = true;
 		UDPSendBroadcast ();
+        CancelInvoke("UDPSendBroadcast");
 	}
 }
