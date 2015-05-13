@@ -13,8 +13,8 @@ public class blink : UIBase
     {
         direction = true;
         addOrDec = true;
-        cdBack.fillAmount = 0f;
-        isCD = true;
+        isCD = false;
+        cdBack.fillAmount = isCD ? 0f : 1f;
         cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
     }
 
