@@ -72,15 +72,7 @@ public class startUI : MonoBehaviour {
             countPress += 1;
         }
 
-        if (isPressSlogan || isPressStartButton && countPress == 1)
-        {
-            SloganObj.GetComponent<TypewriterEffect>().charsPerSecond = 2000;
-            isPressSlogan = false;
-            if (countPress == 1)
-            {
-                countPress += 1;
-            }
-        }
+        
 
         //天涯load播放帧
         if (istianyaLoad)
@@ -266,8 +258,6 @@ public class startUI : MonoBehaviour {
 
 	//标语控制
 	public void OnSloganClick() {
-		isPressSlogan = true;
-		SloganObj = GameObject.Find ("slogan");
-		print("OnSloganClick");
+		
 	}
 }
