@@ -65,7 +65,7 @@ public class MGSkillEffect : MonoBehaviour {
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-            if (objc)
+            if (objc && (objc.GetComponent<Jump>().stateMask & roleState.wudi) == 0)
             {
                 objc.transform.Translate(Vector3.left * MGSkillBeatbackInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillBeatbackInfo.durationTime);
             }
@@ -87,7 +87,7 @@ public class MGSkillEffect : MonoBehaviour {
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-            if (objc)
+            if (objc && (objc.GetComponent<Jump>().stateMask & roleState.wudi) == 0)
             {
                 objc.transform.Translate(Vector3.left * MGSkillRoadblockInfo.SkillEffectSpeed * dis * Time.deltaTime / MGSkillRoadblockInfo.durationTime);
             }
@@ -157,8 +157,8 @@ public class MGSkillEffect : MonoBehaviour {
     {
         if (notification != null) {
 			blinkSkillBonesTimer = 0;
-			if(notification.objc == null){
-				MGNotificationCenter.defaultCenter().postNotification(EventEnum.bones, shortBonesName);//发送bones技能的事件
+			if(MGGlobalDataCenter.defaultCenter().isFrontRoler == false &&  MGGlobalDataCenter.defaultCenter().isSingle == false){
+                MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.bones, shortBonesName);//发送bones技能的事件
 				return;
 			}
 
@@ -177,7 +177,7 @@ public class MGSkillEffect : MonoBehaviour {
 				}
 			}
 
-			MGNotificationCenter.defaultCenter ().postNotification (EventEnum.bones, shortBonesName);//发送bones技能的事件
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.bones, shortBonesName);//发送bones技能的事件
 
 			UILabel label = GameObject.Find ("log").GetComponent<UIInput> ().label;
 			Vector3 pos1 = GameObject.Find ("role1").transform.position;
@@ -193,7 +193,7 @@ public class MGSkillEffect : MonoBehaviour {
             MGMsgModel skillModel = (MGMsgModel)notification.objc;
             GameObject objc = GameObject.Find(skillModel.gameobjectName);
             float dis = MGGlobalDataCenter.defaultCenter().roleFrontPos.x - MGGlobalDataCenter.defaultCenter().roleLaterPos.x;
-            if (objc)
+            if (objc && (objc.GetComponent<Jump>().stateMask & roleState.wudi) == 0)
             {
                 objc.transform.Translate(Vector3.left * MGSkillDartInfo.SkillEffectSpeed * dis );
             }

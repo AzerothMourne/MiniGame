@@ -3,17 +3,18 @@ using System.Collections;
 
 public class Down : UIBase
 {
-    private float cameraMoveSpeed;
+    private float cameraMoveSpeed,fx;
     private bool isClick, isMoveCamera;
     private float timer;
-
+    private string selfSpriteName;
    // private MusicPlayer music;
 	// Use this for initialization
 	void Start () {
         cameraMoveSpeed = 8f;
 		timer = 0.0f;
 		isClick = false;
-
+        selfSpriteName = this.GetComponent<UISprite>().spriteName;
+        fx = 1;
     //    music = (GetComponent("MusicPlayer") as MusicPlayer);//获取播放器对象
 	}
 	
@@ -22,11 +23,11 @@ public class Down : UIBase
         if (isMoveCamera)
         {
             Vector3 pos = Camera.main.transform.position;
-            pos.y -= cameraMoveSpeed * Time.deltaTime;
+            pos.y -= cameraMoveSpeed * Time.deltaTime * fx;
             Camera.main.transform.position = pos;
-            if (pos.y <= -1f)
+            if ((pos.y <= -1 && fx == 1) || (pos.y >= 0 && fx == -1))
             {
-                pos.y = -1f;
+                pos.y = fx > 0 ? -1 : 0;
                 Camera.main.transform.position = pos;
                 isMoveCamera = false;
             }
@@ -49,22 +50,30 @@ public class Down : UIBase
 			}
 		}
 	}
-
 	public void OnMouseDown () {
         if (MGGlobalDataCenter.defaultCenter().isStop == true) return;
 		isClick = true;
-        if(MGGlobalDataCenter.defaultCenter().isHost==true)
-            MGNotificationCenter.defaultCenter().postNotification("downToLine", null);
-        else
-            MGNotificationCenter.defaultCenter().postNotification("1downToLine", null);
-        //按向下后调出向上按钮
-        GameObject upButton = GameObject.Find("upButton(Clone)");
-        //播放音效
-        //if(upButton.GetComponent<UISprite>().spriteName != "up")
-        //    music.play("Sound/updown_roll");
-     
-        upButton.GetComponent<UISprite>().spriteName= "up";
-        upButton.GetComponent<UIButton>().normalSprite = "up";
+        
+        if (this.GetComponent<UISprite>().spriteName == selfSpriteName)
+        {
+            fx = 1;
+            this.GetComponent<UISprite>().spriteName = "up";
+            this.GetComponent<UIButton>().normalSprite = "up";
+            if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
+                MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.downToLineFormerEventId, null);
+            if (MGGlobalDataCenter.defaultCenter().isLaterRoler)
+                MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.dowmToLineLatterEventId, null);
+        }
+        else if (this.GetComponent<UISprite>().spriteName == "up")
+        {
+            fx = -1;
+            this.GetComponent<UISprite>().spriteName = selfSpriteName;
+            this.GetComponent<UIButton>().normalSprite = selfSpriteName;
+            if (MGGlobalDataCenter.defaultCenter().isFrontRoler)
+                MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpFormerEventId, null);
+            if (MGGlobalDataCenter.defaultCenter().isLaterRoler)
+                MGNotificationCenter.defaultCenter().postNotification(RoleActEventEnum.jumpLatterEventId, null);
+        }
         isMoveCamera = true;
 	}
 }

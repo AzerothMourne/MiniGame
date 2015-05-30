@@ -16,7 +16,6 @@ public class MGNotification{
 
 public delegate void MGNotificationSelector(MGNotification notification);
 
-
 public class MGNotificationCenter  {
     
 	private static MGNotificationCenter instance;
@@ -39,7 +38,6 @@ public class MGNotificationCenter  {
 		}
 		return instance;
 	}
-    
 	/// <summary>
 	/// Adds the observer.
 	/// </summary>

@@ -18,6 +18,11 @@ public class MGSkillBlink : MGSkillsBase
         base.createSkillSprite(pos);
         return GameObject.Instantiate(this, pos, Quaternion.Euler(0, 0, 0));
     }
+    public override Object createSkillSprite(Vector3 pos, Quaternion rotation)
+    {
+        base.createSkillSprite(pos, rotation);
+        return GameObject.Instantiate(this, pos, rotation);
+    }
     public override void playSkillAnimation()
     {
         base.playSkillAnimation();
@@ -29,12 +34,12 @@ public class MGSkillBlink : MGSkillsBase
             skillModel.eventId = SkillEffectEnum.blink;
             skillModel.gameobjectName = "role1";
             //发送给对面 产生技能效果
-			if(MGGlobalDataCenter.defaultCenter().isHost==false){
-				MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, null);
+            if (MGGlobalDataCenter.defaultCenter().isFrontRoler == false || MGGlobalDataCenter.defaultCenter().isSingle)
+            {
+                Debug.Log("发送给对面 产生技能效果");
+                MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
             	mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(skillModel));
 			}
-            //发送给自己
-            //MGNotificationCenter.defaultCenter().postNotification(SkillEffectEnum.blink, skillModel);
         }
     }
     public override void playSkillSound()

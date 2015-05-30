@@ -36,8 +36,7 @@ public class MGSkillBeatback : MGSkillsBase
         }
 
         this.releaseSkillObjectName = "role";
-		transform.parent = MGGlobalDataCenter.defaultCenter ().role.transform;
-        this.gameObject.layer = 9;
+        this.gameObject.layer = 12;
         base.scaleAnimationFofBigSkill();
 		MGGlobalDataCenter.defaultCenter ().isSprint = true;
     }

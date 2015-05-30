@@ -35,8 +35,9 @@ public class FlyBird : MonoBehaviour
     public void CreatBirds() {
         for (int j = 0; j < 10; j++) {            
             bird = GameObject.Instantiate(xiaoniao,
-                new Vector3(Random.Range(width,width+3), Random.Range(height - 2, height), Random.Range(-10, 0)),
-                Quaternion.Euler(0, 0, 0)) as GameObject;            
+                new Vector3(Random.Range(width, width + 3), Random.Range(height, MGGlobalDataCenter.defaultCenter().screenTopY-1f), Random.Range(-10, 0)),
+                Quaternion.Euler(0, 0, 0)) as GameObject;
+            bird.GetComponent<Animator>().speed = Random.Range(0f, 1f) + 1f;
         }
     }
 }

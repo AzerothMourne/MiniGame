@@ -3,22 +3,56 @@ using System.Collections;
 using LitJson;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
+using System.Net.NetworkInformation;
+using System.Threading;
 /// <summary>
 /// 还需要建立一个误差校正机制，保证客户机以服务器端的数据为主（重要）
 /// </summary>
 public class MGNetWorking : MonoBehaviour {
-	
-	public static void findHost()
+    private Socket mainSocket,syncSocket;
+    private IPEndPoint mainSocketIPE;
+    private EndPoint mainSocketEP;
+    public static void sendMsgToPeer(string ip, int port)
+    {
+
+    }
+    public void connectToServer(string ip,int port)
+    {
+
+    }
+    //线程函数
+    public void mainSocketListen()
+    {
+        string receiveString = null;
+        while (true)
+        {
+            byte[] buffer = new byte[1024];//设置缓冲数据流
+            mainSocket.ReceiveFrom(buffer, ref mainSocketEP);//接收数据,并确把数据设置到缓冲流里面
+            receiveString = Encoding.ASCII.GetString(buffer);
+            if (receiveString.Length > 0)
+            {
+               
+                
+
+            }
+        }
+    }
+	public static NetworkConnectionError findHost()
 	{
-        MGGlobalDataCenter.defaultCenter().isHost = false;
-        Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
+        MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
+        MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
+        return Network.Connect(MGGlobalDataCenter.defaultCenter().serverIp, MGGlobalDataCenter.defaultCenter().listenPort);
 		
 	}
 	public static void createHost()
 	{
-        MGGlobalDataCenter.defaultCenter().isHost = true;
+        MGGlobalDataCenter.defaultCenter().isFrontRoler = true;
+        MGGlobalDataCenter.defaultCenter().isLaterRoler = false;
         Network.InitializeServer(MGGlobalDataCenter.defaultCenter().connecttions, MGGlobalDataCenter.defaultCenter().listenPort, false);
+
 	}
     public static void disconnect()
     {
@@ -61,7 +95,7 @@ public class MGNetWorking : MonoBehaviour {
 	{
 		//Debug.Log ("receiverMessageFromPeer:"+msg+";"+MGGlobalDataCenter.timestamp());
 		MGMsgModel msgModel = JsonMapper.ToObject<MGMsgModel>(msg);
-        if (msgModel.eventId == EventEnum.gameoverEventId)
+        if (msgModel.eventId == RoleActEventEnum.gameoverEventId)
         {
             MGGlobalDataCenter.defaultCenter().overSenceUIName = msgModel.gameobjectName;
             if (Application.loadedLevelName != "overSence")

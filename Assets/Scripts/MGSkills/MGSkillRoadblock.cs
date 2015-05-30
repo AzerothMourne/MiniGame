@@ -42,7 +42,7 @@ public class MGSkillRoadblock : MGSkillsBase{
             DestroySelf();
         }
     }
-    void triggerFunc(MGNotification notification)
+    public void triggerFunc(MGNotification notification)
     {
         string tag = null, name = null;
         if (notification.objc is Collider2D)//自己要做的
@@ -61,7 +61,11 @@ public class MGSkillRoadblock : MGSkillsBase{
         {
             //Debug.Log("roadblock break");
             isBreak = true;
-            this.GetComponent<Animator>().SetBool("isBreak", true);
+            try
+            {
+                this.GetComponent<Animator>().SetBool("isBreak", true);
+            }
+            catch { }
         }
         if (tag != "Player")
             return;
@@ -75,7 +79,10 @@ public class MGSkillRoadblock : MGSkillsBase{
 				MGGlobalDataCenter.defaultCenter().isRoadBlockDefence = true;
             //print("技能名：路障。被打中的是" + name + "，释放技能的是" + releaseSkillObjectName);
             isBreak = true;
-            this.GetComponent<Animator>().SetBool("isBreak", true);
+			try{
+				this.GetComponent<Animator>().SetBool("isBreak", true);
+			}catch{}
+           
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.killAnimLatterEventId, name);
 
 			GameObject objc=GameObject.Find(name);
@@ -98,7 +105,7 @@ public class MGSkillRoadblock : MGSkillsBase{
     }
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (MGGlobalDataCenter.defaultCenter().isHost == true)
+        if (MGGlobalDataCenter.defaultCenter().isFrontRoler == true || MGGlobalDataCenter.defaultCenter().isSingle)
         {
             MGMsgModel model = new MGMsgModel();
             model.eventId = SkillEnum.roadblock + gameObject.name;

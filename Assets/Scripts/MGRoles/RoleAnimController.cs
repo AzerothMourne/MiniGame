@@ -33,19 +33,23 @@ public class RoleAnimController : MonoBehaviour {
 	float rollTimer,rollDuration;
     private float downSpeed;
     private MusicPlayer music;
-	// Use this for initialization
-	void Start () {
+    public void initRoleAnimController()
+    {
         isFirstJump = false;
         isPressDown = false;
-		isFallDown = true;
+        isFallDown = true;
         isPressDownToGround = false;
-		isSecondJump = false;
+        isSecondJump = false;
         isRoll = false;
         isDead = false;
         isCallChangeKillFlag = false;
 
         rollTimer = 0;
-        rollDuration = 0.2f;
+        rollDuration = 0.15f;
+    }
+	// Use this for initialization
+	void Start () {
+        initRoleAnimController();
 
         //获取播放器对象
         music = (GetComponent("MusicPlayer") as MusicPlayer);
@@ -78,6 +82,8 @@ public class RoleAnimController : MonoBehaviour {
             Debug.Log("changeKillFlag");
 			//GameObject.Find("log").GetComponent<UILabel>().text+="changeKillFlag";
             MGNotificationCenter.defaultCenter().postNotification(RoleButtonEvent.deadFormerEventId, "role");
+			MGGlobalDataCenter.defaultCenter().isGameOver = true;
+			MGGlobalDataCenter.defaultCenter().isKillMingyue = true;
             toNomalRun();
             animStateToRun();
         }  
@@ -107,33 +113,49 @@ public class RoleAnimController : MonoBehaviour {
     {
         jumpAnim.SetBool("AnyStateToDead", true);
     }
-    void animStateToRun()
+    public void animStateToRun()
     {
         jumpAnim.SetBool("FallDownToRun", true);
         jumpAnim.SetBool("RollToRun", true);
-        jumpAnim.SetBool("killToRun", true);
-        jumpAnim.SetBool("KillRoadblockToRun", true);
-		jumpAnim.SetBool("DanToRun", true);
+        
+        jumpAnim.SetBool("AnyStateToRun", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToRun", true);
+            jumpAnim.SetBool("killToRun", true);
+            jumpAnim.SetBool("KillRoadblockToRun", true);
+        }
     }
     void animStateToFirstJump()
     {
         jumpAnim.SetBool("RunToFirstJump", true);
-		jumpAnim.SetBool("DanToFirstJump", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToFirstJump", true);
+        }
     }
     void animStateToFallDown()
     {
         jumpAnim.SetBool("FirstJumpToFallDown", true);
         jumpAnim.SetBool("RollToFallDown", true);
-		jumpAnim.SetBool("DanToFallDown", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToFallDown", true);
+        }
+		
     }
     void animStateToRoll()
     {
         jumpAnim.SetBool("FirstJumpToSecondJump", true);
         jumpAnim.SetBool("RunToRoll", true);
         jumpAnim.SetBool("FallDownToRoll", true);
-		jumpAnim.SetBool("DanToRoll", true);
+        if (this.gameObject.name == "role1")
+        {
+            jumpAnim.SetBool("DanToRoll", true);
+        }
+		
     }
-    void setAllAnimStateToFalse()
+    public void setAllAnimStateToFalse()
     {
         jumpAnim.SetBool("RunToFirstJump", false);
         jumpAnim.SetBool("FirstJumpToSecondJump", false);
@@ -144,6 +166,7 @@ public class RoleAnimController : MonoBehaviour {
         jumpAnim.SetBool("FallDownToRoll", false);
         jumpAnim.SetBool("RollToRun", false);
         jumpAnim.SetBool("AnyStateToDead", false);
+        jumpAnim.SetBool("AnyStateToRun", false);
         if (this.gameObject.name == "role1")
         {
             jumpAnim.SetBool("sprint", false);
@@ -159,7 +182,7 @@ public class RoleAnimController : MonoBehaviour {
 			jumpAnim.SetBool("DanToRoll", false);
         }
     }
-    void toNomalRun()
+    public void toNomalRun()
     {
         rigidbody2D.gravityScale = transform.localScale.y > 0 ? 5 : 0;
         rigidbody2D.velocity = Vector3.zero;
@@ -257,7 +280,7 @@ public class RoleAnimController : MonoBehaviour {
     }
     public void downButtonClick(MGNotification notification)
     {
-        if (!isRoll && !isPressDown && transform.lossyScale.y < 0) return;
+        if (!isRoll && !isPressDown && transform.localScale.y < 0) return;
         //Debug.Log(this.gameObject.name + " downButtonClick");
         collider2D.isTrigger = true;
         if (isFirstJump)//在空中
@@ -316,7 +339,7 @@ public class RoleAnimController : MonoBehaviour {
 				      "defeated=" +MGGlobalDataCenter.defaultCenter().isDefeat);
                 Application.LoadLevel("overSence");
                 MGMsgModel gameoverModel = new MGMsgModel();
-                gameoverModel.eventId = EventEnum.gameoverEventId;
+                gameoverModel.eventId = RoleActEventEnum.gameoverEventId;
                 gameoverModel.gameobjectName = MGGlobalDataCenter.defaultCenter().overSenceUIName;
                 jumpSprict.mgNetWorking.sendMessageToPeer(JsonMapper.ToJson(gameoverModel));
             }

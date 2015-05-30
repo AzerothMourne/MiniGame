@@ -21,6 +21,7 @@ public class Dart : UIBase
         cdBackObject = GameObject.Find("dartBack");
 		cdBack = cdBackObject.GetComponent<UISprite>();
         dartNum.text = MGSkillDartInfo.skillHoldLevel.ToString();
+		cdBack.fillAmount = 1f;
 	}
 	
 	// Update is called once per frame
@@ -95,7 +96,7 @@ public class Dart : UIBase
             dartNum.text = num.ToString();
             isCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.dart, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.dart, null);
         }
     }
 }

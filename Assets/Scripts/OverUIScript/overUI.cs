@@ -7,7 +7,7 @@ public class overUI : MonoBehaviour {
 	void Start () {
         GameObject[] overUI = GameObject.FindGameObjectsWithTag("overUI");
         Debug.Log(MGGlobalDataCenter.defaultCenter().overSenceUIName);
-        if (MGGlobalDataCenter.defaultCenter().isHost == false)
+        if (MGGlobalDataCenter.defaultCenter().isFrontRoler == false)
         {
             if (MGGlobalDataCenter.defaultCenter().overSenceUIName == "victoryFrontGameUI")
             {

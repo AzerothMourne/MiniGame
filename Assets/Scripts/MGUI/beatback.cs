@@ -65,7 +65,7 @@ public class beatback : UIBase
 			if(fireTimer>0.15f){
 				fireTimer=0;
 				fireSprite.GetComponent<UISprite>().spriteName=(index+1).ToString();
-				index=(index+1)%14;
+				index=(index+1)%12;
 			}
 		}
     }
@@ -84,7 +84,7 @@ public class beatback : UIBase
             cdBack.fillAmount = addOrDec ? 0f : 1f;
             holdCD = true;
             cdBackObject.transform.localScale = new Vector3((addOrDec ? 1 : -1) * (direction ? -1 : 1), 1, 1);
-            MGNotificationCenter.defaultCenter().postNotification(EventEnum.beatback, null);
+            MGNotificationCenter.defaultCenter().postNotification(SkillActEventEnum.beatback, null);
         }
     }
 }

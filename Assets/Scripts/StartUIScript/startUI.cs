@@ -16,15 +16,15 @@ public class startUI : MonoBehaviour {
 	public bool isPressSlogan; //标语
 	public GameObject SloganObj;
 
-	public Sprite[] tianyaLoadList;
+	public string[] tianyaLoadList;
 	public bool istianyaLoad;
 	public float timer;
 	public int count;
 
-	public Sprite[] mingyueLoadList;
+	public string[] mingyueLoadList;
 	public bool ismingyueLoad;
     public bool isHood;
-    public Sprite[] hoodList;
+    public string[] hoodList;
     public float timerHood;
     public int countHood;
 
@@ -89,7 +89,7 @@ public class startUI : MonoBehaviour {
             if (timer >= 0.1f)
             {                
 				try{
-					GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count].name;
+					GameObject.Find("tianya").GetComponent<UIButton>().normalSprite = tianyaLoadList[count];
 				}
 				catch{}
                 timer = 0f;
@@ -103,7 +103,7 @@ public class startUI : MonoBehaviour {
             if (timer >= 0.1f)
             {                
 				try{
-					GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count].name;
+					GameObject.Find("mingyue").GetComponent<UIButton>().normalSprite = mingyueLoadList[count];
 				}
 				catch{}
                 timer = 0f;
@@ -116,7 +116,11 @@ public class startUI : MonoBehaviour {
             timerHood += Time.deltaTime;            
             if (timerHood >= 0.2f)
             {
-                GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood].name;
+                try
+                {
+                    GameObject.Find("player").GetComponent<UISprite>().spriteName = hoodList[countHood];
+                }
+                catch{ }
                 timerHood = 0f;
                 countHood = (++countHood) % 5;
             }
@@ -125,8 +129,15 @@ public class startUI : MonoBehaviour {
 
 	public void OnStartButtonClick() {
 		isPressStartButton = true;
+        MGGlobalDataCenter.defaultCenter().isSingle = false;
 		print ("click start button");
 	}
+
+    public void OnGuideButtonClick()
+    {
+        isPressStartButton = true;
+        MGGlobalDataCenter.defaultCenter().isSingle = true;
+    }
 	
 	public void clicktianya() {
 		print ("click tianya");
@@ -154,8 +165,25 @@ public class startUI : MonoBehaviour {
 		print ("1 click start tianya");
 		if(ismingyueLoad == false)
 			istianyaLoad = true;
-		if(istianyaLoad)
-        	this.GetComponent<MyNetworkTest>().findHost();
+        if (istianyaLoad)
+        {
+            if (MGGlobalDataCenter.defaultCenter().isSingle == true)
+            {
+                MGGlobalDataCenter.defaultCenter().isLaterRoler = true;
+                MGGlobalDataCenter.defaultCenter().isFrontRoler = false;
+                if (!MGGlobalDataCenter.defaultCenter().isTianYaGuide){
+                    MGFoundtion.setTianYaGuideFlag();
+                    MGGlobalDataCenter.defaultCenter().isTianYaGuide = true;
+                    Application.LoadLevel("guideScene");
+                } 
+                else
+                    Application.LoadLevel("gameScene1");
+            }
+            else
+            {
+                this.GetComponent<MyNetworkTest>().findHost();
+            }
+        }
 
 	}
 
@@ -163,8 +191,27 @@ public class startUI : MonoBehaviour {
 		print ("2 click start mingyue");
 		if(istianyaLoad == false)
 			ismingyueLoad = true;
-		if(ismingyueLoad)
-        	this.GetComponent<MyNetworkTest>().createHost();
+        if (ismingyueLoad)
+        {
+            if (MGGlobalDataCenter.defaultCenter().isSingle == true)
+            {
+                MGGlobalDataCenter.defaultCenter().isLaterRoler = false;
+                MGGlobalDataCenter.defaultCenter().isFrontRoler = true;
+                if (!MGGlobalDataCenter.defaultCenter().isMingYueGuide)
+                {
+                    MGFoundtion.setMingYueGuideFlag();
+                    MGGlobalDataCenter.defaultCenter().isMingYueGuide = true;
+                    Application.LoadLevel("guideScene");
+                    
+                }
+                else
+                    Application.LoadLevel("gameScene1");
+            }
+            else
+            {
+                this.GetComponent<MyNetworkTest>().createHost();
+            }
+        }	
 	}
 
 	public void OnCloseButton(GameObject button) {

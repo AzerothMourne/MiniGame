@@ -22,7 +22,7 @@ public class MGSkillSprint : MGSkillsBase
     {
         MGGlobalDataCenter.defaultCenter().isBigSkilling = true;
         releaseRole = GameObject.Find("role1");
-		releaseRole.GetComponent<Jump> ().stateMask |= roleState.bone;
+		releaseRole.GetComponent<Jump> ().stateMask |= roleState.sprint;
         UILabel label = GameObject.Find("log").GetComponent<UIInput>().label;
         label.text += "\r\nsprint start";
         timer = 0f;
@@ -88,6 +88,7 @@ public class MGSkillSprint : MGSkillsBase
 
                 GameObject roleLater = GameObject.Find("role1");
                 roleLater.GetComponent<RoleAnimController>().isSprint = true;
+                roleLater.GetComponent<RoleAnimController>().setAllAnimStateToFalse();
                 roleLater.GetComponent<Animator>().SetBool("sprint", true);
                 roleLater.GetComponent<SpriteRenderer>().material = new Material(Shader.Find("long/sprint"));
 				GameObject[] backgroundList = GameObject.FindGameObjectsWithTag("Background");
